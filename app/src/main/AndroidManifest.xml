@@ -13,7 +13,34 @@
         android:theme="@style/Theme.MD09_PharmaPoly"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".welcome_login.Success"
+            android:exported="false" />
+        <activity
+            android:name=".welcome_login.DangKy"
+            android:exported="false" />
+        <activity
+            android:name=".welcome_login.DangNhap3"
+            android:exported="false" />
+        <activity
+            android:name=".welcome_login.XacThucOTP"
+            android:exported="false" />
+        <activity
+            android:name=".welcome_login.DangNhap1"
+            android:exported="false" />
+        <activity
+            android:name=".welcome_login.DangNhapDangKy"
+            android:exported="false" />
+        <activity
+            android:name=".welcome_login.ManHinh4"
+            android:exported="false" />
+        <activity
+            android:name=".welcome_login.ManHinh3"
+            android:exported="false" />
+        <activity
+            android:name=".welcome_login.ManHinh2"
+            android:exported="false" />
+        <activity
+            android:name=".welcome_login.ManHinh1"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +48,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
