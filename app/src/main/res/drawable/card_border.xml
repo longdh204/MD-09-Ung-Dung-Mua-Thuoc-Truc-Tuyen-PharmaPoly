@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <!-- Màu nền thẻ -->
+    <solid android:color="@android:color/transparent"/>
+
+    <!-- Bo góc -->
+    <corners android:radius="25dp"/>
+
+    <!-- Viền (Border) -->
+    <solid android:color="#1CD1D7"/>
+
+</shape>

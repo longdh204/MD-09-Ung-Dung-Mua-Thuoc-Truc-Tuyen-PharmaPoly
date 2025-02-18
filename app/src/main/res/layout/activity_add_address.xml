@@ -15,13 +15,14 @@
         android:layout_weight="1">
 
         <!-- ImageView giả lập bản đồ -->
+
+        <!-- Nút back -->
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/mapdemo"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/mapdemo" />
 
-        <!-- Nút back -->
         <ImageView
             android:id="@+id/backButton"
             android:layout_width="24dp"
@@ -37,8 +38,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_location_pin"
-            android:background="@drawable/circle_background" />
+/>
     </FrameLayout>
 
     <!-- Nội dung chọn địa chỉ -->
@@ -101,7 +101,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -119,8 +120,8 @@
                     android:orientation="horizontal"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@drawable/"
-                    android:padding="12dp">
+                    android:background="@drawable/item_background"
+                    android:layout_margin="5dp">
 
                     <ImageView
                         android:layout_width="40dp"
@@ -147,8 +148,8 @@
                     android:orientation="horizontal"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@drawable/radio_button_selector"
-                    android:padding="12dp">
+                    android:background="@drawable/item_background"
+                    android:layout_margin="5dp">
 
                     <ImageView
                         android:layout_width="40dp"
@@ -176,8 +177,8 @@
                     android:orientation="horizontal"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@drawable/radio_button_selector"
-                    android:padding="12dp">
+                    android:background="@drawable/item_background"
+                    android:layout_margin="5dp">
 
                     <ImageView
                         android:layout_width="40dp"
