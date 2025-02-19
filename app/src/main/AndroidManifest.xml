@@ -40,25 +40,37 @@
             android:name=".welcome_login.DangNhap3"
             android:exported="false" />
         <activity
-            android:name=".welcome_login.XacThucOTP"
+            android:name=".welcome_login.VerifyPhone"
             android:exported="false" />
         <activity
-            android:name=".welcome_login.DangNhap1"
-            android:exported="false" />
+            android:name=".welcome_login.PhoneNumber"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".welcome_login.DangNhapDangKy"
             android:exported="false" />
         <activity
-            android:name=".welcome_login.ManHinh4"
-            android:exported="false" />
+            android:name=".ui.view.activity.Onboarding_Screen_3"
+            android:exported="true">
+
+        </activity>
         <activity
-            android:name=".welcome_login.ManHinh3"
-            android:exported="false" />
+            android:name=".ui.view.activity.Onboarding_Screen_2"
+            android:exported="true" >
+
+        </activity>
         <activity
-            android:name=".welcome_login.ManHinh2"
-            android:exported="false" />
+            android:name=".ui.view.activity.Onboarding_Screen_1"
+            android:exported="true">
+
+        </activity>
         <activity
-            android:name=".welcome_login.ManHinh1"
+            android:name=".ui.view.activity.SplashScreen"
             android:exported="false" />
         <activity
             android:name=".AddAddressSuccessful"
@@ -81,11 +93,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

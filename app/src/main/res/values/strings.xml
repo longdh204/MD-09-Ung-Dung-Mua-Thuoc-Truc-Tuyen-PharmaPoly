@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">MD09_PharmaPoly</string>
+    <string name="skip">Skip</string>
+    <string name="healthcare_access">Importance of healthcare access.</string>
+    <string name="quality_healthcare_access">Access quality healthcare services at your fingertips with PharmaPoly</string>
+    <string name="welcome">Welcome,</string>
+    <string name="sub_title_phone_number_screen">Please enter your phone number to continue.</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="enter_phone_number">Enter phone number</string>
+    <string name="next">Next</string>
+    <string name="account_registration_prompt">Don\'t have an account?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="or">Or</string>
+    <string name="google_login_option">Continue with Google.</string>
+    <string name="verification_code_input">Enter the verify code</string>
+    <string name="verification_code_sent_message">We just sent you a verification code via phone:</string>
+    <string name="verification_code_expiration">The verify code will expire in</string>
 </resources>

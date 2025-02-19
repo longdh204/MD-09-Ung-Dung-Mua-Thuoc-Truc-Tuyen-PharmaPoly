@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MD09_PharmaPoly</string>
+    <string name="skip">Bỏ qua</string>
+    <string name="healthcare_access">Tầm quan trọng của việc tiếp cận chăm sóc sức khỏe</string>
+    <string name="quality_healthcare_access">Tiếp cận dịch vụ chăm sóc sức khỏe chất lượng trong tầm tay bạn với PharmaPoly</string>
+    <string name="welcome">XIN CHÀO,</string>
+    <string name="sub_title_phone_number_screen">Vui lòng nhập số điện thoại của bạn để tiếp tục.</string>
+    <string name="phone_number">Số điện thoại</string>
+    <string name="enter_phone_number">Nhập số điện thoại</string>
+    <string name="next">Tiếp tục</string>
+    <string name="account_registration_prompt">Bjan chưa có tài khoản?</string>
+    <string name="sign_up">Đăng ký</string>
+    <string name="or">Hoặc</string>
+    <string name="google_login_option">Tiếp tục với Google</string>
+    <string name="verification_code_input">Nhập mã xác minh</string>
+    <string name="verification_code_sent_message">Chúng tôi vừa gửi cho bạn một mã xác minh qua điện thoại:</string>
+    <string name="verification_code_expiration">Mã xác minh sẽ hết hạn trong</string>
+</resources>

@@ -15,4 +15,14 @@
 
     <color name="light_gray">#E0E0E0</color>
 
+    <color name="white_FFF">#FFFFFF</color>
+    <color name="blue_CE4">#306CE4</color>
+    <color name="blue_5E7">#52E5E7</color>
+    <color name="blue_CB7">#130CB7</color>
+    <color name="red_757">#EB5757</color>
+    <color name="black_333">#333333</color>
+    <color name="gray_6f4">#F6F6F4</color>
+    <color name="gray_DCD">#CDCDCD</color>
+    <color name="gray_E9E">#9E9E9E</color>
+    <color name="gray_6F4">#F6F6F4</color>
 </resources>
