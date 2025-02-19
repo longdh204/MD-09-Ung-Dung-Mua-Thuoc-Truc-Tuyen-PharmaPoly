@@ -13,6 +13,21 @@
         android:theme="@style/Theme.MD09_PharmaPoly"
         tools:targetApi="31">
         <activity
+            android:name=".Dialog_Advise"
+            android:exported="false" />
+        <activity
+            android:name=".Dialog_Review_Successfully"
+            android:exported="false" />
+        <activity
+            android:name=".Product_Review"
+            android:exported="false" />
+        <activity
+            android:name=".Dialog_BuyNow"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".contact_support"
             android:exported="false" />
         <activity
@@ -27,9 +42,6 @@
         <activity
             android:name=".iteam_viewholder_card"
             android:exported="false" />
-        <activity
-            android:name=".iteam_cart"
-            android:exported="false" /> <!-- Giữ lại tất cả activity -->
         <activity
             android:name=".welcome_login.Success"
             android:exported="false" />
@@ -79,7 +91,7 @@
             android:name=".ShoppingCart"
             android:exported="false" /> <!-- MainActivity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".Product_Detail"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".Dialog_BuyNow">
+
+
+    <!-- Tiêu đề -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Tiêu đề -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chọn số lượng và đơn vị"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="start"
+            android:gravity="center"
+            android:layout_weight="1"/>
+
+        <!-- Hình ảnh ở cuối -->
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_x"
+            android:layout_gravity="end"/>
+    </LinearLayout>
+
+
+    <!-- Hình ảnh sản phẩm -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- Đơn vị -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đơn vị"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Chọn đơn vị -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <!-- Nút "Hộp" - Được chọn -->
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="Hộp"
+            android:textSize="15sp"
+            android:textColor="@color/blue"
+            android:padding="8dp"
+            android:background="@drawable/bg_selected"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"/>
+
+        <!-- Nút "Ví" - Chưa chọn -->
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="Ví"
+            android:textSize="15sp"
+            android:textColor="@color/blue"
+            android:padding="8dp"
+            android:background="@drawable/bg_unselected"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"/>
+
+        <!-- Nút "Ống" - Chưa chọn -->
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="Ống"
+            android:textSize="15sp"
+            android:textColor="@color/blue"
+            android:padding="8dp"
+            android:background="@drawable/bg_unselected"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <!-- Số lượng -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Số lượng"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp"/>
+
+    <LinearLayout
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/blue_bg_full_corner"
+        android:padding="2dp">
+
+        <!-- Nút + -->
+        <TextView
+            android:id="@+id/plusCartBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/blue_bg2"
+            android:gravity="center"
+            android:text="+"
+            android:textSize="25dp"
+            android:textColor="@color/white"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Số lượng -->
+        <TextView
+            android:id="@+id/numberItemTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="8dp"/>
+
+        <!-- Nút - -->
+        <TextView
+            android:id="@+id/minusvCartBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/blue_bg"
+            android:gravity="center"
+            android:textSize="35dp"
+            android:text="-"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+
+    <!-- Tổng tiền -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Tạm tính -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tạm tính:"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#4E4E4E"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Tạm tính giá trị -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="999.999.999đ"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="end"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Tạm tính -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tiết kiệm được:"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#4E4E4E"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Tạm tính giá trị -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="999đ"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="end"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+
+    <!-- Nút mua ngay -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Hủy"
+            android:layout_weight="1"
+            android:textSize="17dp"
+            android:background="@drawable/rounded_button2"
+            android:textColor="#0600B8"
+            android:layout_marginStart="8dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Mua ngay"
+            android:layout_weight="1"
+            android:textSize="17dp"
+            android:background="@drawable/rounded_button"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+</LinearLayout>
