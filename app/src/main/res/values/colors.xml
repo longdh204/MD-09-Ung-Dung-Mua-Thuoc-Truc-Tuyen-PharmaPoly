@@ -9,7 +9,10 @@
     <color name="darkGrey">#707070</color>
     //2.51
     <color name="yellow">#FFEB3B</color>
-    <color name="blue">#2196F3</color>
+    <color name="blue">#2D72FF</color>
+    <color name="nav_background">#3A54F6</color>
+    <color name="nav_item_color">#FFFFFF</color>
+    <color name="fab_color">#3A54F6</color>
     <color name="red">#FF0000</color>
     <color name="gray">#BDBDBD</color>
 

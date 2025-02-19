@@ -57,9 +57,7 @@
         <activity
             android:name=".welcome_login.ManHinh2"
             android:exported="false" />
-        <activity
-            android:name=".welcome_login.ManHinh1"
-            android:exported="false" />
+
         <activity
             android:name=".AddAddressSuccessful"
             android:exported="false" />
@@ -80,6 +78,16 @@
             android:exported="false" /> <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".welcome_login.ManHinh1"
+            android:exported="false" />
+
+        <activity
+            android:name=".Home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
