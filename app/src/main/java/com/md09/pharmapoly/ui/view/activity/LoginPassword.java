@@ -4,6 +4,7 @@ import static com.md09.pharmapoly.utils.Constants.PHONE_NUMBER_KEY;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -15,8 +16,10 @@ import androidx.cardview.widget.CardView;
 
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
+import com.md09.pharmapoly.data.model.User;
 import com.md09.pharmapoly.network.RetrofitClient;
 import com.md09.pharmapoly.utils.ProgressDialogHelper;
+import com.md09.pharmapoly.utils.SharedPrefHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +37,7 @@ public class LoginPassword extends AppCompatActivity {
     private TextView tv_phone_number;
     private RetrofitClient retrofitClient;
     private ImageButton btn_back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,13 +66,21 @@ public class LoginPassword extends AppCompatActivity {
             RequestBody phoneRequest = RequestBody.create(
                     MediaType.parse("application/json"), jsonObject.toString()
             );
-            retrofitClient.callAPI().login(phoneRequest).enqueue(new Callback<ApiResponse<Void>>() {
+            retrofitClient.callAPI().login(phoneRequest).enqueue(new Callback<ApiResponse<User>>() {
                 @Override
-                public void onResponse(Call<ApiResponse<Void>> call, Response<ApiResponse<Void>> response) {
+                public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
                     ProgressDialogHelper.hideLoading();
                     if (response.isSuccessful()) {
                         if (response.body().getStatus() == 200) {
+                            User user = response.body().getData();
+                            String token = response.body().getToken();
+                            String refreshToken = response.body().getRefreshToken();
+
+                            SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(LoginPassword.this);
+                            sharedPrefHelper.saveUser(user, token, refreshToken);
+
                             startActivity(new Intent(LoginPassword.this, MainActivity.class));
+                            finishAffinity();
                         }
                     } else {
                         String message = "";
@@ -97,12 +109,53 @@ public class LoginPassword extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<ApiResponse<Void>> call, Throwable t) {
+                public void onFailure(Call<ApiResponse<User>> call, Throwable t) {
                     ProgressDialogHelper.hideLoading();
                     String message = getString(R.string.server_error);
                     Toast.makeText(LoginPassword.this, message, Toast.LENGTH_SHORT).show();
                 }
             });
+//            retrofitClient.callAPI().login(phoneRequest).enqueue(new Callback<ApiResponse<Void>>() {
+//                @Override
+//                public void onResponse(Call<ApiResponse<Void>> call, Response<ApiResponse<Void>> response) {
+//                    ProgressDialogHelper.hideLoading();
+//                    if (response.isSuccessful()) {
+//                        if (response.body().getStatus() == 200) {
+//                            startActivity(new Intent(LoginPassword.this, MainActivity.class));
+//                        }
+//                    } else {
+//                        String message = "";
+//                        switch (response.code()) {
+//                            case 400:
+//                                message = getString(R.string.error_phone_password_required);
+//                                edt_password.setError(message);
+//                                edt_password.setFocusable(true);
+//                                break;
+//                            case 404:
+//                                message = getString(R.string.error_user_not_found);
+//                                startActivity(new Intent(LoginPassword.this, PhoneNumber.class));
+//                                finish();
+//                                break;
+//                            case 401:
+//                                message = getString(R.string.error_invalid_credentials);
+//                                edt_password.setError(message);
+//                                edt_password.setFocusable(true);
+//                                break;
+//                            default:
+//                                message = getString(R.string.server_error);
+//                                break;
+//                        }
+//                        Toast.makeText(LoginPassword.this, message, Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<ApiResponse<Void>> call, Throwable t) {
+//                    ProgressDialogHelper.hideLoading();
+//                    String message = getString(R.string.server_error);
+//                    Toast.makeText(LoginPassword.this, message, Toast.LENGTH_SHORT).show();
+//                }
+//            });
         });
     }
 

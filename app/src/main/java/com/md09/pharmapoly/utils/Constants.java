@@ -8,4 +8,8 @@ public class Constants {
     public static final String PASSWORD_PATTERN = "^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+=|<>?{}\\[\\]~-]).{8,}$";
     public static final String PHONE_NUMBER_KEY = "PHONE_NUMBER";
     public static final String UID_KEY = "UID";
+
+    public static final String USER_KEY = "USER";
+    public static final String TOKEN_KEY = "TOKEN";
+    public static final String REFRESH_TOKEN_KEY = "REFRESH_TOKEN";
 }
