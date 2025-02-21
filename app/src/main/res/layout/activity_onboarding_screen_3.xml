@@ -50,7 +50,7 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:layout_marginTop="24dp"
-        android:text="Giữ kết nối với sức khỏe của bạn với ứng dụng di động của chúng tôi"/>
+        android:text="@string/stay_connected_health"/>
 
     <RelativeLayout
         android:layout_width="0dp"
@@ -71,12 +71,6 @@
                 android:layout_width="20dp"
                 android:layout_height="6dp"
                 android:layout_marginRight="6dp"
-                android:background="@drawable/rounded_linear_5e7_cb7" />
-
-            <RelativeLayout
-                android:layout_width="20dp"
-                android:layout_height="6dp"
-                android:layout_marginRight="6dp"
                 android:alpha="0.3"
                 android:background="@drawable/rounded_linear_5e7_cb7" />
 
@@ -86,6 +80,13 @@
                 android:layout_marginRight="6dp"
                 android:alpha="0.3"
                 android:background="@drawable/rounded_linear_5e7_cb7" />
+
+            <RelativeLayout
+                android:layout_width="20dp"
+                android:layout_height="6dp"
+                android:layout_marginRight="6dp"
+                android:background="@drawable/rounded_linear_5e7_cb7" />
+
         </LinearLayout>
 
         <RelativeLayout

@@ -1,8 +1,12 @@
 <resources>
+    <string name="recaptcha_site_key">AIzaSyARGw9XS9YKgiD0cTksAtzFMAZsu_I-UKk</string>
+    <string name="default_web_client_id">556654868745-n5sfou4nohi0978fr8sad6hm6kcvh58c.apps.googleusercontent.com</string>
+
     <string name="app_name">MD09_PharmaPoly</string>
     <string name="skip">Skip</string>
     <string name="healthcare_access">Importance of healthcare access.</string>
     <string name="quality_healthcare_access">Access quality healthcare services at your fingertips with PharmaPoly</string>
+    <string name="stay_connected_health">Stay connected to your health with our mobile app</string>
     <string name="welcome">Welcome,</string>
     <string name="sub_title_phone_number_screen">Please enter your phone number to continue.</string>
     <string name="phone_number">Phone Number</string>
@@ -13,6 +17,33 @@
     <string name="or">Or</string>
     <string name="google_login_option">Continue with Google.</string>
     <string name="verification_code_input">Enter the verify code</string>
+    <string name="create_new_password">CREATE NEW PASSWORD</string>
     <string name="verification_code_sent_message">We just sent you a verification code via phone:</string>
     <string name="verification_code_expiration">The verify code will expire in</string>
+    <string name="enter_password_upper">ENTER PASSWORD</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="enter_password_login">Please enter your password to log in</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="login">Login</string>
+    <string name="error_empty_phone">Phone number cannot be empty!</string>
+    <string name="server_error">Server error, please try again later!</string>
+    <string name="error_phone_password_required">Phone number and password are required!</string>
+    <string name="error_password_required">Password cannot be empty!</string>
+    <string name="error_user_not_found">User not found!</string>
+    <string name="error_invalid_credentials">Password or phone number is incorrect!</string>
+    <string name="verify">Verify</string>
+    <string name="resend_code">Resend code</string>
+    <string name="error_otp_required">Please enter the full OTP code!</string>
+    <string name="password_requirements">You can create a new password with at least 8 characters, including at least 1 uppercase letter, 1 number, and 1 special character.</string>
+    <string name="new_password">New password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="enter_new_password">Enter new password</string>
+    <string name="reenter_new_password">Re-enter new password</string>
+    <string name="complete">Complete</string>
+    <string name="error_enter_password">Please enter your password</string>
+    <string name="error_password_mismatch">Confirmation password does not match</string>
+    <string name="password_policy">Password must have at least 8 characters, 1 uppercase letter, 1 number, and 1 special character.</string>
+    <string name="account_created">Account created successfully!</string>
+    <string name="otp_request_limit">You have requested the OTP code too many times. Please wait and try again later.</string>
 </resources>

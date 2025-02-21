@@ -14,13 +14,6 @@ public class Onboarding_Screen_1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_onboarding_screen_1);
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                Intent intent= new Intent(Onboarding_Screen_1.this, ManHinh3.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        },2000);
+
     }
 }
