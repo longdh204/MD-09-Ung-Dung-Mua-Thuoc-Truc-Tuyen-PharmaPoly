@@ -69,9 +69,7 @@
         <activity
             android:name=".welcome_login.ManHinh2"
             android:exported="false" />
-        <activity
-            android:name=".welcome_login.ManHinh1"
-            android:exported="false" />
+
         <activity
             android:name=".AddAddressSuccessful"
             android:exported="false" />
@@ -91,7 +89,21 @@
             android:name=".ShoppingCart"
             android:exported="false" /> <!-- MainActivity -->
         <activity
+<<<<<<< HEAD
             android:name=".Product_Detail"
+=======
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".welcome_login.ManHinh1"
+            android:exported="false" />
+
+        <activity
+            android:name=".Home"
+>>>>>>> origin/namah
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
