@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="recaptcha_site_key">AIzaSyARGw9XS9YKgiD0cTksAtzFMAZsu_I-UKk</string>
+    <string name="default_web_client_id">556654868745-n5sfou4nohi0978fr8sad6hm6kcvh58c.apps.googleusercontent.com</string>
+
+    <string name="app_name">MD09_PharmaPoly</string>
+    <string name="skip">Bỏ qua</string>
+    <string name="healthcare_access">Tầm quan trọng của việc tiếp cận chăm sóc sức khỏe</string>
+    <string name="quality_healthcare_access">Tiếp cận dịch vụ chăm sóc sức khỏe chất lượng trong tầm tay bạn với PharmaPoly</string>
+    <string name="stay_connected_health">Giữ kết nối với sức khỏe của bạn với ứng dụng di động của chúng tôi</string>
+    <string name="welcome">XIN CHÀO,</string>
+    <string name="sub_title_phone_number_screen">Vui lòng nhập số điện thoại của bạn để tiếp tục.</string>
+    <string name="phone_number">Số điện thoại</string>
+    <string name="enter_phone_number">Nhập số điện thoại</string>
+    <string name="next">Tiếp tục</string>
+    <string name="account_registration_prompt">Bjan chưa có tài khoản?</string>
+    <string name="sign_up">Đăng ký</string>
+    <string name="or">Hoặc</string>
+    <string name="google_login_option">Tiếp tục với Google</string>
+    <string name="verification_code_input">Nhập mã xác minh</string>
+    <string name="create_new_password">TẠO MẬT KHẨU MỚI</string>
+    <string name="verification_code_sent_message">Chúng tôi vừa gửi cho bạn một mã xác minh qua điện thoại:</string>
+    <string name="verification_code_expiration">Mã xác minh sẽ hết hạn trong</string>
+    <string name="enter_password_upper">NHẬP MẬT KHẨU</string>
+    <string name="enter_password">Nhập mật khẩu</string>
+    <string name="enter_password_login">Vui lòng nhập mật khẩu để đăng nhập</string>
+    <string name="password">Mật khẩu</string>
+    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="login">Đăng nhập</string>
+
+
+<!--    Error Message-->
+    <string name="error_empty_phone">Số điện thoại không được để trống!</string>
+    <string name="server_error">Lỗi máy chủ vui lòng thử lại sau!</string>
+    <string name="error_phone_password_required">Số điện thoại và mật khẩu là bắt buộc!</string>
+    <string name="error_password_required">Mật khẩu không được để trống!</string>
+    <string name="error_user_not_found">Không tìm thấy người dùng!</string>
+    <string name="error_invalid_credentials">Mật khẩu hoặc số điện thoại không chính xác!</string>
+    <string name="verify">Xác minh</string>
+    <string name="resend_code">Gửi lại code</string>
+    <string name="error_otp_required">Vui lòng nhập đầy đủ mã OTP!</string>
+    <string name="password_requirements">Bạn có thể tạo mật khẩu mới từ 8 ký tự, gồm ít nhất 1 chữ hoa, 1 số và 1 ký tự đặc biệt.</string>
+    <string name="new_password">Mật khẩu mới</string>
+    <string name="confirm_password">Nhập lại mật khẩu</string>
+    <string name="enter_new_password">Nhập mật khẩu mới</string>
+    <string name="reenter_new_password">Nhập lại mật khẩu mới</string>
+    <string name="complete">Hoàn thành</string>
+    <string name="error_enter_password">Vui lòng nhập mật khẩu</string>
+    <string name="error_password_mismatch">Mật khẩu xác nhận không khớp</string>
+    <string name="password_policy">Mật khẩu phải có ít nhất 8 ký tự, 1 chữ hoa, 1 số và 1 ký tự đặc biệt.</string>
+    <string name="account_created">Tạo tài khoản thành công!</string>
+    <string name="otp_request_limit">" Bạn đã yêu cầu mã OTP quá nhiều lần. Vui lòng chờ thử lại sau."</string>
+</resources>

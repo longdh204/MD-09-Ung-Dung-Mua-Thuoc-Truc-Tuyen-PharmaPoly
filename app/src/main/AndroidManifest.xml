@@ -2,7 +2,30 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+    <meta-data
+        android:name="com.google.firebase.auth.api.FirebaseAuth"
+        android:value="@string/default_web_client_id" />
+
+    <meta-data
+        android:name="com.google.firebase.auth.RECAPTCHA_SITE_KEY"
+        android:value="@string/recaptcha_site_key" />
+
+    <meta-data
+        android:name="com.google.firebase.auth.API_KEY"
+        android:value="@string/recaptcha_site_key"/>
+
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,21 +35,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MD09_PharmaPoly"
         tools:targetApi="31">
-        <activity
-            android:name=".Dialog_Advise"
-            android:exported="false" />
-        <activity
-            android:name=".Dialog_Review_Successfully"
-            android:exported="false" />
-        <activity
-            android:name=".Product_Review"
-            android:exported="false" />
-        <activity
-            android:name=".Dialog_BuyNow"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
         <activity
             android:name=".contact_support"
             android:exported="false" />
@@ -43,33 +51,57 @@
             android:name=".iteam_viewholder_card"
             android:exported="false" />
         <activity
+            android:name=".iteam_cart"
+            android:exported="false" /> <!-- Giữ lại tất cả activity -->
+        <activity
             android:name=".welcome_login.Success"
             android:exported="false" />
         <activity
-            android:name=".welcome_login.DangKy"
+            android:name=".ui.view.activity.SignupPassword"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".ui.view.activity.LoginPassword"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".ui.view.activity.VerifyPhone"
             android:exported="false" />
         <activity
-            android:name=".welcome_login.DangNhap3"
-            android:exported="false" />
+            android:name=".ui.view.activity.PhoneNumber"
+            android:exported="true"/>
         <activity
-            android:name=".welcome_login.XacThucOTP"
-            android:exported="false" />
-        <activity
-            android:name=".welcome_login.DangNhap1"
-            android:exported="false" />
+            android:name=".Home"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".welcome_login.DangNhapDangKy"
             android:exported="false" />
         <activity
-            android:name=".welcome_login.ManHinh4"
-            android:exported="false" />
-        <activity
-            android:name=".welcome_login.ManHinh3"
-            android:exported="false" />
-        <activity
-            android:name=".welcome_login.ManHinh2"
-            android:exported="false" />
+            android:name=".ui.view.activity.Onboarding_Screen_3"
+            android:exported="true">
 
+        </activity>
+        <activity
+            android:name=".ui.view.activity.Onboarding_Screen_2"
+            android:exported="true" >
+
+        </activity>
+        <activity
+            android:name=".ui.view.activity.Onboarding_Screen_1"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".ui.view.activity.SplashScreen"
+            android:exported="false" />
         <activity
             android:name=".AddAddressSuccessful"
             android:exported="false" />
@@ -89,27 +121,9 @@
             android:name=".ShoppingCart"
             android:exported="false" /> <!-- MainActivity -->
         <activity
-<<<<<<< HEAD
-            android:name=".Product_Detail"
-=======
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".NotificationsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".welcome_login.ManHinh1"
-            android:exported="false" />
-
-        <activity
-            android:name=".Home"
->>>>>>> origin/namah
+            android:name=".ui.view.activity.MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

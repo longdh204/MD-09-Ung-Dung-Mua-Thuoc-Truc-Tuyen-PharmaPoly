@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:paddingHorizontal="36dp"
+    android:paddingTop="48dp"
+    android:paddingBottom="56dp"
+    tools:context=".ui.view.activity.Onboarding_Screen_1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/btn_back_otp_authen"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_back1" />
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/btn_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/skip"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <ImageView
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:layout_gravity="center"
+        android:src="@drawable/group6574"/>
+    <TextView
+        android:fontFamily="@font/be_vietnam_pro_light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:layout_marginTop="24dp"
+        android:text="@string/healthcare_access"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="20dp"
+                android:layout_height="6dp"
+                android:layout_marginRight="6dp"
+                android:background="@drawable/rounded_linear_5e7_cb7" />
+
+            <RelativeLayout
+                android:layout_width="20dp"
+                android:layout_height="6dp"
+                android:layout_marginRight="6dp"
+                android:alpha="0.3"
+                android:background="@drawable/rounded_linear_5e7_cb7" />
+
+            <RelativeLayout
+                android:layout_width="20dp"
+                android:layout_height="6dp"
+                android:layout_marginRight="6dp"
+                android:alpha="0.3"
+                android:background="@drawable/rounded_linear_5e7_cb7" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <RelativeLayout
+            android:id="@+id/btn_next"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/rounded_30"
+            android:backgroundTint="@color/blue_CE4">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_arrow_right" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

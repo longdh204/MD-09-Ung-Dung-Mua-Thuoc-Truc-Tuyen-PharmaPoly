@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "15410433474",
+    "project_id": "pharmapoly-62b41",
+    "storage_bucket": "pharmapoly-62b41.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15410433474:android:6ecd5ca72fe37f3abbda5b",
+        "android_client_info": {
+          "package_name": "com.md09.pharmapoly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "15410433474-hj5na5du0n358ache2koc21ripfdh84o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCflCkNxVKxHv95e6aJVCVdRWn2QtsGN9w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "15410433474-hj5na5du0n358ache2koc21ripfdh84o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
