@@ -1,7 +1,10 @@
 package com.md09.pharmapoly;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,69 +12,66 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.md09.pharmapoly.Adapters.CategoryAdapter;
+import com.md09.pharmapoly.Adapters.SliderAdapter;
 import com.md09.pharmapoly.Models.Category;
-
+import com.md09.pharmapoly.utils.Constants;
 import java.util.ArrayList;
 import java.util.List;
-
+import me.relex.circleindicator.CircleIndicator3;
 
 public class Home extends AppCompatActivity {
+
+    // hiển thị item product từ csdl
+    private SharedPreferences sharedPreferences;
 
     private RecyclerView recyclerView;
     private CategoryAdapter categoryAdapter;
     private List<Category> categoryList;
     private DrawerLayout drawerLayout;
 
+    private ViewPager2 viewPager2;
+    private SliderAdapter sliderAdapter;
+    private CircleIndicator3 circleIndicator;  // Sử dụng CircleIndicator3
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // Khởi tạo ViewPager2 và CircleIndicator3
+        viewPager2 = findViewById(R.id.viewPagerSlider);
+        circleIndicator = findViewById(R.id.dotsIndicator);
+
+        // Tạo danh sách các hình ảnh cục bộ hoặc URL cố định
+        List<String> sliderImageUrls = new ArrayList<>();
+        sliderImageUrls.add("https://cdn.vjshop.vn/tin-tuc/phan-biet-raw-va-jpeg/phan-biet-raw-va-jpeg-14.jpg");
+        sliderImageUrls.add("https://cdn.vjshop.vn/tin-tuc/phan-biet-raw-va-jpeg/phan-biet-raw-va-jpeg-14.jpg");
+        sliderImageUrls.add("https://cdn.vjshop.vn/tin-tuc/phan-biet-raw-va-jpeg/phan-biet-raw-va-jpeg-14.jpg");
+
+        // Gán Adapter cho ViewPager2
+        sliderAdapter = new SliderAdapter(sliderImageUrls);
+        viewPager2.setAdapter(sliderAdapter);
+
+        // Kết nối CircleIndicator3 với ViewPager2
+        circleIndicator.setViewPager(viewPager2);  // Đây là cách đúng
 
         drawerLayout = findViewById(R.id.drawer_layout);
         ImageView menuIcon = findViewById(R.id.menu_icon);
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_view); // Sửa kiểu dữ liệu
-        AppCompatButton headButton = findViewById(R.id.head_button);
-
-        // ... (Code xử lý nut thông báo)
         ImageView bellIcon = findViewById(R.id.bell_icon);
         bellIcon.setOnClickListener(v -> {
             Intent intent = new Intent(Home.this, NotificationsActivity.class);
             startActivity(intent);
-        });
-
-
-        // Xử lý sự kiện khi bấm vào BottomNavigationView
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            Fragment selectedFragment = null;
-            int itemId = item.getItemId();
-
-            if (itemId == R.id.nav_home) { // ID của menu item
-                //selectedFragment = new HomeFragment();
-            } else if (itemId == R.id.nav_mess) {
-                //selectedFragment = new ListenFragment();
-            } else if (itemId == R.id.nav_cart) {
-                //selectedFragment = new CartFragment();
-            } else if (itemId == R.id.nav_profile) {
-                //selectedFragment = new ProfileFragment();
-            }
-
-            // ... (Code thay thế Fragment, nếu có)
-
-            return true; // Xác nhận item đã được xử lý
         });
 
         recyclerView = findViewById(R.id.recyclerViewCategories);
@@ -89,7 +89,6 @@ public class Home extends AppCompatActivity {
         categoryAdapter = new CategoryAdapter(this, categoryList);
         recyclerView.setAdapter(categoryAdapter);
 
-// Xử lý khi click icon menu
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +96,6 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        // Xử lý sự kiện khi click vào các mục trong menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -116,4 +114,5 @@ public class Home extends AppCompatActivity {
             }
         });
     }
+
 }

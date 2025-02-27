@@ -10,7 +10,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
     private ApiService requestInterface;
-
+    private static Retrofit retrofit;
+    public static Retrofit getRetrofitInstance() {
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit;
+    }
     public RetrofitClient() {
         OkHttpClient client = SafeOkHttpClient.getSafeOkHttpClient();
 
