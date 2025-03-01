@@ -14,6 +14,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.md09.pharmapoly.Home;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.data.model.User;
@@ -79,7 +80,7 @@ public class LoginPassword extends AppCompatActivity {
                             SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(LoginPassword.this);
                             sharedPrefHelper.saveUser(user, token, refreshToken);
 
-                            startActivity(new Intent(LoginPassword.this, MainActivity.class));
+                            startActivity(new Intent(LoginPassword.this, Home.class));
                             finishAffinity();
                         }
                     } else {

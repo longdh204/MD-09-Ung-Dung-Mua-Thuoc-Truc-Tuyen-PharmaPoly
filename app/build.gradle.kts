@@ -46,6 +46,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+    implementation ("com.google.code.gson:gson:2.12.1")
 
 
 // Glide để load ảnh
@@ -64,7 +65,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database")
-
+    implementation ("androidx.cardview:cardview:1.0.0")
     implementation("com.google.android.gms:play-services-safetynet:18.0.1")
     implementation("com.google.android.recaptcha:recaptcha:18.4.0")
 }
