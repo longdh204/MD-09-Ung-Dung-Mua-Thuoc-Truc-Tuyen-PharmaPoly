@@ -7,6 +7,15 @@ public class ProductReview {
     private float rating;
     private String review;
     private String create_at;
+    private String created_at;
+
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
 
     public String get_id() {
         return _id;

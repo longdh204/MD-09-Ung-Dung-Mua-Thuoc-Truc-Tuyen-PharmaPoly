@@ -190,14 +190,6 @@
                     android:layout_marginStart="8dp" />
 
                 <!-- Số bình luận -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="số lượng bình luận"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/overpass_regular"
-                    android:textColor="@android:color/black"
-                    android:layout_marginStart="16dp" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -406,7 +398,16 @@
                     android:maxLines="3"
                     android:minLines="1"
                     android:ellipsize="end"
+
                     android:textColor="@android:color/black"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Xem thêm"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@android:color/black" />
 
             </LinearLayout>
     <!--quaroi-->
@@ -427,6 +428,7 @@
                     android:text="Câu hỏi thường gặp"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    android:fontFamily="@font/overpass_regular"
                     android:textColor="@android:color/black"
                     android:layout_marginBottom="8dp"/>
 
@@ -443,6 +445,7 @@
                         android:layout_height="wrap_content"
                         android:text="Những ai nên sử dụng cái này ?"
                         android:textSize="16sp"
+                        android:fontFamily="@font/overpass_regular"
                         android:textColor="@android:color/black"
                         android:layout_weight="1"/>
 
@@ -465,6 +468,7 @@
                         android:layout_height="wrap_content"
                         android:text="Ảnh hưởng của thuốc sau này ?"
                         android:textSize="16sp"
+                        android:fontFamily="@font/overpass_regular"
                         android:textColor="@android:color/black"
                         android:layout_weight="1"/>
 
@@ -478,8 +482,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="..."
-                    android:textSize="36sp"
+                    android:text="Xem thêm"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
                     android:textColor="@android:color/black" />
 
             </LinearLayout>
@@ -494,11 +500,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Đánh giá sản phẩm"
+                android:text="Câu hỏi thường gặp"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/overpass_regular"
+                android:textColor="@android:color/black"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -526,8 +535,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="5"
-                            android:textSize="40sp"
+                            android:textSize="35sp"
                             android:textStyle="bold"
+                            android:fontFamily="@font/overpass_regular"
                             android:textColor="@android:color/black"/>
 
                         <ImageView
@@ -539,10 +549,12 @@
 
                     <!-- Số lượng đánh giá -->
                     <TextView
+                        android:id="@+id/productReviewCount2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="923 Ratings\nand 257 Reviews"
+                        android:text="923 Number of reviewers"
                         android:textSize="14sp"
+                        android:layout_marginLeft="16dp"
                         android:textColor="@android:color/darker_gray"/>
                 </LinearLayout>
 
@@ -551,7 +563,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginRight="15dp">
 
                     <!-- Tạo danh sách tiến trình đánh giá -->
                     <LinearLayout
@@ -560,19 +573,22 @@
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
 
-                        <TextView android:text="5 ★"
+                        <TextView
+                            android:text="5 ⭐️"
                             android:layout_width="40dp"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/overpass_regular"
                             android:textSize="14sp"/>
 
                         <ProgressBar
                             android:layout_width="0dp"
-                            android:layout_height="8dp"
+                            android:layout_height="15dp"
                             android:layout_weight="1"
                             android:progress="67"
                             android:progressDrawable="@drawable/progress_bar_custom"/>
 
                         <TextView android:text="67%"
+                            android:fontFamily="@font/overpass_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
@@ -585,19 +601,22 @@
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
 
-                        <TextView android:text="4 ★"
+                        <TextView android:text="4 ⭐️"
                             android:layout_width="40dp"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/overpass_regular"
                             android:textSize="14sp"/>
 
                         <ProgressBar
                             android:layout_width="0dp"
-                            android:layout_height="8dp"
+                            android:layout_height="15dp"
                             android:layout_weight="1"
                             android:progress="20"
                             android:progressDrawable="@drawable/progress_bar_custom"/>
 
                         <TextView android:text="20%"
+                            android:fontFamily="@font/overpass_regular"
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
@@ -609,19 +628,22 @@
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
 
-                        <TextView android:text="4 ★"
+                        <TextView android:text="3 ⭐️"
                             android:layout_width="40dp"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/overpass_regular"
                             android:textSize="14sp"/>
 
                         <ProgressBar
                             android:layout_width="0dp"
-                            android:layout_height="8dp"
+                            android:layout_height="15dp"
                             android:layout_weight="1"
                             android:progress="20"
                             android:progressDrawable="@drawable/progress_bar_custom"/>
 
                         <TextView android:text="20%"
+                            android:fontFamily="@font/overpass_regular"
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
@@ -633,19 +655,22 @@
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
 
-                        <TextView android:text="4 ★"
+                        <TextView android:text="2 ⭐️"
                             android:layout_width="40dp"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/overpass_regular"
                             android:textSize="14sp"/>
 
                         <ProgressBar
                             android:layout_width="0dp"
-                            android:layout_height="8dp"
+                            android:layout_height="15dp"
                             android:layout_weight="1"
                             android:progress="20"
                             android:progressDrawable="@drawable/progress_bar_custom"/>
 
                         <TextView android:text="20%"
+                            android:fontFamily="@font/overpass_regular"
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
@@ -657,19 +682,22 @@
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
 
-                        <TextView android:text="4 ★"
+                        <TextView android:text="1 ⭐️"
                             android:layout_width="40dp"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/overpass_regular"
                             android:textSize="14sp"/>
 
                         <ProgressBar
                             android:layout_width="0dp"
-                            android:layout_height="8dp"
+                            android:layout_height="15dp"
                             android:layout_weight="1"
                             android:progress="20"
                             android:progressDrawable="@drawable/progress_bar_custom"/>
 
                         <TextView android:text="20%"
+                            android:fontFamily="@font/overpass_regular"
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
@@ -678,19 +706,22 @@
                 </LinearLayout>
             </LinearLayout>
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="Gửi đánh giá"
                 android:textColor="@android:color/white"
                 android:backgroundTint="@color/blue"
                 android:padding="10dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="120dp"/>
+                android:fontFamily="@font/overpass_regular"
+                android:layout_gravity="end"
+                android:layout_marginRight="16dp"
+                />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/userReview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"/>
 <!--            ABCCCCCCCCCCCCCCCCCC-->
 
 <!--            quaroi3-->

@@ -20,6 +20,7 @@ import com.md09.pharmapoly.Models.ProductReview;
 import com.md09.pharmapoly.Models.Section;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
+import com.md09.pharmapoly.network.ApiClient;
 import com.md09.pharmapoly.network.ApiService;
 import com.md09.pharmapoly.network.RetrofitClient;
 import com.md09.pharmapoly.utils.ProgressDialogHelper;
@@ -43,6 +44,7 @@ public class ProductDetail extends AppCompatActivity {
             productOriginCountry,
             productManufacturer,
             productReviewCount,
+            productReviewCount2,
             productCategory,
             productBrand;
     private ImageView productImage;
@@ -106,7 +108,9 @@ public class ProductDetail extends AppCompatActivity {
         productBrand.setText(getString(R.string.brand) + ": " + product.getBrand().getName());
         productPrice.setText(product.getPrice() + "/" + product.getProduct_type().getName());
         productRating.setText(String.valueOf(product.getAverage_rating()));
+
         productReviewCount.setText(product.getReview_count() + " " + getString(R.string.review).toLowerCase());
+        productReviewCount2.setText(product.getReview_count()+ " " + getString(R.string.reviewr).toLowerCase());
 
         productCategory.setText(product.getCategory().getName());
         productSpecification.setText(product.getSpecification());
@@ -126,6 +130,7 @@ public class ProductDetail extends AppCompatActivity {
         productOriginCountry = findViewById(R.id.productOriginCountry);
         productManufacturer = findViewById(R.id.productManufacturer);
         productReviewCount = findViewById(R.id.productReviewCount);
+        productReviewCount2 = findViewById(R.id.productReviewCount2);
         productCategory = findViewById(R.id.productCategory);
         productImage = findViewById(R.id.productImage);
     }
@@ -157,39 +162,54 @@ public class ProductDetail extends AppCompatActivity {
         });
     }
     private void fetchProductReviews(String productId, String token) {
+        // Gọi API để lấy đánh giá của sản phẩm
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+        String url = "https://pharmapoly-server.onrender.com/api/product/" + productId + "/reviews";  // URL API với Product ID
 
-       retrofitClient.callAPI().getProductReviews(productId, token).enqueue(new Callback<ApiResponse<List<ProductReview>>>() {
+        // Gọi API để lấy đánh giá sản phẩm
+        Call<ApiResponse<List<ProductReview>>> reviewCall = apiService.getProductReviews(url, token);  // Đảm bảo bạn sử dụng đúng kiểu dữ liệu
+        reviewCall.enqueue(new Callback<ApiResponse<List<ProductReview>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<ProductReview>>> call, Response<ApiResponse<List<ProductReview>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<ProductReview> reviews = response.body().getData();
+                    List<ProductReview> reviews = response.body().getData();  // Lấy danh sách đánh giá
+                    Log.d("APIResponse", "Fetched reviews: " + reviews.size());  // In số lượng đánh giá
 
+                    // Hiển thị danh sách đánh giá
+                    reviewList.clear();
                     if (reviews != null && !reviews.isEmpty()) {
-                        Log.d("APIResponse", "Fetched " + reviews.size() + " reviews.");
-
-                        reviewList.clear();
                         reviewList.addAll(reviews);
+                        // Kiểm tra nếu adapter đã được gắn vào RecyclerView, nếu chưa thì gắn mới
+                        if (userReviewRecyclerView.getAdapter() == null) {
+                            ReviewAdapter reviewAdapter = new ReviewAdapter(ProductDetail.this, reviewList);
+                            userReviewRecyclerView.setAdapter(reviewAdapter);  // Gắn Adapter vào RecyclerView
+                        } else {
+                            userReviewRecyclerView.getAdapter().notifyDataSetChanged();  // Cập nhật RecyclerView với dữ liệu mới
+                        }
 
-                        // Cập nhật Adapter ngay sau khi có dữ liệu
-                        runOnUiThread(() -> reviewAdapter.notifyDataSetChanged());
+                        // Log thông tin của từng review để kiểm tra
+                        for (ProductReview review : reviews) {
+                            Log.d("APIResponse", "Review ID: " + review.get_id());
+                            Log.d("APIResponse", "Review Rating: " + review.getRating());
+                            Log.d("APIResponse", "Review Content: " + review.getReview());
+                            Log.d("APIResponse", "Date: " + review.getCreated_at());
+                        }
                     } else {
                         Log.d("APIResponse", "No reviews found.");
                     }
                 } else {
+                    Toast.makeText(ProductDetail.this, "Failed to fetch reviews", Toast.LENGTH_SHORT).show();
                     Log.e("APIError", "Failed to fetch reviews: " + response.message());
-                    Log.e("APIError", "Response Code: " + response.code()); // In lỗi cụ thể
-                    Log.e("APIError", "Response Body: " + response.errorBody()); // In chi tiết lỗi
                 }
             }
 
             @Override
             public void onFailure(Call<ApiResponse<List<ProductReview>>> call, Throwable t) {
+                Toast.makeText(ProductDetail.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.e("APIError", "Error fetching reviews: " + t.getMessage());
             }
         });
     }
-
-
 
     private void displaySections(List<Section> sections) {
         // Hiển thị các phần chi tiết (ví dụ: tác dụng, hướng dẫn sử dụng, thành phần,...)

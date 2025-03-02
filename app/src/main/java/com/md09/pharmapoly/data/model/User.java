@@ -12,7 +12,6 @@ public class User {
     private String uid;
     private int role;
     private int status;
-
     @Override
     public String toString() {
         return "User{" +
@@ -28,7 +27,6 @@ public class User {
                 ", status=" + status +
                 '}';
     }
-
     public User(String _id, String full_name, String gander, String phone_number, String google_id, String address, String avatar_url, String uid, int role, int status) {
         this._id = _id;
         this.full_name = full_name;

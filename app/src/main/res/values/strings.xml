@@ -50,4 +50,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="brand">Brand</string>
     <string name="review">Review</string>
+    <string name="reviewr">Number of reviewers</string>
 </resources>

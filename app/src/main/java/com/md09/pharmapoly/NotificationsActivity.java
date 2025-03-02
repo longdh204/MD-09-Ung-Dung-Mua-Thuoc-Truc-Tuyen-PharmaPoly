@@ -30,7 +30,6 @@ public class NotificationsActivity extends AppCompatActivity {
         ImageView btnBack = findViewById(R.id.btn_back);
         btnBack.setOnClickListener(v -> finish()); // Đóng activity hiện tại
 
-
         notificationList = new ArrayList<>();
         notificationList.add(new NotificationModel("Thông báo 1", "11/12/2004 vào 12:01", R.drawable.ic_bell, true));
         notificationList.add(new NotificationModel("Thông báo 2", "11/12/2004 vào 12:01", R.drawable.ic_bell, false));
