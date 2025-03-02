@@ -1,10 +1,8 @@
 package com.md09.pharmapoly;
 
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -12,18 +10,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.Gson;
 import com.md09.pharmapoly.Adapters.CategoryAdapter;
 import com.md09.pharmapoly.Adapters.ProductAdapter;
 import com.md09.pharmapoly.Adapters.SliderAdapter;
 import com.md09.pharmapoly.Models.Category;
 import com.md09.pharmapoly.data.model.ApiResponse;
-import com.md09.pharmapoly.data.model.Product;
+import com.md09.pharmapoly.Models.Product;
 import com.md09.pharmapoly.network.ApiClient;
 import com.md09.pharmapoly.network.ApiService;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
@@ -158,10 +154,7 @@ public class Home extends AppCompatActivity {
                     ApiResponse<Product> apiResponse = response.body();
                     Product product = apiResponse.getData();
 
-                    // In ra để kiểm tra imageUrl sau khi lấy từ API
-                    Log.d("APIResponse", "Product fetched: " + product.toString());
-
-                    // Kiểm tra xem imageUrl có giá trị không
+                    // Kiểm tra imageUrl sau khi lấy từ API
                     String imageUrl = product.getImageUrl();
                     if (imageUrl != null) {
                         Log.d("APIResponse", "Image URL: " + imageUrl);
@@ -183,7 +176,6 @@ public class Home extends AppCompatActivity {
                 Toast.makeText(Home.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
 //    public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
 //        private final int space;
 //
@@ -201,6 +193,6 @@ public class Home extends AppCompatActivity {
 ////            }
 ////        }
 //    }
-
+    }
 }
 

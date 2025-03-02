@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Product_Detail"
+    tools:context=".ui.view.activity.Product_Detail"
     android:padding="10dp">
 
     <ScrollView
@@ -23,7 +23,7 @@
                 android:layout_height="420dp">
 
                 <ImageView
-                    android:id="@+id/picMain"
+                    android:id="@+id/productImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
@@ -62,16 +62,15 @@
                     app:srcCompat="@drawable/card" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/picList"
+                    android:id="@+id/abc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/picMain"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:background="@drawable/white_bg"
-                    android:layout_marginBottom="8dp"
-                    android:clipToPadding="false"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
+                    android:background="@drawable/white_bg"
+                    android:clipToPadding="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/productImage"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -82,22 +81,24 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/productBrand"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Thương hiệu : $ "
+                    android:text="Thương hiệu"
                     android:textStyle="bold"
                     android:textColor="#0D00FF"
                     android:textSize="16dp"
+                    android:fontFamily="@font/overpass_regular"
                     android:layout_marginTop="20dp"/>
 
                 <TextView
-                    android:id="@+id/textView18"
+                    android:id="@+id/productName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Elixir của Vĩnh Hằng và Tinh Tú Bất Diệt – Thuốc Giúp Con Người Vượt Thời Gian "
                     android:textStyle="bold"
                     android:textColor="#000000"
+                    android:fontFamily="@font/overpass_regular"
                     android:textSize="17dp"
                     android:layout_marginTop="10dp"/>
             </LinearLayout>
@@ -108,10 +109,11 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp">
                 <TextView
-                    android:id="@+id/tv_rating"
+                    android:id="@+id/productRating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$"
+                    android:text="đánh giá trung bình"
+                    android:fontFamily="@font/overpass_regular"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/black" />
@@ -126,21 +128,22 @@
 
                 <!-- Số lượt đánh giá -->
                 <TextView
-                    android:id="@+id/tv_reviews"
+                    android:id="@+id/productReviewCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$ đánh giá"
+                    android:text="số lượng đánh giá"
                     android:textSize="14sp"
+                    android:fontFamily="@font/overpass_regular"
                     android:textColor="@android:color/black"
                     android:layout_marginStart="8dp" />
 
                 <!-- Số bình luận -->
                 <TextView
-                    android:id="@+id/tv_comments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$ bình luận"
+                    android:text="số lượng ình luận"
                     android:textSize="14sp"
+                    android:fontFamily="@font/overpass_regular"
                     android:textColor="@android:color/black"
                     android:layout_marginStart="16dp" />
             </LinearLayout>
@@ -150,52 +153,58 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:layout_marginTop="10dp">
-
-                <!-- Nút "Hộp" - Được chọn -->
                 <TextView
-                    android:layout_width="50dp"
+                    android:id="@+id/productSpecification"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hộp"
-                    android:textSize="15sp"
-                    android:textColor="@color/blue"
-                    android:padding="8dp"
-                    android:background="@drawable/bg_selected"
-                    android:layout_marginEnd="8dp"
-                    android:textAlignment="center"/>
+                    android:text="Specification"/>
+<!--                &lt;!&ndash; Nút "Hộp" - Được chọn &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_box"-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Hộp"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:textColor="@color/blue"-->
+<!--                    android:padding="8dp"-->
+<!--                    android:background="@drawable/bg_selected"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    android:textAlignment="center"/>-->
 
-                <!-- Nút "Ví" - Chưa chọn -->
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:text="Ví"
-                    android:textSize="15sp"
-                    android:textColor="@color/blue"
-                    android:padding="8dp"
-                    android:background="@drawable/bg_unselected"
-                    android:layout_marginEnd="8dp"
-                    android:textAlignment="center"/>
+<!--                &lt;!&ndash; Nút "Ví" - Chưa chọn &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Ví"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:textColor="@color/blue"-->
+<!--                    android:padding="8dp"-->
+<!--                    android:background="@drawable/bg_unselected"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    android:textAlignment="center"/>-->
 
-                <!-- Nút "Ống" - Chưa chọn -->
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:text="Ống"
-                    android:textSize="15sp"
-                    android:textColor="@color/blue"
-                    android:padding="8dp"
-                    android:background="@drawable/bg_unselected"
-                    android:textAlignment="center"/>
+<!--                &lt;!&ndash; Nút "Ống" - Chưa chọn &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Ống"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:textColor="@color/blue"-->
+<!--                    android:padding="8dp"-->
+<!--                    android:background="@drawable/bg_unselected"-->
+<!--                    android:textAlignment="center"/>-->
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/productPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="$ / Viên"
                 android:textStyle="bold"
                 android:textColor="#0012FB"
                 android:textSize="25dp"
+                android:fontFamily="@font/overpass_regular"
                 android:layout_marginTop="10dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -220,7 +229,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Giảm $% cho đến $"
+                    android:text="Giảm giá"
+                    android:fontFamily="@font/overpass_regular"
                     android:textSize="17sp"
                     android:textColor="@android:color/black"
                     />
@@ -238,9 +248,11 @@
 
                 <!-- Tiêu đề -->
                 <TextView
+                    android:id="@+id/productDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Thông tin sản phẩm"
+                    android:fontFamily="@font/overpass_regular"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"
@@ -253,47 +265,16 @@
                     android:text="Danh mục"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:fontFamily="@font/overpass_regular"
                     android:textColor="@android:color/black"/>
 
                 <TextView
+                    android:id="@+id/productCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Thực phẩm chức năng"
                     android:textSize="14sp"
-                    android:textColor="@android:color/black"/>
-
-                <!-- Dạng bảo chế -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dạng bảo chế"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    android:layout_marginTop="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Viên nén"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"/>
-
-                <!-- Quý cách -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Quy cách"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    android:layout_marginTop="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hộp xứ thương hiệu"
-                    android:textSize="14sp"
+                    android:fontFamily="@font/overpass_regular"
                     android:textColor="@android:color/black"/>
 
                 <!-- Xuất xứ -->
@@ -303,10 +284,12 @@
                     android:text="Xuất xứ"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:fontFamily="@font/overpass_regular"
                     android:textColor="@android:color/black"
                     android:layout_marginTop="8dp"/>
 
                 <TextView
+                    android:id="@+id/productOrigin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Việt Nam"
@@ -324,60 +307,10 @@
                     android:layout_marginTop="8dp"/>
 
                 <TextView
+                    android:id="@+id/productManufacturer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="DoLong"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"/>
-
-                <!-- Hỗ trợ -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hỗ trợ"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    android:layout_marginTop="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Người sắp chết"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"/>
-
-                <!-- Thành phần -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Thành phần"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    android:layout_marginTop="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ABC"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"/>
-
-                <!-- Mô tả ngắn -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mô tả ngắn"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    android:layout_marginTop="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ABC"
                     android:textSize="14sp"
                     android:textColor="@android:color/black"/>
 
@@ -470,298 +403,210 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#000000"/>
+            <!-- Khu vực hiển thị tổng số sao và tiến trình đánh giá -->
+
+            <!--ABCCCCCCCCCCCCCCCCCC-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đánh giá sản phẩm"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="15dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="10dp">
 
-                <!-- Tiêu đề Đánh giá sản phẩm -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Đánh giá sản phẩm"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    android:layout_marginBottom="8dp"/>
-
-                <!-- Hiển thị số sao đánh giá -->
+                <!-- Số sao lớn -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="5"
-                        android:textSize="34sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/black"
-                        android:layout_gravity="center"/>
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_star"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="923 Ratings and 257 Reviews"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/darker_gray"
-                        android:layout_marginLeft="20dp"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-                <!-- Phân bổ tỷ lệ sao -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#000000"
-                    android:layout_marginTop="18dp"
-                    /> <!-- Đường kẻ -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="18dp">
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_gravity="center">
+                        android:gravity="center_vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="5"
-                            android:textSize="20sp"
-                            android:textColor="@android:color/black" />
+                            android:textSize="40sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"/>
+
                         <ImageView
-                            android:layout_width="20dp"
+                            android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:src="@drawable/ic_star"
                             android:layout_marginLeft="8dp"/>
                     </LinearLayout>
 
-                    <ProgressBar
-                        android:id="@+id/progressBar5Star"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:progress="67"
-                        android:max="100"
-                        android:indeterminate="false"
-                        android:layout_gravity="center"/>
-
+                    <!-- Số lượng đánh giá -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="67%"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/black"
-                        android:layout_gravity="center"/>
+                        android:text="923 Ratings\nand 257 Reviews"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"/>
                 </LinearLayout>
 
+                <!-- Khu vực hiển thị tiến trình đánh giá -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="8dp">
+                    android:layout_weight="2"
+                    android:orientation="vertical">
 
+                    <!-- Tạo danh sách tiến trình đánh giá -->
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_gravity="center">
-                        <TextView
+                        android:gravity="center_vertical">
+
+                        <TextView android:text="5 ★"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"/>
+
+                        <ProgressBar
+                            android:layout_width="0dp"
+                            android:layout_height="8dp"
+                            android:layout_weight="1"
+                            android:progress="67"
+                            android:progressDrawable="@drawable/progress_bar_custom"/>
+
+                        <TextView android:text="67%"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="4"
-                            android:textSize="20sp"
-                            android:textColor="@android:color/black" />
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_star"
+                            android:textSize="14sp"
                             android:layout_marginLeft="8dp"/>
                     </LinearLayout>
-
-                    <ProgressBar
-                        android:id="@+id/progressBar4Star"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:progress="20"
-                        android:max="100"
-                        android:indeterminate="false"
-                        android:layout_gravity="center"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="20%"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/black"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="8dp">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_gravity="center">
-                        <TextView
+                        android:gravity="center_vertical">
+
+                        <TextView android:text="4 ★"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"/>
+
+                        <ProgressBar
+                            android:layout_width="0dp"
+                            android:layout_height="8dp"
+                            android:layout_weight="1"
+                            android:progress="20"
+                            android:progressDrawable="@drawable/progress_bar_custom"/>
+
+                        <TextView android:text="20%"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="3"
-                            android:textSize="20sp"
-                            android:textColor="@android:color/black" />
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_star"
+                            android:textSize="14sp"
                             android:layout_marginLeft="8dp"/>
                     </LinearLayout>
-
-                    <ProgressBar
-                        android:id="@+id/progressBar3Star"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:progress="20"
-                        android:max="100"
-                        android:indeterminate="false"
-                        android:layout_gravity="center"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="20%"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/black"
-                        android:layout_gravity="center"
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="8dp">
-
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_gravity="center">
-                        <TextView
+                        android:gravity="center_vertical">
+
+                        <TextView android:text="4 ★"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"/>
+
+                        <ProgressBar
+                            android:layout_width="0dp"
+                            android:layout_height="8dp"
+                            android:layout_weight="1"
+                            android:progress="20"
+                            android:progressDrawable="@drawable/progress_bar_custom"/>
+
+                        <TextView android:text="20%"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2"
-                            android:textSize="20sp"
-                            android:textColor="@android:color/black" />
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_star"
+                            android:textSize="14sp"
                             android:layout_marginLeft="8dp"/>
                     </LinearLayout>
-
-                    <ProgressBar
-                        android:id="@+id/progressBar2Star"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:progress="20"
-                        android:max="100"
-                        android:indeterminate="false"
-                        android:layout_gravity="center"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="20%"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/black"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="8dp">
-
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_gravity="center">
-                        <TextView
+                        android:gravity="center_vertical">
+
+                        <TextView android:text="4 ★"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"/>
+
+                        <ProgressBar
+                            android:layout_width="0dp"
+                            android:layout_height="8dp"
+                            android:layout_weight="1"
+                            android:progress="20"
+                            android:progressDrawable="@drawable/progress_bar_custom"/>
+
+                        <TextView android:text="20%"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1"
-                            android:textSize="20sp"
-                            android:textColor="@android:color/black" />
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_star"
+                            android:textSize="14sp"
                             android:layout_marginLeft="8dp"/>
                     </LinearLayout>
-
-                    <ProgressBar
-                        android:id="@+id/progressBar1Star"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:progress="20"
-                        android:max="100"
-                        android:indeterminate="false"
-                        android:layout_gravity="center"/>
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="20%"
-                        android:textSize="18sp"
-                        android:textColor="@android:color/black"
-                        android:layout_gravity="center"/>
+                        <TextView android:text="4 ★"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"/>
+
+                        <ProgressBar
+                            android:layout_width="0dp"
+                            android:layout_height="8dp"
+                            android:layout_weight="1"
+                            android:progress="20"
+                            android:progressDrawable="@drawable/progress_bar_custom"/>
+
+                        <TextView android:text="20%"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginLeft="8dp"/>
+                    </LinearLayout>
                 </LinearLayout>
-
-                <!-- Nút gửi đánh giá -->
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="Gửi đánh giá"
-                    android:textColor="@android:color/white"
-                    android:background="@drawable/rounded_button"
-                    android:layout_marginTop="16dp" />
-
-                <!-- Thông tin người đánh giá -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Erric Hoffman ★ 4.2  05 - oct 2020"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"
-                    android:layout_marginTop="16dp"/>
-
-                <!-- Nội dung đánh giá -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Interdum et malesuada fames ac ante ipsum primis in faucibus."
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray"
-                    android:layout_marginTop="8dp"/>
-
             </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gửi đánh giá"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/blue"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="120dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/userReview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+<!--            ABCCCCCCCCCCCCCCCCCC-->
 
 <!--            quaroi3-->
             <TextView

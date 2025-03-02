@@ -73,6 +73,9 @@
             android:name=".Home"
             android:exported="true"/>
         <activity
+            android:name=".ui.view.activity.Product_Detail"
+            android:exported="true"/>
+        <activity
             android:name=".ui.view.activity.PhoneNumber"
             android:exported="true">
             <intent-filter>
