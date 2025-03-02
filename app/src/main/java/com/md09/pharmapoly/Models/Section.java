@@ -4,6 +4,14 @@ public class Section {
     private String _id;
     private String name;
 
+    public Section() {
+    }
+
+    public Section(String _id, String name) {
+        this._id = _id;
+        this.name = name;
+    }
+
     public String get_id() {
         return _id;
     }

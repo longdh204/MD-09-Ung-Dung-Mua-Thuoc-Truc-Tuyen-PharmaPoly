@@ -2,19 +2,22 @@ package com.md09.pharmapoly.Models;
 
 import java.util.List;
 
-public class Sections {
+public class ProductSection {
     private String _id;
     private String product_id;
     private String section_id;
     private Section section;
     private List<ProductSectionDetail> details;
 
-    public Section getSection() {
-        return section;
+    public ProductSection() {
     }
 
-    public void setSection(Section section) {
+    public ProductSection(String _id, String product_id, String section_id, Section section, List<ProductSectionDetail> details) {
+        this._id = _id;
+        this.product_id = product_id;
+        this.section_id = section_id;
         this.section = section;
+        this.details = details;
     }
 
     public String get_id() {
@@ -39,6 +42,14 @@ public class Sections {
 
     public void setSection_id(String section_id) {
         this.section_id = section_id;
+    }
+
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
     }
 
     public List<ProductSectionDetail> getDetails() {

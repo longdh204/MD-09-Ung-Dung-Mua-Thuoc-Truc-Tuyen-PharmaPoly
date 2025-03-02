@@ -20,7 +20,7 @@ public class Product {
     private Brand brand;
     private ProductType product_type;
     private List<ProductImage> images;
-    private List<Sections> sections;
+    private List<ProductSection> sections;
     // Lấy URL của ảnh chính
     public String getImageUrl() {
         if (images != null && !images.isEmpty()) {
@@ -106,11 +106,11 @@ public class Product {
         this.product_type = product_type;
     }
 
-    public List<Sections> getSections() {
+    public List<ProductSection> getSections() {
         return sections;
     }
 
-    public void setSections(List<Sections> sections) {
+    public void setSections(List<ProductSection> sections) {
         this.sections = sections;
     }
 
