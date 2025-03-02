@@ -1,8 +1,6 @@
 package com.md09.pharmapoly.Models;
 
-import com.google.gson.annotations.SerializedName;
-
-public class SectionDetail{
+public class ProductSectionDetail {
     private String _id;
 
     private String product_section_id;

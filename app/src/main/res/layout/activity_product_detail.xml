@@ -5,8 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.activity.Product_Detail"
-    android:padding="10dp">
+    tools:context=".ui.view.activity.ProductDetail">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,97 +16,150 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="420dp">
-
-                <ImageView
-                    android:id="@+id/productImage"
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/productImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="360dp"
+                        android:scaleType="centerCrop"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-                <ImageView
-                    android:id="@+id/backBtn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="48dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/back" />
+                        <LinearLayout
+                            android:background="@drawable/custom_bgr_gradient_black_tran"
+                            android:gravity="center_vertical"
+                            android:paddingTop="48dp"
+                            android:paddingBottom="32dp"
+                            android:paddingHorizontal="12dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:id="@+id/backBtn"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:backgroundTint="@color/white_FFF"
+                                android:background="@drawable/back" />
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"/>
+                            <ImageView
+                                android:layout_marginRight="24dp"
+                                android:id="@+id/shareBtn"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:backgroundTint="@color/white_FFF"
+                                android:background="@drawable/share" />
+                            <ImageView
+                                android:backgroundTint="@color/white_FFF"
+                                android:id="@+id/favBtn"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:background="@drawable/card" />
+                        </LinearLayout>
+                </RelativeLayout>
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="420dp">-->
 
-                <ImageView
-                    android:id="@+id/shareBtn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="30dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/backBtn"
-                    app:layout_constraintEnd_toStartOf="@+id/favBtn"
-                    app:layout_constraintTop_toTopOf="@+id/backBtn"
-                    app:srcCompat="@drawable/share" />
-                <ImageView
-                    android:id="@+id/favBtn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/backBtn"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/backBtn"
-                    app:srcCompat="@drawable/card" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/productImage"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:scaleType="centerCrop"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    tools:srcCompat="@tools:sample/backgrounds/scenic" />-->
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/abc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:background="@drawable/white_bg"
-                    android:clipToPadding="false"
-                    app:layout_constraintBottom_toBottomOf="@+id/productImage"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/backBtn"-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:srcCompat="@drawable/back" />-->
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                <ImageView-->
+<!--                    android:id="@+id/shareBtn"-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/backBtn"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/favBtn"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/backBtn"-->
+<!--                    app:srcCompat="@drawable/share" />-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/favBtn"-->
+<!--                    android:layout_width="30dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/backBtn"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/backBtn"-->
+<!--                    app:srcCompat="@drawable/card" />-->
+
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/abc"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="4dp"-->
+<!--                    android:layout_marginEnd="4dp"-->
+<!--                    android:background="@drawable/white_bg"-->
+<!--                    android:clipToPadding="false"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/productImage"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent" />-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
             <LinearLayout
+                android:paddingHorizontal="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/productBrand"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Thương hiệu"
-                    android:textStyle="bold"
-                    android:textColor="#0D00FF"
-                    android:textSize="16dp"
-                    android:fontFamily="@font/overpass_regular"
-                    android:layout_marginTop="20dp"/>
-
                 <TextView
                     android:id="@+id/productName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Elixir của Vĩnh Hằng và Tinh Tú Bất Diệt – Thuốc Giúp Con Người Vượt Thời Gian "
                     android:textStyle="bold"
-                    android:textColor="#000000"
+                    android:lines="3"
+                    android:minLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/black_333"
                     android:fontFamily="@font/overpass_regular"
-                    android:textSize="17dp"
-                    android:layout_marginTop="10dp"/>
+                    android:textSize="22sp"
+                    android:layout_marginTop="12dp"/>
+                <TextView
+                    android:id="@+id/productBrand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thương hiệu"
+                    android:textStyle="bold"
+                    android:textColor="@color/blue_CE4"
+                    android:textSize="12dp"
+                    android:fontFamily="@font/overpass_regular"
+                    android:layout_marginTop="12dp"/>
+
+                <TextView
+                    android:id="@+id/productPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="666.666đ / Viên"
+                    android:textStyle="bold"
+                    android:textColor="@color/blue_CB7"
+                    android:textSize="25dp"
+                    android:fontFamily="@font/overpass_regular" />
             </LinearLayout>
 
             <LinearLayout
+                android:paddingHorizontal="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="12dp">
                 <TextView
                     android:id="@+id/productRating"
                     android:layout_width="wrap_content"
@@ -141,7 +193,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="số lượng ình luận"
+                    android:text="số lượng bình luận"
                     android:textSize="14sp"
                     android:fontFamily="@font/overpass_regular"
                     android:textColor="@android:color/black"
@@ -153,11 +205,11 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:layout_marginTop="10dp">
-                <TextView
-                    android:id="@+id/productSpecification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Specification"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/productSpecification"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Specification"/>-->
 <!--                &lt;!&ndash; Nút "Hộp" - Được chọn &ndash;&gt;-->
 <!--                <TextView-->
 <!--                    android:id="@+id/tv_box"-->
@@ -195,17 +247,6 @@
 <!--                    android:textAlignment="center"/>-->
 
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/productPrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="$ / Viên"
-                android:textStyle="bold"
-                android:textColor="#0012FB"
-                android:textSize="25dp"
-                android:fontFamily="@font/overpass_regular"
-                android:layout_marginTop="10dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -247,19 +288,34 @@
                 android:padding="16dp">
 
                 <!-- Tiêu đề -->
-                <TextView
-                    android:id="@+id/productDescription"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Thông tin sản phẩm"
-                    android:fontFamily="@font/overpass_regular"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    android:layout_marginBottom="8dp"/>
-
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Thông tin sản phẩm"
+                        android:fontFamily="@font/overpass_regular"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black" />
+                    <!-- Xem thêm -->
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Xem Thêm"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_CE4"/>
+                </LinearLayout>
                 <!-- Danh mục -->
                 <TextView
+                    android:layout_marginTop="12dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Danh mục"
@@ -276,12 +332,29 @@
                     android:textSize="14sp"
                     android:fontFamily="@font/overpass_regular"
                     android:textColor="@android:color/black"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quy cách"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/overpass_regular"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/productSpecification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hộp 12 gói x 3g"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/overpass_regular"
+                    android:textColor="@android:color/black"/>
 
                 <!-- Xuất xứ -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Xuất xứ"
+                    android:text="Xuất xứ thương hiệu"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/overpass_regular"
@@ -289,7 +362,7 @@
                     android:layout_marginTop="8dp"/>
 
                 <TextView
-                    android:id="@+id/productOrigin"
+                    android:id="@+id/productOriginCountry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Việt Nam"
@@ -303,7 +376,7 @@
                     android:text="Nhà sản xuất"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/overpass_regular"
                     android:layout_marginTop="8dp"/>
 
                 <TextView
@@ -314,15 +387,27 @@
                     android:textSize="14sp"
                     android:textColor="@android:color/black"/>
 
-                <!-- Xem thêm -->
+                <!-- Mô tả ngắn gọn  -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Xem Thêm"
+                    android:text="Mô tả ngắn gọn"
                     android:textSize="16sp"
-                    android:textColor="@android:color/holo_blue_dark"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"/>
+                    android:textStyle="bold"
+                    android:fontFamily="@font/overpass_regular"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/productShortDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mô tả ngắn gọn"
+                    android:textSize="14sp"
+                    android:maxLines="3"
+                    android:minLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@android:color/black"/>
+
             </LinearLayout>
     <!--quaroi-->
             <View

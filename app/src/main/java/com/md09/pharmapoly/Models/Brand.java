@@ -12,6 +12,15 @@ public class Brand {
     // Getters and Setters
 
 
+    public Brand() {
+    }
+
+    public Brand(String _id, String name, String description) {
+        this._id = _id;
+        this.name = name;
+        this.description = description;
+    }
+
     public String get_id() {
         return _id;
     }

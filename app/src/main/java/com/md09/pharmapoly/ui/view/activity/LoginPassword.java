@@ -4,7 +4,6 @@ import static com.md09.pharmapoly.utils.Constants.PHONE_NUMBER_KEY;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -14,7 +13,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import com.md09.pharmapoly.Home;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.data.model.User;
@@ -80,7 +78,7 @@ public class LoginPassword extends AppCompatActivity {
                             SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(LoginPassword.this);
                             sharedPrefHelper.saveUser(user, token, refreshToken);
 
-                            startActivity(new Intent(LoginPassword.this, Home.class));
+                            startActivity(new Intent(LoginPassword.this, MainActivity.class));
                             finishAffinity();
                         }
                     } else {

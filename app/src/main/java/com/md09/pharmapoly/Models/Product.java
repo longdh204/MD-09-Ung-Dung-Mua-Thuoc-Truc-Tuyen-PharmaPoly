@@ -13,15 +13,14 @@ public class Product {
     private String specification;
     private String origin_country;
     private String manufacturer;
-
     private float average_rating;
-
     private int review_count;
-
     private String create_at;
-
-    private List<ProductImage> images;  // Lưu danh sách ảnh
-
+    private Category category;
+    private Brand brand;
+    private ProductType product_type;
+    private List<ProductImage> images;
+    private List<Sections> sections;
     // Lấy URL của ảnh chính
     public String getImageUrl() {
         if (images != null && !images.isEmpty()) {
@@ -57,6 +56,62 @@ public class Product {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(String category_id) {
+        this.category_id = category_id;
+    }
+
+    public String getBrand_id() {
+        return brand_id;
+    }
+
+    public void setBrand_id(String brand_id) {
+        this.brand_id = brand_id;
+    }
+
+    public String getProduct_type_id() {
+        return product_type_id;
+    }
+
+    public void setProduct_type_id(String product_type_id) {
+        this.product_type_id = product_type_id;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
+    public ProductType getProduct_type() {
+        return product_type;
+    }
+
+    public void setProduct_type(ProductType product_type) {
+        this.product_type = product_type;
+    }
+
+    public List<Sections> getSections() {
+        return sections;
+    }
+
+    public void setSections(List<Sections> sections) {
+        this.sections = sections;
     }
 
     public String getShort_description() {

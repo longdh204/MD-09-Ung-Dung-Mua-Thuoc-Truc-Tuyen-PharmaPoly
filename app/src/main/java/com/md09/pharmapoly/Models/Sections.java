@@ -6,10 +6,8 @@ public class Sections {
     private String _id;
     private String product_id;
     private String section_id;
-    private String createdAt;
-    private String updatedAt;
     private Section section;
-    private List<SectionDetail> details;
+    private List<ProductSectionDetail> details;
 
     public Section getSection() {
         return section;
@@ -43,27 +41,11 @@ public class Sections {
         this.section_id = section_id;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public List<SectionDetail> getDetails() {
+    public List<ProductSectionDetail> getDetails() {
         return details;
     }
 
-    public void setDetails(List<SectionDetail> details) {
+    public void setDetails(List<ProductSectionDetail> details) {
         this.details = details;
     }
 }

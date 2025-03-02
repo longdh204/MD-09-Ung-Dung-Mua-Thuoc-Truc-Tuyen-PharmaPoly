@@ -10,6 +10,14 @@ public class ProductType {
     // Getters and Setters
 
 
+    public ProductType() {
+    }
+
+    public ProductType(String _id, String name) {
+        this._id = _id;
+        this.name = name;
+    }
+
     public String get_id() {
         return _id;
     }

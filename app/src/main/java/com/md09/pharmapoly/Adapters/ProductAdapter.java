@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.md09.pharmapoly.ui.view.activity.Product_Detail;
+import com.md09.pharmapoly.ui.view.activity.ProductDetail;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.Models.Product;  // Đảm bảo import đúng package
 import com.squareup.picasso.Picasso;
@@ -22,6 +22,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     private Context context;
     private List<Product> productList;
 
+    public void Update(List<Product> products) {
+        this.productList = products;
+        notifyDataSetChanged();
+    }
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
@@ -38,8 +42,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product = productList.get(position);
         holder.productName.setText(product.getName());
-        holder.productPrice.setText("Price: " + product.getPrice());
-        holder.productRating.setText("Rating: " + product.getAverage_rating());
+        holder.productPrice.setText(String.valueOf(product.getPrice()) + "/" + product.getProduct_type().getName());
+        holder.productRating.setText(String.valueOf(product.getAverage_rating()));
 
         // Lấy imageUrl từ Product (ảnh chính)
         String imageUrl = product.getImageUrl();
@@ -50,7 +54,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         // Thiết lập sự kiện click cho mỗi item sản phẩm
         holder.itemView.setOnClickListener(v -> {
             // Chuyển sang Activity chi tiết sản phẩm
-            Intent intent = new Intent(context, Product_Detail.class);
+            Intent intent = new Intent(context, ProductDetail.class);
             // Truyền thông tin cơ bản sản phẩm qua Intent
             intent.putExtra("product_id", product.get_id());  // Chuyển ID sản phẩm
             intent.putExtra("product_name", product.getName());
