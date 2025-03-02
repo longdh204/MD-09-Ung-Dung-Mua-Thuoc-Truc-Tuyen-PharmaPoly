@@ -1,0 +1,45 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_notification"
+        android:title="Thông báo"
+        />
+
+    <item
+        android:id="@+id/nav_healthcare"
+        android:title="Thực phẩm chức năng"
+        android:checkable="true" />
+
+    <item
+        android:id="@+id/nav_pharmacy"
+        android:title="Dược mỹ phẩm"
+        android:checkable="true" />
+
+    <item
+        android:id="@+id/nav_medicine"
+        android:title="Thuốc"
+        android:checkable="true" />
+
+    <item
+        android:id="@+id/nav_medical_equipment"
+        android:title="Thiết bị y tế"
+        android:checkable="true" />
+    <item
+        android:id="@+id/nav_vaccination"
+        android:title="Tiêm chủng"
+        android:checkable="true" />
+    <item
+        android:id="@+id/nav_sick"
+        android:title="Bệnh"
+        android:checkable="true" />
+
+    <item
+        android:id="@+id/nav_health_package"
+        android:title="Gói sức khỏe"
+        android:checkable="true" />
+    <item
+        android:id="@+id/nav_system"
+        android:title="Hệ thống nhà thuốc"
+        android:checkable="true" />
+
+
+</menu>

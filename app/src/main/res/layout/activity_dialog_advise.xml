@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".Dialog_Advise">
+
+
+    <!-- Tiêu đề -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Tiêu đề -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tư vấn với dược sỹ"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="start"
+            android:gravity="center"
+            android:layout_weight="1"/>
+
+        <!-- Hình ảnh ở cuối -->
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_x"
+            android:layout_gravity="end"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center">
+
+        <!-- Hình ảnh đại diện tư vấn viên -->
+        <ImageView
+            android:layout_width="320dp"
+            android:layout_height="220dp"
+            android:src="@drawable/advise"
+        android:layout_marginBottom="16dp"/>
+
+        <!-- Văn bản hướng dẫn -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vui lòng chọn phương thức tư vấn của chúng tôi"
+            android:textSize="18sp"
+            android:textColor="#4E4E4E"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"/>
+
+        <!-- Văn bản miễn phí -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Miễn Phí)"
+            android:textSize="16sp"
+            android:textColor="#4E4E4E"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"/>
+
+        <!-- Các nút chọn phương thức -->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nhắn tin"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#7F85F0"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gọi tổng đài"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#7F85F0"/>
+    </LinearLayout>
+
+</LinearLayout>

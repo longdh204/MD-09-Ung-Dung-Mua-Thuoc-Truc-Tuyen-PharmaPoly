@@ -1,0 +1,91 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/logo_image"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:paddingTop="40dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_logo"
+        android:scaleType="centerCrop"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#00A1FF"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_user"
+            android:scaleType="centerCrop"
+            android:padding="5dp"
+            android:layout_gravity="start"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:paddingStart="20dp"
+            >
+
+            <TextView
+                android:id="@+id/user_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0967197293"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:layout_gravity="start"/>
+
+            <TextView
+                android:id="@+id/user_points"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="100 điểm"
+                android:textSize="15sp"
+                android:padding="5dp"
+                android:paddingStart="20dp"
+                android:background="@drawable/bgr_menu"
+                android:textColor="@color/white"
+                android:layout_gravity="start"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <TextView
+            android:id="@+id/hotline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bgr_menu"
+            android:text="Hotline tư vấn :0967197293"
+            android:layout_margin="10dp"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal|bottom" />
+    </LinearLayout>
+</LinearLayout>
+
+

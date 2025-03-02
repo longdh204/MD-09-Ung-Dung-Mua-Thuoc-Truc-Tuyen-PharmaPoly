@@ -15,6 +15,4 @@ public interface ApiService {
     Call<ApiResponse<User>> login(@Body RequestBody request);
     @POST("user/create-account")
     Call<ApiResponse<Void>> createAccount(@Body RequestBody request);
-
-
 }

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/border_rounded_product">
+
+        <LinearLayout
+            android:paddingTop="2dp"
+            android:paddingHorizontal="2dp"
+            android:paddingBottom="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/productImage"
+                android:layout_width="164dp"
+                android:layout_height="164dp"
+                app:shapeAppearance="@style/CornerImageViewTop_LeftRight"
+                android:src="@drawable/product_image"/>
+
+
+            <TextView
+                android:layout_marginTop="6dp"
+                android:paddingHorizontal="6dp"
+                android:id="@+id/productName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/overpass_regular"
+                android:text="Productname"
+                android:lines="2"
+                android:ellipsize="end"
+                android:textSize="16sp"
+                android:textColor="@color/black_333"/>
+            <LinearLayout
+                android:layout_marginTop="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:paddingHorizontal="6dp"
+                    android:id="@+id/productPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/be_vietnam_pro_semibold"
+                    android:singleLine="true"
+                    android:text="666.666đ"
+                    android:textColor="@color/blue_CE4"/>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/danhgiatrungbinhproduct"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/productPrice">
+
+                    <!-- Hình ngôi sao -->
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="18dp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@android:drawable/star_big_on"
+                        app:tint="#FFFFFF" />
+
+                    <!-- Điểm số -->
+                    <TextView
+                        android:id="@+id/productRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:text="4.2"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            tools:ignore="MissingConstraints">
+
+            <!-- Nền Tam giác -->
+            <View
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/sale_tag"/>
+
+            <!-- Chữ "SALE" -->
+            <TextView
+                android:id="@+id/saleLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SALE"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:fontFamily="@font/be_vietnam_pro_bold"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:rotation="-45"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

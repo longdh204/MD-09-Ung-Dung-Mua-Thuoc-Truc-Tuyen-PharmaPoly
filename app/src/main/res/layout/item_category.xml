@@ -1,0 +1,29 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="80dp"
+    android:layout_height="99dp"
+    android:layout_margin="10dp"
+    android:padding="5dp"
+    android:orientation="vertical"
+    android:background="@drawable/rounded_shadow_background"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/imgCategory"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_medicine"
+        android:scaleType="fitCenter"/>
+
+    <TextView
+        android:id="@+id/txtCategoryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cần mua thuốc"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:fontFamily="@font/overpass_regular"
+        android:layout_marginTop="8dp"/>
+</LinearLayout>

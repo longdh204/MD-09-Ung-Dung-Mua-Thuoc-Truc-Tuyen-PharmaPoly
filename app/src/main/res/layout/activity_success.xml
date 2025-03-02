@@ -7,12 +7,14 @@
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".welcome_login.Success">
+
     <ImageView
         android:layout_marginTop="100dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center"
         android:src="@drawable/mailsent"/>
+
     <TextView
         android:layout_width="380dp"
         android:layout_height="wrap_content"
