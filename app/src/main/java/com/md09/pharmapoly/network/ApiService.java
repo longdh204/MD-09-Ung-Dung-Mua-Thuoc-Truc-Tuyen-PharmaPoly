@@ -17,11 +17,15 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Url;
 
 public interface ApiService {
-    @GET
-    Call<ApiResponse<List<ProductReview>>> getProductReviews(@Url String url, @Header("Authorization") String token);
+    @GET("product/{id}/reviews")
+    Call<ApiResponse<List<ProductReview>>>
+            getProductReviews(
+                    @Path("id") String productId,
+                    @Header("Authorization") String token);
     @GET
     Call<ApiResponse<Brand>> getBrandDetails(@Url String url, @Header("Authorization") String token);
     @GET

@@ -22,6 +22,7 @@ import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.network.ApiClient;
 import com.md09.pharmapoly.network.ApiService;
+import com.md09.pharmapoly.network.RetrofitClient;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.squareup.picasso.Picasso;
 
@@ -47,12 +48,14 @@ public class Product_Detail extends AppCompatActivity {
 
     private Brand brand;
     private ProductCategory category;
-
+    private RetrofitClient retrofitClient;
     @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
+
+        InitUI();
 
         RecyclerView recyclerView = findViewById(R.id.userReview);
         // Ánh xạ các views
@@ -115,6 +118,11 @@ public class Product_Detail extends AppCompatActivity {
         fetchProductDetails(productId, token);
         // Gọi API để lấy đánh giá của sản phẩm
     }
+
+    private void InitUI() {
+        retrofitClient = new RetrofitClient();
+    }
+
     private void fetchProductDetails(String productId, String token) {
         // Gọi API để lấy chi tiết sản phẩm
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
@@ -157,14 +165,8 @@ public class Product_Detail extends AppCompatActivity {
         });
     }
     private void fetchProductReviews(String productId, String token) {
-        ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        String url = "https://pharmapoly-server.onrender.com/api/product-review/get/" + productId;
 
-        Log.d("APIRequest", "Fetching reviews from: " + url);
-
-        Call<ApiResponse<List<ProductReview>>> reviewCall = apiService.getProductReviews(url, token);
-
-        reviewCall.enqueue(new Callback<ApiResponse<List<ProductReview>>>() {
+       retrofitClient.callAPI().getProductReviews(productId, token).enqueue(new Callback<ApiResponse<List<ProductReview>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<ProductReview>>> call, Response<ApiResponse<List<ProductReview>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
