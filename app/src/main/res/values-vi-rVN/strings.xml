@@ -29,7 +29,7 @@
     <string name="login">Đăng nhập</string>
 
 
-<!--    Error Message-->
+    <!--    Error Message-->
     <string name="error_empty_phone">Số điện thoại không được để trống!</string>
     <string name="server_error">Lỗi máy chủ vui lòng thử lại sau!</string>
     <string name="error_phone_password_required">Số điện thoại và mật khẩu là bắt buộc!</string>
