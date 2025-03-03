@@ -15,7 +15,7 @@ public class ProductSectionDetail {
     public void set_id(String _id) {
         this._id = _id;
     }
-
+//
     public String getProduct_section_id() {
         return product_section_id;
     }

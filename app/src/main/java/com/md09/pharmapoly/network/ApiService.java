@@ -23,7 +23,6 @@ public interface ApiService {
     @GET
     Call<ApiResponse<List<ProductReview>>> getProductReviews(@Url String url, @Header("Authorization") String token);
 
-
     @GET("product/top-rated/{limit}")
     Call<ApiResponse<List<Product>>> getTopRatedProducts(
             @Path("limit") int limit,

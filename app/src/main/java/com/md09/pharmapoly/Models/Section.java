@@ -6,7 +6,7 @@ public class Section {
 
     public Section() {
     }
-
+//
     public Section(String _id, String name) {
         this._id = _id;
         this.name = name;

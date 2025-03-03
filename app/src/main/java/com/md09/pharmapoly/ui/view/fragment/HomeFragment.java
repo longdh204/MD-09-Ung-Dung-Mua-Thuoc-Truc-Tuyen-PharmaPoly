@@ -193,20 +193,16 @@ public class HomeFragment extends Fragment {
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<ApiResponse<List<Product>>> call, Throwable t) {
-
             }
         });
     }
-
     private void InitUI(View view) {
         retrofitClient = new RetrofitClient();
         sharedPrefHelper = new SharedPrefHelper(getContext());
         recyclerView = view.findViewById(R.id.recyclerView);
         viewPager2 = view.findViewById(R.id.viewPagerSlider);
         circleIndicator = view.findViewById(R.id.dotsIndicator);
-
     }
 }

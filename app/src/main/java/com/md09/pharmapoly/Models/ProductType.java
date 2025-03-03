@@ -12,7 +12,7 @@ public class ProductType {
 
     public ProductType() {
     }
-
+//
     public ProductType(String _id, String name) {
         this._id = _id;
         this.name = name;

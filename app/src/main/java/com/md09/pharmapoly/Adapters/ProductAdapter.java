@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.md09.pharmapoly.ui.view.activity.ProductDetail;
 import com.md09.pharmapoly.R;
-import com.md09.pharmapoly.Models.Product;  // Đảm bảo import đúng package
+import com.md09.pharmapoly.Models.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -26,6 +26,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         this.productList = products;
         notifyDataSetChanged();
     }
+
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
@@ -41,30 +42,40 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product = productList.get(position);
-        holder.productName.setText(product.getName());
-        holder.productPrice.setText(String.valueOf(product.getPrice()) + "/" + product.getProduct_type().getName());
-        holder.productRating.setText(String.valueOf(product.getAverage_rating()));
 
-        // Lấy imageUrl từ Product (ảnh chính)
-        String imageUrl = product.getImageUrl();
-        if (imageUrl != null) {
-            Picasso.get().load(imageUrl).into(holder.productImage);  // Hiển thị ảnh vào ImageView
+        // Set product name, ensure it's not null
+        holder.productName.setText(product.getName() != null ? product.getName() : "N/A");
+
+        // Check if ProductType is not null before getting its name
+        if (product.getProduct_type() != null) {
+            holder.productPrice.setText(product.getPrice() + "/" + product.getProduct_type().getName());
+        } else {
+            holder.productPrice.setText(product.getPrice() + "/ N/A");
         }
 
-        // Thiết lập sự kiện click cho mỗi item sản phẩm
+        // Set product rating
+        holder.productRating.setText(String.valueOf(product.getAverage_rating()));
+
+        // Load image if URL is not null
+        String imageUrl = product.getImageUrl();
+        if (imageUrl != null) {
+            Picasso.get().load(imageUrl).into(holder.productImage);
+        } else {
+            // Optional: Set a default image if imageUrl is null
+            holder.productImage.setImageResource(R.drawable.group6574);
+        }
+
+        // Set click listener to open ProductDetail Activity
         holder.itemView.setOnClickListener(v -> {
-            // Chuyển sang Activity chi tiết sản phẩm
             Intent intent = new Intent(context, ProductDetail.class);
-            // Truyền thông tin cơ bản sản phẩm qua Intent
-            intent.putExtra("product_id", product.get_id());  // Chuyển ID sản phẩm
+            intent.putExtra("product_id", product.get_id());
             intent.putExtra("product_name", product.getName());
             intent.putExtra("product_price", String.valueOf(product.getPrice()));
             intent.putExtra("product_rating", String.valueOf(product.getAverage_rating()));
-            intent.putExtra("product_image_url", product.getImageUrl());  // Thêm URL ảnh
-            context.startActivity(intent);  // Mở ProductDetailActivity
+            intent.putExtra("product_image_url", product.getImageUrl());
+            context.startActivity(intent);
         });
     }
-
 
     @Override
     public int getItemCount() {

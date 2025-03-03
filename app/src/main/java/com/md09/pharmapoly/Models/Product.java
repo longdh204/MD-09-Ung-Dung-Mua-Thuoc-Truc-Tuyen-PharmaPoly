@@ -184,3 +184,4 @@ public class Product {
                 ", averageRating=" + average_rating + ", imageUrl='" + images + "'}";
     }
 }
+//
