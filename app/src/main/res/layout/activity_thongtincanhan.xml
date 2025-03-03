@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".thongtincanhan">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/blue"
+        android:orientation="vertical"
+        tools:ignore="ExtraText">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/blue"
+            android:drawableLeft="@drawable/ten"
+            android:gravity="left|center_vertical"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            />
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:cardCornerRadius="50dp"
+            app:cardElevation="4dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:strokeColor="@color/black">
+
+            <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/nguoidung" />
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Họ tên"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_gradient"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:hint="Đỗ Long"
+        android:layout_marginTop="5dp"
+        android:inputType="textPassword"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Số điện thoại"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_gradient"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:hint="090783909"
+        android:layout_marginTop="5dp"
+        android:inputType="textPassword"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_gradient"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:hint="kob200459@gmail.com"
+        android:layout_marginTop="5dp"
+        android:inputType="textPassword"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sinh nhật"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_gradient"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:hint="DD/XX/YY"
+        android:layout_marginTop="5dp"
+        android:inputType="textPassword"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
+        android:gravity="center"
+        android:text="Cập nhật thông tin"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:background="@drawable/boder_matkhau"
+        android:layout_marginTop="100dp"/>
+</LinearLayout>
+</ScrollView>
+
+
+
