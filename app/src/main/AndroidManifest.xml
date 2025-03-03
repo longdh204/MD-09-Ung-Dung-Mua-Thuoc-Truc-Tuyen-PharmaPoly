@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MD09_PharmaPoly"
         tools:targetApi="31">
         <activity
+            android:name=".CaiDat"
+            android:exported="false" />
+        <activity
             android:name=".ThayMatKhau"
             android:exported="false" />
         <activity
