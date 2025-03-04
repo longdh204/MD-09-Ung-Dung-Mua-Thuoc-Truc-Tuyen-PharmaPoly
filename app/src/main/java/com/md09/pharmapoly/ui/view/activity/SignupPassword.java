@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,8 +42,9 @@ public class SignupPassword extends AppCompatActivity {
             edt_confirm_password;
     private CardView btn_create_account;
     private RetrofitClient retrofitClient;
-    private String phone_number,uid;
-    private TextView tv_complete;
+    private String phone_number, uid;
+    private TextView tv_complete, tv_error_message;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,25 +157,31 @@ public class SignupPassword extends AppCompatActivity {
     private boolean isValidPassword(String password) {
         return password.matches(PASSWORD_PATTERN);
     }
+
     private void UpdateButtonState() {
         String password = edt_new_password.getText().toString().trim();
         String confirm_password = edt_confirm_password.getText().toString().trim();
 
         boolean isValid = true;
 
-        if (password.isEmpty()) {
-            edt_new_password.setError(getString(R.string.error_enter_password));
-            isValid = false;
-        }
-        if (!password.equals(confirm_password) && isValid) {
-            edt_confirm_password.setError(getString(R.string.error_password_mismatch));
-            isValid = false;
-        }
-        if (!isValidPassword(password) && isValid) {
-            edt_new_password.setError(getString(R.string.password_policy));
-            isValid = false;
-        }
+        String errorMessage = "";
 
+        if (password.isEmpty()) {
+            errorMessage = "* " + getString(R.string.error_enter_password);
+            isValid = false;
+        } else if (!password.equals(confirm_password)) {
+            errorMessage = "* " + getString(R.string.error_password_mismatch);
+            isValid = false;
+        } else if (!isValidPassword(password)) {
+            errorMessage = "* " + getString(R.string.password_policy);
+            isValid = false;
+        }
+        if (!isValid) {
+            tv_error_message.setText(errorMessage);
+            tv_error_message.setVisibility(View.VISIBLE);
+        } else {
+            tv_error_message.setVisibility(View.GONE);
+        }
 
         int colorFromCard = btn_create_account.getCardBackgroundColor().getDefaultColor();
         int colorToCard = ContextCompat.getColor(this, isValid ? R.color.blue_CE4 : R.color.gray_DCD);
@@ -197,11 +205,15 @@ public class SignupPassword extends AppCompatActivity {
         );
         textColorAnimator.start();
     }
+
     private void initUI() {
         edt_new_password = findViewById(R.id.edt_new_password);
         edt_confirm_password = findViewById(R.id.edt_confirm_password);
         btn_create_account = findViewById(R.id.btn_create_account);
         retrofitClient = new RetrofitClient();
         tv_complete = findViewById(R.id.tv_complete);
+        tv_error_message = findViewById(R.id.tv_error_message);
+        tv_error_message.setVisibility(View.GONE);
+
     }
 }

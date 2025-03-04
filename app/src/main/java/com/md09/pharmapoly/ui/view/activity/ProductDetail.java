@@ -172,10 +172,11 @@ public class ProductDetail extends AppCompatActivity {
                     if (productDetails.getImages() != null && !productDetails.getImages().isEmpty()) {
                         Picasso.get().load(productDetails.getImages().get(0).getImage_url()).into(productImage);
                     }
-                    ProgressDialogHelper.hideLoading();
+
                 } else {
                     Toast.makeText(ProductDetail.this, "Failed to fetch product details", Toast.LENGTH_SHORT).show();
                 }
+                ProgressDialogHelper.hideLoading();
             }
             @Override
             public void onFailure(Call<ApiResponse<Product>> call, Throwable t) {

@@ -26,8 +26,7 @@ public interface ApiService {
     @GET("product/top-rated/{limit}")
     Call<ApiResponse<List<Product>>> getTopRatedProducts(
             @Path("limit") int limit,
-            @Header("Authorization") String token
-    );
+            @Header("Authorization") String token);
 //    @GET("product/{id}/reviews")
 //    Call<ApiResponse<List<ProductReview>>>
 //    getProductReviews(

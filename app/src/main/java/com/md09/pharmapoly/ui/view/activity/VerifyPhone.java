@@ -68,7 +68,6 @@ public class VerifyPhone extends AppCompatActivity {
         SendOtp();
         SetupOtpInputs();
         SetupButton();
-
     }
 
     private void SetupFirebase() {
@@ -242,7 +241,7 @@ public class VerifyPhone extends AppCompatActivity {
         }
     }
     private void UpdateButtonState() {
-        if (!isCountdownTimerDone || !isSendOtp) return;
+        if (!isSendOtp) return;
         StringBuilder otpCode = new StringBuilder();
 
         for (EditText otpInput : otpInputs) {
