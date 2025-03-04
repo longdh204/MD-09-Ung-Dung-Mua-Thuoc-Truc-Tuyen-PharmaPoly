@@ -48,8 +48,36 @@
     <string name="error_enter_password">Vui lòng nhập mật khẩu</string>
     <string name="error_password_mismatch">Mật khẩu xác nhận không khớp</string>
     <string name="password_policy">Mật khẩu phải có ít nhất 8 ký tự, 1 chữ hoa, 1 số và 1 ký tự đặc biệt.</string>
+    <string name="password_changed_successfully">Đổi mật khẩu thành công!</string>
+    <string name="error_fill_all_fields">Bạn phải điền vào tất cả các trường!</string>
+    <string name="error_json">Lỗi JSON</string>
+
     <string name="account_created">Tạo tài khoản thành công!</string>
+    <string name="profile_updated_successfully">Cập nhật tài khoản thành công!</string>
     <string name="otp_request_limit">" Bạn đã yêu cầu mã OTP quá nhiều lần. Vui lòng chờ thử lại sau."</string>
+    <string name="error_incorrect_password">Mật khẩu hiện tại nhập sai!</string>
+    <string name="no_internet_connection">Không có internet!</string>
+
     <string name="brand">Thương hiệu</string>
     <string name="review">Đánh giá</string>
+    <string name="my_orders">Đơn của tôi</string>
+    <string name="view_all">Xem tất cả</string>
+    <string name="processing">Đang xử lý</string>
+    <string name="shipping">Đang giao</string>
+    <string name="delivered">Đã giao</string>
+    <string name="exchange_return">Đổi/Trả</string>
+    <string name="account">Tài khoản</string>
+    <string name="personal_info">Thông tin cá nhân</string>
+    <string name="manage_address">Quản lý sổ địa chỉ</string>
+    <string name="manage_cards">Quản lý thẻ thanh toán</string>
+    <string name="about_pharmapoly">Về nhà thuốc PharmaPoly</string>
+    <string name="pharmacy_intro">Giới thiệu nhà thuốc</string>
+    <string name="business_license">Giấy phép kinh doanh</string>
+    <string name="deposit_policy">Chính sách đặt cọc</string>
+    <string name="content_policy">Chính sách nội dung</string>
+    <string name="medicine_return_policy">Chính sách đổi trả thuốc</string>
+    <string name="shipping_policy">Chính sách giao hàng</string>
+    <string name="privacy_policy">Chính sách bảo mật</string>
+    <string name="customer">Khách hàng</string>
+    <string name="logout">Đăng xuất</string>
 </resources>

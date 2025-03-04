@@ -2,30 +2,26 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
-    <uses-permission android:name="android.permission.READ_SMS"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <meta-data
         android:name="com.google.firebase.auth.api.FirebaseAuth"
         android:value="@string/default_web_client_id" />
-
     <meta-data
         android:name="com.google.firebase.auth.RECAPTCHA_SITE_KEY"
         android:value="@string/recaptcha_site_key" />
-
     <meta-data
         android:name="com.google.firebase.auth.API_KEY"
-        android:value="@string/recaptcha_site_key"/>
+        android:value="@string/recaptcha_site_key" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -34,7 +30,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MD09_PharmaPoly"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.view.activity.ChangePassword"
+            android:exported="false" />
         <activity
             android:name=".contact_support"
             android:exported="false" />
@@ -58,23 +58,19 @@
             android:exported="false" />
         <activity
             android:name=".ui.view.activity.SignupPassword"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.view.activity.LoginPassword"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.view.activity.VerifyPhone"
             android:exported="false" />
         <activity
             android:name=".Home"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".ui.view.activity.ProductDetail"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".ui.view.activity.PhoneNumber"
             android:exported="true">
@@ -89,19 +85,13 @@
             android:exported="false" />
         <activity
             android:name=".ui.view.activity.Onboarding_Screen_3"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.view.activity.Onboarding_Screen_2"
-            android:exported="true" >
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.view.activity.Onboarding_Screen_1"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.view.activity.SplashScreen"
             android:exported="false" />
@@ -125,9 +115,13 @@
             android:exported="false" /> <!-- MainActivity -->
         <activity
             android:name=".ui.view.activity.MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
+        <activity
+            android:name=".ui.view.activity.ProfileOptionsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.view.activity.ProfileUpdate"
+            android:exported="true" />
     </application>
 
 </manifest>

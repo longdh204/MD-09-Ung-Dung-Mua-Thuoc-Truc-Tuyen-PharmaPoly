@@ -1,5 +1,6 @@
 package com.md09.pharmapoly.ui.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.md09.pharmapoly.R;
+import com.md09.pharmapoly.ui.view.activity.ProfileOptionsActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,6 +66,16 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        InitUI(view);
         return view;
     }
+
+    private void InitUI(View view) {
+        LinearLayout btnPersonalInfo = view.findViewById(R.id.btn_personal_info);
+        btnPersonalInfo.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ProfileOptionsActivity.class);
+            startActivity(intent);
+        });
+    }
+
 }

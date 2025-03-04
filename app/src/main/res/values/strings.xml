@@ -36,6 +36,12 @@
     <string name="resend_code">Resend code</string>
     <string name="error_otp_required">Please enter the full OTP code!</string>
     <string name="password_requirements">You can create a new password with at least 8 characters, including at least 1 uppercase letter, 1 number, and 1 special character.</string>
+
+    <string name="password_changed_successfully">Password changed successfully!</string>
+    <string name="profile_updated_successfully">Profile updated successfully!</string>
+    <string name="no_internet_connection">No Internet Connection!</string>
+    <string name="error_fill_all_fields">You must fill in all fields!</string>
+    <string name="error_json">JSON error</string>
     <string name="new_password">New password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="enter_new_password">Enter new password</string>
@@ -43,6 +49,8 @@
     <string name="complete">Complete</string>
     <string name="error_enter_password">Please enter your password</string>
     <string name="error_password_mismatch">Confirmation password does not match</string>
+    <string name="error_incorrect_password">Incorrect current password!</string>
+
     <string name="password_policy">Password must have at least 8 characters, 1 uppercase letter, 1 number, and 1 special character.</string>
     <string name="account_created">Account created successfully!</string>
     <string name="otp_request_limit">You have requested the OTP code too many times. Please wait and try again later.</string>
@@ -51,4 +59,24 @@
     <string name="brand">Brand</string>
     <string name="review">Review</string>
     <string name="reviewr">Number of reviewers</string>
+    <string name="my_orders">My Orders</string>
+    <string name="view_all">View all</string>
+    <string name="processing">Processing</string>
+    <string name="shipping">Shipping</string>
+    <string name="delivered">Delivered</string>
+    <string name="exchange_return">Exchange/Return</string>
+    <string name="account">Account</string>
+    <string name="personal_info">Personal Information</string>
+    <string name="manage_address">Manage Address Book</string>
+    <string name="manage_cards">Manage Payment Cards</string>
+    <string name="about_pharmapoly">About PharmaPoly Pharmacy</string>
+    <string name="pharmacy_intro">Pharmacy Introduction</string>
+    <string name="business_license">Business License</string>
+    <string name="deposit_policy">Deposit Policy</string>
+    <string name="content_policy">Content Policy</string>
+    <string name="medicine_return_policy">Medicine Exchange Return Policy</string>
+    <string name="shipping_policy">Shipping Policy</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="customer">Customer</string>
+    <string name="logout">Logout</string>
 </resources>
