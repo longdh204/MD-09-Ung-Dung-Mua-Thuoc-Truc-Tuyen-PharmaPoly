@@ -51,4 +51,24 @@
     <string name="brand">Brand</string>
     <string name="review">Review</string>
     <string name="reviewr">Number of reviewers</string>
+    <string name="my_orders">My Orders</string>
+    <string name="view_all">View all</string>
+    <string name="processing">Processing</string>
+    <string name="shipping">Shipping</string>
+    <string name="delivered">Delivered</string>
+    <string name="exchange_return">Exchange/Return</string>
+    <string name="account">Account</string>
+    <string name="personal_info">Personal Information</string>
+    <string name="manage_address">Manage Address Book</string>
+    <string name="manage_cards">Manage Payment Cards</string>
+    <string name="about_pharmapoly">About PharmaPoly Pharmacy</string>
+    <string name="pharmacy_intro">Pharmacy Introduction</string>
+    <string name="business_license">Business License</string>
+    <string name="deposit_policy">Deposit Policy</string>
+    <string name="content_policy">Content Policy</string>
+    <string name="medicine_return_policy">Medicine Exchange Return Policy</string>
+    <string name="shipping_policy">Shipping Policy</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="customer">Customer</string>
+    <string name="logout">Logout</string>
 </resources>
