@@ -1,5 +1,7 @@
 package com.md09.pharmapoly.Models;
 
+import com.md09.pharmapoly.data.model.User;
+
 import java.io.Serializable;
 
 public class ProductReview implements Serializable {
@@ -10,6 +12,15 @@ public class ProductReview implements Serializable {
     private String review;
     private String create_at;
     private String created_at;
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getCreated_at() {
         return created_at;
