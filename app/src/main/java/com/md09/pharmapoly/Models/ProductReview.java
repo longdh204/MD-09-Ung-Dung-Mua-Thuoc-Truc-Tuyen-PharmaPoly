@@ -1,6 +1,8 @@
 package com.md09.pharmapoly.Models;
 
-public class ProductReview {
+import java.io.Serializable;
+
+public class ProductReview implements Serializable {
     private String _id;
     private String user_id;
     private String product_id;

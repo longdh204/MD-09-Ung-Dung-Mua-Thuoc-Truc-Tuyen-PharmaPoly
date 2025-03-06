@@ -2,7 +2,9 @@ package com.md09.pharmapoly.Models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Brand {
+import java.io.Serializable;
+
+public class Brand implements Serializable {
     private String _id;
 
     private String name;

@@ -401,14 +401,16 @@
 
                     android:textColor="@android:color/black"/>
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnLoadMore"
+                    android:id="@+id/showProductDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Xem thêm"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@android:color/black" />
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/overpass_regular"
+                    android:background="@drawable/rounded_button"/>
 
             </LinearLayout>
     <!--quaroi-->
@@ -434,60 +436,22 @@
                     android:layout_marginBottom="8dp"/>
 
                 <!-- Câu hỏi 1 -->
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/questionRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="start|center_vertical"
-                    android:paddingBottom="8dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Những ai nên sử dụng cái này ?"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/overpass_regular"
-                        android:textColor="@android:color/black"
-                        android:layout_weight="1"/>
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/iconback" /> <!-- Icon mở rộng -->
-                </LinearLayout>
-
-                <!-- Câu hỏi 2 -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="start|center_vertical"
-                    android:paddingBottom="8dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ảnh hưởng của thuốc sau này ?"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/overpass_regular"
-                        android:textColor="@android:color/black"
-                        android:layout_weight="1"/>
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/iconback" /> <!-- Icon mở rộng -->
-                </LinearLayout>
+                    android:layout_height="wrap_content"/>
 
                 <!-- Các câu hỏi tiếp theo -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Xem thêm"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@android:color/black" />
+<!--                <androidx.appcompat.widget.AppCompatButton-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Xem thêm"-->
+<!--                    android:textSize="13sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_marginTop="15dp"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:fontFamily="@font/overpass_regular"-->
+<!--                    android:background="@drawable/rounded_button"/>-->
 
             </LinearLayout>
             <!--quaroi2-->
@@ -743,20 +707,20 @@
 <!--            ABCCCCCCCCCCCCCCCCCC-->
 
 <!--            quaroi3-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Xem Thêm"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="@android:color/holo_blue_dark"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:fontFamily="@font/overpass_regular"-->
+<!--                android:layout_marginLeft="16dp"-->
+<!--                android:layout_marginBottom="8dp"/>-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Xem Thêm"
-                android:textSize="16sp"
-                android:textColor="@android:color/holo_blue_dark"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/overpass_regular"
-                android:layout_marginLeft="16dp"
-                android:layout_marginBottom="8dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sản phẩm liên quan"
+                android:text="Các sản phẩm khác"
                 android:textSize="16sp"
                 android:textColor="@android:color/holo_blue_dark"
                 android:layout_marginTop="8dp"

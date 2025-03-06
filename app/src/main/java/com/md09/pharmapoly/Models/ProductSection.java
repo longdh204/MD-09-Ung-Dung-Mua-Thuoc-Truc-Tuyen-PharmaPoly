@@ -1,8 +1,9 @@
 package com.md09.pharmapoly.Models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ProductSection {
+public class ProductSection implements Serializable {
     private String _id;
     private String product_id;
     private String section_id;

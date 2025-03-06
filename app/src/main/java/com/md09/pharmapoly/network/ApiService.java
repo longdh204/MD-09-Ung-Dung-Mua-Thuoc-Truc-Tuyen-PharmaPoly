@@ -2,6 +2,7 @@ package com.md09.pharmapoly.network;
 
 import com.md09.pharmapoly.Models.Brand;
 import com.md09.pharmapoly.Models.ProductReview;
+import com.md09.pharmapoly.Models.Question;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.Models.Product;
 import com.md09.pharmapoly.data.model.User;
@@ -18,7 +19,12 @@ import retrofit2.http.Path;
 import retrofit2.http.Url;
 
 public interface ApiService {
-
+    @GET("product/{productId}/questions")
+    Call<ApiResponse<List<Question>>> getProductQuestions(
+            @Path("productId") String productId,
+            @Header("Authorization") String token);
+    @GET("api/product/{productId}/details")
+    Call<Product> getProductDetails(@Path("productId") String productId);
     // Đảm bảo rằng getProductReviews trả về đúng kiểu dữ liệu
     @GET
     Call<ApiResponse<List<ProductReview>>> getProductReviews(@Url String url, @Header("Authorization") String token);

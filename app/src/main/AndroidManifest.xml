@@ -69,16 +69,20 @@
         <activity
             android:name=".ui.view.activity.VerifyPhone"
             android:exported="false" />
-        <activity
-            android:name=".Home"
-            android:exported="true"/>
+<!--        <activity-->
+<!--            android:name=".Home"-->
+<!--            android:exported="true"/>-->
         <activity
             android:name=".ui.view.activity.ProductDetail"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.view.activity.ProductDetailAllActivity"
             android:exported="true"/>
         <activity
             android:name=".ui.view.activity.PhoneNumber"
             android:exported="true">
             <intent-filter>
+
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

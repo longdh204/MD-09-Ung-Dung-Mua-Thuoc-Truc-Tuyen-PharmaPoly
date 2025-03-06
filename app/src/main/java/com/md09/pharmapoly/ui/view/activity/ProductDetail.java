@@ -1,8 +1,10 @@
 package com.md09.pharmapoly.ui.view.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -15,9 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.md09.pharmapoly.Adapters.ProductAdapter;
+import com.md09.pharmapoly.Adapters.QuestionAdapter;
 import com.md09.pharmapoly.Adapters.ReviewAdapter;
 import com.md09.pharmapoly.Models.Product;
 import com.md09.pharmapoly.Models.ProductReview;
+import com.md09.pharmapoly.Models.Question;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.network.ApiClient;
@@ -37,8 +41,7 @@ public class ProductDetail extends AppCompatActivity {
 
     private ProductAdapter productAdapter;
     private List<Product> productList;
-    private TextView productName, productPrice, productRating, productShortDescription, productSpecification,
-            productOriginCountry, productManufacturer, productReviewCount, productReviewCount2, productCategory, productBrand;
+    private TextView productName, productPrice, productRating, productShortDescription, productSpecification, productOriginCountry, productManufacturer, productReviewCount, productReviewCount2, productCategory, productBrand;
     private ImageView productImage;
     private RecyclerView userReviewRecyclerView;
     private List<ProductReview> reviewList;
@@ -48,6 +51,11 @@ public class ProductDetail extends AppCompatActivity {
     private TextView percentage5, percentage4, percentage3, percentage2, percentage1;
     private ReviewAdapter reviewAdapter;
     private SharedPrefHelper sharedPrefHelper;
+    private Product product;
+    private Button showProductDetailsButton;
+    private RecyclerView questionRecyclerView;
+    private QuestionAdapter questionAdapter;
+    private List<Question> questionList;
 
     @SuppressLint("CutPasteId")
     @Override
@@ -55,6 +63,7 @@ public class ProductDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_product_detail);
+
         progress5 = findViewById(R.id.progress5);
         progress4 = findViewById(R.id.progress4);
         progress3 = findViewById(R.id.progress3);
@@ -99,7 +108,38 @@ public class ProductDetail extends AppCompatActivity {
         fetchProductDetails(productId, token);
         fetchProductData("67c2bac612ae5bc6e9990212");
         fetchProductData("67c2ba6612ae5bc6e9990209");
+
+        // nút xem thêm toàn bộ thông tin trong product details
+        Button showProductDetailsButton = findViewById(R.id.showProductDetails);
+        showProductDetailsButton.setOnClickListener(v -> {
+            if (product != null) {
+                Intent intent = new Intent(ProductDetail.this, ProductDetailAllActivity.class);
+                // Gửi thêm thông tin qua Intent
+                intent.putExtra("product", product);
+                intent.putExtra("brand_description", product.getBrand().getDescription());
+                intent.putExtra("product_type_name", product.getProduct_type().getName());
+                intent.putExtra("sections", new ArrayList<>(product.getSections()));
+                startActivity(intent);
+            } else {
+                Log.d("ProductDetailActivity", "Product is null");
+            }
+        });
+
+
+// Khởi tạo RecyclerView và Adapter
+        questionRecyclerView = findViewById(R.id.questionRecyclerView);
+        questionRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        questionList = new ArrayList<>();  // Khởi tạo lại danh sách câu hỏi
+        questionAdapter = new QuestionAdapter(this, questionList);
+        questionRecyclerView.setAdapter(questionAdapter);
+
+// Fetch dữ liệu câu hỏi từ API
+        String productId = getIntent().getStringExtra("product_id");
+        fetchProductQuestions(productId, token, questionAdapter);
+
     }
+
+    // hiển thị thanh theo % đánh giá
     private void updateRatings(int totalReviews, int rating5, int rating4, int rating3, int rating2, int rating1) {
         if (totalReviews == 0) {
             Log.d("ProductDetail", "No reviews to update progress.");
@@ -129,6 +169,8 @@ public class ProductDetail extends AppCompatActivity {
             percentage1.setText(percentage1Star + "%");
         });
     }
+
+    // filldata
     private void FillData(Product product) {
         productName.setText(product.getName());
         productBrand.setText(getString(R.string.brand) + ": " + product.getBrand().getName());
@@ -146,6 +188,7 @@ public class ProductDetail extends AppCompatActivity {
         productManufacturer.setText(product.getManufacturer());
         productShortDescription.setText(product.getShort_description());
     }
+
     private void InitUI() {
         productName = findViewById(R.id.productName);
         productPrice = findViewById(R.id.productPrice);
@@ -160,6 +203,8 @@ public class ProductDetail extends AppCompatActivity {
         productCategory = findViewById(R.id.productCategory);
         productImage = findViewById(R.id.productImage);
     }
+
+    // lấy product details
     private void fetchProductDetails(String productId, String token) {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
         apiService.getProductDetails(productId, token).enqueue(new Callback<ApiResponse<Product>>() {
@@ -169,20 +214,27 @@ public class ProductDetail extends AppCompatActivity {
                     Product productDetails = response.body().getData();
                     FillData(productDetails);
 
-                    if (productDetails.getImages() != null && !productDetails.getImages().isEmpty()) {
+                    if (productDetails.getImages() != null && !productDetails.getImages().isEmpty() && productDetails != null) {
+                        product = productDetails;  // Gán dữ liệu vào biến product
+                        FillData(productDetails);
+                        Log.d("ProductDetailActivity", "Product fetched: " + productDetails);
                         Picasso.get().load(productDetails.getImages().get(0).getImage_url()).into(productImage);
                     }
                     ProgressDialogHelper.hideLoading();
                 } else {
                     Toast.makeText(ProductDetail.this, "Failed to fetch product details", Toast.LENGTH_SHORT).show();
+                    Log.d("ProductDetailActivity", "Product details are null");
                 }
             }
+
             @Override
             public void onFailure(Call<ApiResponse<Product>> call, Throwable t) {
                 Toast.makeText(ProductDetail.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+    // fetch review sản phẩm từ người dùng
     private void fetchProductReviews(String productId, String token) {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
         String url = "https://pharmapoly-server.onrender.com/api/product/" + productId + "/reviews";
@@ -229,6 +281,8 @@ public class ProductDetail extends AppCompatActivity {
             }
         });
     }
+
+    // hiển thị các sản phẩm khác
     private void fetchProductData(String productId) {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
         Call<ApiResponse<Product>> productCall = apiService.getProduct(productId, "Bearer " + token);
@@ -259,6 +313,40 @@ public class ProductDetail extends AppCompatActivity {
             public void onFailure(Call<ApiResponse<Product>> call, Throwable t) {
                 Log.e("APIError", "Error fetching product: " + t.getMessage());
                 Toast.makeText(ProductDetail.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    // hiển thị câu hỏi lên
+    // Phương thức fetchProductQuestions
+    private void fetchProductQuestions(String productId, String token, QuestionAdapter questionAdapter) {
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+        apiService.getProductQuestions(productId, token).enqueue(new Callback<ApiResponse<List<Question>>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<List<Question>>> call, Response<ApiResponse<List<Question>>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Question> questions = response.body().getData();
+                    if (questions != null && !questions.isEmpty()) {
+                        // Kiểm tra và log số câu hỏi nhận được
+                        Log.d("ProductDetail", "Questions received: " + questions.size());
+
+                        // Xóa dữ liệu cũ và thêm 3 câu hỏi đầu tiên
+                        questionList.clear();
+                        questionList.addAll(questions.subList(0, Math.min(3, questions.size())));
+
+                        // Cập nhật lại Adapter
+                        questionAdapter.notifyDataSetChanged();
+                    } else {
+                        Log.d("ProductDetail", "No questions available.");
+                    }
+                } else {
+                    Log.e("ProductDetail", "Failed to fetch product questions");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<List<Question>>> call, Throwable t) {
+                Log.e("ProductDetail", "Error fetching questions: " + t.getMessage());
             }
         });
     }

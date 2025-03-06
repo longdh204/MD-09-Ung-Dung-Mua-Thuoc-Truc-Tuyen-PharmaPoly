@@ -1,6 +1,8 @@
 package com.md09.pharmapoly.Models;
 
-public class Section {
+import java.io.Serializable;
+
+public class Section  implements Serializable {
     private String _id;
     private String name;
 

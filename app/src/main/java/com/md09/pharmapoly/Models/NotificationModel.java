@@ -1,6 +1,8 @@
 package com.md09.pharmapoly.Models;
 
-public class NotificationModel {
+import java.io.Serializable;
+
+public class NotificationModel implements Serializable {
     private String title;
     private String time;
     private int icon;
