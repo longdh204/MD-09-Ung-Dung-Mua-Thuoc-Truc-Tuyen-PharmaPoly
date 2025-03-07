@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="16dp"
+    android:padding="16dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Tên người đánh giá -->
+        <TextView
+            android:id="@+id/reviewerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reviewer Name"
+            android:textStyle="bold" />
+
+        <!-- Nội dung đánh giá -->
+        <TextView
+            android:id="@+id/reviewContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Review Content" />
+
+        <!-- Đánh giá sao -->
+        <TextView
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rating: 5" />
+
+        <!-- Ngày đánh giá -->
+        <TextView
+            android:id="@+id/reviewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

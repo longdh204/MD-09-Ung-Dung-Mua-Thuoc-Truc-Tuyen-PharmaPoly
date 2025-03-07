@@ -50,7 +50,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
     }
     @Override
     public int getItemCount() {
-        return reviewList.size();
+        return Math.min(reviewList.size(), 3); // Giới hạn chỉ hiển thị 3 review đầu tiên
     }
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView reviewerName, rating, reviewDate, reviewContent;

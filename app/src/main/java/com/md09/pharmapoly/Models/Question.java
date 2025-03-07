@@ -1,5 +1,7 @@
 package com.md09.pharmapoly.Models;
 
+import com.md09.pharmapoly.data.model.User;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,6 +14,8 @@ public class Question implements Serializable {
     private float status;
     private UserQuestion userQuestion;
     private List<Answer> answers;
+    private User user;
+
 
     public String get_id() {
         return _id;

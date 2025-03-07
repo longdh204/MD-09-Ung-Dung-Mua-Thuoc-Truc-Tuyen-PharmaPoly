@@ -1,6 +1,8 @@
 package com.md09.pharmapoly.Models;
 
-public class UserQuestion {
+import java.io.Serializable;
+
+public class UserQuestion implements Serializable {
     private String _id;
     private String full_name;
     private String avatar_url;

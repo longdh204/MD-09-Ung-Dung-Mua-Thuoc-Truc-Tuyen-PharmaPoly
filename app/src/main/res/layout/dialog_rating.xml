@@ -11,18 +11,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Đánh giá sản phẩm"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:fontFamily="@font/overpass_regular"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_marginTop="15dp"/>
         <!-- Stars Rating -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="số sao bạn muốn đánh giá ?"
+        android:textSize="15dp"
+        android:fontFamily="@font/overpass_regular"
+        android:textStyle="bold"
+        android:gravity="start"
+        android:layout_marginTop="25dp"/>
         <LinearLayout
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp">
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:id="@+id/star1"
@@ -64,29 +73,35 @@
             android:id="@+id/reviewText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Write your review here"
+            android:hint="Viết review của bạn vào đây"
             android:fontFamily="@font/overpass_regular"
-            android:textStyle="bold"
+            android:textSize="15dp"
             android:gravity="top|start"
             android:layout_marginTop="10dp"/>
 
         <!-- Submit Button -->
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
         android:id="@+id/sendButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:background="@drawable/rounded_button"
+        android:text="Gửi đánh giá"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/blue"
+        android:padding="10dp"
+        android:fontFamily="@font/overpass_regular"
+        android:layout_gravity="start"
         android:layout_marginTop="15dp"
-        android:text="Gửi đánh giá" />
-
-    <androidx.appcompat.widget.AppCompatButton
+        />
+    <Button
         android:id="@+id/cancelButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/white"
-        android:background="@drawable/rounded_button"
-        android:text="Hủy" />
+        android:text="Hủy"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#FA4D4D"
+        android:padding="10dp"
+        android:fontFamily="@font/overpass_regular"
+        android:layout_gravity="start"
+        />
 
     </LinearLayout>

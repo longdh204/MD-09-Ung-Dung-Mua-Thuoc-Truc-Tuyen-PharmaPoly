@@ -41,13 +41,13 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         // Gán nội dung câu hỏi vào TextView
         holder.questionContent.setText(question.getContent());
 
-        // Kiểm tra câu hỏi có trả lời hay không và hiển thị câu trả lời đầu tiên nếu có
-        if (question.getAnswers() != null && !question.getAnswers().isEmpty()) {
-            holder.answerContent.setText(question.getAnswers().get(0).getContent());
-        } else {
-            // Nếu không có câu trả lời, hiển thị thông báo
-            holder.answerContent.setText("No answers yet.");
-        }
+//        // Kiểm tra câu hỏi có trả lời hay không và hiển thị câu trả lời đầu tiên nếu có
+//        if (question.getAnswers() != null && !question.getAnswers().isEmpty()) {
+//            holder.answerContent.setText(question.getAnswers().get(0).getContent());
+//        } else {
+//            // Nếu không có câu trả lời, hiển thị thông báo
+//            holder.answerContent.setText("No answers yet.");
+//        }
     }
 
     @Override

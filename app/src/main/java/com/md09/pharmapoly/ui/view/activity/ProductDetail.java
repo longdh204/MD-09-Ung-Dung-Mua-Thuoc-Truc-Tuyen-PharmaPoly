@@ -62,6 +62,7 @@ public class ProductDetail extends AppCompatActivity {
     private RecyclerView questionRecyclerView;
     private QuestionAdapter questionAdapter;
     private List<Question> questionList;
+    private Button showMoreReviewsButton;
 
     @SuppressLint("CutPasteId")
     @Override
@@ -148,7 +149,33 @@ public class ProductDetail extends AppCompatActivity {
             showRatingDialog(); // Hiển thị dialog đánh giá khi người dùng nhấn nút
         });
 
+        Button showProductDetailsButton1 = findViewById(R.id.btnShowMoreQuestions);  // Tìm nút trong layout
 
+        showProductDetailsButton1.setOnClickListener(v -> {
+            if (product != null) {
+                // Mở QuestionDetailActivity khi người dùng nhấn "Xem thêm"
+                Intent intent = new Intent(ProductDetail.this, QuestionDetailActivity.class);
+
+                // Truyền danh sách câu hỏi qua Intent
+                intent.putExtra("product_id", product.get_id());
+                intent.putExtra("product_name", product.getName());
+                intent.putExtra("questions", new ArrayList<>(questionList));  // Truyền câu hỏi
+
+                startActivity(intent);  // Mở Activity mới
+            } else {
+                Log.d("ProductDetailActivity", "Product is null");
+            }
+        });
+//
+        // Khởi tạo nút "Xem thêm đánh giá"
+        showMoreReviewsButton = findViewById(R.id.showMoreReviewsButton);
+
+        // Khi nhấn nút "Xem thêm đánh giá"
+        showMoreReviewsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ProductDetail.this, ProductReviewsActivity.class);
+            List<ProductReview> reviewList = new ArrayList<>();
+            startActivity(intent);
+        });
     }
 
     // hiển thị thanh theo % đánh giá

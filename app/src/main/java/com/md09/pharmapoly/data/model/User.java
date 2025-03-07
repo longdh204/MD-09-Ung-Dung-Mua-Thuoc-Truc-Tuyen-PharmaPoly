@@ -1,6 +1,8 @@
 package com.md09.pharmapoly.data.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private String _id;
     private String full_name;

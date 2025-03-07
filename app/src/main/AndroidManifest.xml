@@ -79,6 +79,12 @@
             android:name=".ui.view.activity.ProductDetailAllActivity"
             android:exported="true"/>
         <activity
+            android:name=".ui.view.activity.QuestionDetailActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.view.activity.ProductReviewsActivity"
+            android:exported="true"/>
+        <activity
             android:name=".ui.view.activity.PhoneNumber"
             android:exported="true">
             <intent-filter>

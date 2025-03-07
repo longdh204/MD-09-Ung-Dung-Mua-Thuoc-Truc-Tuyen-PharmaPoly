@@ -14,6 +14,8 @@ public class ProductReview implements Serializable {
     private String created_at;
     private User user;
 
+
+
     public User getUser() {
         return user;
     }
