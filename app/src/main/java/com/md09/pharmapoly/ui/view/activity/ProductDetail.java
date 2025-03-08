@@ -210,6 +210,7 @@ public class ProductDetail extends AppCompatActivity {
         apiService.getProductDetails(productId, token).enqueue(new Callback<ApiResponse<Product>>() {
             @Override
             public void onResponse(Call<ApiResponse<Product>> call, Response<ApiResponse<Product>> response) {
+                ProgressDialogHelper.hideLoading();
                 if (response.isSuccessful() && response.body() != null) {
                     Product productDetails = response.body().getData();
                     FillData(productDetails);
@@ -220,7 +221,6 @@ public class ProductDetail extends AppCompatActivity {
                         Log.d("ProductDetailActivity", "Product fetched: " + productDetails);
                         Picasso.get().load(productDetails.getImages().get(0).getImage_url()).into(productImage);
                     }
-                    ProgressDialogHelper.hideLoading();
                 } else {
                     Toast.makeText(ProductDetail.this, "Failed to fetch product details", Toast.LENGTH_SHORT).show();
                     Log.d("ProductDetailActivity", "Product details are null");
@@ -229,6 +229,7 @@ public class ProductDetail extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ApiResponse<Product>> call, Throwable t) {
+                ProgressDialogHelper.hideLoading();
                 Toast.makeText(ProductDetail.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

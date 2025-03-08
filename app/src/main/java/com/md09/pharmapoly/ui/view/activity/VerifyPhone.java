@@ -108,7 +108,7 @@ public class VerifyPhone extends AppCompatActivity {
 
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
-                                Log.e("OTP", "Gửi OTP thất bại: " + e.getMessage());
+                                Log.e("OTP Error", "Gửi OTP thất bại: " + e.getMessage());
                                 ProgressDialogHelper.hideLoading();
                                 isSendOtp = false;
                                 String message = getString(R.string.otp_request_limit);
@@ -118,7 +118,6 @@ public class VerifyPhone extends AppCompatActivity {
                                         finish();
                                     }
                                 });
-                                //Toast.makeText(VerifyPhone.this, message, Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
@@ -126,7 +125,6 @@ public class VerifyPhone extends AppCompatActivity {
                                                    @NonNull PhoneAuthProvider.ForceResendingToken token) {
                                 super.onCodeSent(id, token);
                                 verification_id = id;
-                                Log.e("verification_id", verification_id);
                                 StartCountdownTimer();
                                 isSendOtp = true;
                                 Toast.makeText(VerifyPhone.this, "OTP đã được gửi!", Toast.LENGTH_SHORT).show();
@@ -242,7 +240,7 @@ public class VerifyPhone extends AppCompatActivity {
         }
     }
     private void UpdateButtonState() {
-        if (!isCountdownTimerDone || !isSendOtp) return;
+        if (!isSendOtp) return;
         StringBuilder otpCode = new StringBuilder();
 
         for (EditText otpInput : otpInputs) {
