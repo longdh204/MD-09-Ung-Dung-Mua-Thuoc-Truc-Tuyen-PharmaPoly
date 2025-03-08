@@ -4,6 +4,7 @@ import static com.md09.pharmapoly.utils.Constants.PHONE_NUMBER_KEY;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -58,6 +59,9 @@ public class LoginPassword extends AppCompatActivity {
             try {
                 jsonObject.put("phone_number", phoneNumber);
                 jsonObject.put("password", password);
+
+                Log.d("phone_number", "JSON Object: " + phoneNumber);
+                Log.d("password", "JSON Object: " + password);
             } catch (JSONException e) {
                 return;
             }
@@ -74,7 +78,6 @@ public class LoginPassword extends AppCompatActivity {
                             User user = response.body().getData();
                             String token = response.body().getToken();
                             String refreshToken = response.body().getRefreshToken();
-
                             SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(LoginPassword.this);
                             sharedPrefHelper.saveUser(user, token, refreshToken);
 

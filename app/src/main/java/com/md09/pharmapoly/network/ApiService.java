@@ -15,6 +15,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Url;
 
@@ -67,6 +68,18 @@ public interface ApiService {
     @POST("user/create-account")
     Call<ApiResponse<Void>>
     createAccount(@Body RequestBody request);
+
+    @PUT("user/update-profile")
+    Call<ApiResponse<User>>
+    updateProfile(
+            @Header("Authorization") String token,
+            @Body RequestBody request);
+
+    @PUT("user/change-password")
+    Call<ApiResponse<Void>>
+    changePassword(
+            @Header("Authorization") String token,
+            @Body RequestBody request);
 }
 
 

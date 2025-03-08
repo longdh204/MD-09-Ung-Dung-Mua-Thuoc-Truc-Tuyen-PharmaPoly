@@ -133,9 +133,6 @@ public class HomeFragment extends Fragment {
             startActivity(intent);
         });
 
-
-
-
         recyclerViewCategory = view.findViewById(R.id.recyclerViewCategories);
         recyclerViewCategory.setLayoutManager(new GridLayoutManager(getContext(), 4));
 
