@@ -1,6 +1,7 @@
 package com.md09.pharmapoly.network;
 
 import com.md09.pharmapoly.Models.Brand;
+import com.md09.pharmapoly.Models.PageData;
 import com.md09.pharmapoly.Models.ProductReview;
 import com.md09.pharmapoly.Models.Question;
 import com.md09.pharmapoly.data.model.ApiResponse;
@@ -17,6 +18,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 public interface ApiService {
@@ -30,11 +32,18 @@ public interface ApiService {
     @GET
     Call<ApiResponse<List<ProductReview>>> getProductReviews(@Url String url, @Header("Authorization") String token);
 
-    @GET("product/top-rated/{limit}")
-    Call<ApiResponse<List<Product>>> getTopRatedProducts(
-            @Path("limit") int limit,
+//    @GET("product/top-rated/{limit}")
+//    Call<ApiResponse<List<Product>>> getTopRatedProducts(
+//            @Path("limit") int limit,
+//            @Header("Authorization") String token
+//    );
+    @GET("product/top-rated")
+    Call<ApiResponse<PageData<List<Product>>>> getTopRatedProducts(
+            @Query("page") int page,
+            @Query("limit") int limit,
             @Header("Authorization") String token
     );
+
 //    @GET("product/{id}/reviews")
 //    Call<ApiResponse<List<ProductReview>>>
 //    getProductReviews(

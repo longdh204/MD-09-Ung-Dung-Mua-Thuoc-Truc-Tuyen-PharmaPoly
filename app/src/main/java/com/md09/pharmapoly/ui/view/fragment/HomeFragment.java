@@ -22,6 +22,7 @@ import com.md09.pharmapoly.Adapters.CategoryAdapter;
 import com.md09.pharmapoly.Adapters.ProductAdapter;
 import com.md09.pharmapoly.Adapters.SliderAdapter;
 import com.md09.pharmapoly.Models.Category;
+import com.md09.pharmapoly.Models.PageData;
 import com.md09.pharmapoly.Models.Product;
 import com.md09.pharmapoly.NotificationsActivity;
 import com.md09.pharmapoly.R;
@@ -83,6 +84,7 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
     private RecyclerView recyclerView;
     private ProductAdapter productAdapter;
     private List<Product> productList;
@@ -97,6 +99,7 @@ public class HomeFragment extends Fragment {
     private CircleIndicator3 circleIndicator;
     private SharedPrefHelper sharedPrefHelper;
     private RetrofitClient retrofitClient;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -180,21 +183,39 @@ public class HomeFragment extends Fragment {
     }
 
     private void GetTopRatedProducts() {
-        retrofitClient.callAPI().getTopRatedProducts(10,"Bearer " + token).enqueue(new Callback<ApiResponse<List<Product>>>() {
+//        retrofitClient.callAPI().getTopRatedProducts(10,"Bearer " + token).enqueue(new Callback<ApiResponse<List<Product>>>() {
+//            @Override
+//            public void onResponse(Call<ApiResponse<List<Product>>> call, Response<ApiResponse<List<Product>>> response) {
+//                if (response.isSuccessful()) {
+//                    if (response.body().getStatus() == 200) {
+//                        productList = response.body().getData();
+//                        productAdapter.Update(productList);
+//                    }
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<ApiResponse<List<Product>>> call, Throwable t) {
+//            }
+//        });
+        retrofitClient.callAPI().getTopRatedProducts(1, 10, "Bearer " + token).enqueue(new Callback<ApiResponse<PageData<List<Product>>>>() {
             @Override
-            public void onResponse(Call<ApiResponse<List<Product>>> call, Response<ApiResponse<List<Product>>> response) {
+            public void onResponse(Call<ApiResponse<PageData<List<Product>>>> call, Response<ApiResponse<PageData<List<Product>>>> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getStatus() == 200) {
-                        productList = response.body().getData();
+                        PageData<List<Product>> page = response.body().getData();
+                        productList = page.getData();
                         productAdapter.Update(productList);
                     }
                 }
             }
+
             @Override
-            public void onFailure(Call<ApiResponse<List<Product>>> call, Throwable t) {
+            public void onFailure(Call<ApiResponse<PageData<List<Product>>>> call, Throwable t) {
+
             }
         });
     }
+
     private void InitUI(View view) {
         retrofitClient = new RetrofitClient();
         sharedPrefHelper = new SharedPrefHelper(getContext());
