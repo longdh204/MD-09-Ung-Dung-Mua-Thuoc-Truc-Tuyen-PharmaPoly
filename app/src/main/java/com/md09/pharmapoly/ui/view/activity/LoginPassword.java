@@ -59,9 +59,6 @@ public class LoginPassword extends AppCompatActivity {
             try {
                 jsonObject.put("phone_number", phoneNumber);
                 jsonObject.put("password", password);
-
-                Log.d("phone_number", "JSON Object: " + phoneNumber);
-                Log.d("password", "JSON Object: " + password);
             } catch (JSONException e) {
                 return;
             }

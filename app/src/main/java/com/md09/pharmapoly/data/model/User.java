@@ -1,12 +1,13 @@
 package com.md09.pharmapoly.data.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
 
     private String _id;
     private String full_name;
-    private Integer gender;
+    private int gender;
     private String phone_number;
     private String google_id;
     private String address;
@@ -33,13 +34,13 @@ public class User {
                 '}';
     }
 
-    public User(String full_name, Integer gender, String phone_number) {
+    public User(String full_name, int gender, String phone_number) {
         this.full_name = full_name;
         this.gender = gender;
         this.phone_number = phone_number;
     }
 
-    public User(String _id, String full_name, Integer gender, String phone_number, String google_id, String address, String avatar_url, String uid, int role, int status) {
+    public User(String _id, String full_name, int gender, String phone_number, String google_id, String address, String avatar_url, String uid, int role, int status) {
         this._id = _id;
         this.full_name = full_name;
         this.gender = gender;
@@ -68,11 +69,11 @@ public class User {
         this.full_name = full_name;
     }
 
-    public Integer getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(Integer gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
