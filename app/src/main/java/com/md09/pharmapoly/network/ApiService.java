@@ -22,13 +22,18 @@ import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 public interface ApiService {
+    @POST("product-review/create")
+    Call<ApiResponse<Void>> submitReview(
+            @Header("Authorization") String token, // Thêm header token
+            @Body ProductReview productReview
+    );
+
     @GET("product/{productId}/questions")
     Call<ApiResponse<List<Question>>> getProductQuestions(
             @Path("productId") String productId,
             @Header("Authorization") String token);
     @GET("api/product/{productId}/details")
     Call<Product> getProductDetails(@Path("productId") String productId);
-    // Đảm bảo rằng getProductReviews trả về đúng kiểu dữ liệu
     @GET
     Call<ApiResponse<List<ProductReview>>> getProductReviews(@Url String url, @Header("Authorization") String token);
 

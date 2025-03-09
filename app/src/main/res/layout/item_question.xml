@@ -3,21 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Câu hỏi :"
-        android:fontFamily="@font/overpass_regular"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="10dp"
-        tools:ignore="MissingConstraints" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView9"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Câu hỏi :"-->
+<!--        android:fontFamily="@font/overpass_regular"-->
+<!--        android:textSize="16dp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textColor="@color/black"-->
+<!--        tools:layout_editor_absoluteX="10dp"-->
+<!--        tools:layout_editor_absoluteY="10dp"-->
+<!--        tools:ignore="MissingConstraints" />-->
 
     <TextView
         android:id="@+id/questionContent"
@@ -27,32 +26,32 @@
         android:textSize="15sp"
         android:fontFamily="@font/overpass_regular"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
         tools:ignore="MissingConstraints" />
+<!--    app:layout_constraintTop_toBottomOf="@+id/textView9"-->
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Câu trả lời: "
-        android:fontFamily="@font/overpass_regular"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/questionContent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="10dp" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView10"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Câu trả lời: "-->
+<!--        android:fontFamily="@font/overpass_regular"-->
+<!--        android:textSize="16dp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textColor="@color/black"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/questionContent"-->
+<!--        tools:ignore="MissingConstraints"-->
+<!--        tools:layout_editor_absoluteX="10dp" />-->
 
-    <TextView
-        android:id="@+id/answerContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/questionContent"
-        android:text="Answer Content"
-        android:textSize="15dp"
-        android:fontFamily="@font/overpass_regular"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
-        tools:ignore="MissingConstraints" />
+<!--    <TextView-->
+<!--        android:id="@+id/answerContent"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/questionContent"-->
+<!--        android:text="Answer Content"-->
+<!--        android:textSize="15dp"-->
+<!--        android:fontFamily="@font/overpass_regular"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView10"-->
+<!--        tools:ignore="MissingConstraints" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

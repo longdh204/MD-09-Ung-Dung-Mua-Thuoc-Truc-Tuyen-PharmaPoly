@@ -29,7 +29,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ProductReview review = reviewList.get(position);
-        holder.reviewerName.setText("nguoi dung "+ review.getUser_id());
+        holder.reviewerName.setText(""+ review.getUser().getFull_name());
         holder.rating.setText(String.valueOf(review.getRating()));
         holder.reviewContent.setText(review.getReview());
         String rawDate = review.getCreated_at();
@@ -50,7 +50,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
     }
     @Override
     public int getItemCount() {
-        return reviewList.size();
+        return Math.min(reviewList.size(), 3); // Giới hạn chỉ hiển thị 3 review đầu tiên
     }
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView reviewerName, rating, reviewDate, reviewContent;

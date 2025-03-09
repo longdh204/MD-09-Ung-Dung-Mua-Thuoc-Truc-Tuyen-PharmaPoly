@@ -400,17 +400,19 @@
                     android:ellipsize="end"
 
                     android:textColor="@android:color/black"/>
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:id="@+id/showProductDetails"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Xem thêm"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="15dp"
-                    android:textColor="@color/white"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@color/blue"
+                    android:padding="10dp"
                     android:fontFamily="@font/overpass_regular"
-                    android:background="@drawable/rounded_button"/>
+                    android:layout_gravity="start"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="15dp"
+                    />
 
             </LinearLayout>
     <!--quaroi-->
@@ -440,6 +442,19 @@
                     android:id="@+id/questionRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+                <Button
+                    android:id="@+id/btnShowMoreQuestions"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Xem thêm"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@color/blue"
+                    android:padding="10dp"
+                    android:fontFamily="@font/overpass_regular"
+                    android:layout_gravity="start"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="15dp"
+                    />
 
                 <!-- Các câu hỏi tiếp theo -->
 <!--                <androidx.appcompat.widget.AppCompatButton-->
@@ -546,13 +561,13 @@
                             android:textSize="14sp"/>
 
                         <ProgressBar
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                             android:id="@+id/progress5"
-                            style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="0dp"
-                            android:layout_height="6dp"
+                            android:layout_height="5dp"
                             android:layout_weight="1"
                             android:max="100"
-                            android:progress="50"
+                            android:progress="0"
                             android:progressDrawable="@drawable/progress_bar_custom"/>
 
 
@@ -580,8 +595,9 @@
 
                         <ProgressBar
                             android:id="@+id/progress4"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                             android:layout_width="0dp"
-                            android:layout_height="15dp"
+                            android:layout_height="5dp"
                             android:layout_weight="1"
                             android:max="100"
                             android:progress="0"
@@ -612,7 +628,8 @@
                         <ProgressBar
                             android:id="@+id/progress3"
                             android:layout_width="0dp"
-                            android:layout_height="15dp"
+                            android:layout_height="5dp"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                             android:layout_weight="1"
                             android:max="100"
                             android:progress="0"
@@ -642,9 +659,10 @@
                         <ProgressBar
                             android:id="@+id/progress2"
                             android:layout_width="0dp"
-                            android:layout_height="15dp"
+                            android:layout_height="5dp"
                             android:layout_weight="1"
                             android:max="100"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                             android:progress="0"
                             android:progressDrawable="@drawable/progress_bar_custom"/>
 
@@ -672,8 +690,9 @@
                         <ProgressBar
                             android:id="@+id/progress1"
                             android:layout_width="0dp"
-                            android:layout_height="15dp"
+                            android:layout_height="5dp"
                             android:layout_weight="1"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                             android:max="100"
                             android:progress="0"
                             android:progressDrawable="@drawable/progress_bar_custom"/>
@@ -689,6 +708,7 @@
                 </LinearLayout>
             </LinearLayout>
             <Button
+                android:id="@+id/ratingButton"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="Gửi đánh giá"
@@ -706,7 +726,20 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"/>
 <!--            ABCCCCCCCCCCCCCCCCCC-->
-
+            <Button
+                android:id="@+id/showMoreReviewsButton"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Xem thêm"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/blue"
+                android:padding="10dp"
+                android:fontFamily="@font/overpass_regular"
+                android:layout_gravity="start"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="16dp"
+                />
 <!--            quaroi3-->
 <!--            <TextView-->
 <!--                android:layout_width="wrap_content"-->

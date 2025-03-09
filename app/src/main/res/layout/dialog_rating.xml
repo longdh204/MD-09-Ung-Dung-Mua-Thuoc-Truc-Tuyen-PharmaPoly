@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_margin="0dp"
+        android:background="@drawable/dialog_rounded_corners"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đánh giá sản phẩm"
+        android:textSize="20dp"
+        android:fontFamily="@font/overpass_regular"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="15dp"/>
+        <!-- Stars Rating -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="số sao bạn muốn đánh giá ?"
+        android:textSize="15dp"
+        android:fontFamily="@font/overpass_regular"
+        android:textStyle="bold"
+        android:gravity="start"
+        android:layout_marginTop="25dp"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/star1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_star"/>
+
+            <ImageView
+                android:id="@+id/star2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_star"
+                android:layout_marginLeft="10dp"/>
+
+            <ImageView
+                android:id="@+id/star3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_star"
+                android:layout_marginLeft="10dp"/>
+
+            <ImageView
+                android:id="@+id/star4"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_star"
+                android:layout_marginLeft="10dp"/>
+
+            <ImageView
+                android:id="@+id/star5"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_star"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <!-- Text input for review -->
+        <EditText
+            android:id="@+id/reviewText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Viết review của bạn vào đây"
+            android:fontFamily="@font/overpass_regular"
+            android:textSize="15dp"
+            android:gravity="top|start"
+            android:layout_marginTop="10dp"/>
+
+        <!-- Submit Button -->
+    <Button
+        android:id="@+id/sendButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gửi đánh giá"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/blue"
+        android:padding="10dp"
+        android:fontFamily="@font/overpass_regular"
+        android:layout_gravity="start"
+        android:layout_marginTop="15dp"
+        />
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hủy"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#FA4D4D"
+        android:padding="10dp"
+        android:fontFamily="@font/overpass_regular"
+        android:layout_gravity="start"
+        />
+
+    </LinearLayout>

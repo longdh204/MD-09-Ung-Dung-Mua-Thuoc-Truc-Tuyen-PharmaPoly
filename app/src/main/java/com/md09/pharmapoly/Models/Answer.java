@@ -1,6 +1,8 @@
 package com.md09.pharmapoly.Models;
 
-public class Answer {
+import java.io.Serializable;
+
+public class Answer implements Serializable {
     private String _id;
     private String user_id;
     private String content;

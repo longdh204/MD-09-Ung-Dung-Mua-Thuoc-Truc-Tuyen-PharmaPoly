@@ -4,13 +4,19 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -56,6 +62,7 @@ public class ProductDetail extends AppCompatActivity {
     private RecyclerView questionRecyclerView;
     private QuestionAdapter questionAdapter;
     private List<Question> questionList;
+    private Button showMoreReviewsButton;
 
     @SuppressLint("CutPasteId")
     @Override
@@ -137,6 +144,38 @@ public class ProductDetail extends AppCompatActivity {
         String productId = getIntent().getStringExtra("product_id");
         fetchProductQuestions(productId, token, questionAdapter);
 
+        Button ratingButton = findViewById(R.id.ratingButton); // giả sử bạn có một nút đánh giá
+        ratingButton.setOnClickListener(v -> {
+            showRatingDialog(); // Hiển thị dialog đánh giá khi người dùng nhấn nút
+        });
+
+        Button showProductDetailsButton1 = findViewById(R.id.btnShowMoreQuestions);  // Tìm nút trong layout
+
+        showProductDetailsButton1.setOnClickListener(v -> {
+            if (product != null) {
+                // Mở QuestionDetailActivity khi người dùng nhấn "Xem thêm"
+                Intent intent = new Intent(ProductDetail.this, QuestionDetailActivity.class);
+
+                // Truyền danh sách câu hỏi qua Intent
+                intent.putExtra("product_id", product.get_id());
+                intent.putExtra("product_name", product.getName());
+                intent.putExtra("questions", new ArrayList<>(questionList));  // Truyền câu hỏi
+
+                startActivity(intent);  // Mở Activity mới
+            } else {
+                Log.d("ProductDetailActivity", "Product is null");
+            }
+        });
+//
+        // Khởi tạo nút "Xem thêm đánh giá"
+        showMoreReviewsButton = findViewById(R.id.showMoreReviewsButton);
+
+        // Khi nhấn nút "Xem thêm đánh giá"
+        showMoreReviewsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ProductDetail.this, ProductReviewsActivity.class);
+            List<ProductReview> reviewList = new ArrayList<>();
+            startActivity(intent);
+        });
     }
 
     // hiển thị thanh theo % đánh giá
@@ -169,7 +208,6 @@ public class ProductDetail extends AppCompatActivity {
             percentage1.setText(percentage1Star + "%");
         });
     }
-
     // filldata
     private void FillData(Product product) {
         productName.setText(product.getName());
@@ -331,9 +369,9 @@ public class ProductDetail extends AppCompatActivity {
                         // Kiểm tra và log số câu hỏi nhận được
                         Log.d("ProductDetail", "Questions received: " + questions.size());
 
-                        // Xóa dữ liệu cũ và thêm 3 câu hỏi đầu tiên
+                        // Xóa dữ liệu cũ và thêm 5 câu hỏi đầu tiên
                         questionList.clear();
-                        questionList.addAll(questions.subList(0, Math.min(3, questions.size())));
+                        questionList.addAll(questions.subList(0, Math.min(5, questions.size())));
 
                         // Cập nhật lại Adapter
                         questionAdapter.notifyDataSetChanged();
@@ -348,6 +386,137 @@ public class ProductDetail extends AppCompatActivity {
             @Override
             public void onFailure(Call<ApiResponse<List<Question>>> call, Throwable t) {
                 Log.e("ProductDetail", "Error fetching questions: " + t.getMessage());
+            }
+        });
+    }
+    private void showRatingDialog() {
+        // Inflate custom dialog layout
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View dialogView = inflater.inflate(R.layout.dialog_rating, null);
+
+        // Setup star images
+        ImageView star1 = dialogView.findViewById(R.id.star1);
+        ImageView star2 = dialogView.findViewById(R.id.star2);
+        ImageView star3 = dialogView.findViewById(R.id.star3);
+        ImageView star4 = dialogView.findViewById(R.id.star4);
+        ImageView star5 = dialogView.findViewById(R.id.star5);
+
+        // Setup EditText for review
+        EditText reviewText = dialogView.findViewById(R.id.reviewText);
+
+        // Setup the initial rating to 0
+        final int[] rating = {0};
+
+        // Set click listeners for the stars
+        star1.setOnClickListener(v -> {
+            rating[0] = 1;
+            updateStars(star1, star2, star3, star4, star5, rating[0]);
+        });
+        star2.setOnClickListener(v -> {
+            rating[0] = 2;
+            updateStars(star1, star2, star3, star4, star5, rating[0]);
+        });
+        star3.setOnClickListener(v -> {
+            rating[0] = 3;
+            updateStars(star1, star2, star3, star4, star5, rating[0]);
+        });
+        star4.setOnClickListener(v -> {
+            rating[0] = 4;
+            updateStars(star1, star2, star3, star4, star5, rating[0]);
+        });
+        star5.setOnClickListener(v -> {
+            rating[0] = 5;
+            updateStars(star1, star2, star3, star4, star5, rating[0]);
+        });
+
+        // Build the dialog with custom buttons
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+        builder.setCancelable(true); // Dialog có thể bị hủy khi bấm ngoài
+
+        // Tạo đối tượng dialog từ builder
+        AlertDialog dialog = builder.create();
+
+        // Hiển thị dialog ở cuối màn hình
+        dialog.getWindow().setGravity(Gravity.BOTTOM);  // Đặt vị trí ở cuối
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        // Handle click for 'Gửi' button
+        Button sendButton = dialogView.findViewById(R.id.sendButton);
+        sendButton.setOnClickListener(v -> {
+            String review = reviewText.getText().toString().trim();
+            if (rating[0] == 0) {
+                Toast.makeText(this, "Vui lòng chọn sao", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (review.isEmpty()) {
+                Toast.makeText(this, "Vui lòng nhập đánh giá", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            submitReview(rating[0], review); // Gửi dữ liệu đánh giá lên server
+            dialog.dismiss(); // Đóng dialog sau khi gửi
+        });
+
+        // Handle click for 'Hủy' button
+        Button cancelButton = dialogView.findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(v -> {
+            dialog.dismiss(); // Đóng dialog khi bấm Hủy
+        });
+
+        // Hiển thị dialog
+        dialog.show();
+    }
+
+
+
+    // Update the stars based on rating
+    private void updateStars(ImageView star1, ImageView star2, ImageView star3, ImageView star4, ImageView star5, int rating) {
+        // Reset all stars to empty
+        star1.setImageResource(R.drawable.ic_star_empty);
+        star2.setImageResource(R.drawable.ic_star_empty);
+        star3.setImageResource(R.drawable.ic_star_empty);
+        star4.setImageResource(R.drawable.ic_star_empty);
+        star5.setImageResource(R.drawable.ic_star_empty);
+
+        // Set stars to filled based on rating
+        if (rating >= 1) star1.setImageResource(R.drawable.ic_star);
+        if (rating >= 2) star2.setImageResource(R.drawable.ic_star);
+        if (rating >= 3) star3.setImageResource(R.drawable.ic_star);
+        if (rating >= 4) star4.setImageResource(R.drawable.ic_star);
+        if (rating >= 5) star5.setImageResource(R.drawable.ic_star);
+    }
+
+    private void submitReview(int rating, String review) {
+        String userId = new SharedPrefHelper(this).getUser().get_id(); // Lấy ID người dùng từ Shared Preferences
+        String productId = getIntent().getStringExtra("product_id");
+        String token = "Bearer " + new SharedPrefHelper(this).getToken(); // Lấy token từ SharedPreferences
+        ProductReview productReview = new ProductReview();
+        productReview.setUser_id(userId);
+        productReview.setProduct_id(productId);
+        productReview.setRating(rating);
+        productReview.setReview(review);
+
+        Log.d("Review", "User ID: " + userId);
+        Log.d("Review", "Product ID: " + productId);
+        Log.d("Review", "Rating: " + rating);
+        Log.d("Review", "Review: " + review);
+        Log.d("Review", "Token: " + token);
+
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+        apiService.submitReview(token, productReview).enqueue(new Callback<ApiResponse<Void>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<Void>> call, Response<ApiResponse<Void>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Toast.makeText(ProductDetail.this, "Đánh giá đã được gửi thành công", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ProductDetail.this, "Gửi đánh giá thất bại", Toast.LENGTH_SHORT).show();
+                    Log.e("APIError", "Failed to submit review: " + response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<ApiResponse<Void>> call, Throwable t) {
+                Toast.makeText(ProductDetail.this, "Lỗi: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("APIError", "Error submitting review: " + t.getMessage());
             }
         });
     }
