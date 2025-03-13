@@ -33,6 +33,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.view.activity.functional_food"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.activity.ChangePassword"
             android:exported="false" />
         <activity
@@ -58,16 +61,13 @@
             android:exported="false" />
         <activity
             android:name=".ui.view.activity.SignupPassword"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.activity.LoginPassword"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.activity.VerifyPhone"
             android:exported="false" />
-        <activity
-            android:name=".Home"
-            android:exported="true" />
         <activity
             android:name=".ui.view.activity.ProductDetail"
             android:exported="true" />
@@ -76,10 +76,28 @@
             android:exported="true" />
         <activity
             android:name=".ui.view.activity.QuestionDetailActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".ui.view.activity.ProductReviewsActivity"
-            android:exported="true"/>
+            android:exported="true" />
+        <activity
+            android:name=".ui.view.activity.NotificationsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.view.activity.Nav_FunctionalFoodActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.view.activity.Nav_Medical_Equiment"
+            android:exported="true" />
+        <activity
+            android:name=".ui.view.activity.Nav_Personalcare"
+            android:exported="true" />
+        <activity
+            android:name=".ui.view.activity.Nav_Pharmaceutical_Cosmetics"
+            android:exported="true" />
+        <activity
+            android:name=".ui.view.activity.Nav_Medicine"
+            android:exported="true" />
         <activity
             android:name=".ui.view.activity.PhoneNumber"
             android:exported="true">
@@ -94,13 +112,13 @@
             android:exported="false" />
         <activity
             android:name=".ui.view.activity.Onboarding_Screen_3"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.activity.Onboarding_Screen_2"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.activity.Onboarding_Screen_1"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.activity.SplashScreen"
             android:exported="false" />
@@ -124,7 +142,7 @@
             android:exported="false" /> <!-- MainActivity -->
         <activity
             android:name=".ui.view.activity.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.view.activity.ProfileOptionsActivity"
             android:exported="true" />

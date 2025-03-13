@@ -1,4 +1,4 @@
-package com.md09.pharmapoly;
+package com.md09.pharmapoly.ui.view.activity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.md09.pharmapoly.Adapters.NotificationAdapter;
 import com.md09.pharmapoly.Models.NotificationModel;
+import com.md09.pharmapoly.R;
 
 import java.util.ArrayList;
 import java.util.List;

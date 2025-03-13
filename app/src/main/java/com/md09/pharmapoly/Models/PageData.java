@@ -1,6 +1,5 @@
 package com.md09.pharmapoly.Models;
 
-
 import java.util.List;
 
 public class PageData<T> {
@@ -58,6 +57,4 @@ public class PageData<T> {
     public void setHasPrevPage(boolean hasPrevPage) {
         this.hasPrevPage = hasPrevPage;
     }
-
-
 }

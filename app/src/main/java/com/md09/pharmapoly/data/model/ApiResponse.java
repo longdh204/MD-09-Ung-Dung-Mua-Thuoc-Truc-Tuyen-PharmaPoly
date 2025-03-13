@@ -1,11 +1,14 @@
 package com.md09.pharmapoly.data.model;
 
+import java.util.List;
+
 public class ApiResponse<T> {
     private int status;
     private String message;
     private T data;
     private String token;
     private String refreshToken;
+
     public ApiResponse() {
     }
 

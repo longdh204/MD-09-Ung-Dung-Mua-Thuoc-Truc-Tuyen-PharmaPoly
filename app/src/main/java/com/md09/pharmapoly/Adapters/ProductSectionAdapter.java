@@ -18,12 +18,10 @@ import java.util.List;
 public class ProductSectionAdapter extends RecyclerView.Adapter<ProductSectionAdapter.ViewHolder> {
     private Context context;
     private List<ProductSection> sectionList;
-
     public ProductSectionAdapter(Context context, List<ProductSection> sectionList) {
         this.context = context;
         this.sectionList = sectionList;
     }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

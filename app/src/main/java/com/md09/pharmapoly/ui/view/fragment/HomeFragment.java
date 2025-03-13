@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,12 @@ import com.md09.pharmapoly.Adapters.SliderAdapter;
 import com.md09.pharmapoly.Models.Category;
 import com.md09.pharmapoly.Models.PageData;
 import com.md09.pharmapoly.Models.Product;
-import com.md09.pharmapoly.NotificationsActivity;
+import com.md09.pharmapoly.ui.view.activity.Nav_FunctionalFoodActivity;
+import com.md09.pharmapoly.ui.view.activity.Nav_Medical_Equiment;
+import com.md09.pharmapoly.ui.view.activity.Nav_Medicine;
+import com.md09.pharmapoly.ui.view.activity.Nav_Personalcare;
+import com.md09.pharmapoly.ui.view.activity.Nav_Pharmaceutical_Cosmetics;
+import com.md09.pharmapoly.ui.view.activity.NotificationsActivity;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.network.RetrofitClient;
@@ -38,35 +42,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HomeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     public HomeFragment() {
-        // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
@@ -157,10 +142,32 @@ public class HomeFragment extends Fragment {
             int id = item.getItemId();
             if (id == R.id.nav_notification) {
                 Toast.makeText(getContext(), "Thông báo", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), NotificationsActivity.class));
+                return true;
             } else if (id == R.id.nav_healthcare) {
                 Toast.makeText(getContext(), "Thực phẩm chức năng", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), Nav_FunctionalFoodActivity.class));
+                return true;
             } else if (id == R.id.nav_pharmacy) {
                 Toast.makeText(getContext(), "Dược mỹ phẩm", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), Nav_Pharmaceutical_Cosmetics.class));
+                return true;
+            }else if (id == R.id.nav_medicine) {
+                Toast.makeText(getContext(), "Thuốc", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), Nav_Medicine.class));
+                return true;
+            }else if (id == R.id.nav_medical_equipment) {
+                Toast.makeText(getContext(), "Thiết bị y tế", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), Nav_Medical_Equiment.class));
+                return true;
+            }else if (id == R.id.nav_sick) {
+                Toast.makeText(getContext(), "Bệnh", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), NotificationsActivity.class));
+                return true;
+            }else if (id == R.id.nav_personalcare) {
+                Toast.makeText(getContext(), "Chăm sóc cá nhân", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), Nav_Personalcare.class));
+                return true;
             }
 
             drawerLayout.closeDrawer(GravityCompat.START);

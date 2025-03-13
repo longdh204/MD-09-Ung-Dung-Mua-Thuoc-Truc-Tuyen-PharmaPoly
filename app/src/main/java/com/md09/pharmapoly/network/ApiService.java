@@ -22,6 +22,12 @@ import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 public interface ApiService {
+    @GET("category/{id}/products")
+    Call<ApiResponse<PageData<List<Product>>>> getProductsByCategory(
+            @Path("id") String categoryId,
+            @Header("Authorization") String token
+    );
+
     @POST("product-review/create")
     Call<ApiResponse<Void>> submitReview(
             @Header("Authorization") String token, // Thêm header token

@@ -18,15 +18,16 @@
         android:id="@+id/nav_medicine"
         android:title="Thuốc"
         android:checkable="true" />
+    <item
+        android:id="@+id/nav_personalcare"
+        android:title="Chăm sóc cá nhân"
+        android:checkable="true" />
 
     <item
         android:id="@+id/nav_medical_equipment"
         android:title="Thiết bị y tế"
         android:checkable="true" />
-    <item
-        android:id="@+id/nav_vaccination"
-        android:title="Tiêm chủng"
-        android:checkable="true" />
+
     <item
         android:id="@+id/nav_sick"
         android:title="Bệnh"
