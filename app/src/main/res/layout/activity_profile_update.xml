@@ -95,6 +95,9 @@
         android:textSize="16sp"
         android:paddingHorizontal="24dp"
         android:hint="Enter Phone Number"
+        android:focusable="false"
+        android:clickable="false"
+        android:longClickable="false"
         android:inputType="phone"/>
 
     <androidx.cardview.widget.CardView

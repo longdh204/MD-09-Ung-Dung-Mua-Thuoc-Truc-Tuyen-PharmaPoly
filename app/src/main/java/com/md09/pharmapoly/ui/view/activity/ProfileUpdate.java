@@ -12,6 +12,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -43,6 +44,10 @@ import retrofit2.Response;
 
 public class ProfileUpdate extends AppCompatActivity {
 
+    private String initialFullName;
+    private Integer initialGender;
+
+
     private EditText edtFullName, edtPhoneNumber;
     private RadioButton rbMale, rbFemale;
     private CardView btnSaveProfile;
@@ -50,46 +55,55 @@ public class ProfileUpdate extends AppCompatActivity {
     private String phoneNumber, uid, token;
     private TextView profileUpdateComplete;
     private RetrofitClient retrofitClient;
+    private ImageButton btnbackUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_profile_update);
-
+        btnbackUpdate=findViewById(R.id.btn_back);
+        btnbackUpdate.setOnClickListener(view -> finish());
         initUI();
 
         Intent intent = getIntent();
-        SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(this);
+        sharedPrefHelper = new SharedPrefHelper(this);
         User user = sharedPrefHelper.getUser();
 
         phoneNumber = user.getPhone_number();
         token = sharedPrefHelper.getToken();
-
         uid = intent.getStringExtra(UID_KEY);
 
         loadUserData();
 
+        updateButtonState();
+
         btnSaveProfile.setOnClickListener(v -> updateUserProfile());
 
         edtFullName.addTextChangedListener(textWatcher);
-        edtPhoneNumber.addTextChangedListener(textWatcher);
+        rbMale.setOnCheckedChangeListener((group, checkedId) -> updateButtonState());
+        rbFemale.setOnCheckedChangeListener((group, checkedId) -> updateButtonState());
     }
+
 
     private void loadUserData() {
         User user = sharedPrefHelper.getUser();
 
         if (user != null) {
-            edtFullName.setText(user.getFull_name());
+            initialFullName = user.getFull_name();
+            initialGender = user.getGender();
+
+            edtFullName.setText(initialFullName);
             edtPhoneNumber.setText(user.getPhone_number());
 
-            if (user.getGender() == 1) {
+            if (initialGender == 1) {
                 rbMale.setChecked(true);
             } else {
                 rbFemale.setChecked(true);
             }
         }
     }
+
 
     private void updateUserProfile() {
         String fullName = edtFullName.getText().toString().trim();
@@ -127,7 +141,11 @@ public class ProfileUpdate extends AppCompatActivity {
                 Log.d("API_RESPONSE", "Status Code: " + response.code());
 
                 if (response.isSuccessful() && response.body() != null) {
-                    Log.d("API_RESPONSE", "Response Body: " + new Gson().toJson(response.body()));
+                    User updatedUser = response.body().getData();
+
+                    Log.d("API_RESPONSE", "Response Body: " + new Gson().toJson(updatedUser));
+
+                    sharedPrefHelper.saveUser(updatedUser, token, SharedPrefHelper.TOKEN_KEY);
 
                     Toast.makeText(ProfileUpdate.this, getString(R.string.profile_updated_successfully), Toast.LENGTH_SHORT).show();
                     finish();
@@ -142,6 +160,7 @@ public class ProfileUpdate extends AppCompatActivity {
                     handleErrorResponse(response.code());
                 }
             }
+
 
 
             @Override
@@ -189,29 +208,23 @@ public class ProfileUpdate extends AppCompatActivity {
     };
 
     private void updateButtonState() {
-        boolean isValid = !edtFullName.getText().toString().trim().isEmpty() &&
-                !edtPhoneNumber.getText().toString().trim().isEmpty();
+        String currentFullName = edtFullName.getText().toString().trim();
+        Integer currentGender = rbMale.isChecked() ? 1 : 0;
 
-        int colorFromCard = btnSaveProfile.getSolidColor();
-        int colorToCard = ContextCompat.getColor(this, isValid ? R.color.blue_CE4 : R.color.gray_DCD);
-        int colorFromText = profileUpdateComplete.getCurrentTextColor();
-        int colorToText = ContextCompat.getColor(this, isValid ? R.color.white_FFF : R.color.gray_E9E);
+        boolean isFullNameChanged = !currentFullName.equals(initialFullName);
+        boolean isGenderChanged = !currentGender.equals(initialGender);
+
+        boolean isValid = isFullNameChanged || isGenderChanged;
 
         btnSaveProfile.setEnabled(isValid);
 
-        ValueAnimator cardColorAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), colorFromCard, colorToCard);
-        cardColorAnimator.setDuration(300);
-        cardColorAnimator.addUpdateListener(animator ->
-                btnSaveProfile.setBackgroundColor((int) animator.getAnimatedValue())
-        );
-        cardColorAnimator.start();
+        int colorToCard = ContextCompat.getColor(this, isValid ? R.color.blue_CE4 : R.color.gray_DCD);
+        int colorToText = ContextCompat.getColor(this, isValid ? R.color.white_FFF : R.color.gray_E9E);
 
-        ValueAnimator textColorAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), colorFromText, colorToText);
-        textColorAnimator.setDuration(300);
-        textColorAnimator.addUpdateListener(animator ->
-                profileUpdateComplete.setTextColor((int) animator.getAnimatedValue())
-        );
+        btnSaveProfile.setCardBackgroundColor(colorToCard);
+        profileUpdateComplete.setTextColor(colorToText);
     }
+
 
     private void initUI() {
         edtFullName = findViewById(R.id.update_profile_full_name);

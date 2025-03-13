@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,13 +44,15 @@ public class ChangePassword extends AppCompatActivity {
     private RetrofitClient retrofitClient;
     private String phoneNumber, uid, token;
     private TextView change_pass_complete;
+    private ImageButton btnback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_change_password);
-
+        btnback=findViewById(R.id.btn_back);
+        btnback.setOnClickListener(view -> finish());
         initUI();
 
         Intent intent = getIntent();
