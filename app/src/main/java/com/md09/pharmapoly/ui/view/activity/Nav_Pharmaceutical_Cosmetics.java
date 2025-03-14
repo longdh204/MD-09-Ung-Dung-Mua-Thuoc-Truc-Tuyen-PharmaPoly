@@ -31,12 +31,12 @@ public class Nav_Pharmaceutical_Cosmetics extends AppCompatActivity{
     private final List<Product> allProducts = new ArrayList<>();
     private int loadedCategoryCount = 0;
     private final List<String> categoryIds = Arrays.asList(
-            "67d1aff618952b1910922880", // Chăm sóc da mặt
-            "67d1b03318952b1910922887", // Chăm sóc cơ thể
-            "67d1b01118952b1910922882", // Giải pháp làm da
-            "67d1b03e18952b1910922889", // Chăm sóc tóc da đầu
-            "67d1b02318952b1910922885", // Mỹ phẩm trang điểm
-            "67d1b06018952b191092288c"  // Chăm sóc da vùng mặt
+            "67d40078b0aaf7c883554d52", // Chăm sóc da mặt
+            "67d40083b0aaf7c883554d54", // Chăm sóc cơ thể
+            "67d40096b0aaf7c883554d56", // Giải pháp làm da
+            "67d400e7b0aaf7c883554d58", // Chăm sóc tóc da đầu
+            "67d400efb0aaf7c883554d5a", // Mỹ phẩm trang điểm
+            "67d400f6b0aaf7c883554d5c"  // Chăm sóc da vùng mặt
     );
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +50,12 @@ public class Nav_Pharmaceutical_Cosmetics extends AppCompatActivity{
         loadAllProducts();
 
         // Ánh xạ các button từ layout
-        findViewById(R.id.btnchamsocdamat).setOnClickListener(v -> filterProductsByCategory("67d1aff618952b1910922880"));
-        findViewById(R.id.btngiaiphaplamda).setOnClickListener(v -> filterProductsByCategory("67d1b03318952b1910922887"));
-        findViewById(R.id.btnmyphamtrangdiem).setOnClickListener(v -> filterProductsByCategory("67d1b01118952b1910922882"));
-        findViewById(R.id.btnchamsoccothe).setOnClickListener(v -> filterProductsByCategory("67d1b03e18952b1910922889"));
-        findViewById(R.id.chamsoctocdadau).setOnClickListener(v -> filterProductsByCategory("67d1b02318952b1910922885"));
-        findViewById(R.id.btnchamsocdavungmat).setOnClickListener(v -> filterProductsByCategory("67d1b06018952b191092288c"));
+        findViewById(R.id.btnchamsocdamat).setOnClickListener(v -> filterProductsByCategory("67d40078b0aaf7c883554d52"));
+        findViewById(R.id.btngiaiphaplamda).setOnClickListener(v -> filterProductsByCategory("67d40083b0aaf7c883554d54"));
+        findViewById(R.id.btnmyphamtrangdiem).setOnClickListener(v -> filterProductsByCategory("67d40096b0aaf7c883554d56"));
+        findViewById(R.id.btnchamsoccothe).setOnClickListener(v -> filterProductsByCategory("67d400e7b0aaf7c883554d58"));
+        findViewById(R.id.chamsoctocdadau).setOnClickListener(v -> filterProductsByCategory("67d400efb0aaf7c883554d5a"));
+        findViewById(R.id.btnchamsocdavungmat).setOnClickListener(v -> filterProductsByCategory("67d400f6b0aaf7c883554d5c"));
 
     }
     private void loadAllProducts() {

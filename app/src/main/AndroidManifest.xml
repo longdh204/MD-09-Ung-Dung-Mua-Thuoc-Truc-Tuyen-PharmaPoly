@@ -32,9 +32,9 @@
         android:theme="@style/Theme.MD09_PharmaPoly"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.view.activity.functional_food"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".ui.view.activity.functional_food"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".ui.view.activity.ChangePassword"
             android:exported="false" />

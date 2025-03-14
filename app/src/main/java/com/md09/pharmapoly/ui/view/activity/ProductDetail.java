@@ -113,8 +113,10 @@ public class ProductDetail extends AppCompatActivity {
         String token = "Bearer " + sharedPrefHelper.getToken();
         fetchProductReviews(productId, token);
         fetchProductDetails(productId, token);
-        fetchProductData("67c2bac612ae5bc6e9990212");
-        fetchProductData("67c2ba6612ae5bc6e9990209");
+        fetchProductData("67d3df615a228bc7cc5bb8f5");
+        fetchProductData("67d3ec3a5a228bc7cc5bbbab");
+        fetchProductData("67d3ef595a228bc7cc5bbc9a");
+        fetchProductData("67d3f1df5a228bc7cc5bbd20");
 
         // nút xem thêm toàn bộ thông tin trong product details
         Button showProductDetailsButton = findViewById(R.id.showProductDetails);
