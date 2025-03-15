@@ -174,6 +174,19 @@ public class HomeFragment extends Fragment {
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
+        // Lấy ImageView từ layout
+        ImageView circleImage = view.findViewById(R.id.circleImage);
+
+        // Set OnClickListener cho ImageView
+        circleImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chuyển đến Activity mới khi nhấn vào cục tròn ảnh
+                Intent intent = new Intent(getActivity(), ChatbotActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 

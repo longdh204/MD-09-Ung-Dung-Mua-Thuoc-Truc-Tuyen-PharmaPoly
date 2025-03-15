@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.view.fragment.HomeFragment">
 
     <androidx.drawerlayout.widget.DrawerLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -139,7 +137,38 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
+                    <!-- res/layout/activity_home.xml -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/circle_background"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="end"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/recyclerViewCategories"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:ignore="MissingConstraints">
 
+                        <!-- Cục tròn ảnh -->
+                        <ImageView
+                            android:id="@+id/circleImage"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:clickable="true"
+                            android:contentDescription="Circular Image"
+                            android:focusable="true"
+                            android:src="@drawable/icon_chatbot" />
+                        <!--                        <TextView-->
+                        <!--                            android:layout_width="wrap_content"-->
+                        <!--                            android:layout_height="wrap_content"-->
+                        <!--                            android:text="ChatBot"-->
+                        <!--                            android:fontFamily="@font/overpass_regular"-->
+                        <!--                            android:textStyle="bold"-->
+                        <!--                            android:textColor="@color/white"/>-->
+                    </LinearLayout>
                     <!-- ViewPager2 cho Slider -->
                     <androidx.viewpager2.widget.ViewPager2
                         android:id="@+id/viewPagerSlider"
