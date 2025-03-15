@@ -1,5 +1,6 @@
 package com.md09.pharmapoly.utils;
 
+import java.text.DecimalFormat;
 import java.util.regex.Pattern;
 
 public class Constants {
@@ -12,4 +13,9 @@ public class Constants {
     public static final String USER_KEY = "USER";
     public static final String TOKEN_KEY = "TOKEN";
     public static final String REFRESH_TOKEN_KEY = "REFRESH_TOKEN";
+    public static final int MAX_QUANTITY_PER_PRODUCT = 20;
+    public static String formatCurrency(int amount, String symbol) {
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        return formatter.format(amount) + symbol;
+    }
 }

@@ -1,6 +1,8 @@
 package com.md09.pharmapoly.network;
 
 import com.md09.pharmapoly.Models.Brand;
+import com.md09.pharmapoly.Models.Cart;
+import com.md09.pharmapoly.Models.CartItem;
 import com.md09.pharmapoly.Models.PageData;
 import com.md09.pharmapoly.Models.ProductReview;
 import com.md09.pharmapoly.Models.Question;
@@ -9,10 +11,14 @@ import com.md09.pharmapoly.Models.Product;
 import com.md09.pharmapoly.data.model.User;
 
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -22,6 +28,26 @@ import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 public interface ApiService {
+
+    @POST("refresh-token")
+    Call<ApiResponse<User>> refreshToken(@Body Map<String, String> refreshTokenRequest);
+    @GET("user/cart")
+    Call<ApiResponse<Cart>> cart(
+            @Header("Authorization") String token
+    );
+    @FormUrlEncoded
+    @POST("cart-item/update")
+    Call<ApiResponse<CartItem>> updateCartItem(
+            @Header("Authorization") String token,
+            @Field("cart_item_id") String cartItemId,
+            @Field("new_quantity") int newQuantity
+    );
+
+    @DELETE("cart-item/remove")
+    Call<ApiResponse<Cart>> removeCartItem(
+            @Query("cart_item_id") String cartItemId,
+            @Header("Authorization") String token
+    );
     @GET("category/{id}/products")
     Call<ApiResponse<PageData<List<Product>>>> getProductsByCategory(
             @Path("id") String categoryId,
@@ -30,7 +56,7 @@ public interface ApiService {
 
     @POST("product-review/create")
     Call<ApiResponse<Void>> submitReview(
-            @Header("Authorization") String token, // Thêm header token
+            @Header("Authorization") String token,
             @Body ProductReview productReview
     );
 

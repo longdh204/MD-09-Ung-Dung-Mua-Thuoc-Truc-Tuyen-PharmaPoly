@@ -79,4 +79,7 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="customer">Customer</string>
     <string name="logout">Logout</string>
+    <string name="your_cart">Your Cart</string>
+    <string name="cart_empty">No products in cart</string>
+    <string name="confirm_remove_cart">Are you sure you want to remove this item from your cart?</string>
 </resources>

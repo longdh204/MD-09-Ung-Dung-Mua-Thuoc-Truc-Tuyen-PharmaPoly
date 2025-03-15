@@ -1,5 +1,9 @@
 package com.md09.pharmapoly.utils;
 
+import static com.md09.pharmapoly.utils.Constants.REFRESH_TOKEN_KEY;
+import static com.md09.pharmapoly.utils.Constants.TOKEN_KEY;
+import static com.md09.pharmapoly.utils.Constants.USER_KEY;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -8,11 +12,6 @@ import com.md09.pharmapoly.data.model.User;
 
 public class SharedPrefHelper {
     private static final String PREF_NAME = "UserPrefs";
-
-    public static final String USER_KEY = "USER";
-    public static final String TOKEN_KEY = "TOKEN";
-    public static final String REFRESH_TOKEN_KEY = "REFRESH_TOKEN";
-
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private Gson gson;
@@ -22,7 +21,7 @@ public class SharedPrefHelper {
         gson = new Gson();
     }
 
-    public void saveUser(com.md09.pharmapoly.data.model.User user, String token, String refreshToken) {
+    public void saveUser(User user, String token, String refreshToken) {
         editor.putString(USER_KEY, gson.toJson(user));
         editor.putString(TOKEN_KEY, token);
         editor.putString(REFRESH_TOKEN_KEY, refreshToken);

@@ -1,4 +1,6 @@
-package com.md09.pharmapoly.ui.view.activity;
+package com.md09.pharmapoly.Models;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -6,6 +8,7 @@ public class Cart {
     private String _id;
     private int total_price;
     private int total_items;
+    @SerializedName("cartItems")
     private List<CartItem> cartItems;
 
     public Cart() {
@@ -48,5 +51,15 @@ public class Cart {
 
     public void setCartItems(List<CartItem> cartItems) {
         this.cartItems = cartItems;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "_id='" + _id + '\'' +
+                ", total_price=" + total_price +
+                ", total_items=" + total_items +
+                ", cartItems=" + cartItems +
+                '}';
     }
 }

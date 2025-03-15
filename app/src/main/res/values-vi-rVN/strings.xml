@@ -80,4 +80,7 @@
     <string name="privacy_policy">Chính sách bảo mật</string>
     <string name="customer">Khách hàng</string>
     <string name="logout">Đăng xuất</string>
+    <string name="your_cart">Giỏ hàng của bạn</string>
+    <string name="cart_empty">Chưa có sản phẩm nào trong giỏ hàng</string>
+    <string name="confirm_remove_cart">Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?</string>
 </resources>

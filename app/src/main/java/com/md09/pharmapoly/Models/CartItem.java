@@ -1,6 +1,4 @@
-package com.md09.pharmapoly.ui.view.activity;
-
-import com.md09.pharmapoly.Models.Product;
+package com.md09.pharmapoly.Models;
 
 public class CartItem {
     private String _id;
@@ -76,5 +74,18 @@ public class CartItem {
 
     public void setTotal_price(int total_price) {
         this.total_price = total_price;
+    }
+
+    @Override
+    public String toString() {
+        return "CartItem{" +
+                "_id='" + _id + '\'' +
+                ", cart_id='" + cart_id + '\'' +
+                ", product_id='" + product_id + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", total_price=" + total_price +
+                ", product=" + product +
+                '}';
     }
 }

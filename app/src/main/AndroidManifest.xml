@@ -139,7 +139,7 @@
             android:exported="false" />
         <activity
             android:name=".ShoppingCart"
-            android:exported="false" /> <!-- MainActivity -->
+            android:exported="false" />
         <activity
             android:name=".ui.view.activity.MainActivity"
             android:exported="true" />

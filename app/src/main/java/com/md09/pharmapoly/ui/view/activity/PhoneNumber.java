@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,11 +21,16 @@ import androidx.core.content.ContextCompat;
 
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
+import com.md09.pharmapoly.data.model.User;
 import com.md09.pharmapoly.network.RetrofitClient;
 import com.md09.pharmapoly.utils.ProgressDialogHelper;
+import com.md09.pharmapoly.utils.SharedPrefHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -127,7 +133,34 @@ public class PhoneNumber extends AppCompatActivity {
                 Toast.makeText(PhoneNumber.this, "Số điện thoại không hợp lệ!", Toast.LENGTH_SHORT).show();
             }
         });
+        ProgressDialogHelper.showLoading(this);
+        String refreshToken = new SharedPrefHelper(this).getRefreshToken();
+        Map<String, String> requestBody = new HashMap<>();
+        requestBody.put("refreshToken", refreshToken);
+        retrofitClient.callAPI().refreshToken(requestBody).enqueue(new Callback<ApiResponse<User>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
+                ProgressDialogHelper.hideLoading();
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus() == 200) {
+                        User user = response.body().getData();
+                        String token = response.body().getToken();
+                        String refreshToken = response.body().getRefreshToken();
+                        SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(PhoneNumber.this);
+                        sharedPrefHelper.saveUser(user, token, refreshToken);
 
+                        startActivity(new Intent(PhoneNumber.this, MainActivity.class));
+                        finishAffinity();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<User>> call, Throwable t) {
+                ProgressDialogHelper.hideLoading();
+
+            }
+        });
     }
     private void UpdateButtonState(String phoneNumber) {
         boolean isValid = validateAndFormatPhoneNumber(phoneNumber) != null;
