@@ -8,6 +8,7 @@ public class CartItem {
     private int price;
     private int total_price;
     private Product product;
+    private boolean isSelected = false;
     public CartItem() {
     }
 
@@ -18,6 +19,14 @@ public class CartItem {
         this.quantity = quantity;
         this.price = price;
         this.total_price = total_price;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public Product getProduct() {

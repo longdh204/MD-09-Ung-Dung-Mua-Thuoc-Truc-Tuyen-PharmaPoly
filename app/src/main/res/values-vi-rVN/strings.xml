@@ -83,4 +83,7 @@
     <string name="your_cart">Giỏ hàng của bạn</string>
     <string name="cart_empty">Chưa có sản phẩm nào trong giỏ hàng</string>
     <string name="confirm_remove_cart">Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?</string>
+    <string name="all">Tất cả</string>
+    <string name="total_payment">Tổng thanh toán</string>
+    <string name="purchase">Mua hàng</string>
 </resources>

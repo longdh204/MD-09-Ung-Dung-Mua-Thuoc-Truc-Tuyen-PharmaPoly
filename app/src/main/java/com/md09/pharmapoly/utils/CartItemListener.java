@@ -5,4 +5,5 @@ import com.md09.pharmapoly.Models.CartItem;
 public interface CartItemListener {
     void onItemDeleted(CartItem cartItem);
     void onQuantityUpdated(CartItem cartItem);
+    void onItemSelected(CartItem cartItem);
 }

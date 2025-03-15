@@ -1,7 +1,10 @@
 package com.md09.pharmapoly.ui.view.fragment;
 
+import static com.md09.pharmapoly.utils.Constants.formatCurrency;
+
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -83,6 +88,11 @@ public class CartFragment extends Fragment {
     private RetrofitClient retrofitClient;
     private RecyclerView rcv_cart_item;
     private CartAdapter cartAdapter;
+    private CardView btn_purchase;
+    private TextView tv_price,tv_purchase;
+    private CheckBox cb_selected_all_item;
+
+    private Cart cart;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -98,7 +108,8 @@ public class CartFragment extends Fragment {
             public void onResponse(Call<ApiResponse<Cart>> call, Response<ApiResponse<Cart>> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getStatus() == 200) {
-                        cartAdapter.UpdateCart(response.body().getData());
+                        cart = response.body().getData();
+                        cartAdapter.UpdateCart(cart);
                     }
                 }
             }
@@ -108,6 +119,19 @@ public class CartFragment extends Fragment {
 
             }
         });
+        cb_selected_all_item.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (cart != null && cart.getCartItems() != null) {
+                for (int i = 0; i < cart.getCartItems().size(); i++) {
+                    CartItem item = cart.getCartItems().get(i);
+                    if (item.isSelected() != isChecked) {
+                        item.setSelected(isChecked);
+                        cartAdapter.notifyItemChanged(i);
+                    }
+                }
+                CalculateTotalPrice();
+            }
+        });
+
         return view;
     }
 
@@ -121,25 +145,12 @@ public class CartFragment extends Fragment {
 
             @Override
             public void onQuantityUpdated(CartItem cartItem) {
-                retrofitClient.callAPI().updateCartItem(
-                        "Bearer " + new SharedPrefHelper(getContext()).getToken(),
-                        cartItem.get_id(),
-                        cartItem.getQuantity()
-                ).enqueue(new Callback<ApiResponse<CartItem>>() {
-                    @Override
-                    public void onResponse(Call<ApiResponse<CartItem>> call, Response<ApiResponse<CartItem>> response) {
-                        if (response.isSuccessful()) {
-                            if (response.body().getStatus() == 200) {
-                                cartAdapter.UpdateCartItem(response.body().getData());
-                            }
-                        }
-                    }
+                UpdateCartItem(cartItem);
+            }
 
-                    @Override
-                    public void onFailure(Call<ApiResponse<CartItem>> call, Throwable t) {
-
-                    }
-                });
+            @Override
+            public void onItemSelected(CartItem cartItem) {
+                CalculateTotalPrice();
             }
         });
 
@@ -168,7 +179,18 @@ public class CartFragment extends Fragment {
             public void onResponse(Call<ApiResponse<Cart>> call, Response<ApiResponse<Cart>> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getStatus() == 200) {
-                        cartAdapter.UpdateCart(response.body().getData());
+                        Cart updatedCart = response.body().getData();
+
+                        if (cart != null) {
+                            for (int i = 0; i < cart.getCartItems().size(); i++) {
+                                if (cart.getCartItems().get(i).get_id().equals(id)) {
+                                    cart.getCartItems().remove(i);
+                                    cartAdapter.notifyItemRemoved(i);
+                                    break;
+                                }
+                            }
+                        }
+                        CalculateTotalPrice();
                     }
                 }
             }
@@ -179,8 +201,58 @@ public class CartFragment extends Fragment {
             }
         });
     }
+    private void CalculateTotalPrice() {
+        int totalPrice = 0;
+        int selectedCount = 0;
+        for (CartItem item : cart.getCartItems()) {
+            if (item.isSelected()) {
+                selectedCount++;
+                totalPrice += item.getTotal_price();
+            }
+        }
+        String baseText = getString(R.string.purchase);
+        tv_purchase.setText(baseText + " (" + selectedCount + ")");
+        tv_price.setText(formatCurrency(totalPrice, "đ"));
+    }
+    private void UpdateCartItem(CartItem cartItem) {
+        retrofitClient.callAPI().updateCartItem(
+                "Bearer " + new SharedPrefHelper(getContext()).getToken(),
+                cartItem.get_id(),
+                cartItem.getQuantity()
+        ).enqueue(new Callback<ApiResponse<CartItem>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<CartItem>> call, Response<ApiResponse<CartItem>> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus() == 200) {
+                        CartItem updatedItem = response.body().getData();
+
+                        int position = cart.getCartItems().indexOf(cartItem);
+                        if (position != -1) {
+                            CartItem existingItem = cart.getCartItems().get(position);
+                            existingItem.setQuantity(updatedItem.getQuantity());
+                            existingItem.setTotal_price(updatedItem.getTotal_price());
+                        }
+                        if (cartItem.isSelected()) CalculateTotalPrice();
+                        cartAdapter.UpdateCartItem(updatedItem);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<CartItem>> call, Throwable t) {
+
+            }
+        });
+    }
     private void InitUI(View view) {
         retrofitClient = new RetrofitClient();
         rcv_cart_item = view.findViewById(R.id.rcv_cart_item);
+
+        btn_purchase = view.findViewById(R.id.btn_purchase);
+
+        tv_price = view.findViewById(R.id.tv_price);
+        tv_purchase = view.findViewById(R.id.tv_purchase);
+
+        cb_selected_all_item = view.findViewById(R.id.cb_selected_all_item);
     }
 }

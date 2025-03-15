@@ -82,4 +82,7 @@
     <string name="your_cart">Your Cart</string>
     <string name="cart_empty">No products in cart</string>
     <string name="confirm_remove_cart">Are you sure you want to remove this item from your cart?</string>
+    <string name="all">All</string>
+    <string name="total_payment">Total Payment</string>
+    <string name="purchase">Purchase</string>
 </resources>

@@ -77,11 +77,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull CartAdapter.ViewHolder holder, int position) {
         CartItem cartItem = cart.getCartItems().get(position);
         if (cartItem != null) {
+
             holder.tv_product_name.setText(cartItem.getProduct().getName());
             holder.tv_price.setText(formatCurrency(cartItem.getPrice(), "đ"));
             holder.edt_quantity.setText(String.valueOf(cartItem.getQuantity()));
 
             Picasso.get().load(cartItem.getProduct().getImageUrl()).into(holder.img_product);
+
             holder.edt_quantity.setOnFocusChangeListener((v, hasFocus) -> {
                 if (hasFocus) {
                     holder.edt_quantity.post(() -> holder.edt_quantity.selectAll());
@@ -103,6 +105,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             });
             holder.btn_remove.setOnClickListener(v-> {
                 cartItemListener.onItemDeleted(cartItem);
+            });
+
+            holder.cb_selected_item.setOnCheckedChangeListener(null);
+            holder.cb_selected_item.setChecked(cartItem.isSelected());
+
+            holder.cb_selected_item.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                cartItem.setSelected(isChecked);
+                cartItemListener.onItemSelected(cartItem);
             });
         }
     }
