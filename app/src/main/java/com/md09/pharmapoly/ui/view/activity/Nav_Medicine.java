@@ -31,18 +31,18 @@ public class Nav_Medicine extends AppCompatActivity {
     private final List<Product> allProducts = new ArrayList<>();
     private int loadedCategoryCount = 0;
     private final List<String> categoryIds = Arrays.asList(
-            "67d1a9012ae6c07ce3700873", // Thuốc dị ứng
-            "67d1a91f2ae6c07ce3700875", // Thuốc da liễu
-            "67d1aa232ae6c07ce3700884", // Miếng dán cao xoa
-            "67d1a97c2ae6c07ce3700877", // Cơ xương khớp
-            "67d1a9972ae6c07ce370087a", // Thuốc ung thư
-            "67d1a9f72ae6c07ce370087f", // Thuốc hô hấp
-            "67d1a9e22ae6c07ce370087d", // Thuốc mắt tai mũi họng
-            "67d1a9f72ae6c07ce370087f", // Thuốc giải độc khử độc
-            "67d1aa422ae6c07ce3700887", // Thuốc bổ vitamin
-            "67d1aa552ae6c07ce3700889", // Thuốc giảm đau hạ sốt
-            "67d1aa762ae6c07ce370088d", // Thuốc kháng sinh kháng nấm
-            "67d1aa8b2ae6c07ce370088f"  // Thuốc hệ thần kinh
+            "67d4015fb0aaf7c883554d5e", // Thuốc dị ứng
+            "67d40169b0aaf7c883554d60", // Thuốc da liễu
+            "67d40198b0aaf7c883554d6c", // Miếng dán cao xoa
+            "67d4016eb0aaf7c883554d62", // Cơ xương khớp
+            "67d40173b0aaf7c883554d64", // Thuốc ung thư
+            "67d40179b0aaf7c883554d66", // Thuốc hô hấp
+            "67d40181b0aaf7c883554d68", // Thuốc mắt tai mũi họng
+            "67d40186b0aaf7c883554d6a", // Thuốc giải độc khử độc
+            "67d401a0b0aaf7c883554d6e", // Thuốc bổ vitamin
+            "67d401a8b0aaf7c883554d70", // Thuốc giảm đau hạ sốt
+            "67d401aeb0aaf7c883554d72", // Thuốc kháng sinh kháng nấm
+            "67d401b3b0aaf7c883554d74"  // Thuốc hệ thần kinh
     );
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +56,19 @@ public class Nav_Medicine extends AppCompatActivity {
         loadAllProducts();
 
         // Ánh xạ các button từ layout
-        findViewById(R.id.btnthuocdiung).setOnClickListener(v -> filterProductsByCategory("67d1a9012ae6c07ce3700873"));
-        findViewById(R.id.btnthuocdalieu).setOnClickListener(v -> filterProductsByCategory("67d1a91f2ae6c07ce3700875"));
-        findViewById(R.id.btncoxuongkhop).setOnClickListener(v -> filterProductsByCategory("67d1a97c2ae6c07ce3700877"));
-        findViewById(R.id.btnthuocungthu).setOnClickListener(v -> filterProductsByCategory("67d1a9972ae6c07ce370087a"));
-        findViewById(R.id.btnthuochohap).setOnClickListener(v -> filterProductsByCategory("67d1a9f72ae6c07ce370087f"));
-        findViewById(R.id.btnthuocmattaimuihong).setOnClickListener(v -> filterProductsByCategory("67d1a9e22ae6c07ce370087d"));
+        findViewById(R.id.btnthuocdiung).setOnClickListener(v -> filterProductsByCategory("67d4015fb0aaf7c883554d5e"));
+        findViewById(R.id.btnthuocdalieu).setOnClickListener(v -> filterProductsByCategory("67d40169b0aaf7c883554d60"));
+        findViewById(R.id.btncoxuongkhop).setOnClickListener(v -> filterProductsByCategory("67d4016eb0aaf7c883554d62"));
+        findViewById(R.id.btnthuocungthu).setOnClickListener(v -> filterProductsByCategory("67d40173b0aaf7c883554d64"));
+        findViewById(R.id.btnthuochohap).setOnClickListener(v -> filterProductsByCategory("67d40179b0aaf7c883554d66"));
+        findViewById(R.id.btnthuocmattaimuihong).setOnClickListener(v -> filterProductsByCategory("67d40181b0aaf7c883554d68"));
 
-        findViewById(R.id.btnthuocgiaidockhudoc).setOnClickListener(v -> filterProductsByCategory("67d1a9f72ae6c07ce370087f"));
-        findViewById(R.id.btnmiengdancaoxoa).setOnClickListener(v -> filterProductsByCategory("67d1aa232ae6c07ce3700884"));
-        findViewById(R.id.btnthuocbovitamin).setOnClickListener(v -> filterProductsByCategory("67d1aa422ae6c07ce3700887"));
-        findViewById(R.id.btnthuocgiamdauhasot).setOnClickListener(v -> filterProductsByCategory("67d1aa552ae6c07ce3700889"));
-        findViewById(R.id.btnthuockhangsinhkhangnam).setOnClickListener(v -> filterProductsByCategory("67d1aa762ae6c07ce370088d"));
-        findViewById(R.id.btnthuochethankinh).setOnClickListener(v -> filterProductsByCategory("67d1aa8b2ae6c07ce370088f"));
+        findViewById(R.id.btnthuocgiaidockhudoc).setOnClickListener(v -> filterProductsByCategory("67d40186b0aaf7c883554d6a"));
+        findViewById(R.id.btnmiengdancaoxoa).setOnClickListener(v -> filterProductsByCategory("67d40198b0aaf7c883554d6c"));
+        findViewById(R.id.btnthuocbovitamin).setOnClickListener(v -> filterProductsByCategory("67d401a0b0aaf7c883554d6e"));
+        findViewById(R.id.btnthuocgiamdauhasot).setOnClickListener(v -> filterProductsByCategory("67d401a8b0aaf7c883554d70"));
+        findViewById(R.id.btnthuockhangsinhkhangnam).setOnClickListener(v -> filterProductsByCategory("67d401aeb0aaf7c883554d72"));
+        findViewById(R.id.btnthuochethankinh).setOnClickListener(v -> filterProductsByCategory("67d401b3b0aaf7c883554d74"));
 
     }
     private void loadAllProducts() {

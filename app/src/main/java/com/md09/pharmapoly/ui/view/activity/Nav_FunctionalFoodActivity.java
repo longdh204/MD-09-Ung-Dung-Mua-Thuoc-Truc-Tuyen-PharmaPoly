@@ -37,12 +37,12 @@ public class Nav_FunctionalFoodActivity extends AppCompatActivity {
     private final List<Product> allProducts = new ArrayList<>();
     private int loadedCategoryCount = 0;
     private final List<String> categoryIds = Arrays.asList(
-            "67ad913c062d69fa665f2794", // vitamin & khoáng chất
-            "67b31e15dc1bbe3d9987e226", // sinh lý & nội tiết tố
-            "67cea99bcc0919474360506a", // Cải thiện tăng cường chức năng
-            "67b31e2ddc1bbe3d9987e22a", // Hỗ trợ điều trị
-            "67ad9163062d69fa665f279a", // Hỗ trợ tiêu hóa
-            "67ad912f062d69fa665f2792"  // Thần kinh não
+            "67d3dd545a228bc7cc5bb8eb", // vitamin & khoáng chất
+            "67d3ff31b0aaf7c883554c55", // sinh lý & nội tiết tố
+            "67d3ff3fb0aaf7c883554c57", // Cải thiện tăng cường chức năng
+            "67d3ff46b0aaf7c883554c59", // Hỗ trợ điều trị
+            "67d3ff4cb0aaf7c883554c5b", // Hỗ trợ tiêu hóa
+            "67d3ff56b0aaf7c883554c5d"  // Thần kinh não
     );
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +56,12 @@ public class Nav_FunctionalFoodActivity extends AppCompatActivity {
         loadAllProducts();
 
         // Ánh xạ các button từ layout
-        findViewById(R.id.btnvitamin).setOnClickListener(v -> filterProductsByCategory("67ad913c062d69fa665f2794"));
-        findViewById(R.id.btnsinhlynoitiet).setOnClickListener(v -> filterProductsByCategory("67b31e15dc1bbe3d9987e226"));
-        findViewById(R.id.btncaithientangcuong).setOnClickListener(v -> filterProductsByCategory("67cea99bcc0919474360506a"));
-        findViewById(R.id.btnhotrodieutri).setOnClickListener(v -> filterProductsByCategory("67b31e2ddc1bbe3d9987e22a"));
-        findViewById(R.id.btnhotrotieuhoa).setOnClickListener(v -> filterProductsByCategory("67ad9163062d69fa665f279a"));
-        findViewById(R.id.btnthankinhnao).setOnClickListener(v -> filterProductsByCategory("67ad912f062d69fa665f2792"));
+        findViewById(R.id.btnvitamin).setOnClickListener(v -> filterProductsByCategory("67d3dd545a228bc7cc5bb8eb"));
+        findViewById(R.id.btnsinhlynoitiet).setOnClickListener(v -> filterProductsByCategory("67d3ff31b0aaf7c883554c55"));
+        findViewById(R.id.btncaithientangcuong).setOnClickListener(v -> filterProductsByCategory("67d3ff3fb0aaf7c883554c57"));
+        findViewById(R.id.btnhotrodieutri).setOnClickListener(v -> filterProductsByCategory("67d3ff46b0aaf7c883554c59"));
+        findViewById(R.id.btnhotrotieuhoa).setOnClickListener(v -> filterProductsByCategory("67d3ff4cb0aaf7c883554c5b"));
+        findViewById(R.id.btnthankinhnao).setOnClickListener(v -> filterProductsByCategory("67d3ff56b0aaf7c883554c5d"));
     }
 
     private void loadAllProducts() {

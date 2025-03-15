@@ -32,14 +32,14 @@ public class Nav_Personalcare extends AppCompatActivity {
     private final List<Product> allProducts = new ArrayList<>();
     private int loadedCategoryCount = 0;
     private final List<String> categoryIds = Arrays.asList(
-            "67d1ab0f2ae6c07ce3700893", // hỗ trợ tình dục
-            "67d1ab652ae6c07ce370089c", // Thực phẩm đồ uống
-            "67d1ab282ae6c07ce3700895", // Đồ dùng gia đình
-            "67d1abaf2ae6c07ce37008a0", // Chăm sóc răng miệng
-            "67d1ab412ae6c07ce3700898", // Tinh dầu các loại
-            "67d1ab832ae6c07ce370089e",  // Hàng tổng hợp
-            "67d1ab542ae6c07ce370089a", // Vệ sinh cá nhân
-            "67d1abc32ae6c07ce37008a2"  // Thiết bị làm đẹp hạ sốt
+            "67d40297b0aaf7c883554d76", // hỗ trợ tình dục
+            "67d4029db0aaf7c883554d78", // Thực phẩm đồ uống
+            "67d402a3b0aaf7c883554d7a", // Đồ dùng gia đình
+            "67d402a9b0aaf7c883554d7c", // Chăm sóc răng miệng
+            "67d402afb0aaf7c883554d7e", // Tinh dầu các loại
+            "67d402b9b0aaf7c883554d82",  // Hàng tổng hợp
+            "67d402b5b0aaf7c883554d80", // Vệ sinh cá nhân
+            "67d402c0b0aaf7c883554d84"  // Thiết bị làm đẹp hạ sốt
     );
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +53,14 @@ public class Nav_Personalcare extends AppCompatActivity {
         loadAllProducts();
 
         // Ánh xạ các button từ layout
-        findViewById(R.id.btnhotrotinhduc).setOnClickListener(v -> filterProductsByCategory("67d1ab0f2ae6c07ce3700893"));
-        findViewById(R.id.btndodunggiadinh).setOnClickListener(v -> filterProductsByCategory("67d1ab652ae6c07ce370089c"));
-        findViewById(R.id.btntinhdaucacloai).setOnClickListener(v -> filterProductsByCategory("67d1ab282ae6c07ce3700895"));
-        findViewById(R.id.btnvesinhcanhan).setOnClickListener(v -> filterProductsByCategory("67d1abaf2ae6c07ce37008a0"));
-        findViewById(R.id.btnthucphamdouong).setOnClickListener(v -> filterProductsByCategory("67d1ab412ae6c07ce3700898"));
-        findViewById(R.id.btnchamsocrangmieng).setOnClickListener(v -> filterProductsByCategory("67d1ab832ae6c07ce370089e"));
-        findViewById(R.id.btnhangtonghop).setOnClickListener(v -> filterProductsByCategory("67d1ab542ae6c07ce370089a"));
-        findViewById(R.id.btnthietbilamdep).setOnClickListener(v -> filterProductsByCategory("67d1abc32ae6c07ce37008a2"));
+        findViewById(R.id.btnhotrotinhduc).setOnClickListener(v -> filterProductsByCategory("67d40297b0aaf7c883554d76"));
+        findViewById(R.id.btndodunggiadinh).setOnClickListener(v -> filterProductsByCategory("67d402a3b0aaf7c883554d7a"));
+        findViewById(R.id.btntinhdaucacloai).setOnClickListener(v -> filterProductsByCategory("67d402afb0aaf7c883554d7e"));
+        findViewById(R.id.btnvesinhcanhan).setOnClickListener(v -> filterProductsByCategory("67d402b5b0aaf7c883554d80"));
+        findViewById(R.id.btnthucphamdouong).setOnClickListener(v -> filterProductsByCategory("67d4029db0aaf7c883554d78"));
+        findViewById(R.id.btnchamsocrangmieng).setOnClickListener(v -> filterProductsByCategory("67d402a9b0aaf7c883554d7c"));
+        findViewById(R.id.btnhangtonghop).setOnClickListener(v -> filterProductsByCategory("67d402b9b0aaf7c883554d82"));
+        findViewById(R.id.btnthietbilamdep).setOnClickListener(v -> filterProductsByCategory("67d402c0b0aaf7c883554d84"));
 
     }
     private void loadAllProducts() {

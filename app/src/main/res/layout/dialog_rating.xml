@@ -3,10 +3,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-    android:padding="16dp"
-    android:layout_margin="0dp"
-        android:background="@drawable/dialog_rounded_corners"
-    >
+        android:padding="16dp"
+        android:layout_margin="0dp"
+        android:background="@drawable/dialog_rounded_corners">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -90,8 +89,8 @@
         android:padding="10dp"
         android:fontFamily="@font/overpass_regular"
         android:layout_gravity="start"
-        android:layout_marginTop="15dp"
-        />
+        android:layout_marginTop="15dp"/>
+
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="match_parent"
@@ -101,7 +100,5 @@
         android:backgroundTint="#FA4D4D"
         android:padding="10dp"
         android:fontFamily="@font/overpass_regular"
-        android:layout_gravity="start"
-        />
-
+        android:layout_gravity="start"/>
     </LinearLayout>

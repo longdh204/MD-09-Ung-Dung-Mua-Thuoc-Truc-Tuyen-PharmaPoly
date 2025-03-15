@@ -23,6 +23,7 @@ import com.md09.pharmapoly.Adapters.SliderAdapter;
 import com.md09.pharmapoly.Models.Category;
 import com.md09.pharmapoly.Models.PageData;
 import com.md09.pharmapoly.Models.Product;
+import com.md09.pharmapoly.ui.view.activity.ChatbotActivity;
 import com.md09.pharmapoly.ui.view.activity.Nav_FunctionalFoodActivity;
 import com.md09.pharmapoly.ui.view.activity.Nav_Medical_Equiment;
 import com.md09.pharmapoly.ui.view.activity.Nav_Medicine;
@@ -160,19 +161,32 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), "Thiết bị y tế", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), Nav_Medical_Equiment.class));
                 return true;
-            }else if (id == R.id.nav_sick) {
-                Toast.makeText(getContext(), "Bệnh", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getContext(), NotificationsActivity.class));
-                return true;
             }else if (id == R.id.nav_personalcare) {
                 Toast.makeText(getContext(), "Chăm sóc cá nhân", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), Nav_Personalcare.class));
+                return true;
+            }else if (id == R.id.nav_chatbot) {
+                Toast.makeText(getContext(), "ChatBot", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), ChatbotActivity.class));
                 return true;
             }
 
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
+        // Lấy ImageView từ layout
+        ImageView circleImage = view.findViewById(R.id.circleImage);
+
+        // Set OnClickListener cho ImageView
+        circleImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chuyển đến Activity mới khi nhấn vào cục tròn ảnh
+                Intent intent = new Intent(getActivity(), ChatbotActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 

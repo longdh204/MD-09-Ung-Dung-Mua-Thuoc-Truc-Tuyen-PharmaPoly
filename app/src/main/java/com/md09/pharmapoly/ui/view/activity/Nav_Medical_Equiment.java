@@ -32,10 +32,10 @@ public class Nav_Medical_Equiment extends AppCompatActivity {
     private final List<Product> allProducts = new ArrayList<>();
     private int loadedCategoryCount = 0;
     private final List<String> categoryIds = Arrays.asList(
-            "67d1abcf2ae6c07ce37008a4", // dụng cụ y tế
-            "67d1ac022ae6c07ce37008a7", // dụng cụ sơ cứu
-            "67d1ac182ae6c07ce37008aa", // Dụng cụ theo dõi
-            "67d1ac232ae6c07ce37008ac" // Khẩu trang
+            "67d403bbb0aaf7c883554d86", // dụng cụ y tế
+            "67d403cdb0aaf7c883554d8a", // dụng cụ sơ cứu
+            "67d403c4b0aaf7c883554d88", // Dụng cụ theo dõi
+            "67d403d2b0aaf7c883554d8c" // Khẩu trang
     );
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +49,10 @@ public class Nav_Medical_Equiment extends AppCompatActivity {
         loadAllProducts();
 
         // Ánh xạ các button từ layout
-        findViewById(R.id.btndungcuyte).setOnClickListener(v -> filterProductsByCategory("67d1abcf2ae6c07ce37008a4"));
-        findViewById(R.id.btndungcusocuu).setOnClickListener(v -> filterProductsByCategory("67d1ac022ae6c07ce37008a7"));
-        findViewById(R.id.btndungcutheodoi).setOnClickListener(v -> filterProductsByCategory("67d1ac182ae6c07ce37008aa"));
-        findViewById(R.id.btnkhautrang).setOnClickListener(v -> filterProductsByCategory("67d1ac232ae6c07ce37008ac"));
+        findViewById(R.id.btndungcuyte).setOnClickListener(v -> filterProductsByCategory("67d403bbb0aaf7c883554d86"));
+        findViewById(R.id.btndungcusocuu).setOnClickListener(v -> filterProductsByCategory("67d403cdb0aaf7c883554d8a"));
+        findViewById(R.id.btndungcutheodoi).setOnClickListener(v -> filterProductsByCategory("67d403c4b0aaf7c883554d88"));
+        findViewById(R.id.btnkhautrang).setOnClickListener(v -> filterProductsByCategory("67d403d2b0aaf7c883554d8c"));
     }
     private void loadAllProducts() {
         String token = "Bearer " + new SharedPrefHelper(this).getToken();

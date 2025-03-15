@@ -57,4 +57,6 @@ dependencies {
     implementation ("androidx.cardview:cardview:1.0.0")
     implementation("com.google.android.gms:play-services-safetynet:18.0.1")
     implementation("com.google.android.recaptcha:recaptcha:18.4.0")
+    implementation ("com.google.firebase:firebase-database:20.1.0")
+
 }

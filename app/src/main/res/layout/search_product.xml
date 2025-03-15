@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/overpass_regular"
+            android:text="Tìm kiếm"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_back"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Search Bar -->
+
+    <!-- Text View for Popular Search -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchProduct"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/border_rounded_product"
+        android:iconifiedByDefault="false"
+        android:queryHint="Tìm Kiếm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <TextView
+        android:id="@+id/labelPopularSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tra cứu nổi bật"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/searchProduct"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Horizontal ScrollView for popular search tags -->
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/labelPopularSearch">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <!-- Search Tags -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/tracuu1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tra cứu nổi bật 1"
+                android:layout_marginEnd="8dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:background="@drawable/rounded_button_menu"
+                android:textColor="@android:color/black"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/tracuu2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tra cứu nổi bật 2"
+                android:layout_marginEnd="8dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:background="@drawable/rounded_button_menu"
+                android:textColor="@android:color/black"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/tracuu3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tra cứu nổi bật 3"
+                android:layout_marginEnd="8dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:background="@drawable/rounded_button_menu"
+                android:textColor="@android:color/black"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/tracuu4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tra cứu nôir bật 4"
+                android:layout_marginEnd="8dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:background="@drawable/rounded_button_menu"
+                android:textColor="@android:color/black"/>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView1">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Search Tags -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/tracuu5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/rounded_button_menu"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="tra cứu nổi bật 5"
+                android:textColor="@android:color/black" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/tracuu6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/rounded_button_menu"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="tra cứu nổi bật 6"
+                android:textColor="@android:color/black" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/tracuu7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/rounded_button_menu"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="tra cứu nổi bật 7"
+                android:textColor="@android:color/black" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/tracuu8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/rounded_button_menu"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="tra cứu nổi bật 8"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+    </HorizontalScrollView>
+    <!-- RecyclerView for displaying search results -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewKetQuaTimKiem"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

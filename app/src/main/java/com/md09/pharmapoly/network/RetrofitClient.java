@@ -34,4 +34,13 @@ public class RetrofitClient {
     public ApiService callAPI() {
         return requestInterface;
     }
+    public static ApiService getApiService() {
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl("https://api.openai.com/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit.create(ApiService.class);
+    }
 }
