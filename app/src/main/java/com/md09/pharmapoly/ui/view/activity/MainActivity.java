@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottom_navigation_main;
     private ViewPagerBottomNavigationMainAdapter bottom_navigation_main_adapter;
     private ViewPager2 view_pager_main;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +28,12 @@ public class MainActivity extends AppCompatActivity {
         initUI();
         SetupBottomNavigation();
     }
+
     private void SetupBottomNavigation() {
         view_pager_main.setAdapter(bottom_navigation_main_adapter);
+
+        // Disable swipe functionality of ViewPager2
+        view_pager_main.setUserInputEnabled(false); // This line disables swipe gesture
 
         bottom_navigation_main.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -36,21 +41,22 @@ public class MainActivity extends AppCompatActivity {
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.home) {
-                    view_pager_main.setCurrentItem(0, true);
+                    view_pager_main.setCurrentItem(0, false); // Switch to Home tab
                     return true;
                 } else if (itemId == R.id.notification) {
-                    view_pager_main.setCurrentItem(1, true);
+                    view_pager_main.setCurrentItem(1, false); // Switch to Notification tab
                     return true;
                 } else if (itemId == R.id.cart) {
-                    view_pager_main.setCurrentItem(2, true);
+                    view_pager_main.setCurrentItem(2, false); // Switch to Cart tab
                     return true;
                 } else if (itemId == R.id.profile) {
-                    view_pager_main.setCurrentItem(3, true);
+                    view_pager_main.setCurrentItem(3, false); // Switch to Profile tab
                     return true;
                 }
                 return false;
             }
         });
+
         view_pager_main.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -72,10 +78,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private void initUI() {
         bottom_navigation_main = findViewById(R.id.bottomNavigationMain);
         view_pager_main = findViewById(R.id.viewPagerMain);
         bottom_navigation_main_adapter = new ViewPagerBottomNavigationMainAdapter(this);
-
     }
 }
