@@ -192,11 +192,10 @@
                             android:layout_marginTop="15dp"
                             android:layout_marginBottom="90dp"/>
                     </LinearLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </RelativeLayout>
         </ScrollView>
-
-
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation_view"
             android:layout_width="wrap_content"

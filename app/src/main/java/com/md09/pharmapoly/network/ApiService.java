@@ -1,6 +1,8 @@
 package com.md09.pharmapoly.network;
 
 import com.md09.pharmapoly.Models.Brand;
+import com.md09.pharmapoly.Models.ChatRequest;
+import com.md09.pharmapoly.Models.ChatResponse;
 import com.md09.pharmapoly.Models.PageData;
 import com.md09.pharmapoly.Models.ProductReview;
 import com.md09.pharmapoly.Models.Question;
@@ -15,6 +17,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -22,6 +25,12 @@ import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 public interface ApiService {
+    @Headers({
+            "Content-Type: application/json",
+            "Authorization: Bearer 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"
+    })
+    @POST("v1/chat/completions")
+    Call<ChatResponse> getChatResponse(@Body ChatRequest request);
     @GET("category/{id}/products")
     Call<ApiResponse<PageData<List<Product>>>> getProductsByCategory(
             @Path("id") String categoryId,

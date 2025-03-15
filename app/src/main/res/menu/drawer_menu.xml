@@ -29,8 +29,8 @@
         android:checkable="true" />
 
     <item
-        android:id="@+id/nav_sick"
-        android:title="Bệnh"
+        android:id="@+id/nav_chatbot"
+        android:title="ChatBot"
         android:checkable="true" />
 
     <item
