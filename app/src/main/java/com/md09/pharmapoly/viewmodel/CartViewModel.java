@@ -1,5 +1,7 @@
 package com.md09.pharmapoly.viewmodel;
 
+import static com.md09.pharmapoly.utils.Constants.PRODUCT_ADDED_TO_CART_KEY;
+
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
@@ -25,7 +27,7 @@ public class CartViewModel extends ViewModel {
     }
 
     public void FetchCartData(Context context) {
-        new SharedPrefHelper(context).resetProductAddedToCart();
+        new SharedPrefHelper(context).resetBooleanState(PRODUCT_ADDED_TO_CART_KEY);
         retrofitClient = new RetrofitClient();
         new Thread(() -> {
             retrofitClient.callAPI().cart("Bearer " + new SharedPrefHelper(context).getToken())

@@ -1,5 +1,7 @@
 package com.md09.pharmapoly.ui.view.activity;
 
+import static com.md09.pharmapoly.utils.Constants.PRODUCT_ADDED_TO_CART_KEY;
+
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        if (new SharedPrefHelper(this).isProductAddedToCart()) {
+        if (new SharedPrefHelper(this).getBooleanState(PRODUCT_ADDED_TO_CART_KEY,false)) {
             cartViewModel.FetchCartData(this);
         }
     }

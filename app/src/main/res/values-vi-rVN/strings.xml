@@ -93,4 +93,12 @@
     <string name="add_to_cart">Thêm vào giỏ hàng</string>
     <string name="buy_now">Mua ngay</string>
     <string name="cart_add_success">Thêm sản phẩm vào giỏ hàng thành công</string>
+    <string name="change_password">Đổi mật khẩu</string>
+    <string name="change_avatar">Thay đổi ảnh đại diện</string>
+    <string name="full_name">Họ và tên</string>
+    <string name="male">Nam</string>
+    <string name="female">Nữ</string>
+    <string name="other">Khác</string>
+    <string name="date_of_birth">Ngày sinh</string>
+    <string name="shipping_phone">Số điện thoại nhận hàng</string>
 </resources>

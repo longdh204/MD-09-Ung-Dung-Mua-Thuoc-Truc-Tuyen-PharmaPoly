@@ -149,9 +149,6 @@
             android:name=".ui.view.activity.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.view.activity.ProfileOptionsActivity"
-            android:exported="true" />
-        <activity
             android:name=".ui.view.activity.ProfileUpdate"
             android:exported="true" />
     </application>

@@ -15,6 +15,7 @@ import com.md09.pharmapoly.data.model.User;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -24,8 +25,10 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
@@ -130,11 +133,17 @@ public interface ApiService {
     Call<ApiResponse<Void>>
     createAccount(@Body RequestBody request);
 
+    @Multipart
     @PUT("user/update-profile")
-    Call<ApiResponse<User>>
-    updateProfile(
+    Call<ApiResponse<User>> updateProfile(
             @Header("Authorization") String token,
-            @Body RequestBody request);
+            @Part MultipartBody.Part avatar,
+            @Part("full_name") RequestBody fullName,
+            @Part("phone_number") RequestBody phoneNumber,
+            @Part("gender") RequestBody gender,
+            @Part("date_of_birth") RequestBody dateOfBirth
+    );
+
 
     @PUT("user/change-password")
     Call<ApiResponse<Void>>

@@ -92,4 +92,12 @@
     <string name="add_to_cart">Add to Cart</string>
     <string name="buy_now">Buy Now</string>
     <string name="cart_add_success">Product added to cart successfully</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_avatar">Change Profile Picture</string>
+    <string name="full_name">Full Name</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="shipping_phone">Shipping Phone Number</string>
 </resources>

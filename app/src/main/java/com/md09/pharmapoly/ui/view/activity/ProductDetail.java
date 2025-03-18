@@ -1,5 +1,7 @@
 package com.md09.pharmapoly.ui.view.activity;
 
+import static com.md09.pharmapoly.utils.Constants.PRODUCT_ADDED_TO_CART_KEY;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -213,7 +215,7 @@ public class ProductDetail extends AppCompatActivity {
                         purchaseBottomSheet.dismiss();
                         ProgressDialogHelper.hideLoading();
                         if (response.isSuccessful() && response.body().getStatus() == 200) {
-                            new SharedPrefHelper(ProductDetail.this).setProductAddedToCart(true);
+                            new SharedPrefHelper(ProductDetail.this).setBooleanState(PRODUCT_ADDED_TO_CART_KEY,true);
                             isProductAdded = true;
                             CartSuccessBottomSheet bottomSheet = CartSuccessBottomSheet.newInstance();
                             bottomSheet.show(getSupportFragmentManager(), "CartSuccessBottomSheet");
