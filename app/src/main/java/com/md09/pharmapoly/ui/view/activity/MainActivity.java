@@ -1,5 +1,6 @@
 package com.md09.pharmapoly.ui.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -9,8 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 import com.md09.pharmapoly.R;
+import com.md09.pharmapoly.contact_support;
 import com.md09.pharmapoly.ui.components.ViewPagerBottomNavigationMainAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,13 +21,17 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottom_navigation_main;
     private ViewPagerBottomNavigationMainAdapter bottom_navigation_main_adapter;
     private ViewPager2 view_pager_main;
-
+    private FloatingActionButton btn_fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.main_activity);
-
+        btn_fab=findViewById(R.id.fab1);
+        btn_fab.setOnClickListener(v ->{
+            Intent intent = new Intent(MainActivity.this, contact_support.class);
+            startActivity(intent);
+        });
         initUI();
         SetupBottomNavigation();
     }

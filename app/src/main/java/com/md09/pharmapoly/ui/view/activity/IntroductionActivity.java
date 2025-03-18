@@ -1,4 +1,4 @@
-package com.md09.pharmapoly;
+package com.md09.pharmapoly.ui.view.activity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -9,17 +9,17 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class payment_card_manager extends AppCompatActivity {
-    private ImageView btnBackPayment;
+import com.md09.pharmapoly.R;
+
+public class IntroductionActivity extends AppCompatActivity {
+    private ImageView btnBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_payment_card_manager);
-        btnBackPayment=findViewById(R.id.btn_back_payment);
-        btnBackPayment.setOnClickListener(v -> {
-            finish();
-        });
+        setContentView(R.layout.activity_introduction);
+        btnBack=findViewById(R.id.backBtn);
+        btnBack.setOnClickListener(v -> finish());
 
     }
 }

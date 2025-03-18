@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_marginTop="20dp"
     android:background="@color/white"
     tools:context=".AddAddress">
 
@@ -17,6 +18,7 @@
         <!-- ImageView giả lập bản đồ -->
 
         <!-- Nút back -->
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -25,13 +27,13 @@
 
         <ImageView
             android:id="@+id/backButton"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="top|start"
             android:layout_margin="16dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/back"
-            android:tint="@color/black"
-            android:layout_gravity="top|start" />
+            app:tint="@color/black" />
 
         <!-- Icon định vị -->
         <ImageView

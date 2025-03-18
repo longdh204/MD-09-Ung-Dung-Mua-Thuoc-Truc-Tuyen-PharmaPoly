@@ -33,9 +33,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".chatbot"
+            android:name=".ui.view.activity.IntroductionActivity"
             android:exported="false" />
-        <!-- <activity -->
+        <activity
+            android:name=".chatbot"
+            android:exported="false" /> <!-- <activity -->
         <!-- android:name=".ui.view.activity.functional_food" -->
         <!-- android:exported="false" /> -->
         <activity
@@ -92,8 +94,9 @@
         <activity
             android:name=".ui.view.activity.Nav_Medical_Equiment"
             android:exported="true" />
-        <activity android:name=".ui.view.activity.ChatbotActivity"
-            android:exported="true"/>
+        <activity
+            android:name=".ui.view.activity.ChatbotActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.view.activity.Nav_Personalcare"
             android:exported="true" />

@@ -1,6 +1,10 @@
 package com.md09.pharmapoly.network;
 
 import com.md09.pharmapoly.Models.Brand;
+import com.md09.pharmapoly.Models.Cart;
+import com.md09.pharmapoly.Models.CartItem;
+import com.md09.pharmapoly.Models.ChatRequest;
+import com.md09.pharmapoly.Models.ChatResponse;
 import com.md09.pharmapoly.Models.PageData;
 import com.md09.pharmapoly.Models.ProductReview;
 import com.md09.pharmapoly.Models.Question;
@@ -9,12 +13,17 @@ import com.md09.pharmapoly.Models.Product;
 import com.md09.pharmapoly.data.model.User;
 
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;

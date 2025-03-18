@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_marginTop="20dp"
     android:padding="16dp"
     tools:context=".payment_card_manager_empty">
 
@@ -15,14 +16,14 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/backBtn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/back" />
+            android:id="@+id/btn_back_payment_empty"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="top|start"
+            android:layout_margin="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/back"
+            app:tint="@color/black" />
 
         <TextView
             android:id="@+id/textView"
@@ -33,9 +34,9 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/backBtn"
+            app:layout_constraintStart_toEndOf="@id/btn_back_payment_empty"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/backBtn" />
+            app:layout_constraintBottom_toBottomOf="@id/btn_back_payment_empty" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Nội dung chính -->
@@ -73,12 +74,12 @@
     </LinearLayout>
 
     <!-- Nút mua sắm -->
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/payButton"
+    <Button
+        android:id="@+id/btn_add_payment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/blue"
         android:text="Thêm thẻ"
         android:textSize="18sp"
         android:textStyle="bold"

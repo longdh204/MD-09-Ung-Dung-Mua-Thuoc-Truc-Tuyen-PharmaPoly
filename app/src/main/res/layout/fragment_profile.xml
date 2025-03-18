@@ -274,10 +274,12 @@
 
                         <LinearLayout
                             android:paddingVertical="12dp"
+                            android:id="@+id/btn_payment"
                             android:gravity="center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            tools:ignore="InvalidId">
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
@@ -334,6 +336,7 @@
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:id="@+id/btn_introduction"
                             android:paddingVertical="12dp"
                             android:gravity="center_vertical"
                             android:layout_width="match_parent"
