@@ -12,13 +12,14 @@ public class CartItem {
     public CartItem() {
     }
 
-    public CartItem(String _id, String cart_id, String product_id, int quantity, int price, int total_price) {
-        this._id = _id;
+    public CartItem(String cart_id, String product_id, int quantity, int price, Product product) {
+        this._id = "";
         this.cart_id = cart_id;
         this.product_id = product_id;
         this.quantity = quantity;
         this.price = price;
-        this.total_price = total_price;
+        this.total_price = quantity * price;
+        this.product = product;
     }
 
     public boolean isSelected() {

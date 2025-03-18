@@ -22,12 +22,15 @@
     <color name="blue_CE4">#306CE4</color>
     <color name="blue_5E7">#52E5E7</color>
     <color name="blue_CB7">#130CB7</color>
+    <color name="blue_4FF">#D3E4FF</color>
     <color name="red_757">#EB5757</color>
     <color name="black_333">#333333</color>
     <color name="gray_6f4">#F6F6F4</color>
     <color name="gray_DCD">#CDCDCD</color>
     <color name="gray_E9E">#9E9E9E</color>
     <color name="gray_6F4">#F6F6F4</color>
+    <color name="green_754">#198754</color>
+    <color name="yellow_a20">#ffaa20</color>
 
     <color name="transparent">#00000000</color>
 </resources>

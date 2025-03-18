@@ -86,4 +86,11 @@
     <string name="all">Tất cả</string>
     <string name="total_payment">Tổng thanh toán</string>
     <string name="purchase">Mua hàng</string>
+    <string name="select_quantity_unit">Chọn số lượng, đơn vị</string>
+    <string name="quantity">Số lượng</string>
+    <string name="subtotal">Tạm tính</string>
+    <string name="you_save">Tiết kiệm được</string>
+    <string name="add_to_cart">Thêm vào giỏ hàng</string>
+    <string name="buy_now">Mua ngay</string>
+    <string name="cart_add_success">Thêm sản phẩm vào giỏ hàng thành công</string>
 </resources>

@@ -85,4 +85,11 @@
     <string name="all">All</string>
     <string name="total_payment">Total Payment</string>
     <string name="purchase">Purchase</string>
+    <string name="select_quantity_unit">Select Quantity, Unit</string>
+    <string name="quantity">Quantity</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="you_save">You save</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="buy_now">Buy Now</string>
+    <string name="cart_add_success">Product added to cart successfully</string>
 </resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="24dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:background="@drawable/custom_input"
+        android:backgroundTint="#1B2735"
+        android:gravity="center"
+        android:paddingVertical="16dp"
+        android:paddingHorizontal="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtMessage"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:minLines="1"
+            android:paddingTop="6dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="10dp"
+            android:text="@string/cart_add_success"
+            android:textColor="@color/white_FFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:backgroundTint="@color/green_754"
+            android:background="@drawable/ic_done"/>
+    </LinearLayout>
+</LinearLayout>

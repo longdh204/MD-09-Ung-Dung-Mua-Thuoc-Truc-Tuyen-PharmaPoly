@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.md09.pharmapoly.Adapters.ProductAdapter;
 import com.md09.pharmapoly.Adapters.QuestionAdapter;
 import com.md09.pharmapoly.Adapters.ReviewAdapter;
+import com.md09.pharmapoly.Models.CartItem;
 import com.md09.pharmapoly.Models.Product;
 import com.md09.pharmapoly.Models.ProductReview;
 import com.md09.pharmapoly.Models.Question;
@@ -32,7 +34,10 @@ import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.network.ApiClient;
 import com.md09.pharmapoly.network.ApiService;
+import com.md09.pharmapoly.network.RetrofitClient;
+import com.md09.pharmapoly.utils.CartSuccessBottomSheet;
 import com.md09.pharmapoly.utils.ProgressDialogHelper;
+import com.md09.pharmapoly.utils.PurchaseBottomSheet;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.squareup.picasso.Picasso;
 
@@ -52,7 +57,7 @@ public class ProductDetail extends AppCompatActivity {
     private RecyclerView userReviewRecyclerView;
     private List<ProductReview> reviewList;
     private String token, productId;
-    private ApiService apiService;
+    private RetrofitClient retrofitClient;
     private ProgressBar progress5, progress4, progress3, progress2, progress1;
     private TextView percentage5, percentage4, percentage3, percentage2, percentage1;
     private ReviewAdapter reviewAdapter;
@@ -63,7 +68,9 @@ public class ProductDetail extends AppCompatActivity {
     private QuestionAdapter questionAdapter;
     private List<Question> questionList;
     private Button showMoreReviewsButton;
-
+    private LinearLayout btn_purchase;
+    private boolean isProductAdded = false;
+    private PurchaseBottomSheet purchaseBottomSheet;
     @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +78,7 @@ public class ProductDetail extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_product_detail);
 
+        btn_purchase = findViewById(R.id.btn_purchase);
         progress5 = findViewById(R.id.progress5);
         progress4 = findViewById(R.id.progress4);
         progress3 = findViewById(R.id.progress3);
@@ -178,9 +186,56 @@ public class ProductDetail extends AppCompatActivity {
             List<ProductReview> reviewList = new ArrayList<>();
             startActivity(intent);
         });
+
+
+        btn_purchase.setOnClickListener(v -> {
+
+            purchaseBottomSheet = new PurchaseBottomSheet(
+                    product,
+                    new PurchaseBottomSheet.AddToCartListener() {
+                        @Override
+                        public void onAddToCart(CartItem cartItem) {
+                            AddProductToCart(cartItem);
+                        }
+                    });
+            purchaseBottomSheet.show(getSupportFragmentManager(), "QuantitySelectionDialog");
+        });
     }
 
-    // hiển thị thanh theo % đánh giá
+    private void AddProductToCart(CartItem cartItem) {
+        ProgressDialogHelper.showLoading(this);
+        retrofitClient.callAPI().addProductToCart(
+                cartItem,
+                "Bearer " + new SharedPrefHelper(this).getToken())
+                .enqueue(new Callback<ApiResponse<CartItem>>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse<CartItem>> call, Response<ApiResponse<CartItem>> response) {
+                        purchaseBottomSheet.dismiss();
+                        ProgressDialogHelper.hideLoading();
+                        if (response.isSuccessful() && response.body().getStatus() == 200) {
+                            new SharedPrefHelper(ProductDetail.this).setProductAddedToCart(true);
+                            isProductAdded = true;
+                            CartSuccessBottomSheet bottomSheet = CartSuccessBottomSheet.newInstance();
+                            bottomSheet.show(getSupportFragmentManager(), "CartSuccessBottomSheet");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponse<CartItem>> call, Throwable t) {
+                        ProgressDialogHelper.hideLoading();
+                        purchaseBottomSheet.dismiss();
+                    }
+                });
+    }
+    @Override
+    public void finish() {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("isProductAdded", isProductAdded);
+        setResult(RESULT_OK, resultIntent);
+        super.finish();
+    }
+
+
     private void updateRatings(int totalReviews, int rating5, int rating4, int rating3, int rating2, int rating1) {
         if (totalReviews == 0) {
             Log.d("ProductDetail", "No reviews to update progress.");
@@ -242,6 +297,8 @@ public class ProductDetail extends AppCompatActivity {
         productReviewCount2 = findViewById(R.id.productReviewCount2);
         productCategory = findViewById(R.id.productCategory);
         productImage = findViewById(R.id.productImage);
+
+        retrofitClient = new RetrofitClient();
     }
 
     // lấy product details

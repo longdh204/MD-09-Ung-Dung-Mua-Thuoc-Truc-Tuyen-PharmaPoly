@@ -99,8 +99,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             holder.btn_increase_quantity.setOnClickListener(v -> {
                 if (cartItem.getQuantity() < MAX_QUANTITY_PER_PRODUCT) {
                     UpdateCartItemQuantity(cartItem, cartItem.getQuantity() + 1, holder);
-                } else {
-                    cartItemListener.onItemDeleted(cartItem);
                 }
             });
             holder.btn_remove.setOnClickListener(v-> {

@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,11 +31,13 @@ import com.md09.pharmapoly.network.RetrofitClient;
 import com.md09.pharmapoly.utils.CartItemListener;
 import com.md09.pharmapoly.utils.DialogHelper;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
+import com.md09.pharmapoly.viewmodel.CartViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -89,36 +94,46 @@ public class CartFragment extends Fragment {
     private RecyclerView rcv_cart_item;
     private CartAdapter cartAdapter;
     private CardView btn_purchase;
-    private TextView tv_price,tv_purchase;
+    private TextView tv_price, tv_purchase;
     private CheckBox cb_selected_all_item;
-
     private Cart cart;
+    private CartViewModel cartViewModel;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
+        requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         InitUI(view);
 
         SetUpRecyclerView();
 
-        retrofitClient.callAPI().cart("Bearer " + new SharedPrefHelper(getContext()).getToken()).enqueue(new Callback<ApiResponse<Cart>>() {
-            @Override
-            public void onResponse(Call<ApiResponse<Cart>> call, Response<ApiResponse<Cart>> response) {
-                if (response.isSuccessful()) {
-                    if (response.body().getStatus() == 200) {
-                        cart = response.body().getData();
-                        cartAdapter.UpdateCart(cart);
-                    }
-                }
-            }
 
+        cartViewModel.GetCart().observe(getViewLifecycleOwner(), new Observer<Cart>() {
             @Override
-            public void onFailure(Call<ApiResponse<Cart>> call, Throwable t) {
-
+            public void onChanged(Cart cart) {
+                CartFragment.this.cart = cart;
+                cartAdapter.UpdateCart(cart);
             }
         });
+//        retrofitClient.callAPI().cart("Bearer " + new SharedPrefHelper(getContext()).getToken()).enqueue(new Callback<ApiResponse<Cart>>() {
+//            @Override
+//            public void onResponse(Call<ApiResponse<Cart>> call, Response<ApiResponse<Cart>> response) {
+//                if (response.isSuccessful()) {
+//                    if (response.body().getStatus() == 200) {
+//                        cart = response.body().getData();
+//                        cartAdapter.UpdateCart(cart);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ApiResponse<Cart>> call, Throwable t) {
+//
+//            }
+//        });
         cb_selected_all_item.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (cart != null && cart.getCartItems() != null) {
                 for (int i = 0; i < cart.getCartItems().size(); i++) {
@@ -170,37 +185,54 @@ public class CartFragment extends Fragment {
                     RemoveCartItem(cartItem.get_id());
                 });
     }
-    private void RemoveCartItem(String id) {
-        retrofitClient.callAPI().removeCartItem(
-                id,
-                "Bearer " + new SharedPrefHelper(getContext()).getToken()
-        ).enqueue(new Callback<ApiResponse<Cart>>() {
-            @Override
-            public void onResponse(Call<ApiResponse<Cart>> call, Response<ApiResponse<Cart>> response) {
-                if (response.isSuccessful()) {
-                    if (response.body().getStatus() == 200) {
-                        Cart updatedCart = response.body().getData();
 
-                        if (cart != null) {
-                            for (int i = 0; i < cart.getCartItems().size(); i++) {
-                                if (cart.getCartItems().get(i).get_id().equals(id)) {
-                                    cart.getCartItems().remove(i);
-                                    cartAdapter.notifyItemRemoved(i);
-                                    break;
-                                }
-                            }
-                        }
-                        CalculateTotalPrice();
+    private void RemoveCartItem(String id) {
+        Map<String, Boolean> selectedItems = new HashMap<>();
+        for (CartItem item : cart.getCartItems()) {
+            selectedItems.put(item.get_id(), item.isSelected());
+        }
+        cartViewModel.RemoveCartItem(getContext(), id, new Consumer<Cart>() {
+            @Override
+            public void accept(Cart cart) {
+                for (CartItem item : cart.getCartItems()) {
+                    if (selectedItems.containsKey(item.get_id())) {
+                        item.setSelected(selectedItems.get(item.get_id()));
                     }
                 }
-            }
-
-            @Override
-            public void onFailure(Call<ApiResponse<Cart>> call, Throwable t) {
-
+                CartFragment.this.cart = cart;
+                cartAdapter.UpdateCart(cart);
+                CalculateTotalPrice();
             }
         });
+//        retrofitClient.callAPI().removeCartItem(
+//                id,
+//                "Bearer " + new SharedPrefHelper(getContext()).getToken()
+//        ).enqueue(new Callback<ApiResponse<Cart>>() {
+//            @Override
+//            public void onResponse(Call<ApiResponse<Cart>> call, Response<ApiResponse<Cart>> response) {
+//                if (response.isSuccessful()) {
+//                    if (response.body().getStatus() == 200) {
+//                        Cart updatedCart = response.body().getData();
+//
+//                        for (CartItem item : updatedCart.getCartItems()) {
+//                            if (selectedItems.containsKey(item.get_id())) {
+//                                item.setSelected(selectedItems.get(item.get_id()));
+//                            }
+//                        }
+//                        cart = updatedCart;
+//                        cartAdapter.UpdateCart(cart);
+//                        CalculateTotalPrice();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ApiResponse<Cart>> call, Throwable t) {
+//
+//            }
+//        });
     }
+
     private void CalculateTotalPrice() {
         int totalPrice = 0;
         int selectedCount = 0;
@@ -214,6 +246,7 @@ public class CartFragment extends Fragment {
         tv_purchase.setText(baseText + " (" + selectedCount + ")");
         tv_price.setText(formatCurrency(totalPrice, "đ"));
     }
+
     private void UpdateCartItem(CartItem cartItem) {
         retrofitClient.callAPI().updateCartItem(
                 "Bearer " + new SharedPrefHelper(getContext()).getToken(),
@@ -244,7 +277,10 @@ public class CartFragment extends Fragment {
             }
         });
     }
+
     private void InitUI(View view) {
+        cartViewModel = new ViewModelProvider(requireActivity()).get(CartViewModel.class);
+
         retrofitClient = new RetrofitClient();
         rcv_cart_item = view.findViewById(R.id.rcv_cart_item);
 
@@ -252,6 +288,8 @@ public class CartFragment extends Fragment {
 
         tv_price = view.findViewById(R.id.tv_price);
         tv_purchase = view.findViewById(R.id.tv_purchase);
+        String baseText = getString(R.string.purchase);
+        tv_purchase.setText(baseText + " (0)");
 
         cb_selected_all_item = view.findViewById(R.id.cb_selected_all_item);
     }

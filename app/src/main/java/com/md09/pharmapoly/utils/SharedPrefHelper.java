@@ -1,5 +1,7 @@
 package com.md09.pharmapoly.utils;
 
+import static com.md09.pharmapoly.utils.Constants.CART_ID_KEY;
+import static com.md09.pharmapoly.utils.Constants.PRODUCT_ADDED_TO_CART_KEY;
 import static com.md09.pharmapoly.utils.Constants.REFRESH_TOKEN_KEY;
 import static com.md09.pharmapoly.utils.Constants.TOKEN_KEY;
 import static com.md09.pharmapoly.utils.Constants.USER_KEY;
@@ -39,6 +41,27 @@ public class SharedPrefHelper {
 
     public String getRefreshToken() {
         return sharedPreferences.getString(REFRESH_TOKEN_KEY, null);
+    }
+
+    public void saveCartId(String cartId) {
+        editor.putString(CART_ID_KEY, cartId);
+        editor.apply();
+    }
+
+    public String getCartId() {
+        return sharedPreferences.getString(CART_ID_KEY, null);
+    }
+    public void setProductAddedToCart(boolean isAdded) {
+        editor.putBoolean(PRODUCT_ADDED_TO_CART_KEY, isAdded);
+        editor.apply();
+    }
+
+    public boolean isProductAddedToCart() {
+        return sharedPreferences.getBoolean(PRODUCT_ADDED_TO_CART_KEY, false);
+    }
+    public void resetProductAddedToCart() {
+        editor.putBoolean(PRODUCT_ADDED_TO_CART_KEY, false);
+        editor.apply();
     }
     public void clearData() {
         editor.clear();

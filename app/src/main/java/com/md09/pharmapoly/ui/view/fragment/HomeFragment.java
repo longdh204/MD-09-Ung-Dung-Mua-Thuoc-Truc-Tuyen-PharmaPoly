@@ -1,11 +1,16 @@
 package com.md09.pharmapoly.ui.view.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
@@ -20,6 +25,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.md09.pharmapoly.Adapters.CategoryAdapter;
 import com.md09.pharmapoly.Adapters.ProductAdapter;
 import com.md09.pharmapoly.Adapters.SliderAdapter;
+import com.md09.pharmapoly.Models.Cart;
 import com.md09.pharmapoly.Models.Category;
 import com.md09.pharmapoly.Models.PageData;
 import com.md09.pharmapoly.Models.Product;
@@ -34,6 +40,7 @@ import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.network.RetrofitClient;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
+import com.md09.pharmapoly.viewmodel.CartViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +92,7 @@ public class HomeFragment extends Fragment {
     private CircleIndicator3 circleIndicator;
     private SharedPrefHelper sharedPrefHelper;
     private RetrofitClient retrofitClient;
-
+    private CartViewModel cartViewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -190,6 +197,24 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == 1001 && resultCode == Activity.RESULT_OK) {
+//            boolean isProductAdded = data.getBooleanExtra("isProductAdded", false);
+//            Toast.makeText(getContext(), isProductAdded + "", Toast.LENGTH_SHORT).show();
+//            if (isProductAdded) {
+//                Toast.makeText(getContext(), "Check A", Toast.LENGTH_SHORT).show();
+//                cartViewModel.FetchCartData(getContext());
+//            } else {
+//                Toast.makeText(getContext(), "Check B", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        }
+//    }
+
     private void SetupRecyclerView(View view) {
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2); // Hiển thị 2 cột
         recyclerView.setLayoutManager(layoutManager);
@@ -243,5 +268,7 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         viewPager2 = view.findViewById(R.id.viewPagerSlider);
         circleIndicator = view.findViewById(R.id.dotsIndicator);
+
+        cartViewModel = new ViewModelProvider(requireActivity()).get(CartViewModel.class);
     }
 }

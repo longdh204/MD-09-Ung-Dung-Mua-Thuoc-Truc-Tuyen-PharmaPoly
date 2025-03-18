@@ -801,6 +801,7 @@
 
                     <!-- Nút Chọn mua -->
                     <LinearLayout
+                        android:id="@+id/btn_purchase"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"

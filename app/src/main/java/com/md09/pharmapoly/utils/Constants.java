@@ -13,6 +13,8 @@ public class Constants {
     public static final String USER_KEY = "USER";
     public static final String TOKEN_KEY = "TOKEN";
     public static final String REFRESH_TOKEN_KEY = "REFRESH_TOKEN";
+    public static final String CART_ID_KEY = "CART_ID_KEY";
+    public static final String PRODUCT_ADDED_TO_CART_KEY = "PRODUCT_ADDED_TO_CART_KEY";
     public static final int MAX_QUANTITY_PER_PRODUCT = 20;
     public static String formatCurrency(int amount, String symbol) {
         DecimalFormat formatter = new DecimalFormat("#,###");
