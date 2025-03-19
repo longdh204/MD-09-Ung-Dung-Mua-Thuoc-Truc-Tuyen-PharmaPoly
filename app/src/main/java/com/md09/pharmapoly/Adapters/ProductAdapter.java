@@ -19,11 +19,6 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private Context context;
     private List<Product> productList;
-    public void Update(List<Product> products) {
-        this.productList.clear();
-        this.productList.addAll(products);
-        notifyDataSetChanged();
-    }
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
@@ -78,6 +73,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public int getItemCount() {
         return productList.size();
+    }
+    public void Update(List<Product> products) {
+        this.productList.clear();
+        this.productList.addAll(products);
+        notifyDataSetChanged();
     }
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView productName, productPrice, productRating;

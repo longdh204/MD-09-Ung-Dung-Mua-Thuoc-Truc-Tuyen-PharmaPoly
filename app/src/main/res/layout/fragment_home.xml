@@ -107,14 +107,19 @@
                             android:padding="1dp"
                             app:layout_constraintEnd_toEndOf="parent" />
 
-                        <EditText
-                            android:id="@+id/edt_search"
+                        <TextView
+                            android:id="@+id/textViewSearch"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hint="Tìm Kiếm"
-                            android:paddingStart="56dp"
-                            android:background="@android:color/transparent"
-                            android:textSize="16sp" />
+                            android:text="Tìm Kiếm"
+                            android:textSize="18sp"
+                            android:padding="16dp"
+                            android:gravity="center"
+                            android:layout_margin="16dp"
+                            android:clickable="true"
+                            android:focusable="true" />
+
+
                     </androidx.cardview.widget.CardView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

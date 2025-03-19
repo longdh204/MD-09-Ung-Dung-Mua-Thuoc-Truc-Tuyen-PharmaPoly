@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Product implements Serializable {
+
     private String _id;
     private String name;
     private String category_id;

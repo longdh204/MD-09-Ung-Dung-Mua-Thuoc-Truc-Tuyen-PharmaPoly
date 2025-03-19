@@ -8,6 +8,7 @@ import com.md09.pharmapoly.Models.ChatResponse;
 import com.md09.pharmapoly.Models.PageData;
 import com.md09.pharmapoly.Models.ProductReview;
 import com.md09.pharmapoly.Models.Question;
+import com.md09.pharmapoly.Models.SearchResponse;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.Models.Product;
 import com.md09.pharmapoly.data.model.User;
@@ -34,7 +35,13 @@ import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 public interface ApiService {
-
+    @GET("search")
+    Call<ApiResponse<SearchResponse>> searchProducts(
+            @Query("keyword") String keyword,
+            @Query("page") int page,
+            @Query("limit") int limit,
+            @Header("Authorization") String token
+    );
     @Headers({
             "Content-Type: application/json",
             "Authorization: Bearer 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"

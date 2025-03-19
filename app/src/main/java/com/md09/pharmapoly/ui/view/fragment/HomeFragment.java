@@ -3,6 +3,7 @@ package com.md09.pharmapoly.ui.view.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -14,7 +15,9 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -34,6 +37,7 @@ import com.md09.pharmapoly.ui.view.activity.NotificationsActivity;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.network.RetrofitClient;
+import com.md09.pharmapoly.ui.view.activity.SearchActivity;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.md09.pharmapoly.viewmodel.CartViewModel;
 
@@ -188,6 +192,15 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+// Trong phương thức onCreateView của HomeFragment
+        TextView textViewSearch = view.findViewById(R.id.textViewSearch);
+
+        textViewSearch.setOnClickListener(v -> {
+            // Khi nhấn vào TextView, chuyển sang màn hình tìm kiếm
+            Intent intent = new Intent(getContext(), SearchActivity.class); // Chuyển tới Activity bạn muốn
+            startActivity(intent);
+        });
+
 
         return view;
     }
