@@ -10,6 +10,7 @@ public class Product implements Serializable {
     private String brand_id;
     private String product_type_id;
     private int price;
+    private int discounted_price;
     private String short_description;
     private String specification;
     private String origin_country;
@@ -53,6 +54,14 @@ public class Product implements Serializable {
 
     public int getPrice() {
         return price;
+    }
+
+    public int getDiscounted_price() {
+        return discounted_price;
+    }
+
+    public void setDiscounted_price(int discounted_price) {
+        this.discounted_price = discounted_price;
     }
 
     public void setPrice(int price) {

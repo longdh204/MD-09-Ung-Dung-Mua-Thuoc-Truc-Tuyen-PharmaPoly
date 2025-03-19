@@ -37,7 +37,7 @@ import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.network.ApiClient;
 import com.md09.pharmapoly.network.ApiService;
 import com.md09.pharmapoly.network.RetrofitClient;
-import com.md09.pharmapoly.utils.CartSuccessBottomSheet;
+import com.md09.pharmapoly.utils.SuccessMessageBottomSheet;
 import com.md09.pharmapoly.utils.ProgressDialogHelper;
 import com.md09.pharmapoly.utils.PurchaseBottomSheet;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
@@ -217,8 +217,8 @@ public class ProductDetail extends AppCompatActivity {
                         if (response.isSuccessful() && response.body().getStatus() == 200) {
                             new SharedPrefHelper(ProductDetail.this).setBooleanState(PRODUCT_ADDED_TO_CART_KEY,true);
                             isProductAdded = true;
-                            CartSuccessBottomSheet bottomSheet = CartSuccessBottomSheet.newInstance();
-                            bottomSheet.show(getSupportFragmentManager(), "CartSuccessBottomSheet");
+                            SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.cart_add_success));
+                            bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
                         }
                     }
 

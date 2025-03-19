@@ -139,7 +139,7 @@ public interface ApiService {
             @Header("Authorization") String token,
             @Part MultipartBody.Part avatar,
             @Part("full_name") RequestBody fullName,
-            @Part("phone_number") RequestBody phoneNumber,
+            @Part("shipping_phone_number") RequestBody phoneNumber,
             @Part("gender") RequestBody gender,
             @Part("date_of_birth") RequestBody dateOfBirth
     );

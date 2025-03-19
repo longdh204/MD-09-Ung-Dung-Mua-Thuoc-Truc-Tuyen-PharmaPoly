@@ -7,8 +7,10 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -17,7 +19,6 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,23 +27,20 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.data.model.User;
 import com.md09.pharmapoly.network.RetrofitClient;
+import com.md09.pharmapoly.utils.SuccessMessageBottomSheet;
 import com.md09.pharmapoly.utils.ProgressDialogHelper;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -82,7 +80,23 @@ public class ProfileUpdate extends AppCompatActivity {
 
         loadUserData();
 
-        btnSaveProfile.setOnClickListener(v -> updateUserProfile());
+//        btnSaveProfile.setOnClickListener(v -> updateUserProfile());
+        btnSaveProfile.setOnClickListener(v -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_MEDIA_IMAGES}, 101);
+                    return;
+                }
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            } else {
+                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
+                    return;
+                }
+            }
+            updateUserProfile();
+        });
+
 
         edtFullName.addTextChangedListener(textWatcher);
         edtShippingPhoneNumber.addTextChangedListener(textWatcher);
@@ -108,7 +122,6 @@ public class ProfileUpdate extends AppCompatActivity {
             newUser.setGender(selectedGender);
             updateButtonState();
         });
-
     }
 
     private void pickImageFromGallery() {
@@ -128,7 +141,6 @@ public class ProfileUpdate extends AppCompatActivity {
             updateButtonState();
         }
     }
-
     private String getRealPathFromURI(Uri uri) {
         String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
@@ -182,19 +194,27 @@ public class ProfileUpdate extends AppCompatActivity {
 
     private void updateUserProfile() {
         ProgressDialogHelper.showLoading(this);
-        String isoDateOfBirth = newUser.getDate_of_birth() != null ? convertToISO8601(newUser.getDate_of_birth()) : "";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String formattedDate = (newUser.getDate_of_birth() != null) ? dateFormat.format(newUser.getDate_of_birth()) : null;
+
 
         RequestBody fullNameBody = RequestBody.create(MediaType.parse("text/plain"), newUser.getFull_name());
         RequestBody shippingPhoneNumberBody = RequestBody.create(MediaType.parse("text/plain"), newUser.getShipping_phone_number());
         RequestBody genderBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(newUser.getGender()));
-        RequestBody dateOfBirthBody = RequestBody.create(MediaType.parse("text/plain"), isoDateOfBirth);
+        RequestBody dateOfBirthBody = (formattedDate != null) ?
+                RequestBody.create(MediaType.parse("text/plain"), formattedDate) :
+                null;
 
-        MultipartBody.Part avatarPart = (selectedAvatarFile != null) ?
-                MultipartBody.Part.createFormData("avatar", selectedAvatarFile.getName(), RequestBody.create(MediaType.parse("image/*"), selectedAvatarFile))
-                : MultipartBody.Part.createFormData("avatar", "", RequestBody.create(MediaType.parse("image/*"), new byte[0]));
-
-        Log.e("Check Avatar",avatarPart.toString());
-        Log.e("Check Avatar A",selectedAvatarFile.getName());
+        MultipartBody.Part avatarPart;
+        if (selectedAvatarFile != null) {
+            avatarPart = MultipartBody.Part.createFormData(
+                    "avatar",
+                    selectedAvatarFile.getName(),
+                    RequestBody.create(MediaType.parse("image/*"), selectedAvatarFile)
+            );
+        } else {
+            avatarPart = null;
+        }
 
         retrofitClient.callAPI().updateProfile(
                 "Bearer " + new SharedPrefHelper(this).getToken(),
@@ -209,9 +229,12 @@ public class ProfileUpdate extends AppCompatActivity {
                 ProgressDialogHelper.hideLoading();
                 if (response.isSuccessful() && response.body().getStatus() == 200) {
                     new SharedPrefHelper(ProfileUpdate.this).updateUser(response.body().getData());
-                    user = response.body().getData();
+                    //user = response.body().getData();
                     new SharedPrefHelper(ProfileUpdate.this).setBooleanState(USER_PROFILE_UPDATED_KEY,true);
-                    finish();
+                    SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.user_update_success));
+                    bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
+                    user = response.body().getData();
+                    loadUserData();
                 }
             }
 
@@ -221,25 +244,6 @@ public class ProfileUpdate extends AppCompatActivity {
             }
         });
     }
-    private String convertToISO8601(Date date) {
-        if (date == null) return null;
-
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault());
-        return isoFormat.format(date);
-    }
-
-
-    private void handleErrorResponse(int code) {
-        switch (code) {
-            case 404:
-                Toast.makeText(this, getString(R.string.error_user_not_found), Toast.LENGTH_SHORT).show();
-                break;
-            default:
-                Toast.makeText(this, getString(R.string.server_error), Toast.LENGTH_SHORT).show();
-                break;
-        }
-    }
-
 
     private final TextWatcher textWatcher = new TextWatcher() {
         @Override
@@ -276,7 +280,7 @@ public class ProfileUpdate extends AppCompatActivity {
         newUser.setFull_name(fullName);
         newUser.setShipping_phone_number(shippingPhoneNumber);
         newUser.setGender(gender);
-        newUser.setDate_of_birth(newDateOfBirth);
+        newUser.setDate_of_birth(isDateSelected ? newDateOfBirth : user.getDate_of_birth());
 
         boolean isChanged = !newUser.equals(user) || selectedAvatarFile != null;
 
