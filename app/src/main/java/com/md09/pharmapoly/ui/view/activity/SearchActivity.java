@@ -35,13 +35,13 @@ import retrofit2.Response;
 
 public class SearchActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView, categoryBrandRecyclerView;
+    private RecyclerView recyclerView;
     private ProductAdapter productAdapter;
     private Button prevPageBtn, nextPageBtn;
     private SearchView searchView;
     private TextView pageInfoTextView;
-    private Set<String> categories = new HashSet<>();  // Lưu các category duy nhất
-    private Set<String> brands = new HashSet<>();  // Lưu các brand duy nhất
+    private Set<String> categories = new HashSet<>();
+    private Set<String> brands = new HashSet<>();
     private List<Product> totalProducts = new ArrayList<>();
     private int currentPage = 0;
     private static final int ITEMS_PER_PAGE = 8;
@@ -49,6 +49,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private HorizontalScrollView categoryScrollView, brandScrollView;
     private LinearLayout categoryLayout, brandLayout;
+    private LinearLayout historyLayout;  // Lịch sử tìm kiếm
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,18 +65,22 @@ public class SearchActivity extends AppCompatActivity {
         brandScrollView = findViewById(R.id.brandScrollView);
         categoryLayout = findViewById(R.id.categoryLayout);
         brandLayout = findViewById(R.id.brandLayout);
+        historyLayout = findViewById(R.id.historyLayout);  // Lịch sử tìm kiếm
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         productAdapter = new ProductAdapter(this, new ArrayList<>());
         recyclerView.setAdapter(productAdapter);
 
         sharedPrefHelper = new SharedPrefHelper(this);
+        // Hiển thị lịch sử tìm kiếm khi mở màn hình tìm kiếm
+        loadSearchHistory();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if (!TextUtils.isEmpty(query)) {
                     fetchSearchResults(query);  // Gọi hàm tìm kiếm khi người dùng submit query
+                    saveSearchHistory(query);  // Lưu lịch sử tìm kiếm
                 }
                 return false;
             }
@@ -99,7 +104,35 @@ public class SearchActivity extends AppCompatActivity {
                 displayPage(currentPage);
             }
         });
+    }
 
+    // Load lịch sử tìm kiếm từ SharedPreferences và hiển thị
+    private void loadSearchHistory() {
+        List<String> history = sharedPrefHelper.getSearchHistory();
+        historyLayout.removeAllViews();
+
+        for (String keyword : history) {
+            Button historyButton = new Button(this);
+            historyButton.setText(keyword);
+            historyButton.setOnClickListener(v -> {
+                searchView.setQuery(keyword, false);
+                fetchSearchResults(keyword);
+            });
+            historyLayout.addView(historyButton);
+        }
+    }
+
+    // Lưu lịch sử tìm kiếm vào SharedPreferences
+    private void saveSearchHistory(String query) {
+        List<String> history = sharedPrefHelper.getSearchHistory();
+        if (!history.contains(query)) {
+            history.add(0, query);  // Lưu từ khóa vào đầu danh sách
+            if (history.size() > 5) {
+                history.remove(history.size() - 1);  // Giới hạn lịch sử tìm kiếm là 5
+            }
+            sharedPrefHelper.saveSearchHistory(history);  // Lưu lại vào SharedPreferences
+            loadSearchHistory();  // Cập nhật lịch sử tìm kiếm trên UI
+        }
     }
 
     private void fetchSearchResults(String keyword) {
@@ -211,4 +244,3 @@ public class SearchActivity extends AppCompatActivity {
         return (int) Math.ceil((double) totalProducts.size() / ITEMS_PER_PAGE);
     }
 }
-
