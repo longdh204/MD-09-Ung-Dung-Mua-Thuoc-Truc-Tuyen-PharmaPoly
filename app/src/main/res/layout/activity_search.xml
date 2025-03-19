@@ -3,14 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/overpass_regular"
+            android:text="Tìm kiếm sản phẩm"
+            android:textSize="20dp"
+            android:layout_marginLeft="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_back"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <!-- Search Bar -->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/border"
         android:queryHint="Tìm kiếm sản phẩm..."
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <!-- RecyclerView for displaying products -->
     <androidx.recyclerview.widget.RecyclerView
@@ -19,6 +53,9 @@
         android:layout_height="0dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/paginationLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <!-- Pagination Controls -->
@@ -28,19 +65,30 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="25dp">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/prevPageBtn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/prev"/>
+        <TextView
+            android:id="@+id/pageInfoTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Prev" />
-
-        <Button
+            android:layout_marginLeft="16dp"
+            android:text="1"
+            android:textSize="20sp"
+            android:layout_marginRight="15dp"
+            android:textColor="@color/blue"
+            android:textStyle="bold"
+            android:fontFamily="@font/overpass_regular"/>
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/nextPageBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Next" />
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/prevproduct"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
