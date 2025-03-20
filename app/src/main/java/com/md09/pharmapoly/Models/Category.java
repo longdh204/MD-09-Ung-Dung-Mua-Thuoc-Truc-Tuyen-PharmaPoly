@@ -3,6 +3,7 @@ package com.md09.pharmapoly.Models;
 import java.io.Serializable;
 
 public class Category implements Serializable {
+
     private String _id;
     private String name;
     private int imageRes;

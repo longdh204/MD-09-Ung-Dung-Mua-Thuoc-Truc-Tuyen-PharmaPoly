@@ -12,6 +12,11 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.md09.pharmapoly.data.model.User;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class SharedPrefHelper {
     private static final String PREF_NAME = "UserPrefs";
     private SharedPreferences sharedPreferences;
@@ -99,5 +104,16 @@ public class SharedPrefHelper {
     public void clearData() {
         editor.clear();
         editor.apply();
+    }
+    public void saveSearchHistory(List<String> history) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Set<String> historySet = new HashSet<>(history);
+        editor.putStringSet("search_history", historySet);
+        editor.apply();
+    }
+
+    public List<String> getSearchHistory() {
+        Set<String> historySet = sharedPreferences.getStringSet("search_history", new HashSet<>());
+        return new ArrayList<>(historySet);
     }
 }

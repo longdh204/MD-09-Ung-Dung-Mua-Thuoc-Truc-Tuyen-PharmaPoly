@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Brand implements Serializable {
+
     private String _id;
 
     private String name;

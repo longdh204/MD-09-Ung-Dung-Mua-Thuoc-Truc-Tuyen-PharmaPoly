@@ -3,6 +3,7 @@ package com.md09.pharmapoly.Models;
 import java.io.Serializable;
 
 public class ProductImage implements Serializable {
+
     private String _id;
     private String product_id;
     private String image_url;

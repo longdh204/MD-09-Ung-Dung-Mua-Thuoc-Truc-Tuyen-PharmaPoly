@@ -105,6 +105,9 @@
             android:name=".ui.view.activity.Nav_Medicine"
             android:exported="true" />
         <activity
+            android:name=".ui.view.activity.SearchActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.view.activity.PhoneNumber"
             android:exported="true">
             <intent-filter>

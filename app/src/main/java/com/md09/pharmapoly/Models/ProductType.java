@@ -13,6 +13,7 @@ public class ProductType implements Serializable {
 
 
     public ProductType() {
+
     }
 //
     public ProductType(String _id, String name) {
