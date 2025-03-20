@@ -57,17 +57,20 @@ public class CartViewModel extends ViewModel {
             @Override
             public void onResponse(Call<ApiResponse<Cart>> call, Response<ApiResponse<Cart>> response) {
                 if (response.isSuccessful() && response.body() != null && response.body().getStatus() == 200) {
-                    cartLiveData.postValue(response.body().getData());
-                    Cart updatedCart = response.body().getData();
+                    Cart currentCart = cartLiveData.getValue();
+                    if (currentCart != null && currentCart.getCartItems() != null) {
+                        currentCart.getCartItems().removeIf(item -> item.get_id().equals(id));
+
+                        cartLiveData.postValue(currentCart);
+                    }
                     if (onSuccess != null) {
-                        onSuccess.accept(updatedCart);
+                        onSuccess.accept(currentCart);
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ApiResponse<Cart>> call, Throwable t) {
-                t.printStackTrace();
             }
         });
     }

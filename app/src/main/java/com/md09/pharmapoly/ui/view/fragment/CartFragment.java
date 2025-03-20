@@ -38,6 +38,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.stream.IntStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -116,24 +117,9 @@ public class CartFragment extends Fragment {
             public void onChanged(Cart cart) {
                 CartFragment.this.cart = cart;
                 cartAdapter.UpdateCart(cart);
+                CalculateTotalPrice();
             }
         });
-//        retrofitClient.callAPI().cart("Bearer " + new SharedPrefHelper(getContext()).getToken()).enqueue(new Callback<ApiResponse<Cart>>() {
-//            @Override
-//            public void onResponse(Call<ApiResponse<Cart>> call, Response<ApiResponse<Cart>> response) {
-//                if (response.isSuccessful()) {
-//                    if (response.body().getStatus() == 200) {
-//                        cart = response.body().getData();
-//                        cartAdapter.UpdateCart(cart);
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ApiResponse<Cart>> call, Throwable t) {
-//
-//            }
-//        });
         cb_selected_all_item.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (cart != null && cart.getCartItems() != null) {
                 for (int i = 0; i < cart.getCartItems().size(); i++) {
@@ -191,46 +177,22 @@ public class CartFragment extends Fragment {
         for (CartItem item : cart.getCartItems()) {
             selectedItems.put(item.get_id(), item.isSelected());
         }
+
         cartViewModel.RemoveCartItem(getContext(), id, new Consumer<Cart>() {
             @Override
             public void accept(Cart cart) {
-                for (CartItem item : cart.getCartItems()) {
-                    if (selectedItems.containsKey(item.get_id())) {
-                        item.setSelected(selectedItems.get(item.get_id()));
-                    }
-                }
-                CartFragment.this.cart = cart;
-                cartAdapter.UpdateCart(cart);
-                CalculateTotalPrice();
-            }
-        });
-//        retrofitClient.callAPI().removeCartItem(
-//                id,
-//                "Bearer " + new SharedPrefHelper(getContext()).getToken()
-//        ).enqueue(new Callback<ApiResponse<Cart>>() {
-//            @Override
-//            public void onResponse(Call<ApiResponse<Cart>> call, Response<ApiResponse<Cart>> response) {
-//                if (response.isSuccessful()) {
-//                    if (response.body().getStatus() == 200) {
-//                        Cart updatedCart = response.body().getData();
-//
-//                        for (CartItem item : updatedCart.getCartItems()) {
-//                            if (selectedItems.containsKey(item.get_id())) {
-//                                item.setSelected(selectedItems.get(item.get_id()));
-//                            }
+//                if (cart.getCartItems() != null) {
+//                    for (CartItem item : cart.getCartItems()) {
+//                        if (selectedItems.containsKey(item.get_id())) {
+//                            item.setSelected(selectedItems.get(item.get_id()));
 //                        }
-//                        cart = updatedCart;
-//                        cartAdapter.UpdateCart(cart);
-//                        CalculateTotalPrice();
 //                    }
 //                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ApiResponse<Cart>> call, Throwable t) {
-//
-//            }
-//        });
+//                CartFragment.this.cart = cart;
+//                cartAdapter.UpdateCart(cart);
+//                CalculateTotalPrice();
+            }
+        });
     }
 
     private void CalculateTotalPrice() {
@@ -258,13 +220,7 @@ public class CartFragment extends Fragment {
                 if (response.isSuccessful()) {
                     if (response.body().getStatus() == 200) {
                         CartItem updatedItem = response.body().getData();
-
-                        int position = cart.getCartItems().indexOf(cartItem);
-                        if (position != -1) {
-                            CartItem existingItem = cart.getCartItems().get(position);
-                            existingItem.setQuantity(updatedItem.getQuantity());
-                            existingItem.setTotal_price(updatedItem.getTotal_price());
-                        }
+                        cartItem.setQuantity(updatedItem.getQuantity());
                         if (cartItem.isSelected()) CalculateTotalPrice();
                         cartAdapter.UpdateCartItem(updatedItem);
                     }

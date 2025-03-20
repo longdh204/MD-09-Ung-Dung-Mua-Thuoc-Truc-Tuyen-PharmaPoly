@@ -5,7 +5,8 @@ public class CartItem {
     private String cart_id;
     private String product_id;
     private int quantity;
-    private int price;
+    private int discounted_price;
+    private int original_price;
     private int total_price;
     private Product product;
     private boolean isSelected = false;
@@ -17,7 +18,7 @@ public class CartItem {
         this.cart_id = cart_id;
         this.product_id = product_id;
         this.quantity = quantity;
-        this.price = price;
+        this.discounted_price = price;
         this.total_price = quantity * price;
         this.product = product;
     }
@@ -70,21 +71,26 @@ public class CartItem {
         this.quantity = quantity;
     }
 
-    public int getPrice() {
-        return price;
+    public int getDiscounted_price() {
+        return discounted_price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setDiscounted_price(int discounted_price) {
+        this.discounted_price = discounted_price;
+    }
+
+    public int getOriginal_price() {
+        return original_price;
+    }
+
+    public void setOriginal_price(int original_price) {
+        this.original_price = original_price;
     }
 
     public int getTotal_price() {
-        return total_price;
+        return this.quantity * this.discounted_price;
     }
 
-    public void setTotal_price(int total_price) {
-        this.total_price = total_price;
-    }
 
     @Override
     public String toString() {
@@ -93,9 +99,10 @@ public class CartItem {
                 ", cart_id='" + cart_id + '\'' +
                 ", product_id='" + product_id + '\'' +
                 ", quantity=" + quantity +
-                ", price=" + price +
+                ", price=" + discounted_price +
                 ", total_price=" + total_price +
                 ", product=" + product +
+                ", isSelected=" + isSelected +
                 '}';
     }
 }

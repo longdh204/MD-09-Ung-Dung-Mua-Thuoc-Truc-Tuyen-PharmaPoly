@@ -102,4 +102,6 @@
     <string name="date_of_birth">Ngày sinh</string>
     <string name="shipping_phone">Số điện thoại nhận hàng</string>
     <string name="user_update_success">Cập nhật thông tin người dùng thành công</string>
+    <string name="discount_now">Giảm ngay</string>
+    <string name="valid_until">Áp dụng đến</string>
 </resources>

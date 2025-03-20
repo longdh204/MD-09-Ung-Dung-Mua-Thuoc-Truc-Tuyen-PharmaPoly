@@ -11,6 +11,7 @@ public class Product implements Serializable {
     private String product_type_id;
     private int price;
     private int discounted_price;
+    private Discount discount;
     private String short_description;
     private String specification;
     private String origin_country;
@@ -33,6 +34,29 @@ public class Product implements Serializable {
             }
         }
         return null;  // Nếu không có ảnh chính, trả về null
+    }
+
+    public Product(String _id, String name, String category_id, String brand_id, String product_type_id, int price, int discounted_price, Discount discount, String short_description, String specification, String origin_country, String manufacturer, float average_rating, int review_count, String create_at, Category category, Brand brand, ProductType product_type, List<ProductImage> images, List<ProductSection> sections) {
+        this._id = _id;
+        this.name = name;
+        this.category_id = category_id;
+        this.brand_id = brand_id;
+        this.product_type_id = product_type_id;
+        this.price = price;
+        this.discounted_price = discounted_price;
+        this.discount = discount;
+        this.short_description = short_description;
+        this.specification = specification;
+        this.origin_country = origin_country;
+        this.manufacturer = manufacturer;
+        this.average_rating = average_rating;
+        this.review_count = review_count;
+        this.create_at = create_at;
+        this.category = category;
+        this.brand = brand;
+        this.product_type = product_type;
+        this.images = images;
+        this.sections = sections;
     }
 
     // Các getter và setter cho các trường khác
@@ -63,9 +87,16 @@ public class Product implements Serializable {
     public void setDiscounted_price(int discounted_price) {
         this.discounted_price = discounted_price;
     }
-
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public Discount getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
     }
 
     public String getCategory_id() {
@@ -190,8 +221,28 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{id='" + _id + "', name='" + name + "', price=" + price +
-                ", averageRating=" + average_rating + ", imageUrl='" + images + "'}";
+        return "Product{" +
+                "_id='" + _id + '\'' +
+                ", name='" + name + '\'' +
+                ", category_id='" + category_id + '\'' +
+                ", brand_id='" + brand_id + '\'' +
+                ", product_type_id='" + product_type_id + '\'' +
+                ", price=" + price +
+                ", discounted_price=" + discounted_price +
+                ", discount=" + discount +
+                ", short_description='" + short_description + '\'' +
+                ", specification='" + specification + '\'' +
+                ", origin_country='" + origin_country + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", average_rating=" + average_rating +
+                ", review_count=" + review_count +
+                ", create_at='" + create_at + '\'' +
+                ", category=" + category +
+                ", brand=" + brand +
+                ", product_type=" + product_type +
+                ", images=" + images +
+                ", sections=" + sections +
+                '}';
     }
 }
 //

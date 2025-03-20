@@ -4,42 +4,31 @@ import static com.md09.pharmapoly.utils.Constants.MAX_QUANTITY_PER_PRODUCT;
 import static com.md09.pharmapoly.utils.Constants.formatCurrency;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.md09.pharmapoly.Models.Cart;
 import com.md09.pharmapoly.Models.CartItem;
 import com.md09.pharmapoly.R;
-import com.md09.pharmapoly.data.model.ApiResponse;
-import com.md09.pharmapoly.network.RetrofitClient;
-import com.md09.pharmapoly.ui.view.fragment.CartFragment;
 import com.md09.pharmapoly.utils.CartItemListener;
-import com.md09.pharmapoly.utils.DialogHelper;
-import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.squareup.picasso.Picasso;
 
 
 import java.util.HashMap;
 import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
@@ -61,7 +50,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         if (position != -1) {
             CartItem cartItem = cart.getCartItems().get(position);
             cartItem.setQuantity(updatedItem.getQuantity());
-            cartItem.setTotal_price(cartItem.getQuantity() * cartItem.getPrice());
+            //cartItem.setTotal_price(cartItem.getQuantity() * cartItem.getDiscounted_price());
             notifyItemChanged(position);
         }
     }
@@ -79,7 +68,24 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         if (cartItem != null) {
 
             holder.tv_product_name.setText(cartItem.getProduct().getName());
-            holder.tv_price.setText(formatCurrency(cartItem.getPrice(), "đ"));
+            holder.tv_discounted_price.setText(formatCurrency(cartItem.getDiscounted_price(), "đ"));
+            if (cartItem.getProduct().getDiscount() != null) {
+                holder.tv_original_price.setVisibility(View.VISIBLE);
+                holder.layout_discount.setVisibility(View.VISIBLE);
+                holder.tv_original_price.setText(formatCurrency(cartItem.getOriginal_price(), "đ"));
+                holder.tv_original_price.setPaintFlags(holder.tv_original_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                holder.tv_discount.setText(
+                        context.getString(R.string.discount_now) + " " +
+                                cartItem.getProduct().getDiscount().getFormattedValue() + " " +
+                                context.getString(R.string.valid_until) + " " +
+                        cartItem.getProduct().getDiscount().getFormattedEndDate());
+            } else {
+                holder.tv_original_price.setVisibility(View.GONE);
+                holder.layout_discount.setVisibility(View.GONE);
+            }
+
+
+
             holder.edt_quantity.setText(String.valueOf(cartItem.getQuantity()));
 
             Picasso.get().load(cartItem.getProduct().getImageUrl()).into(holder.img_product);
@@ -145,9 +151,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 btn_increase_quantity,
                 btn_remove;
         private CheckBox cb_selected_item;
-        private TextView tv_price,tv_product_name;
+        private TextView
+                tv_discounted_price,
+                tv_product_name,
+                tv_original_price,
+                tv_discount;
         private EditText edt_quantity;
         private ImageView img_product;
+        private CardView layout_discount;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -155,13 +166,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             btn_decrease_quantity = itemView.findViewById(R.id.btn_decrease_quantity);
             btn_increase_quantity = itemView.findViewById(R.id.btn_increase_quantity);
             btn_remove = itemView.findViewById(R.id.btn_remove);
-            tv_price = itemView.findViewById(R.id.tv_price);
+            tv_discounted_price = itemView.findViewById(R.id.tv_discounted_price);
+            tv_original_price = itemView.findViewById(R.id.tv_original_price);
             tv_product_name = itemView.findViewById(R.id.tv_product_name);
+            tv_discount = itemView.findViewById(R.id.tv_discount);
             edt_quantity = itemView.findViewById(R.id.edt_quantity);
 
             img_product = itemView.findViewById(R.id.img_product);
 
             cb_selected_item = itemView.findViewById(R.id.cb_selected_item);
+
+            layout_discount = itemView.findViewById(R.id.layout_discount);
         }
     }
 }
