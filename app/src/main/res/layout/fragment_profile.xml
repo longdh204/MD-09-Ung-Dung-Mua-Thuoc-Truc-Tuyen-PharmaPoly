@@ -9,50 +9,107 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/gray_6f4">
+        android:background="#FFFFFF">
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:id="@+id/constraintLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="60dp"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/btn_back"-->
+<!--                android:layout_width="25dp"-->
+<!--                android:layout_height="25dp"-->
+<!--                android:layout_marginStart="30dp"-->
+<!--                android:src="@drawable/back"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView7"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/be_vietnam_pro_extrabold"-->
+<!--                android:text="Profile"-->
+<!--                android:layout_marginLeft="40dp"-->
+<!--                android:textColor="@color/blue_CB7"-->
+<!--                android:textSize="20dp"-->
+<!--                android:textStyle="bold"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/btn_back"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
         <LinearLayout
-            android:background="@color/blue_CE4"
             android:paddingHorizontal="24dp"
-            android:paddingTop="48dp"
             android:paddingBottom="24dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="55dp"
+            android:paddingTop="20dp">
+
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/img_user_avatar"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:scaleType="centerCrop"
                 app:shapeAppearance="@style/FullCornerImageView"
-                android:src="@drawable/default_avatar"/>
+                android:src="@drawable/perfil" />
+
             <LinearLayout
                 android:paddingLeft="12dp"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_weight="1"> <!-- Sử dụng layout_weight để cho phần này chiếm không gian còn lại -->
+
                 <TextView
                     android:id="@+id/tv_full_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:lines="1"
-                    android:fontFamily="@font/be_vietnam_pro_semibold"
-                    android:textSize="18sp"
-                    android:textColor="@color/white_FFF"
+                    android:fontFamily="@font/be_vietnam_pro_bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/blue"
                     android:ellipsize="end"
-                    android:text="@string/customer"/>
+                    android:textStyle="bold"
+                    android:text="Name Profile" />
+
                 <TextView
-                    android:id="@+id/tv_phone_number"
+                    android:id="@+id/tv_wellcome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:lines="1"
-                    android:fontFamily="@font/be_vietnam_pro_light"
+                    android:fontFamily="@font/overpass_regular"
                     android:textSize="14sp"
-                    android:textColor="@color/white_FFF"
+                    android:textColor="#2F2F2F"
                     android:ellipsize="end"
-                    android:text="+8466666666"/>
+                    android:text="Welcome to my App" />
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_phone_number"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:lines="1"-->
+<!--                    android:fontFamily="@font/overpass_regular"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:ellipsize="end"-->
+<!--                    android:text="+8466666666" />-->
             </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/logout"
+                android:gravity="center"
+                android:layout_alignParentEnd="true" /> <!-- Sử dụng gravity để căn nút về phía cuối -->
         </LinearLayout>
+
 
         <ScrollView
             android:layout_width="match_parent"
@@ -69,12 +126,12 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:fontFamily="@font/be_vietnam_pro_semibold"
+                        android:fontFamily="@font/be_vietnam_pro_bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/my_orders"
-                        android:textColor="@color/black_333"
-                        android:textSize="14sp"/>
+                        android:textColor="@color/blue_CE4"
+                        android:textSize="15sp"/>
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -89,25 +146,23 @@
                         android:textSize="14sp"/>
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_marginTop="12dp"
-                    android:layout_marginHorizontal="24dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/gray_6f4"
-                    app:cardCornerRadius="12dp">
                     <LinearLayout
-                        android:padding="12dp"
+                        android:padding="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_margin="20dp"
+                        android:background="@drawable/borderm"
+                        >
                         <LinearLayout
                             android:id="@+id/btn_processing"
                             android:gravity="center_horizontal"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:layout_margin="5dp">
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
@@ -117,8 +172,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/processing"
-                                android:textColor="@color/black_333"
-                                android:fontFamily="@font/be_vietnam_pro_semibold"/>
+                                android:textColor="#3A3A3A"
+                                android:textSize="13dp"
+                                android:fontFamily="@font/be_vietnam_pro_medium"
+                                />
                         </LinearLayout>
 
                         <LinearLayout
@@ -127,7 +184,8 @@
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:layout_margin="5dp">
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
@@ -137,8 +195,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/shipping"
-                                android:textColor="@color/black_333"
-                                android:fontFamily="@font/be_vietnam_pro_semibold"/>
+                                android:textColor="#3A3A3A"
+                                android:textSize="13dp"
+                                android:fontFamily="@font/be_vietnam_pro_medium"
+                                />
                         </LinearLayout>
 
                         <LinearLayout
@@ -147,7 +207,8 @@
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:layout_margin="5dp">
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
@@ -157,8 +218,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/delivered"
-                                android:textColor="@color/black_333"
-                                android:fontFamily="@font/be_vietnam_pro_semibold"/>
+                                android:textColor="#3A3A3A"
+                                android:textSize="13dp"
+                                android:fontFamily="@font/be_vietnam_pro_medium"
+                                />
                         </LinearLayout>
 
                         <LinearLayout
@@ -167,7 +230,8 @@
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:layout_margin="5dp">
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
@@ -178,41 +242,39 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/exchange_return"
-                                android:textColor="@color/black_333"
-                                android:fontFamily="@font/be_vietnam_pro_semibold"/>
+                                android:textColor="#3A3A3A"
+                                android:textSize="13dp"
+                                android:fontFamily="@font/be_vietnam_pro_medium"
+                                />
                         </LinearLayout>
 
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
                 <LinearLayout
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="14dp"
                     android:layout_marginHorizontal="24dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    >
                     <TextView
-                        android:fontFamily="@font/be_vietnam_pro_semibold"
+                        android:fontFamily="@font/be_vietnam_pro_bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/account"
-                        android:textColor="@color/black_333"
-                        android:textSize="14sp"/>
+                        android:textColor="@color/blue_CE4"
+                        android:textSize="15sp"/>
 
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_marginTop="12dp"
-                    android:layout_marginHorizontal="24dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/gray_6f4"
-                    app:cardCornerRadius="12dp">
                     <LinearLayout
                         android:padding="12dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp"
+                        android:layout_margin="20dp"
+                        android:background="@drawable/borderm">
 
                         <LinearLayout
                             android:id="@+id/btn_personal_info"
@@ -220,14 +282,15 @@
                             android:gravity="center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:layout_margin="5dp">
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:background="@drawable/ic_user_circle"
                                 android:backgroundTint="@color/blue_CE4"/>
                             <TextView
-                                android:textSize="16sp"
+                                android:textSize="13dp"
                                 android:fontFamily="@font/be_vietnam_pro_medium"
                                 android:lines="1"
                                 android:layout_marginHorizontal="12dp"
@@ -236,10 +299,10 @@
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:text="@string/personal_info"
-                                android:textColor="@color/black_333"/>
+                                android:textColor="#3A3A3A"/>
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
                                 android:background="@drawable/ic_arrow_right"/>
                         </LinearLayout>
 
@@ -249,14 +312,15 @@
                             android:gravity="center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:layout_margin="5dp">
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:background="@drawable/ic_key"
                                 android:backgroundTint="@color/blue_CE4"/>
                             <TextView
-                                android:textSize="16sp"
+                                android:textSize="13dp"
                                 android:fontFamily="@font/be_vietnam_pro_medium"
                                 android:lines="1"
                                 android:layout_marginHorizontal="12dp"
@@ -265,10 +329,10 @@
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:text="@string/change_password"
-                                android:textColor="@color/black_333"/>
+                                android:textColor="#3A3A3A"/>
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
                                 android:background="@drawable/ic_arrow_right"/>
                         </LinearLayout>
 
@@ -278,7 +342,8 @@
                             android:gravity="center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:layout_margin="5dp">
                             <ImageView
                                 android:scaleX="1.6"
                                 android:scaleY="1.6"
@@ -287,7 +352,7 @@
                                 android:background="@drawable/ic_address"
                                 android:backgroundTint="@color/blue_CE4"/>
                             <TextView
-                                android:textSize="16sp"
+                                android:textSize="13dp"
                                 android:fontFamily="@font/be_vietnam_pro_medium"
                                 android:lines="1"
                                 android:layout_marginHorizontal="12dp"
@@ -296,10 +361,10 @@
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:text="@string/manage_address"
-                                android:textColor="@color/black_333"/>
+                                android:textColor="#3A3A3A"/>
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
                                 android:background="@drawable/ic_arrow_right"/>
                         </LinearLayout>
 
@@ -308,14 +373,15 @@
                             android:gravity="center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:layout_margin="5dp">
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:background="@drawable/ic_card"
                                 android:backgroundTint="@color/blue_CE4"/>
                             <TextView
-                                android:textSize="16sp"
+                                android:textSize="13dp"
                                 android:fontFamily="@font/be_vietnam_pro_medium"
                                 android:lines="1"
                                 android:layout_marginHorizontal="12dp"
@@ -324,59 +390,54 @@
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:text="@string/manage_cards"
-                                android:textColor="@color/black_333"/>
+                                android:textColor="#3A3A3A"/>
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
                                 android:background="@drawable/ic_arrow_right"/>
                         </LinearLayout>
-
-
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
                 <LinearLayout
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="14dp"
                     android:layout_marginHorizontal="24dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:fontFamily="@font/be_vietnam_pro_semibold"
+                        android:fontFamily="@font/be_vietnam_pro_bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/about_pharmapoly"
-                        android:textColor="@color/black_333"
-                        android:textSize="14sp"/>
+                        android:textColor="@color/blue_CE4"
+                        android:textSize="15sp"/>
 
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_marginTop="12dp"
-                    android:layout_marginHorizontal="24dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/gray_6f4"
-                    app:cardCornerRadius="12dp">
+
                     <LinearLayout
                         android:padding="12dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp"
+                        android:layout_margin="20dp"
+                        android:background="@drawable/borderm">
 
                         <LinearLayout
                             android:paddingVertical="12dp"
                             android:gravity="center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:layout_margin="5dp">
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:background="@drawable/ic_info_square"
                                 android:backgroundTint="@color/blue_CE4"/>
                             <TextView
-                                android:textSize="16sp"
+                                android:textSize="13dp"
                                 android:fontFamily="@font/be_vietnam_pro_medium"
                                 android:lines="1"
                                 android:layout_marginHorizontal="12dp"
@@ -385,10 +446,10 @@
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:text="@string/pharmacy_intro"
-                                android:textColor="@color/black_333"/>
+                                android:textColor="#3A3A3A"/>
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
                                 android:background="@drawable/ic_arrow_right"/>
                         </LinearLayout>
 
@@ -397,14 +458,15 @@
                             android:gravity="center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:layout_margin="5dp">
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:background="@drawable/ic_cog_gear_cogwheel"
                                 android:backgroundTint="@color/blue_CE4"/>
                             <TextView
-                                android:textSize="16sp"
+                                android:textSize="13dp"
                                 android:fontFamily="@font/be_vietnam_pro_medium"
                                 android:lines="1"
                                 android:layout_marginHorizontal="12dp"
@@ -413,10 +475,10 @@
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:text="@string/business_license"
-                                android:textColor="@color/black_333"/>
+                                android:textColor="#3A3A3A"/>
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
                                 android:background="@drawable/ic_arrow_right"/>
                         </LinearLayout>
 
@@ -425,14 +487,15 @@
                             android:gravity="center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:layout_margin="5dp">
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:background="@drawable/ic_deposit"
                                 android:backgroundTint="@color/blue_CE4"/>
                             <TextView
-                                android:textSize="16sp"
+                                android:textSize="13dp"
                                 android:fontFamily="@font/be_vietnam_pro_medium"
                                 android:lines="1"
                                 android:layout_marginHorizontal="12dp"
@@ -441,10 +504,10 @@
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:text="@string/deposit_policy"
-                                android:textColor="@color/black_333"/>
+                                android:textColor="#3A3A3A"/>
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
                                 android:background="@drawable/ic_arrow_right"/>
                         </LinearLayout>
 
@@ -453,14 +516,15 @@
                             android:gravity="center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:layout_margin="5dp">
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:background="@drawable/ic_pen"
                                 android:backgroundTint="@color/blue_CE4"/>
                             <TextView
-                                android:textSize="16sp"
+                                android:textSize="13dp"
                                 android:fontFamily="@font/be_vietnam_pro_medium"
                                 android:lines="1"
                                 android:layout_marginHorizontal="12dp"
@@ -469,10 +533,10 @@
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:text="@string/content_policy"
-                                android:textColor="@color/black_333"/>
+                                android:textColor="#3A3A3A"/>
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
                                 android:background="@drawable/ic_arrow_right"/>
                         </LinearLayout>
 
@@ -481,14 +545,15 @@
                             android:gravity="center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:layout_margin="5dp">
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:background="@drawable/ic_return"
                                 android:backgroundTint="@color/blue_CE4"/>
                             <TextView
-                                android:textSize="16sp"
+                                android:textSize="13dp"
                                 android:fontFamily="@font/be_vietnam_pro_medium"
                                 android:lines="1"
                                 android:layout_marginHorizontal="12dp"
@@ -497,10 +562,10 @@
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:text="@string/medicine_return_policy"
-                                android:textColor="@color/black_333"/>
+                                android:textColor="#3A3A3A"/>
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
                                 android:background="@drawable/ic_arrow_right"/>
                         </LinearLayout>
 
@@ -509,14 +574,15 @@
                             android:gravity="center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:layout_margin="5dp">
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:background="@drawable/ic_delivery"
                                 android:backgroundTint="@color/blue_CE4"/>
                             <TextView
-                                android:textSize="16sp"
+                                android:textSize="13dp"
                                 android:fontFamily="@font/be_vietnam_pro_medium"
                                 android:lines="1"
                                 android:layout_marginHorizontal="12dp"
@@ -525,10 +591,10 @@
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:text="@string/shipping_policy"
-                                android:textColor="@color/black_333"/>
+                                android:textColor="#3A3A3A"/>
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
                                 android:background="@drawable/ic_arrow_right"/>
                         </LinearLayout>
 
@@ -537,14 +603,15 @@
                             android:gravity="center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:layout_margin="5dp">
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:background="@drawable/ic_shield_check"
                                 android:backgroundTint="@color/blue_CE4"/>
                             <TextView
-                                android:textSize="16sp"
+                                android:textSize="13dp"
                                 android:fontFamily="@font/be_vietnam_pro_medium"
                                 android:lines="1"
                                 android:layout_marginHorizontal="12dp"
@@ -553,40 +620,14 @@
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:text="@string/privacy_policy"
-                                android:textColor="@color/black_333"/>
+                                android:textColor="#3A3A3A"/>
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
                                 android:background="@drawable/ic_arrow_right"/>
                         </LinearLayout>
-
-
-
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
-                <LinearLayout
-                    android:layout_marginVertical="24dp"
-                    android:id="@+id/btn_logout"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:rotation="180"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:backgroundTint="@color/black_333"
-                        android:background="@drawable/ic_logout"/>
-                    <TextView
-                        android:layout_marginLeft="12dp"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/be_vietnam_pro_bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/logout"/>
-                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
