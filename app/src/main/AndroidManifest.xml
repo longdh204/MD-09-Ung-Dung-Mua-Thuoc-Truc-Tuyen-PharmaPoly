@@ -33,6 +33,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ContentPolicyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DepositPolicyActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.activity.IntroductionActivity"
             android:exported="false" />
         <activity

@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.md09.pharmapoly.AddAddress;
+import com.md09.pharmapoly.ContentPolicyActivity;
+import com.md09.pharmapoly.DepositPolicyActivity;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.payment_card_manager_empty;
 import com.md09.pharmapoly.ui.view.activity.IntroductionActivity;
@@ -92,6 +94,16 @@ public class ProfileFragment extends Fragment {
         LinearLayout btnPayment=view.findViewById(R.id.btn_payment);
         btnPayment.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), payment_card_manager_empty.class);
+            startActivity(intent);
+        });
+        LinearLayout btnDeposit=view.findViewById(R.id.btn_deposit_profile);
+        btnDeposit.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), DepositPolicyActivity.class);
+            startActivity(intent);
+        });
+        LinearLayout btnContent=view.findViewById(R.id.btn_content_profile);
+        btnContent.setOnClickListener(v -> {
+            Intent intent= new Intent(getActivity(), ContentPolicyActivity.class);
             startActivity(intent);
         });
 

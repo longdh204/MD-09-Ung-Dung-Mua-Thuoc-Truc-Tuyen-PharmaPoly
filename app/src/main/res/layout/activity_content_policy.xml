@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.activity.IntroductionActivity">
+    tools:context=".ContentPolicyActivity">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,7 +23,7 @@
                 android:layout_marginTop="28dp">
 
                 <ImageView
-                    android:id="@+id/backBtn"
+                    android:id="@+id/btn_content"
                     android:layout_width="30dp"
                     android:layout_height="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -37,13 +37,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
-                    android:text="Giới thiệu nhà thuốc PharmaPoly"
+                    android:text="Chính sách nội dung"
                     android:textColor="@color/black"
-                    android:textSize="20dp"
+                    android:textSize="22dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/backBtn"
+                    app:layout_constraintStart_toStartOf="@+id/btn_content"
                     app:layout_constraintTop_toTopOf="parent" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -57,8 +58,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="28dp"
-                    android:text="I. Về chúng tôi"
                     android:textSize="20dp"
+                    android:text="1. Thông báo miễn trừ trách nhiệm"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -69,25 +70,24 @@
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Trực thuộc Công ty cổ phần PharmaPoly,hệ thống PharmaPoly là một trong những chuỗi bán lẻ dược phẩm uy tín tại Việt Nam. Với hơn 1000 Nhà thuốc tại hơn 63 tỉnh thành (cuối năm 2022), PharmaPoly chuyên cung cấp đa dạng các loại thuốc kê đơn, không kê đơn, các sản phẩm thực phẩm chức năng, trang thiết bị y tế, dược mỹ phẩm và nhiều sản phẩm chăm sóc sức khoẻ, tiêu dùng hàng ngày,...."
-                    android:textColor="@color/black"
                     android:textSize="18dp"
+                    android:text="- Tất cả các sản phẩm bán tại nhà thuốc PharmaPoly đều có mô tả chi tiết. Nhà thuốc sẽ cung cấp thông tin về sản phẩm như ảnh, giấy phép kinh doanh, thành phần, tác dụng và chỉ định sử dụng. Mặc dù chúng tôi lựa chọn và cung cấp thông tin từ các trang web/ứng dụng đáng tin cậy và chính thống, có độ chính xác cao, nhưng bạn nên coi đó chỉ là tài liệu tham khảo."
+                    android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView6"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"/>
-
                 <TextView
                     android:id="@+id/textView16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="30dp"
-                    android:textSize="20dp"
-                    android:text="II. Sứ mệnh"
+                    android:text="2. Góp ý nội dung"
                     android:textColor="@color/black"
                     android:textStyle="bold"
+                    android:textSize="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -95,18 +95,20 @@
                     android:id="@+id/textView28"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:textSize="18dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="30dp"
-                    android:text="Trực thuộc Công ty cổ phần PharmaPoly,hệ thống PharmaPoly là một trong những chuỗi bán lẻ dược phẩm uy tín tại Việt Nam. Với hơn 1000 Nhà thuốc tại hơn 63 tỉnh thành (cuối năm 2022), PharmaPoly chuyên cung cấp đa dạng các loại thuốc kê đơn, không kê đơn, các sản phẩm thực phẩm chức năng, trang thiết bị y tế, dược mỹ phẩm và nhiều sản phẩm chăm sóc sức khoẻ, tiêu dùng hàng ngày,...."
+                    android:textSize="18dp"
+                    android:text="Chúng tôi luôn cố gắng chọn lọc và cung cấp thông tin từ các nguồn đáng tin cậy, nhưng không tránh khỏi khả năng có thông tin chưa thật sự chính xác. Nếu bạn phát hiện bất kỳ thông tin không chính xác nào hoặc bạn có bất kỳ góp ý nào về thông tin mà chúng tôi cung cấp, rất mong bạn liên hệ với chúng tôi để chúng tôi có thể sửa đổi và cập nhật thông tin đó."
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

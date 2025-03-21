@@ -367,6 +367,7 @@
                         <LinearLayout
                             android:paddingVertical="12dp"
                             android:gravity="center_vertical"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
@@ -395,6 +396,7 @@
                         <LinearLayout
                             android:paddingVertical="12dp"
                             android:gravity="center_vertical"
+                            android:id="@+id/btn_deposit_profile"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
@@ -422,6 +424,7 @@
 
                         <LinearLayout
                             android:paddingVertical="12dp"
+                            android:id="@+id/btn_content_profile"
                             android:gravity="center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
