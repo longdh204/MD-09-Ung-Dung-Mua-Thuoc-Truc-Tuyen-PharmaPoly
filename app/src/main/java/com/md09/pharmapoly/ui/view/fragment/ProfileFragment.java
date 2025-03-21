@@ -15,8 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.md09.pharmapoly.AddAddress;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.User;
+import com.md09.pharmapoly.ui.view.activity.payment_card_manager_empty;
 import com.md09.pharmapoly.ui.view.activity.ChangePassword;
 import com.md09.pharmapoly.ui.view.activity.ProfileUpdate;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
@@ -60,6 +62,7 @@ public class ProfileFragment extends Fragment {
 
     private LinearLayout btn_personal_info;
     private LinearLayout btn_change_password;
+    private LinearLayout btn_manage_address, btn_manage_card;
     private TextView tv_phone_number,tv_full_name;
     private ImageView img_user_avatar;
     @Override
@@ -79,6 +82,14 @@ public class ProfileFragment extends Fragment {
             Intent intent = new Intent(getActivity(), ChangePassword.class);
             startActivity(intent);
         });
+        btn_manage_address.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), AddAddress.class);
+            startActivity(intent);
+        });
+        btn_manage_card.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), payment_card_manager_empty.class);
+            startActivity(intent);
+        });
         return view;
     }
 
@@ -94,10 +105,10 @@ public class ProfileFragment extends Fragment {
     private void InitUI(View view) {
         btn_personal_info = view.findViewById(R.id.btn_personal_info);
         btn_change_password = view.findViewById(R.id.btn_change_password);
-
+        btn_manage_address = view.findViewById(R.id.btn_manage_address);
         tv_phone_number = view.findViewById(R.id.tv_phone_number);
         tv_full_name = view.findViewById(R.id.tv_full_name);
-
+        btn_manage_card = view.findViewById(R.id.btn_manage_card);
         img_user_avatar = view.findViewById(R.id.img_user_avatar);
 
         LoadUserInfo();

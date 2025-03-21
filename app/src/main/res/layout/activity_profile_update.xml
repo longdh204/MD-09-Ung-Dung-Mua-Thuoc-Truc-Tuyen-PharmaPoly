@@ -29,7 +29,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/be_vietnam_pro_extrabold"
+                    android:fontFamily="@font/overpass_regular"
                     android:text="Thông tin cá nhân"
                     android:textColor="@color/blue"
                     android:textSize="20dp"
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/change_avatar"
-                android:fontFamily="@font/be_vietnam_pro_bold"
+                android:fontFamily="@font/overpass_regular"
                 android:textSize="20sp"
                 android:textColor="@color/blue"
                 android:ellipsize="end"
@@ -231,9 +231,9 @@
                 android:layout_marginTop="48dp"
                 android:layout_marginBottom="24dp"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                app:cardBackgroundColor="@color/gray_DCD"
-                app:cardCornerRadius="12dp">
+                android:layout_height="50dp"
+                app:cardBackgroundColor="@color/nav_background"
+                app:cardCornerRadius="32dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -246,7 +246,7 @@
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/be_vietnam_pro_bold"
                         android:text="Update"
-                        android:textColor="@color/gray_E9E"
+                        android:textColor="@color/white"
                         android:textSize="18sp" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>

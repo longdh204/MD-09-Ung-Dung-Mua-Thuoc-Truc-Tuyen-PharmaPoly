@@ -369,6 +369,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/btn_manage_card"
                             android:paddingVertical="12dp"
                             android:gravity="center_vertical"
                             android:layout_width="match_parent"

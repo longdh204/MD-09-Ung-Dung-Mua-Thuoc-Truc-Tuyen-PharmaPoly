@@ -63,7 +63,7 @@ public class ProfileUpdate extends AppCompatActivity {
     private TextView profileUpdateComplete;
     private RetrofitClient retrofitClient;
     private TextView tvDateOfBirth;
-    private ImageButton btn_back;
+//    private ImageButton btn_back;
     private User user;
     private User newUser;
     private File selectedAvatarFile;
@@ -102,9 +102,9 @@ public class ProfileUpdate extends AppCompatActivity {
         edtShippingPhoneNumber.addTextChangedListener(textWatcher);
 
         tvDateOfBirth.setOnClickListener(v -> showDatePickerDialog());
-        btn_back.setOnClickListener(v -> {
-            finish();
-        });
+//        btn_back.setOnClickListener(v -> {
+//            finish();
+//        });
         img_user_avatar.setOnClickListener(v -> {
             pickImageFromGallery();
         });
@@ -306,7 +306,7 @@ public class ProfileUpdate extends AppCompatActivity {
     }
 
     private void InitUI() {
-        btn_back = findViewById(R.id.btn_back);
+//        btn_back = findViewById(R.id.btn_back);
 
         edtFullName = findViewById(R.id.update_profile_full_name);
         edtPhoneNumber = findViewById(R.id.update_profile_phone_number);
