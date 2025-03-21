@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA"
+    tools:context=".Medication_reminder">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#F5F5F5"
+        android:padding="0dp">
+
+        <!-- Thanh tiêu đề -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:padding="12dp">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_back"
+                android:layout_alignParentStart="true"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nhắc nhở uống thuốc"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:gravity="center"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/btnPreviousWeek"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="70dp"
+                android:src="@drawable/ic_arrow_back1"
+                android:contentDescription="Previous Week"/>
+
+            <TextView
+                android:id="@+id/tvCurrentWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hôm nay, 15/03/2025"
+                android:textColor="#4E8BC5"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_marginHorizontal="16dp"/>
+
+            <ImageView
+                android:id="@+id/btnNextWeek"
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:layout_marginLeft="70dp"
+                android:src="@drawable/ic_arrow_right"
+                android:contentDescription="Next Week"/>
+        </LinearLayout>
+
+        <!-- Danh sách ngày trong tuần -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewWeek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"/>
+
+        <!-- Hiển thị thông báo nếu không có lịch -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="50dp">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/ic_empty_calendar"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hôm nay bạn chưa có lịch nhắc uống thuốc"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:padding="8dp"/>
+
+            <Button
+                android:id="@+id/btnCreateReminder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/blue_CE4"
+                android:text="Tạo lịch nhắc"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <!-- Nút tạo lịch nhắc -->
+
+    <!-- BottomAppBar và FloatingActionButton -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        tools:context=".Medication_reminder">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/viewPagerMainRemind"/>
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/blue_CE4"
+            app:fabCradleMargin="20dp"
+            app:fabAlignmentMode="center"
+            app:fabAnchorMode="cradle"
+            app:fabCradleRoundedCornerRadius="56dp"
+            android:layout_gravity="bottom">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigation"
+                app:itemActiveIndicatorStyle="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                app:labelVisibilityMode="unlabeled"
+                android:background="@color/transparent"
+                android:elevation="0dp"
+                app:itemRippleColor="@color/transparent"
+                app:itemIconTint="@color/bottom_nav_color"
+                app:menu="@menu/bottom_nav_menu_reminder"/>
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabRemind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_anchor="@id/bottomAppBar"
+            android:backgroundTint="@color/blue_CE4"
+            app:shapeAppearanceOverlay="@style/RoundedFAB"
+            app:tint="@color/white_FFF"
+            android:src="@drawable/ic_add_remind"
+            app:maxImageSize="32dp"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</RelativeLayout>

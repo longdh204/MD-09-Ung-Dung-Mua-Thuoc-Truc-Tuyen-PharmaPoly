@@ -11,6 +11,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import android.app.Activity;
+import androidx.lifecycle.Observer;
+import com.md09.pharmapoly.Models.Cart;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,13 +135,12 @@ public class HomeFragment extends Fragment {
 
         categoryList = new ArrayList<>();
         categoryList.add(new Category("Cần mua thuốc", R.drawable.ic_medicine));
-        categoryList.add(new Category("Khám bác sĩ", R.drawable.ic_doctor));
+        categoryList.add(new Category("Nhắc nhở uống thuốc", R.drawable.ic_doctor));
         categoryList.add(new Category("Bảo hiểm", R.drawable.ic_insurance));
-        categoryList.add(new Category("Thông tin", R.drawable.ic_calendar_2));
+        categoryList.add(new Category("Thông tin", R.drawable.ic_calendar));
         categoryList.add(new Category("Ghi chú", R.drawable.ic_list1));
         categoryList.add(new Category("Đơn thuốc", R.drawable.ic_list2));
         categoryList.add(new Category("Lịch hẹn", R.drawable.ic_list3));
-
         categoryAdapter = new CategoryAdapter(getContext(), categoryList);
         recyclerViewCategory.setAdapter(categoryAdapter);
 
