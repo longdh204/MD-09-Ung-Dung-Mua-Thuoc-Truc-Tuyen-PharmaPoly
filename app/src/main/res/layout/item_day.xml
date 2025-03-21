@@ -1,0 +1,27 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/txtDayName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="T2"
+        android:textSize="14sp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/tvDay"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="10"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_date_unselected"
+        android:layout_marginTop="4dp"/>
+</LinearLayout>

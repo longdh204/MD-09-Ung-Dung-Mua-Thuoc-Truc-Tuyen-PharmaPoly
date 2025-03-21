@@ -1,12 +1,15 @@
 package com.md09.pharmapoly.ui.view.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.cardview.widget.CardView;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,15 +18,14 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.md09.pharmapoly.Adapters.CategoryAdapter;
 import com.md09.pharmapoly.Adapters.ProductAdapter;
 import com.md09.pharmapoly.Adapters.SliderAdapter;
+import com.md09.pharmapoly.Models.Cart;
 import com.md09.pharmapoly.Models.Category;
 import com.md09.pharmapoly.Models.PageData;
 import com.md09.pharmapoly.Models.Product;
@@ -37,7 +39,6 @@ import com.md09.pharmapoly.ui.view.activity.NotificationsActivity;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.network.RetrofitClient;
-import com.md09.pharmapoly.ui.view.activity.SearchActivity;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.md09.pharmapoly.viewmodel.CartViewModel;
 
@@ -133,9 +134,9 @@ public class HomeFragment extends Fragment {
 
         categoryList = new ArrayList<>();
         categoryList.add(new Category("Cần mua thuốc", R.drawable.ic_medicine));
-        categoryList.add(new Category("Khám bác sĩ", R.drawable.ic_doctor));
+        categoryList.add(new Category("Nhắc nhở uống thuốc", R.drawable.ic_doctor));
         categoryList.add(new Category("Bảo hiểm", R.drawable.ic_insurance));
-        categoryList.add(new Category("Thông tin", R.drawable.ic_calendar_2));
+        categoryList.add(new Category("Thông tin", R.drawable.ic_calendar));
         categoryList.add(new Category("Ghi chú", R.drawable.ic_list1));
         categoryList.add(new Category("Đơn thuốc", R.drawable.ic_list2));
         categoryList.add(new Category("Lịch hẹn", R.drawable.ic_list3));
@@ -192,15 +193,6 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-// Trong phương thức onCreateView của HomeFragment
-        TextView textViewSearch = view.findViewById(R.id.textViewSearch);
-
-        textViewSearch.setOnClickListener(v -> {
-            // Khi nhấn vào TextView, chuyển sang màn hình tìm kiếm
-            Intent intent = new Intent(getContext(), SearchActivity.class); // Chuyển tới Activity bạn muốn
-            startActivity(intent);
-        });
-
 
         return view;
     }
