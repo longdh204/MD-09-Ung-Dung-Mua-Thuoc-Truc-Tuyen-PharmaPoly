@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="56dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".ui.view.activity.OrderManagementActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_CE4"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="48dp"
+        android:paddingBottom="24dp">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_arrow_back1"
+            android:backgroundTint="@color/white_FFF" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/be_vietnam_pro_bold"
+            android:text="@string/my_orders"
+            android:textAlignment="center"
+            android:textColor="@color/white_FFF"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical">
+        <!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+        <!--            android:id="@+id/bn_my_orders"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="bottom"-->
+        <!--            app:labelVisibilityMode="labeled"-->
+        <!--            android:background="@color/transparent"-->
+        <!--            app:itemIconTint="@color/white_FFF"-->
+        <!--            app:itemTextColor="@drawable/bottom_navigation_my_orders_text_color"-->
+        <!--            app:itemBackground="@color/transparent"-->
+        <!--            android:outlineAmbientShadowColor="@color/transparent"-->
+        <!--            android:outlineSpotShadowColor="@color/transparent"-->
+        <!--            app:menu="@menu/bottom_navigation_my_orders"/>-->
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvOrderStatus"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal" />
+
+            <View
+                android:layout_alignParentBottom="true"
+                android:id="@+id/indicator"
+                android:layout_width="80dp"
+                android:layout_height="2dp"
+                android:background="@color/blue_CE4"
+                android:visibility="invisible"/>
+        </RelativeLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2_my_orders"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+</LinearLayout>

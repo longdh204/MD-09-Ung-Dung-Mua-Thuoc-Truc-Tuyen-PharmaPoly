@@ -9,9 +9,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
     <meta-data
         android:name="com.google.firebase.auth.api.FirebaseAuth"
         android:value="@string/default_web_client_id" />
@@ -34,9 +35,20 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".chatbot"
+            android:name=".ui.view.activity.PaymentMethodActivity"
             android:exported="false" />
-        <!-- <activity -->
+        <activity
+            android:name=".ui.view.activity.CheckoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.activity.OrderManagementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.activity.AddressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".chatbot"
+            android:exported="false" /> <!-- <activity -->
         <!-- android:name=".ui.view.activity.functional_food" -->
         <!-- android:exported="false" /> -->
         <activity
@@ -93,8 +105,9 @@
         <activity
             android:name=".ui.view.activity.Nav_Medical_Equiment"
             android:exported="true" />
-        <activity android:name=".ui.view.activity.ChatbotActivity"
-            android:exported="true"/>
+        <activity
+            android:name=".ui.view.activity.ChatbotActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.view.activity.Nav_Personalcare"
             android:exported="true" />

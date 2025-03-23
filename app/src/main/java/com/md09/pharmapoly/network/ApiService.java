@@ -5,10 +5,12 @@ import com.md09.pharmapoly.Models.Cart;
 import com.md09.pharmapoly.Models.CartItem;
 import com.md09.pharmapoly.Models.ChatRequest;
 import com.md09.pharmapoly.Models.ChatResponse;
+import com.md09.pharmapoly.Models.GHNResponse;
 import com.md09.pharmapoly.Models.PageData;
 import com.md09.pharmapoly.Models.ProductReview;
 import com.md09.pharmapoly.Models.Question;
 import com.md09.pharmapoly.Models.SearchResponse;
+import com.md09.pharmapoly.Models.UserAddress;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.Models.Product;
 import com.md09.pharmapoly.data.model.User;
@@ -32,9 +34,20 @@ import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 
 public interface ApiService {
+
+
+
+
+    @POST("calculate-shipping-fee")
+    Call<GHNResponse<Object>> calculateShippingFee(
+            @Header("Authorization") String token,
+            @Body Map<String, String> params
+    );
+
     @GET("search")
     Call<ApiResponse<SearchResponse>> searchProducts(
             @Query("keyword") String keyword,
@@ -51,6 +64,11 @@ public interface ApiService {
 
     @POST("refresh-token")
     Call<ApiResponse<User>> refreshToken(@Body Map<String, String> refreshTokenRequest);
+    @PUT("user/address/update")
+    Call<ApiResponse<UserAddress>> updateAddress(
+            @Body UserAddress userAddress,
+            @Header("Authorization") String token
+    );
     @GET("user/cart")
     Call<ApiResponse<Cart>> cart(
             @Header("Authorization") String token

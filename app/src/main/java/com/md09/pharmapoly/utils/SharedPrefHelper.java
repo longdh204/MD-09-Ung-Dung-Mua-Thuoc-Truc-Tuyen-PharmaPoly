@@ -1,6 +1,7 @@
 package com.md09.pharmapoly.utils;
 
 import static com.md09.pharmapoly.utils.Constants.CART_ID_KEY;
+import static com.md09.pharmapoly.utils.Constants.PAYMENT_METHOD_KEY;
 import static com.md09.pharmapoly.utils.Constants.PRODUCT_ADDED_TO_CART_KEY;
 import static com.md09.pharmapoly.utils.Constants.REFRESH_TOKEN_KEY;
 import static com.md09.pharmapoly.utils.Constants.TOKEN_KEY;
@@ -63,30 +64,6 @@ public class SharedPrefHelper {
         return sharedPreferences.getString(CART_ID_KEY, null);
     }
 
-    //    public void setProductAddedToCart(boolean isAdded) {
-//        editor.putBoolean(PRODUCT_ADDED_TO_CART_KEY, isAdded);
-//        editor.apply();
-//    }
-//
-//    public boolean isProductAddedToCart() {
-//        return sharedPreferences.getBoolean(PRODUCT_ADDED_TO_CART_KEY, false);
-//    }
-//    public void resetProductAddedToCart() {
-//        editor.putBoolean(PRODUCT_ADDED_TO_CART_KEY, false);
-//        editor.apply();
-//    }
-//    public void setUserProfileUpdated(boolean isUpdated) {
-//        editor.putBoolean("USER_PROFILE_UPDATED", isUpdated);
-//        editor.apply();
-//    }
-//
-//    public boolean isUserProfileUpdated() {
-//        return sharedPreferences.getBoolean("USER_PROFILE_UPDATED", false);
-//    }
-//    public void resetUserProfileUpdated() {
-//        editor.putBoolean("USER_PROFILE_UPDATED", false);
-//        editor.apply();
-//    }
     public void setBooleanState(String key, boolean value) {
         editor.putBoolean(key, value);
         editor.apply();
@@ -115,5 +92,14 @@ public class SharedPrefHelper {
     public List<String> getSearchHistory() {
         Set<String> historySet = sharedPreferences.getStringSet("search_history", new HashSet<>());
         return new ArrayList<>(historySet);
+    }
+    public void savePaymentMethod(PaymentMethod method) {
+        editor.putString(PAYMENT_METHOD_KEY, method.getValue());
+        editor.apply();
+    }
+
+    public PaymentMethod getPaymentMethod() {
+        String method = sharedPreferences.getString(PAYMENT_METHOD_KEY, "cod");
+        return PaymentMethod.fromString(method);
     }
 }

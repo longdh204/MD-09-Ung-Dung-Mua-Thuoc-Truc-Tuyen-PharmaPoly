@@ -2,6 +2,7 @@ package com.md09.pharmapoly.ui.view.fragment;
 
 import static com.md09.pharmapoly.utils.Constants.formatCurrency;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ import com.md09.pharmapoly.Models.CartItem;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.network.RetrofitClient;
+import com.md09.pharmapoly.ui.view.activity.CheckoutActivity;
 import com.md09.pharmapoly.utils.CartItemListener;
 import com.md09.pharmapoly.utils.DialogHelper;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
@@ -38,6 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import retrofit2.Call;
@@ -99,7 +103,8 @@ public class CartFragment extends Fragment {
     private CheckBox cb_selected_all_item;
     private Cart cart;
     private CartViewModel cartViewModel;
-
+    private LinearLayout cart_main_layout,
+            cart_sub_layout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -116,8 +121,30 @@ public class CartFragment extends Fragment {
             @Override
             public void onChanged(Cart cart) {
                 CartFragment.this.cart = cart;
-                cartAdapter.UpdateCart(cart);
-                CalculateTotalPrice();
+
+                if (CartFragment.this.cart.getCartItems() == null || CartFragment.this.cart.getCartItems().size() == 0) {
+                    cart_main_layout.animate()
+                            .alpha(0f)
+                            .setDuration(300)
+                            .withEndAction(() -> cart_main_layout.setVisibility(View.GONE));
+
+                    cart_sub_layout.setAlpha(0f);
+                    cart_sub_layout.setVisibility(View.VISIBLE);
+                    cart_sub_layout.animate().alpha(1f).setDuration(300);
+                } else {
+                    cart_sub_layout.animate()
+                            .alpha(0f)
+                            .setDuration(300)
+                            .withEndAction(() -> cart_sub_layout.setVisibility(View.GONE));
+
+                    cart_main_layout.setAlpha(0f);
+                    cart_main_layout.setVisibility(View.VISIBLE);
+                    cart_main_layout.animate().alpha(1f).setDuration(300);
+
+                    cartAdapter.UpdateCart(cart);
+                    CalculateTotalPrice();
+                }
+                cb_selected_all_item.setChecked(false);
             }
         });
         cb_selected_all_item.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -133,6 +160,23 @@ public class CartFragment extends Fragment {
             }
         });
 
+        btn_purchase.setOnClickListener(v -> {
+            List<CartItem> selectedItems = cart.getCartItems()
+                    .stream()
+                    .filter(CartItem::isSelected)
+                    .collect(Collectors.toList());
+
+            if (!selectedItems.isEmpty()) {
+                Gson gson = new Gson();
+                String jsonSelectedItems = gson.toJson(selectedItems);
+
+                Intent intent = new Intent(getContext(), CheckoutActivity.class);
+                intent.putExtra("selected_items", jsonSelectedItems);
+                startActivity(intent);
+            } else {
+                Toast.makeText(getContext(), getString(R.string.no_products_selected), Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 
@@ -181,6 +225,7 @@ public class CartFragment extends Fragment {
         cartViewModel.RemoveCartItem(getContext(), id, new Consumer<Cart>() {
             @Override
             public void accept(Cart cart) {
+
 //                if (cart.getCartItems() != null) {
 //                    for (CartItem item : cart.getCartItems()) {
 //                        if (selectedItems.containsKey(item.get_id())) {
@@ -246,6 +291,9 @@ public class CartFragment extends Fragment {
         tv_purchase = view.findViewById(R.id.tv_purchase);
         String baseText = getString(R.string.purchase);
         tv_purchase.setText(baseText + " (0)");
+
+        cart_main_layout = view.findViewById(R.id.cart_main_layout);
+        cart_sub_layout = view.findViewById(R.id.cart_sub_layout);
 
         cb_selected_all_item = view.findViewById(R.id.cb_selected_all_item);
     }

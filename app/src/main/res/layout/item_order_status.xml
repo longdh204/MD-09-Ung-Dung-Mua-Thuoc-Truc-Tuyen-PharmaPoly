@@ -1,0 +1,37 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<TextView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:id="@+id/tvOrderStatus"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:paddingHorizontal="16dp"-->
+<!--    android:paddingVertical="8dp"-->
+<!--    android:textSize="16sp"-->
+<!--    android:fontFamily="@font/be_vietnam_pro_medium"-->
+<!--    android:textColor="@color/black_333"-->
+<!--    android:gravity="center"/>-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tvOrderStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/be_vietnam_pro_medium"
+        android:textColor="@color/black_333"
+        android:gravity="center"/>
+<!--    <TextView-->
+<!--        android:id="@+id/tvOrderStatus"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="8dp"-->
+<!--        android:textColor="@color/black_333"-->
+<!--        android:textSize="14sp"-->
+<!--        android:textStyle="bold"/>-->
+</LinearLayout>

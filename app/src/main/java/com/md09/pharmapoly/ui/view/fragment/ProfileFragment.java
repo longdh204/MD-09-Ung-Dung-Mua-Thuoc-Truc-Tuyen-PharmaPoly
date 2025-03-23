@@ -15,9 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.md09.pharmapoly.ui.view.activity.AddressActivity;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.User;
 import com.md09.pharmapoly.ui.view.activity.ChangePassword;
+import com.md09.pharmapoly.ui.view.activity.OrderManagementActivity;
 import com.md09.pharmapoly.ui.view.activity.ProfileUpdate;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 
@@ -68,10 +70,18 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    private LinearLayout btn_personal_info;
-    private LinearLayout btn_change_password;
-    private TextView tv_phone_number,tv_full_name;
+    private LinearLayout
+            btn_personal_info,
+            btn_change_password,
+            btn_manage_address,
+
+    btn_processing,
+            btn_shipping,
+            btn_delivered,
+            btn_exchange_return;
+    private TextView tv_phone_number, tv_full_name;
     private ImageView img_user_avatar;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -79,6 +89,24 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         InitUI(view);
+
+        btn_processing.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), OrderManagementActivity.class);
+            startActivity(intent);
+        });
+        btn_shipping.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), OrderManagementActivity.class);
+            startActivity(intent);
+        });
+        btn_delivered.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), OrderManagementActivity.class);
+            startActivity(intent);
+        });
+        btn_exchange_return.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), OrderManagementActivity.class);
+            startActivity(intent);
+        });
+
 
         btn_personal_info.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), ProfileUpdate.class);
@@ -89,13 +117,18 @@ public class ProfileFragment extends Fragment {
             Intent intent = new Intent(getActivity(), ChangePassword.class);
             startActivity(intent);
         });
+
+        btn_manage_address.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), AddressActivity.class);
+            startActivity(intent);
+        });
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (new SharedPrefHelper(getContext()).getBooleanState(USER_PROFILE_UPDATED_KEY,false)) {
+        if (new SharedPrefHelper(getContext()).getBooleanState(USER_PROFILE_UPDATED_KEY, false)) {
             LoadUserInfo();
             new SharedPrefHelper(getContext()).resetBooleanState(USER_PROFILE_UPDATED_KEY);
         }
@@ -104,6 +137,12 @@ public class ProfileFragment extends Fragment {
     private void InitUI(View view) {
         btn_personal_info = view.findViewById(R.id.btn_personal_info);
         btn_change_password = view.findViewById(R.id.btn_change_password);
+        btn_manage_address = view.findViewById(R.id.btn_manage_address);
+
+        btn_processing = view.findViewById(R.id.btn_processing);
+        btn_shipping = view.findViewById(R.id.btn_shipping);
+        btn_delivered = view.findViewById(R.id.btn_delivered);
+        btn_exchange_return = view.findViewById(R.id.btn_exchange_return);
 
         tv_phone_number = view.findViewById(R.id.tv_phone_number);
         tv_full_name = view.findViewById(R.id.tv_full_name);
@@ -112,6 +151,7 @@ public class ProfileFragment extends Fragment {
 
         LoadUserInfo();
     }
+
     private void LoadUserInfo() {
         User user = new SharedPrefHelper(getContext()).getUser();
         if (user.getFull_name().trim().isEmpty()) {

@@ -103,4 +103,20 @@
     <string name="user_update_success">User information updated successfully</string>
     <string name="discount_now">Get off now</string>
     <string name="valid_until">Valid until</string>
+    <string name="address_input_placeholder">Enter street name, building, house number</string>
+    <string name="update">Update</string>
+    <string name="address_update_success">Address updated successfully!</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="no_products_selected">You haven\'t selected any products to buy yet.</string>
+    <string name="payment">Payment</string>
+    <string name="order">Order</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="total_shipping_fee">Total Shipping Fee</string>
+    <string name="total_product_cost">Total Product Cost</string>
+    <string name="product">Product</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="cod">Cash on Delivery</string>
+    <string name="online_payment">Online Payment</string>
+    <string name="momo_payment">Payment via Momo e-wallet</string>
+    <string name="agree">Agree</string>
 </resources>

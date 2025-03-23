@@ -104,4 +104,20 @@
     <string name="user_update_success">Cập nhật thông tin người dùng thành công</string>
     <string name="discount_now">Giảm ngay</string>
     <string name="valid_until">Áp dụng đến</string>
+    <string name="address_input_placeholder">Nhập tên đường, tòa nhà, số nhà</string>
+    <string name="update">Cập nhật</string>
+    <string name="address_update_success">Cập nhật địa chỉ thành công!</string>
+    <string name="cancelled">Đã hủy</string>
+    <string name="no_products_selected">Bạn vẫn chưa chọn sản phẩm nào để mua</string>
+    <string name="payment">Thanh toán</string>
+    <string name="order">Đặt hàng</string>
+    <string name="total_amount">Tổng số tiền</string>
+    <string name="total_shipping_fee">Tổng tiền phí vận chuyển</string>
+    <string name="total_product_cost">Tổng tiền hàng</string>
+    <string name="product">Sản phẩm</string>
+    <string name="payment_method">Phương thức thanh toán</string>
+    <string name="cod">Thanh toán khi nhận hàng</string>
+    <string name="online_payment">Thanh toán trực tuyến</string>
+    <string name="momo_payment">Thanh toán bằng ví điện tử Momo</string>
+    <string name="agree">Đồng ý</string>
 </resources>

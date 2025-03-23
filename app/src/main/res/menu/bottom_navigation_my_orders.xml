@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/_processing"
+        android:title="Processing"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/_shipping"
+        android:title="Shipping"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/_delivered"
+        android:title="Delivered"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/_return"
+        android:title="Return"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/_cancelled"
+        android:title="Cancelled"
+        app:showAsAction="never"/>
+</menu>

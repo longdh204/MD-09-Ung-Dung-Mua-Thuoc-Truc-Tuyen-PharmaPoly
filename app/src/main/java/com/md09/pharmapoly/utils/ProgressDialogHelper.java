@@ -21,6 +21,9 @@ public class ProgressDialogHelper {
             progressDialog.show();
         }
     }
+    public static boolean isShowing() {
+        return progressDialog != null && progressDialog.isShowing();
+    }
 
     public static void hideLoading() {
         if (progressDialog != null && progressDialog.isShowing()) {
