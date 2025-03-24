@@ -1,5 +1,8 @@
 package com.md09.pharmapoly.ui.view.fragment;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -17,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +30,7 @@ import com.md09.pharmapoly.Adapters.ProductAdapter;
 import com.md09.pharmapoly.Adapters.SliderAdapter;
 import com.md09.pharmapoly.Models.Category;
 import com.md09.pharmapoly.Models.PageData;
+import com.md09.pharmapoly.Models.PageDataClone;
 import com.md09.pharmapoly.Models.Product;
 import com.md09.pharmapoly.ui.view.activity.ChatbotActivity;
 import com.md09.pharmapoly.ui.view.activity.Nav_FunctionalFoodActivity;
@@ -42,6 +47,8 @@ import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.md09.pharmapoly.viewmodel.CartViewModel;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator3;
@@ -79,7 +86,11 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private ProductAdapter productAdapter;
+    private ProductAdapter productAdapterMostReview;
+    private ProductAdapter productAdapterTopRate;
     private List<Product> productList;
+    private List<Product> productListMostReview;
+    private List<Product> productListTopRate;
     private String token;
     private RecyclerView recyclerViewCategory;
     private CategoryAdapter categoryAdapter;
@@ -92,6 +103,17 @@ public class HomeFragment extends Fragment {
     private SharedPrefHelper sharedPrefHelper;
     private RetrofitClient retrofitClient;
     private CartViewModel cartViewModel;
+
+    private RecyclerView rvTopRate;
+
+    private RecyclerView rvMostReview;
+
+    private int maxRow = 2;
+    private LinearLayout lnNoiBat;
+    private LinearLayout lnTopRate;
+    private LinearLayout lnMostReview;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -103,6 +125,7 @@ public class HomeFragment extends Fragment {
 
         SetupRecyclerView(view);
         GetTopRatedProducts();
+        GetMostReviewProducts();
 
 
         List<Integer> sliderImageIds = new ArrayList<>();
@@ -237,28 +260,29 @@ public class HomeFragment extends Fragment {
     }
 
     private void GetTopRatedProducts() {
-//        retrofitClient.callAPI().getTopRatedProducts(10,"Bearer " + token).enqueue(new Callback<ApiResponse<List<Product>>>() {
-//            @Override
-//            public void onResponse(Call<ApiResponse<List<Product>>> call, Response<ApiResponse<List<Product>>> response) {
-//                if (response.isSuccessful()) {
-//                    if (response.body().getStatus() == 200) {
-//                        productList = response.body().getData();
-//                        productAdapter.Update(productList);
-//                    }
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<ApiResponse<List<Product>>> call, Throwable t) {
-//            }
-//        });
         retrofitClient.callAPI().getTopRatedProducts(1, 10, "Bearer " + token).enqueue(new Callback<ApiResponse<PageData<List<Product>>>>() {
             @Override
             public void onResponse(Call<ApiResponse<PageData<List<Product>>>> call, Response<ApiResponse<PageData<List<Product>>>> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getStatus() == 200) {
                         PageData<List<Product>> page = response.body().getData();
-                        productList = page.getData();
+                        List<Product> data = response.body().getData().getData();
+                        if(data == null || data.isEmpty()) {
+                            lnTopRate.setVisibility(GONE);
+                            lnNoiBat.setVisibility(GONE);
+                            return;
+                        }
+                        lnTopRate.setVisibility(VISIBLE);
+                        lnNoiBat.setVisibility(VISIBLE);
+
+                        productList = (page.getData().size() >= 2*maxRow) ? page.getData().subList(0,2*maxRow) : page.getData() ;
                         productAdapter.Update(productList);
+
+                        Collections.shuffle(data);
+                        productListTopRate = (data.size() >= 2*maxRow) ? data.subList(0,2*maxRow) : data;
+                        productAdapterTopRate = new ProductAdapter(getContext(),productListTopRate);
+                        rvTopRate.setAdapter(productAdapterTopRate);
+                        rvTopRate.setLayoutManager(new GridLayoutManager(getContext(), 2));
                     }
                 }
             }
@@ -270,13 +294,44 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    private void GetMostReviewProducts() {
+        retrofitClient.callAPI().getMostReviewProducts(1, 10, "Bearer " + token).enqueue(new Callback<ApiResponse<PageDataClone<List<Product>>>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<PageDataClone<List<Product>>>> call, Response<ApiResponse<PageDataClone<List<Product>>>> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus() == 200) {
+                        List<Product> data = response.body().getData().getData();
+                        if(data == null || data.isEmpty()) {
+                            lnMostReview.setVisibility(GONE);
+                            return;
+                        }
+                        lnMostReview.setVisibility(VISIBLE);
+                        productListMostReview = (data.size() >= 2*maxRow) ? data.subList(0,2*maxRow) : data;
+                        productAdapterMostReview = new ProductAdapter(getContext(),productListMostReview);
+                        rvMostReview.setAdapter(productAdapterMostReview);
+                        rvMostReview.setLayoutManager(new GridLayoutManager(getContext(), 2));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<PageDataClone<List<Product>>>> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void InitUI(View view) {
         retrofitClient = new RetrofitClient();
         sharedPrefHelper = new SharedPrefHelper(getContext());
         recyclerView = view.findViewById(R.id.recyclerView);
         viewPager2 = view.findViewById(R.id.viewPagerSlider);
         circleIndicator = view.findViewById(R.id.dotsIndicator);
-
+        rvTopRate = view.findViewById(R.id.rvTopRate);
+        rvMostReview = view.findViewById(R.id.rvMostReview);
         cartViewModel = new ViewModelProvider(requireActivity()).get(CartViewModel.class);
+        lnNoiBat = view.findViewById(R.id.lnNoiBat);
+        lnTopRate = view.findViewById(R.id.lnTopRate);
+        lnMostReview = view.findViewById(R.id.lnMostReview);
     }
 }

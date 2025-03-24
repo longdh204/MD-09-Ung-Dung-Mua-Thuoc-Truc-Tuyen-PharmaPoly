@@ -7,6 +7,7 @@ import com.md09.pharmapoly.Models.ChatRequest;
 import com.md09.pharmapoly.Models.ChatResponse;
 import com.md09.pharmapoly.Models.GHNResponse;
 import com.md09.pharmapoly.Models.PageData;
+import com.md09.pharmapoly.Models.PageDataClone;
 import com.md09.pharmapoly.Models.ProductReview;
 import com.md09.pharmapoly.Models.Question;
 import com.md09.pharmapoly.Models.SearchResponse;
@@ -38,10 +39,6 @@ import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 
 public interface ApiService {
-
-
-
-
     @POST("calculate-shipping-fee")
     Call<GHNResponse<Object>> calculateShippingFee(
             @Header("Authorization") String token,
@@ -119,6 +116,13 @@ public interface ApiService {
 //    );
     @GET("product/top-rated")
     Call<ApiResponse<PageData<List<Product>>>> getTopRatedProducts(
+            @Query("page") int page,
+            @Query("limit") int limit,
+            @Header("Authorization") String token
+    );
+
+    @GET("product/most-reviewed")
+    Call<ApiResponse<PageDataClone<List<Product>>>> getMostReviewProducts(
             @Query("page") int page,
             @Query("limit") int limit,
             @Header("Authorization") String token
