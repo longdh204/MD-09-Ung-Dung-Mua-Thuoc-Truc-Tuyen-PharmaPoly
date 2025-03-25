@@ -29,7 +29,9 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.md09.pharmapoly.Models.CartItem;
 import com.md09.pharmapoly.Models.GHNResponse;
+import com.md09.pharmapoly.Models.Order;
 import com.md09.pharmapoly.Models.Product;
+import com.md09.pharmapoly.Models.Province;
 import com.md09.pharmapoly.Models.UserAddress;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
@@ -88,7 +90,7 @@ public class CheckoutActivity extends AppCompatActivity {
         ProgressDialogHelper.showLoading(this);
         InitUI();
         this.user = new SharedPrefHelper(this).getUser();
-        FillAddress();
+        user.setAddress(null);
         String jsonSelectedItems = getIntent().getStringExtra("selected_items");
 
         if (jsonSelectedItems != null) {
@@ -115,15 +117,42 @@ public class CheckoutActivity extends AppCompatActivity {
         selected_payment_method.setOnClickListener(v -> {
             startActivity(new Intent(CheckoutActivity.this,PaymentMethodActivity.class));
         });
-        CalculateShippingFee();
+        btn_selectedAddress.setOnClickListener(v -> {
+            startActivity(new Intent(CheckoutActivity.this,AddressActivity.class));
+        });
+        btn_order.setOnClickListener(v -> {
+            Map<String, String> requestData = new HashMap<>();
+            requestData.put("payment_method", new SharedPrefHelper(this).getPaymentMethod().getValue());
+            requestData.put("items", new Gson().toJson(selectedItems));
+
+//            new RetrofitClient()
+//                    .callAPI()
+//                    .createOrders(
+//                                requestData,
+//                                "Bearer " + new SharedPrefHelper(this).getToken()
+//                            )
+//                    .enqueue(new Callback<ApiResponse<Order>>() {
+//                        @Override
+//                        public void onResponse(Call<ApiResponse<Order>> call, Response<ApiResponse<Order>> response) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<ApiResponse<Order>> call, Throwable t) {
+//
+//                        }
+//                    });
+        });
+        FillAddress();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        this.user = new SharedPrefHelper(this).getUser();
         UpdatePaymentMethod();
+        FillAddress();
     }
-
     private void UpdatePaymentMethod() {
         PaymentMethod paymentMethod = new SharedPrefHelper(this).getPaymentMethod();
         switch (paymentMethod) {
@@ -155,7 +184,12 @@ public class CheckoutActivity extends AppCompatActivity {
     }
     private void FillAddress() {
         if (user.getAddress() == null) {
-
+            tv_address.setText(getString(R.string.no_shipping_address));
+            total_payment = total_price;
+            tv_total_payment_1.setText(formatCurrency(total_payment,"đ"));
+            tv_total_payment_2.setText(formatCurrency(total_payment,"đ"));
+            tv_total_shipping_fee.setText(formatCurrency(0, "đ"));
+            ProgressDialogHelper.hideLoading();
         } else {
             String addressLine = user.getFull_name() + " | " +
                     user.getShipping_phone_number() + "\n" +
@@ -164,13 +198,13 @@ public class CheckoutActivity extends AppCompatActivity {
             addressLine += user.getAddress().getDistrict().getDistrictName() + ", ";
             addressLine += user.getAddress().getProvince().getProvinceName();
             tv_address.setText(addressLine);
+            CalculateShippingFee();
         }
     }
     private void CalculateShippingFee() {
         Map<String, String> params = new HashMap<>();
         params.put("to_district_id", String.valueOf(user.getAddress().getDistrict_id()));
         params.put("to_ward_code", user.getAddress().getWard_id());
-
 
         new RetrofitClient()
                 .callAPI()

@@ -99,7 +99,7 @@ public class SharedPrefHelper {
     }
 
     public PaymentMethod getPaymentMethod() {
-        String method = sharedPreferences.getString(PAYMENT_METHOD_KEY, "cod");
+        String method = sharedPreferences.getString(PAYMENT_METHOD_KEY, "COD");
         return PaymentMethod.fromString(method);
     }
 }

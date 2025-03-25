@@ -1,0 +1,198 @@
+package com.md09.pharmapoly.Adapters;
+
+import static com.md09.pharmapoly.utils.Constants.findObjectById;
+import static com.md09.pharmapoly.utils.Constants.formatCurrency;
+import static com.md09.pharmapoly.utils.Constants.getDisplayStatus;
+import static com.md09.pharmapoly.utils.Constants.getStatusColor;
+
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.md09.pharmapoly.Models.Order;
+import com.md09.pharmapoly.Models.OrderItem;
+import com.md09.pharmapoly.R;
+import com.md09.pharmapoly.ui.view.activity.OrderInfoActivity;
+import com.md09.pharmapoly.utils.Constants;
+import com.md09.pharmapoly.utils.DialogHelper;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
+public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrdersAdapter.ViewHolder> {
+
+    private Context context;
+    private List<Order> orders;
+    private Constants.OrderStatusGroup orderStatusGroup;
+    private OrderActionListener listener;
+    public interface OrderActionListener {
+        void onCancelOrder(Order order);
+        void onReturnOrExchangeOrder(Order order);
+    }
+
+    public PurchasedOrdersAdapter(Context context, List<Order> orders, Constants.OrderStatusGroup orderStatusGroup, OrderActionListener listener) {
+        this.context = context;
+        this.orders = orders;
+        this.orderStatusGroup = orderStatusGroup;
+        this.listener = listener;
+    }
+
+    public void Update(List<Order> orders) {
+        this.orders = orders;
+        notifyDataSetChanged();
+    }
+
+    @NonNull
+    @Override
+    public PurchasedOrdersAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_item,parent,false);
+        return new ViewHolder(view);
+    }
+
+
+    @Override
+    public void onBindViewHolder(@NonNull PurchasedOrdersAdapter.ViewHolder holder, int position) {
+        Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), android.R.anim.slide_in_left);
+        holder.itemView.startAnimation(animation);
+
+        Order order = orders.get(position);
+
+        holder.layout_order_item.removeAllViews();
+        SetOrderStatus(holder,order);
+//        holder.tv_order_status.setText(context.getString(R.string.status) + getDisplayStatus(context, order.getStatus()));
+//        holder.tv_order_status.setTextColor(getStatusColor(context, order.getStatus()));
+
+        List<OrderItem> items = order.getItems();
+        int itemCount = items.size();
+        int productCount = 0;
+
+        for (OrderItem item : items) {
+            productCount += item.getQuantity();
+            View view = LayoutInflater.from(context).inflate(R.layout.checkout_item, null, false);
+
+            TextView tv_quantity = view.findViewById(R.id.tv_quantity);
+            TextView tv_product_name = view.findViewById(R.id.tv_product_name);
+            TextView tv_discounted_price = view.findViewById(R.id.tv_discounted_price);
+            ImageView img_product = view.findViewById(R.id.img_product);
+
+            tv_quantity.setText("x" + item.getQuantity());
+            tv_product_name.setText(item.getProduct().getName());
+            tv_discounted_price.setText(formatCurrency(item.getPrice(), "đ"));
+            Picasso.get().load(item.getProduct().getImageUrl()).into(img_product);
+
+            holder.layout_order_item.addView(view);
+        }
+
+        if (itemCount > 1) {
+            holder.layout_order_item.post(() -> {
+                int itemHeight = holder.layout_order_item.getChildAt(0).getHeight();
+                ViewGroup.LayoutParams params = holder.layout_order_item.getLayoutParams();
+                params.height = itemHeight;
+                holder.layout_order_item.setLayoutParams(params);
+            });
+
+            holder.btn_show_more.setVisibility(View.VISIBLE);
+        } else {
+            holder.btn_show_more.setVisibility(View.GONE);
+        }
+        holder.tv_total_price.setText(
+                context.getString(R.string.total_amount) + " ( " +
+                productCount + " " +
+                context.getString(R.string.product).toLowerCase() + " ): " +
+                formatCurrency(order.getTotal_price(), "đ")
+        );
+
+        holder.btn_show_more.setOnClickListener(view -> {
+            holder.btn_show_more.setVisibility(View.GONE);
+
+            holder.layout_order_item.post(() -> {
+                int itemHeight = holder.layout_order_item.getChildAt(0).getHeight();
+                int totalHeight = itemHeight * itemCount;
+
+                ViewGroup.LayoutParams params = holder.layout_order_item.getLayoutParams();
+                params.height = totalHeight;
+                holder.layout_order_item.setLayoutParams(params);
+            });
+        });
+        if (orderStatusGroup == Constants.OrderStatusGroup.PROCESSING) {
+            holder.btn_order_item.setCardBackgroundColor(context.getResources().getColor(R.color.red_757));
+            holder.tv_btn_order.setText(R.string.cancel_order);
+            holder.btn_order_item.setOnClickListener(v -> {
+                DialogHelper.ShowConfirmationDialog(
+                        context,
+                        context.getString(R.string.cancel_order_title),
+                        context.getString(R.string.cancel_order_message),
+                        "OK",
+                        "Cancel",
+                        () -> listener.onCancelOrder(order)
+                );
+            });
+        } else if (orderStatusGroup == Constants.OrderStatusGroup.CANCELED) {
+            holder.btn_order_item.setVisibility(View.GONE);
+        } else {
+            holder.btn_order_item.setCardBackgroundColor(context.getResources().getColor(R.color.blue_CE4));
+            holder.tv_btn_order.setText(R.string.details);
+        }
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, OrderInfoActivity.class);
+            intent.putExtra("order_id", order.get_id());
+            context.startActivity(intent);
+        });
+    }
+
+    private void SetOrderStatus(ViewHolder holder,Order order) {
+        String prefix = context.getString(R.string.status) + ": ";
+        String displayStatus = getDisplayStatus(context, order.getStatus());
+
+        SpannableStringBuilder spannable = new SpannableStringBuilder();
+
+        spannable.append(prefix);
+        spannable.setSpan(context.getColor(R.color.black_333), 0, prefix.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        int statusColor = getStatusColor(context, order.getStatus());
+        int start = spannable.length();
+        spannable.append(displayStatus);
+        spannable.setSpan(new ForegroundColorSpan(statusColor), start, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        holder.tv_order_status.setText(spannable);
+    }
+
+
+    @Override
+    public int getItemCount() {
+        return orders != null ? orders.size() : 0;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private LinearLayout
+                layout_order_item,
+                btn_show_more;
+        private TextView tv_total_price,tv_order_status;
+        private CardView btn_order_item;
+        private TextView tv_btn_order;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            btn_order_item = itemView.findViewById(R.id.btn_order_item);
+            tv_btn_order = itemView.findViewById(R.id.tv_btn_order);
+            layout_order_item = itemView.findViewById(R.id.layout_order_item);
+            tv_total_price = itemView.findViewById(R.id.tv_total_price);
+            btn_show_more = itemView.findViewById(R.id.btn_show_more);
+            tv_order_status = itemView.findViewById(R.id.tv_order_status);
+        }
+    }
+}

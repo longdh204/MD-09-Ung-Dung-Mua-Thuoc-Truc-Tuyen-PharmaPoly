@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="56dp"
     android:gravity="center_horizontal"
+    android:paddingBottom="24dp"
     android:orientation="vertical"
+    android:background="@color/white_FFF"
     tools:context=".ui.view.activity.OrderManagementActivity">
 
     <LinearLayout

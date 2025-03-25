@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -75,7 +76,7 @@ public class ProfileFragment extends Fragment {
             btn_change_password,
             btn_manage_address,
 
-    btn_processing,
+            btn_processing,
             btn_shipping,
             btn_delivered,
             btn_exchange_return;
@@ -90,22 +91,17 @@ public class ProfileFragment extends Fragment {
 
         InitUI(view);
 
-        btn_processing.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), OrderManagementActivity.class);
-            startActivity(intent);
-        });
-        btn_shipping.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), OrderManagementActivity.class);
-            startActivity(intent);
-        });
-        btn_delivered.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), OrderManagementActivity.class);
-            startActivity(intent);
-        });
-        btn_exchange_return.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), OrderManagementActivity.class);
-            startActivity(intent);
-        });
+        LinearLayout[] buttons = {btn_processing, btn_shipping, btn_delivered, btn_exchange_return};
+
+        for (int i = 0; i < buttons.length; i++) {
+            final int index = i;
+            buttons[i].setOnClickListener(v -> {
+                Intent intent = new Intent(getActivity(), OrderManagementActivity.class);
+                intent.putExtra("order_status", index);
+                startActivity(intent);
+            });
+        }
+
 
 
         btn_personal_info.setOnClickListener(v -> {

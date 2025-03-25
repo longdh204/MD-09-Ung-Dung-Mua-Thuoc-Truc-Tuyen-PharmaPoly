@@ -58,7 +58,14 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
             listener.onStatusClick(holder.itemView, position);
         });
     }
-
+    public void updateSelectedPosition(int position) {
+        if (selectedPosition != position) {
+            int prevPosition = selectedPosition;
+            selectedPosition = position;
+            notifyItemChanged(prevPosition);
+            notifyItemChanged(selectedPosition);
+        }
+    }
     @Override
     public int getItemCount() {
         return orderStatuses.size();

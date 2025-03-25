@@ -1,8 +1,8 @@
 package com.md09.pharmapoly.utils;
 
 public enum PaymentMethod {
-    COD("cod"),
-    ONLINE("online");
+    COD("COD"),
+    ONLINE("ONLINE");
 
     private final String value;
 

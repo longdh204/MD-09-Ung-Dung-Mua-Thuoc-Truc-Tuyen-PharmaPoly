@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ public class OrderManagementActivity extends AppCompatActivity {
     private BottomNavigationView bn_my_orders;
     private View indicator;
     private int selectedPosition = 0;
+    private ImageButton btn_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,7 @@ public class OrderManagementActivity extends AppCompatActivity {
 //            return insets;
 //        });
         InitUI();
+        int orderStatusValue = getIntent().getIntExtra("order_status", -1);
 
         indicator = findViewById(R.id.indicator);
         ViewPagerBottomNavigationMyOrders bottomNavigationAdapter = new ViewPagerBottomNavigationMyOrders(this);
@@ -54,7 +57,7 @@ public class OrderManagementActivity extends AppCompatActivity {
                 getString(R.string.cancelled));
 
         OrderStatusAdapter adapter = new OrderStatusAdapter(orderStatuses, (itemView, position) -> {
-            //viewPager2_my_orders.setCurrentItem(position, true);
+            viewPager2_my_orders.setCurrentItem(position, true);
             selectedPosition = position;
             moveIndicator(itemView, 200);
         });
@@ -69,7 +72,32 @@ public class OrderManagementActivity extends AppCompatActivity {
             }
         });
 
-        rvOrderStatus.post(() -> moveIndicator(rvOrderStatus.getChildAt(0),200));
+        viewPager2_my_orders.setCurrentItem(orderStatusValue, false);;
+        selectedPosition = orderStatusValue;
+
+        //rvOrderStatus.post(() -> moveIndicator(rvOrderStatus.getChildAt(0),200));
+        rvOrderStatus.post(() -> {
+            adapter.updateSelectedPosition(orderStatusValue);
+            View selectedItem = rvOrderStatus.getLayoutManager().findViewByPosition(orderStatusValue);
+            if (selectedItem != null) {
+                moveIndicator(selectedItem, 0);
+            }
+        });
+
+        viewPager2_my_orders.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                adapter.updateSelectedPosition(position);
+                selectedPosition = position;
+
+                View selectedItem = rvOrderStatus.getLayoutManager().findViewByPosition(position);
+                moveIndicator(selectedItem, 200);
+            }
+        });
+        viewPager2_my_orders.setOffscreenPageLimit(5);
+
+
         //BottomNavigationManager();
     }
 
@@ -98,6 +126,10 @@ public class OrderManagementActivity extends AppCompatActivity {
         if (indicator.getVisibility() == View.INVISIBLE) {
             indicator.setVisibility(View.VISIBLE);
         }
+        btn_back.setOnClickListener(v -> {
+            finish();
+        });
+
     }
 
 
@@ -149,6 +181,7 @@ public class OrderManagementActivity extends AppCompatActivity {
 
     private void InitUI() {
         viewPager2_my_orders = findViewById(R.id.viewPager2_my_orders);
+        btn_back = findViewById(R.id.btn_back);
         //bn_my_orders = findViewById(R.id.bn_my_orders);
     }
 }

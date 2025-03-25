@@ -1,8 +1,13 @@
 package com.md09.pharmapoly.utils;
 
+import android.content.Context;
+
+import androidx.core.content.ContextCompat;
+
 import com.md09.pharmapoly.Models.District;
 import com.md09.pharmapoly.Models.Province;
 import com.md09.pharmapoly.Models.Ward;
+import com.md09.pharmapoly.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -26,7 +31,7 @@ public class Constants {
 
     public static final int PICK_IMAGE_REQUEST = 1;
     public static final int MAX_QUANTITY_PER_PRODUCT = 20;
-    public static String formatCurrency(int amount, String symbol) {
+    public static final String formatCurrency(int amount, String symbol) {
         DecimalFormat formatter = new DecimalFormat("#,###");
         return formatter.format(amount) + symbol;
     }
@@ -50,5 +55,113 @@ public class Constants {
             }
         }
         return null;
+    }
+    public static final String getDisplayStatus(Context context, String status) {
+        int stringResId;
+        switch (status) {
+            case "pending":
+                stringResId = R.string.status_pending;
+                break;
+            case "confirmed":
+                stringResId = R.string.status_confirmed;
+                break;
+            case "ready_to_pick":
+                stringResId = R.string.status_ready_to_pick;
+                break;
+            case "picking":
+                stringResId = R.string.status_picking;
+                break;
+            case "picked":
+                stringResId = R.string.status_picked;
+                break;
+            case "delivering":
+                stringResId = R.string.status_delivering;
+                break;
+            case "money_collect_delivering":
+                stringResId = R.string.status_money_collect_delivering;
+                break;
+            case "delivered":
+                stringResId = R.string.status_delivered;
+                break;
+            case "delivery_fail":
+                stringResId = R.string.status_delivery_fail;
+                break;
+            case "waiting_to_return":
+                stringResId = R.string.status_waiting_to_return;
+                break;
+            case "return":
+                stringResId = R.string.status_return;
+                break;
+            case "returned":
+                stringResId = R.string.status_returned;
+                break;
+            case "return_fail":
+                stringResId = R.string.status_return_fail;
+                break;
+            case "canceled":
+                stringResId = R.string.status_canceled;
+                break;
+            default:
+                return "Unknown";
+        }
+        return context.getString(stringResId);
+    }
+    public static final int getStatusColor(Context context, String status) {
+        int colorResId;
+        switch (status) {
+            case "pending":
+                colorResId = R.color.status_pending;
+                break;
+            case "confirmed":
+                colorResId = R.color.status_confirmed;
+                break;
+            case "ready_to_pick":
+                colorResId = R.color.status_ready_to_pick;
+                break;
+            case "picking":
+                colorResId = R.color.status_picking;
+                break;
+            case "picked":
+                colorResId = R.color.status_picked;
+                break;
+            case "delivering":
+                colorResId = R.color.status_delivering;
+                break;
+            case "money_collect_delivering":
+                colorResId = R.color.status_money_collect_delivering;
+                break;
+            case "delivered":
+                colorResId = R.color.status_delivered;
+                break;
+            case "delivery_fail":
+                colorResId = R.color.status_delivery_fail;
+                break;
+            case "waiting_to_return":
+                colorResId = R.color.status_waiting_to_return;
+                break;
+            case "return":
+                colorResId = R.color.status_return;
+                break;
+            case "returned":
+                colorResId = R.color.status_returned;
+                break;
+            case "return_fail":
+                colorResId = R.color.status_return_fail;
+                break;
+            case "canceled":
+                colorResId = R.color.status_canceled;
+                break;
+            default:
+                colorResId = R.color.black;
+        }
+        return ContextCompat.getColor(context, colorResId);
+    }
+
+    public enum OrderStatusGroup {
+        PROCESSING,
+        SHIPPING,
+        DELIVERED,
+        RETURNING,
+        CANCELED
     }
 }

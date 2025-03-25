@@ -33,4 +33,19 @@
     <color name="yellow_a20">#ffaa20</color>
 
     <color name="transparent">#00000000</color>
+
+    <color name="status_pending">#FFC107</color>
+    <color name="status_confirmed">#2196F3</color>
+    <color name="status_ready_to_pick">#4CAF50</color>
+    <color name="status_picking">#FF9800</color>
+    <color name="status_picked">#1565C0</color>
+    <color name="status_delivering">#9C27B0</color>
+    <color name="status_money_collect_delivering">#E91E63</color>
+    <color name="status_delivered">#2E7D32</color>
+    <color name="status_delivery_fail">#D32F2F</color>
+    <color name="status_waiting_to_return">#757575</color>
+    <color name="status_return">#FFCC80</color>
+    <color name="status_returned">#26A69A</color>
+    <color name="status_return_fail">#B71C1C</color>
+    <color name="status_canceled">#D32F2F</color>
 </resources>

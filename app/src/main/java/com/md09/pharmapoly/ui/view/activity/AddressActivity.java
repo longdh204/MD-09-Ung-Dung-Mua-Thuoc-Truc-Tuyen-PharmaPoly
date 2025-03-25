@@ -134,13 +134,19 @@ public class AddressActivity extends AppCompatActivity {
             }
         });
         btn_update_address.setOnClickListener(v -> {
+            String streetAddress = edt_myAddress.getText().toString().trim();
+            if (streetAddress.isEmpty()) {
+                Toast.makeText(this, "Vui lòng nhập địa chỉ!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             ProgressDialogHelper.showLoading(this);
             userAddress = new UserAddress();
             userAddress.setUser_id(new SharedPrefHelper(this).getUser().get_id());
             userAddress.setProvince(getProvince);
             userAddress.setDistrict(getDistrict);
             userAddress.setWard(getWard);
-            userAddress.setStreet_address(edt_myAddress.getText().toString());
+            userAddress.setStreet_address(streetAddress);
 
             new RetrofitClient().callAPI().updateAddress(
                     userAddress,
@@ -148,6 +154,9 @@ public class AddressActivity extends AppCompatActivity {
             ).enqueue(new Callback<ApiResponse<UserAddress>>() {
                 @Override
                 public void onResponse(Call<ApiResponse<UserAddress>> call, Response<ApiResponse<UserAddress>> response) {
+                    if (ProgressDialogHelper.isShowing()) {
+                        ProgressDialogHelper.hideLoading();
+                    }
                     if (response.isSuccessful() && response.body().getStatus() == 200) {
                         UserAddress updatedAddress = response.body().getData();
 
@@ -157,9 +166,6 @@ public class AddressActivity extends AppCompatActivity {
                         if (currentUser != null) {
                             currentUser.setAddress(updatedAddress);
                             sharedPrefHelper.updateUser(currentUser);
-                        }
-                        if (ProgressDialogHelper.isShowing()) {
-                            ProgressDialogHelper.hideLoading();
                         }
                         SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.address_update_success));
                         bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");

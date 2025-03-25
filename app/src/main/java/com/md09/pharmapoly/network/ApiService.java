@@ -1,11 +1,13 @@
 package com.md09.pharmapoly.network;
 
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 import com.md09.pharmapoly.Models.Brand;
 import com.md09.pharmapoly.Models.Cart;
 import com.md09.pharmapoly.Models.CartItem;
 import com.md09.pharmapoly.Models.ChatRequest;
 import com.md09.pharmapoly.Models.ChatResponse;
 import com.md09.pharmapoly.Models.GHNResponse;
+import com.md09.pharmapoly.Models.Order;
 import com.md09.pharmapoly.Models.PageData;
 import com.md09.pharmapoly.Models.ProductReview;
 import com.md09.pharmapoly.Models.Question;
@@ -39,9 +41,21 @@ import retrofit2.http.Url;
 
 public interface ApiService {
 
-
-
-
+    @POST("orders/create")
+    Call<ApiResponse<Order>> createOrders(
+            @Body Map<String, String> data,
+            @Header("Authorization") String token
+    );
+    @GET("orders/{id}/detail")
+    Call<ApiResponse<Order>> getOrderDetail(
+            @Path("id") String orderId,
+            @Header("Authorization") String token
+    );
+    @GET("orders")
+    Call<ApiResponse<List<Order>>> getOrders(
+            @Query("group") String group,
+            @Header("Authorization") String token
+    );
     @POST("calculate-shipping-fee")
     Call<GHNResponse<Object>> calculateShippingFee(
             @Header("Authorization") String token,
