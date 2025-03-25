@@ -4,11 +4,14 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,6 +22,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -115,6 +119,7 @@ public class HomeFragment extends Fragment {
     private LinearLayout lnMostReview;
     private CategoryListAdapter categoryListAdapter;  // Đổi tên ở đây
 
+    private LinearLayout btnthucphamchucnang, btnduocmypham, btnthuoc, btnchamsoc, btnthietbiyte, btnthuocbovitamin;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -232,6 +237,42 @@ public class HomeFragment extends Fragment {
             Intent intent = new Intent(getContext(), SearchActivity.class); // Chuyển tới Activity bạn muốn
             startActivity(intent);
         });
+
+        btnthucphamchucnang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Nav_FunctionalFoodActivity.class); // Chuyển tới Activity bạn muốn
+                startActivity(intent);
+            }
+        });
+        btnduocmypham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Nav_Pharmaceutical_Cosmetics.class); // Chuyển tới Activity bạn muốn
+                startActivity(intent);
+            }
+        });
+        btnthuoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Nav_Medicine.class); // Chuyển tới Activity bạn muốn
+                startActivity(intent);
+            }
+        });
+        btnchamsoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Nav_Personalcare.class); // Chuyển tới Activity bạn muốn
+                startActivity(intent);
+            }
+        });
+        btnthietbiyte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Nav_Medical_Equiment.class); // Chuyển tới Activity bạn muốn
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -281,24 +322,27 @@ public class HomeFragment extends Fragment {
                         lnTopRate.setVisibility(VISIBLE);
                         lnNoiBat.setVisibility(VISIBLE);
 
-                        productList = (page.getData().size() >= 2 * maxRow) ? page.getData().subList(0, 2 * maxRow) : page.getData();
+                        productList = (page.getData().size() >= 3 * maxRow) ? page.getData().subList(0, 3 * maxRow) : page.getData();
                         productAdapter.Update(productList);
 
                         Collections.shuffle(data);
-                        productListTopRate = (data.size() >= 2 * maxRow) ? data.subList(0, 2 * maxRow) : data;
+                        productListTopRate = (data.size() >= 3 * maxRow) ? data.subList(0, 3 * maxRow) : data;
                         productAdapterTopRate = new ProductAdapter(getContext(), productListTopRate);
                         rvTopRate.setAdapter(productAdapterTopRate);
-                        rvTopRate.setLayoutManager(new GridLayoutManager(getContext(), 2));
+
+                        // Sử dụng LinearLayoutManager với chế độ cuộn ngang
+                        rvTopRate.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ApiResponse<PageData<List<Product>>>> call, Throwable t) {
-
+                // Xử lý lỗi ở đây
             }
         });
     }
+
 
     private void GetMostReviewProducts() {
         retrofitClient.callAPI().getMostReviewProducts(1, 10, "Bearer " + token).enqueue(new Callback<ApiResponse<PageDataClone<List<Product>>>>() {
@@ -312,10 +356,13 @@ public class HomeFragment extends Fragment {
                             return;
                         }
                         lnMostReview.setVisibility(VISIBLE);
-                        productListMostReview = (data.size() >= 2 * maxRow) ? data.subList(0, 2 * maxRow) : data;
+                        productListMostReview = (data.size() >= 5 * maxRow) ? data.subList(0, 5 * maxRow) : data;
                         productAdapterMostReview = new ProductAdapter(getContext(), productListMostReview);
                         rvMostReview.setAdapter(productAdapterMostReview);
                         rvMostReview.setLayoutManager(new GridLayoutManager(getContext(), 2));
+
+                        // Sử dụng LinearLayoutManager với chế độ cuộn ngang
+                        rvMostReview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
                     }
                 }
             }
@@ -339,5 +386,12 @@ public class HomeFragment extends Fragment {
         lnNoiBat = view.findViewById(R.id.lnNoiBat);
         lnTopRate = view.findViewById(R.id.lnTopRate);
         lnMostReview = view.findViewById(R.id.lnMostReview);
+
+        btnthucphamchucnang = view.findViewById(R.id.btnthucphamchucnang);
+        btnduocmypham = view.findViewById(R.id.btnduocmypham);
+        btnthuoc = view.findViewById(R.id.btnthuoc);
+        btnchamsoc = view.findViewById(R.id.btnchamsoc);
+        btnthietbiyte = view.findViewById(R.id.btnthietbiyte);
+        btnthuocbovitamin = view.findViewById(R.id.btnthuocbovitamin);
     }
 }

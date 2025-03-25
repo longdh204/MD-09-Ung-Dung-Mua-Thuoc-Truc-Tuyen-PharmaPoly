@@ -47,6 +47,9 @@ public class PharmacyMapActivity extends FragmentActivity implements OnMapReadyC
 
         LatLng pharmacy4 = new LatLng(41.032, 150.8560); // Ví dụ nhà thuốc thứ 2
         mMap.addMarker(new MarkerOptions().position(pharmacy2).title("Nhà thuốc C"));
+
+        LatLng pharmacy5 = new LatLng(51.032, 160.8560); // Ví dụ nhà thuốc thứ 2
+        mMap.addMarker(new MarkerOptions().position(pharmacy2).title("Nhà thuốc C"));
     }
 }
 
