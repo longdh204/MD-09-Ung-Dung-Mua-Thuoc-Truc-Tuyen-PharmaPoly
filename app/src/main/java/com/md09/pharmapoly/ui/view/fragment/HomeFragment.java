@@ -5,8 +5,15 @@ import static android.view.View.VISIBLE;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -15,23 +22,19 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.android.material.navigation.NavigationView;
 import com.md09.pharmapoly.Adapters.CategoryAdapter;
+import com.md09.pharmapoly.Adapters.CategoryListAdapter;
 import com.md09.pharmapoly.Adapters.ProductAdapter;
 import com.md09.pharmapoly.Adapters.SliderAdapter;
 import com.md09.pharmapoly.Models.Category;
+import com.md09.pharmapoly.Models.ItemCategoryHome;
 import com.md09.pharmapoly.Models.PageData;
 import com.md09.pharmapoly.Models.PageDataClone;
 import com.md09.pharmapoly.Models.Product;
+import com.md09.pharmapoly.R;
+import com.md09.pharmapoly.data.model.ApiResponse;
+import com.md09.pharmapoly.network.RetrofitClient;
 import com.md09.pharmapoly.ui.view.activity.ChatbotActivity;
 import com.md09.pharmapoly.ui.view.activity.Nav_FunctionalFoodActivity;
 import com.md09.pharmapoly.ui.view.activity.Nav_Medical_Equiment;
@@ -39,15 +42,12 @@ import com.md09.pharmapoly.ui.view.activity.Nav_Medicine;
 import com.md09.pharmapoly.ui.view.activity.Nav_Personalcare;
 import com.md09.pharmapoly.ui.view.activity.Nav_Pharmaceutical_Cosmetics;
 import com.md09.pharmapoly.ui.view.activity.NotificationsActivity;
-import com.md09.pharmapoly.R;
-import com.md09.pharmapoly.data.model.ApiResponse;
-import com.md09.pharmapoly.network.RetrofitClient;
+import com.md09.pharmapoly.ui.view.activity.PharmacyMapActivity;
 import com.md09.pharmapoly.ui.view.activity.SearchActivity;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.md09.pharmapoly.viewmodel.CartViewModel;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -66,6 +66,7 @@ public class HomeFragment extends Fragment {
 
     public HomeFragment() {
     }
+
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
@@ -94,7 +95,7 @@ public class HomeFragment extends Fragment {
     private String token;
     private RecyclerView recyclerViewCategory;
     private CategoryAdapter categoryAdapter;
-    private List<Category> categoryList;
+    private List<ItemCategoryHome> categoryList;
     private DrawerLayout drawerLayout;
 
     private ViewPager2 viewPager2;
@@ -112,6 +113,7 @@ public class HomeFragment extends Fragment {
     private LinearLayout lnNoiBat;
     private LinearLayout lnTopRate;
     private LinearLayout lnMostReview;
+    private CategoryListAdapter categoryListAdapter;  // Đổi tên ở đây
 
 
     @Override
@@ -126,7 +128,6 @@ public class HomeFragment extends Fragment {
         SetupRecyclerView(view);
         GetTopRatedProducts();
         GetMostReviewProducts();
-
 
         List<Integer> sliderImageIds = new ArrayList<>();
         sliderImageIds.add(R.drawable.bn1);
@@ -151,24 +152,34 @@ public class HomeFragment extends Fragment {
             startActivity(intent);
         });
 
+
+        // Khởi tạo RecyclerView và danh sách category
         recyclerViewCategory = view.findViewById(R.id.recyclerViewCategories);
         recyclerViewCategory.setLayoutManager(new GridLayoutManager(getContext(), 4));
 
         categoryList = new ArrayList<>();
-        //categoryList.add(new Category("Cần mua thuốc", R.drawable.ic_medicine));
-        categoryList.add(new Category("Đơn của tôi", R.drawable.ic_doncuatoi));
-        categoryList.add(new Category("Tìm nhà thuốc", R.drawable.ic_timnhathuoc));
-        categoryList.add(new Category("Nhắc uống thuốc", R.drawable.ic_nhacuongthuoc));
-        categoryList.add(new Category("Liên hệ dược sĩ", R.drawable.ic_lienheduocsi));
-        categoryList.add(new Category("Ghi chú", R.drawable.ic_ghichuu));
-        categoryList.add(new Category("Cần mua thuốc", R.drawable.ic_canmuathuoc));
-        categoryList.add(new Category("Kiểm tra sức khỏe", R.drawable.ic_kiemtrasuckhoe));
 
-        categoryAdapter = new CategoryAdapter(getContext(), categoryList);
-        recyclerViewCategory.setAdapter(categoryAdapter);
+        // Thêm các danh mục vào categoryList dưới dạng ItemCategoryHome
+        categoryList.add(new ItemCategoryHome("Đơn của tôi", R.drawable.ic_doncuatoi));
+        categoryList.add(new ItemCategoryHome("Tìm nhà thuốc", R.drawable.ic_timnhathuoc));
+        categoryList.add(new ItemCategoryHome("Nhắc uống thuốc", R.drawable.ic_nhacuongthuoc));
+        categoryList.add(new ItemCategoryHome("Liên hệ dược sĩ", R.drawable.ic_lienheduocsi));
+        categoryList.add(new ItemCategoryHome("Ghi chú", R.drawable.ic_ghichuu));
+        categoryList.add(new ItemCategoryHome("Cần mua thuốc", R.drawable.ic_canmuathuoc));
+        categoryList.add(new ItemCategoryHome("Kiểm tra sức khỏe", R.drawable.ic_kiemtrasuckhoe));
+
+        categoryListAdapter = new CategoryListAdapter(getContext(), categoryList); // Sử dụng ItemCategoryHome ở đây
+        recyclerViewCategory.setAdapter(categoryListAdapter);
+
+        // Xử lý sự kiện click vào category
+        categoryListAdapter.setOnCategoryClickListener(category -> {
+            if (category.getName().equals("Tìm nhà thuốc")) {
+                Intent intent = new Intent(getContext(), PharmacyMapActivity.class);
+                startActivity(intent);
+            }
+        });
 
         menuIcon.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
-
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_notification) {
@@ -183,30 +194,28 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), "Dược mỹ phẩm", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), Nav_Pharmaceutical_Cosmetics.class));
                 return true;
-            }else if (id == R.id.nav_medicine) {
+            } else if (id == R.id.nav_medicine) {
                 Toast.makeText(getContext(), "Thuốc", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), Nav_Medicine.class));
                 return true;
-            }else if (id == R.id.nav_medical_equipment) {
+            } else if (id == R.id.nav_medical_equipment) {
                 Toast.makeText(getContext(), "Thiết bị y tế", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), Nav_Medical_Equiment.class));
                 return true;
-            }else if (id == R.id.nav_personalcare) {
+            } else if (id == R.id.nav_personalcare) {
                 Toast.makeText(getContext(), "Chăm sóc cá nhân", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), Nav_Personalcare.class));
                 return true;
-            }else if (id == R.id.nav_chatbot) {
+            } else if (id == R.id.nav_chatbot) {
                 Toast.makeText(getContext(), "ChatBot", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), ChatbotActivity.class));
                 return true;
             }
-
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
         // Lấy ImageView từ layout
         ImageView circleImage = view.findViewById(R.id.circleImage);
-
         // Set OnClickListener cho ImageView
         circleImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,43 +225,39 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-// Trong phương thức onCreateView của HomeFragment
+        // Trong phương thức onCreateView của HomeFragment
         TextView textViewSearch = view.findViewById(R.id.textViewSearch);
-
         textViewSearch.setOnClickListener(v -> {
             // Khi nhấn vào TextView, chuyển sang màn hình tìm kiếm
             Intent intent = new Intent(getContext(), SearchActivity.class); // Chuyển tới Activity bạn muốn
             startActivity(intent);
         });
-
-
         return view;
     }
 
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == 1001 && resultCode == Activity.RESULT_OK) {
-//            boolean isProductAdded = data.getBooleanExtra("isProductAdded", false);
-//            Toast.makeText(getContext(), isProductAdded + "", Toast.LENGTH_SHORT).show();
-//            if (isProductAdded) {
-//                Toast.makeText(getContext(), "Check A", Toast.LENGTH_SHORT).show();
-//                cartViewModel.FetchCartData(getContext());
-//            } else {
-//                Toast.makeText(getContext(), "Check B", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        }
-//    }
+    //    @Override
+    //    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    //        super.onActivityResult(requestCode, resultCode, data);
+    //
+    //        if (requestCode == 1001 && resultCode == Activity.RESULT_OK) {
+    //            boolean isProductAdded = data.getBooleanExtra("isProductAdded", false);
+    //            Toast.makeText(getContext(), isProductAdded + "", Toast.LENGTH_SHORT).show();
+    //            if (isProductAdded) {
+    //                Toast.makeText(getContext(), "Check A", Toast.LENGTH_SHORT).show();
+    //                cartViewModel.FetchCartData(getContext());
+    //            } else {
+    //                Toast.makeText(getContext(), "Check B", Toast.LENGTH_SHORT).show();
+    //
+    //            }
+    //        }
+    //    }
 
     private void SetupRecyclerView(View view) {
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2); // Hiển thị 2 cột
         recyclerView.setLayoutManager(layoutManager);
 //        recyclerView.addItemDecoration(new SpaceItemDecoration(20)); // Thêm khoảng cách giữa các item
 //        recyclerView.setAdapter(adapter);
-
+//
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         productList = new ArrayList<>();
@@ -268,7 +273,7 @@ public class HomeFragment extends Fragment {
                     if (response.body().getStatus() == 200) {
                         PageData<List<Product>> page = response.body().getData();
                         List<Product> data = response.body().getData().getData();
-                        if(data == null || data.isEmpty()) {
+                        if (data == null || data.isEmpty()) {
                             lnTopRate.setVisibility(GONE);
                             lnNoiBat.setVisibility(GONE);
                             return;
@@ -276,12 +281,12 @@ public class HomeFragment extends Fragment {
                         lnTopRate.setVisibility(VISIBLE);
                         lnNoiBat.setVisibility(VISIBLE);
 
-                        productList = (page.getData().size() >= 2*maxRow) ? page.getData().subList(0,2*maxRow) : page.getData() ;
+                        productList = (page.getData().size() >= 2 * maxRow) ? page.getData().subList(0, 2 * maxRow) : page.getData();
                         productAdapter.Update(productList);
 
                         Collections.shuffle(data);
-                        productListTopRate = (data.size() >= 2*maxRow) ? data.subList(0,2*maxRow) : data;
-                        productAdapterTopRate = new ProductAdapter(getContext(),productListTopRate);
+                        productListTopRate = (data.size() >= 2 * maxRow) ? data.subList(0, 2 * maxRow) : data;
+                        productAdapterTopRate = new ProductAdapter(getContext(), productListTopRate);
                         rvTopRate.setAdapter(productAdapterTopRate);
                         rvTopRate.setLayoutManager(new GridLayoutManager(getContext(), 2));
                     }
@@ -302,13 +307,13 @@ public class HomeFragment extends Fragment {
                 if (response.isSuccessful()) {
                     if (response.body().getStatus() == 200) {
                         List<Product> data = response.body().getData().getData();
-                        if(data == null || data.isEmpty()) {
+                        if (data == null || data.isEmpty()) {
                             lnMostReview.setVisibility(GONE);
                             return;
                         }
                         lnMostReview.setVisibility(VISIBLE);
-                        productListMostReview = (data.size() >= 2*maxRow) ? data.subList(0,2*maxRow) : data;
-                        productAdapterMostReview = new ProductAdapter(getContext(),productListMostReview);
+                        productListMostReview = (data.size() >= 2 * maxRow) ? data.subList(0, 2 * maxRow) : data;
+                        productAdapterMostReview = new ProductAdapter(getContext(), productListMostReview);
                         rvMostReview.setAdapter(productAdapterMostReview);
                         rvMostReview.setLayoutManager(new GridLayoutManager(getContext(), 2));
                     }

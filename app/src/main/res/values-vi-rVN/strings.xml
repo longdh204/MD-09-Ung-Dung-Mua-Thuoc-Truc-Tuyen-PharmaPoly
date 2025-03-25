@@ -120,4 +120,5 @@
     <string name="online_payment">Thanh toán trực tuyến</string>
     <string name="momo_payment">Thanh toán bằng ví điện tử Momo</string>
     <string name="agree">Đồng ý</string>
+    <string name="google_maps_key">AIzaSyCY2q4OHoD-kzimfAsIN2MjMp-8KVxl-KY</string>
 </resources>
