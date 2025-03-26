@@ -1,15 +1,21 @@
 package com.md09.pharmapoly.ui.view.activity;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +28,7 @@ import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.Adapters.ProductAdapter;
 import com.md09.pharmapoly.network.RetrofitClient;
 import com.md09.pharmapoly.network.ApiService;
+import com.md09.pharmapoly.ui.view.fragment.HomeFragment;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 
 import java.util.ArrayList;
@@ -50,6 +57,7 @@ public class SearchActivity extends AppCompatActivity {
     private HorizontalScrollView categoryScrollView, brandScrollView;
     private LinearLayout categoryLayout, brandLayout;
     private LinearLayout historyLayout;  // Lịch sử tìm kiếm
+    private ImageView imgback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +74,7 @@ public class SearchActivity extends AppCompatActivity {
         categoryLayout = findViewById(R.id.categoryLayout);
         brandLayout = findViewById(R.id.brandLayout);
         historyLayout = findViewById(R.id.historyLayout);  // Lịch sử tìm kiếm
-
+        imgback = findViewById(R.id.imgback);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         productAdapter = new ProductAdapter(this, new ArrayList<>());
         recyclerView.setAdapter(productAdapter);
@@ -114,6 +122,17 @@ public class SearchActivity extends AppCompatActivity {
         for (String keyword : history) {
             Button historyButton = new Button(this);
             historyButton.setText(keyword);
+
+            historyButton.setBackgroundResource(R.drawable.buttonsearch);  // Thay "button_background" bằng tên file hình nền của bạn
+            historyButton.setTextColor(getResources().getColor(R.color.black));
+//            historyButton.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/overpass_regular.ttf"));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(16, 0, 0, 0);  // Margin: (left, top, right, bottom)
+            historyButton.setLayoutParams(params);
+            historyButton.setAllCaps(false);  // Hiển thị chữ thường
+
             historyButton.setOnClickListener(v -> {
                 searchView.setQuery(keyword, false);
                 fetchSearchResults(keyword);
@@ -194,6 +213,17 @@ public class SearchActivity extends AppCompatActivity {
             categoryButton.setText(category);
             categoryButton.setOnClickListener(v -> filterByCategory(category));
             categoryLayout.addView(categoryButton);
+
+            categoryButton.setBackgroundResource(R.drawable.buttonsearch);  // Thay "button_background" bằng tên file hình nền của bạn
+            categoryButton.setTextColor(getResources().getColor(R.color.black));
+//            historyButton.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/overpass_regular.ttf"));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(16, 0, 0, 0);  // Margin: (left, top, right, bottom)
+            categoryButton.setLayoutParams(params);
+            categoryButton.setPadding(20, 10, 20, 10);
+            categoryButton.setAllCaps(false);  // Hiển thị chữ thường
         }
 
         // Hiển thị brands
@@ -202,6 +232,17 @@ public class SearchActivity extends AppCompatActivity {
             brandButton.setText(brand);
             brandButton.setOnClickListener(v -> filterByBrand(brand));
             brandLayout.addView(brandButton);
+
+            brandButton.setBackgroundResource(R.drawable.buttonsearch);  // Thay "button_background" bằng tên file hình nền của bạn
+            brandButton.setTextColor(getResources().getColor(R.color.black));
+//            historyButton.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/overpass_regular.ttf"));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(16, 0, 0, 0);  // Margin: (left, top, right, bottom)
+            brandButton.setLayoutParams(params);
+            brandButton.setPadding(20, 10, 20, 10);
+            brandButton.setAllCaps(false);  // Hiển thị chữ thường
         }
     }
 
@@ -232,7 +273,7 @@ public class SearchActivity extends AppCompatActivity {
         List<Product> currentPageProducts = totalProducts.subList(startIndex, endIndex);
         productAdapter.Update(currentPageProducts);
         updatePaginationButtons();
-        pageInfoTextView.setText("Trang " + (currentPage + 1) + " / " + getTotalPages());
+        pageInfoTextView.setText("" + (currentPage + 1) + " / " + getTotalPages());
     }
 
     private void updatePaginationButtons() {

@@ -1,6 +1,5 @@
 package com.md09.pharmapoly.network;
 
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 import com.md09.pharmapoly.Models.Brand;
 import com.md09.pharmapoly.Models.Cart;
 import com.md09.pharmapoly.Models.CartItem;
@@ -9,6 +8,7 @@ import com.md09.pharmapoly.Models.ChatResponse;
 import com.md09.pharmapoly.Models.GHNResponse;
 import com.md09.pharmapoly.Models.Order;
 import com.md09.pharmapoly.Models.PageData;
+import com.md09.pharmapoly.Models.PageDataClone;
 import com.md09.pharmapoly.Models.ProductReview;
 import com.md09.pharmapoly.Models.Question;
 import com.md09.pharmapoly.Models.SearchResponse;
@@ -41,6 +41,12 @@ import retrofit2.http.Url;
 
 public interface ApiService {
 
+    @GET("product/most-reviewed")
+    Call<ApiResponse<PageDataClone<List<Product>>>> getMostReviewProducts(
+            @Query("page") int page,
+            @Query("limit") int limit,
+            @Header("Authorization") String token
+    );
     @POST("orders/{id}/cancel")
     Call<ApiResponse<Order>> cancelOrder(
             @Path("id") String orderId,

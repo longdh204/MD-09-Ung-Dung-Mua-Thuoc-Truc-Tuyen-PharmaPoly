@@ -1,5 +1,4 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="80dp"
     android:layout_height="99dp"
     android:layout_margin="10dp"
@@ -13,17 +12,18 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/ic_medicine"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter" />
 
     <TextView
         android:id="@+id/txtCategoryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cần mua thuốc"
-        android:textSize="12sp"
-        android:textStyle="bold"
+        android:textSize="12dp"
         android:textColor="@android:color/black"
         android:gravity="center"
         android:fontFamily="@font/overpass_regular"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:focusable="true" />
 </LinearLayout>
