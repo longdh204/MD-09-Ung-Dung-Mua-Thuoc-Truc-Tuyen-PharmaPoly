@@ -33,7 +33,9 @@ import com.md09.pharmapoly.utils.Constants;
 import com.md09.pharmapoly.utils.DialogHelper;
 import com.squareup.picasso.Picasso;
 
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrdersAdapter.ViewHolder> {
 
@@ -41,8 +43,10 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
     private List<Order> orders;
     private Constants.OrderStatusGroup orderStatusGroup;
     private OrderActionListener listener;
+
     public interface OrderActionListener {
         void onCancelOrder(Order order);
+
         void onReturnOrExchangeOrder(Order order);
     }
 
@@ -61,7 +65,7 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
     @NonNull
     @Override
     public PurchasedOrdersAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -74,7 +78,7 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
         Order order = orders.get(position);
 
         holder.layout_order_item.removeAllViews();
-        SetOrderStatus(holder,order);
+        SetOrderStatus(holder, order);
 //        holder.tv_order_status.setText(context.getString(R.string.status) + getDisplayStatus(context, order.getStatus()));
 //        holder.tv_order_status.setTextColor(getStatusColor(context, order.getStatus()));
 
@@ -113,9 +117,9 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
         }
         holder.tv_total_price.setText(
                 context.getString(R.string.total_amount) + " ( " +
-                productCount + " " +
-                context.getString(R.string.product).toLowerCase() + " ): " +
-                formatCurrency(order.getTotal_price(), "đ")
+                        productCount + " " +
+                        context.getString(R.string.product).toLowerCase() + " ): " +
+                        formatCurrency(order.getTotal_price(), "đ")
         );
 
         holder.btn_show_more.setOnClickListener(view -> {
@@ -143,6 +147,25 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
                         () -> listener.onCancelOrder(order)
                 );
             });
+
+
+        } else if (orderStatusGroup == Constants.OrderStatusGroup.DELIVERED) {
+            if (canReturnOrder(order)) {
+                holder.btn_order_item.setCardBackgroundColor(context.getResources().getColor(R.color.green_500));
+                holder.tv_btn_order.setText(R.string.return_order);
+                holder.btn_order_item.setOnClickListener(v -> {
+                    DialogHelper.ShowConfirmationDialog(
+                            context,
+                            context.getString(R.string.return_order_title),
+                            context.getString(R.string.return_order_message),
+                            "OK",
+                            "Cancel",
+                            () -> listener.onReturnOrExchangeOrder(order)
+                    );
+                });
+            } else {
+                holder.btn_order_item.setVisibility(View.GONE);
+            }
         } else if (orderStatusGroup == Constants.OrderStatusGroup.CANCELED) {
             holder.btn_order_item.setVisibility(View.GONE);
         } else {
@@ -156,7 +179,15 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
         });
     }
 
-    private void SetOrderStatus(ViewHolder holder,Order order) {
+    private boolean canReturnOrder(Order order) {
+        if (order.getDelivered_at() == null) return false;
+        Date now = new Date();
+        long diff = now.getTime() - order.getDelivered_at().getTime();
+        long daysDiff = TimeUnit.MILLISECONDS.toDays(diff);
+        return daysDiff <= 7;
+    }
+
+    private void SetOrderStatus(ViewHolder holder, Order order) {
         String prefix = context.getString(R.string.status) + ": ";
         String displayStatus = getDisplayStatus(context, order.getStatus());
 
@@ -182,9 +213,10 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
         private LinearLayout
                 layout_order_item,
                 btn_show_more;
-        private TextView tv_total_price,tv_order_status;
+        private TextView tv_total_price, tv_order_status;
         private CardView btn_order_item;
         private TextView tv_btn_order;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             btn_order_item = itemView.findViewById(R.id.btn_order_item);

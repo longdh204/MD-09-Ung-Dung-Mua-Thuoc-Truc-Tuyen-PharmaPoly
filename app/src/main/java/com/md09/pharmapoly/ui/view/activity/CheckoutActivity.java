@@ -40,7 +40,12 @@ import com.md09.pharmapoly.network.RetrofitClient;
 import com.md09.pharmapoly.utils.PaymentMethod;
 import com.md09.pharmapoly.utils.ProgressDialogHelper;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
+import com.md09.pharmapoly.utils.SuccessMessageBottomSheet;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -121,27 +126,43 @@ public class CheckoutActivity extends AppCompatActivity {
             startActivity(new Intent(CheckoutActivity.this,AddressActivity.class));
         });
         btn_order.setOnClickListener(v -> {
-            Map<String, String> requestData = new HashMap<>();
+//            Map<String, String> requestData = new HashMap<>();
+//            requestData.put("payment_method", new SharedPrefHelper(this).getPaymentMethod().getValue());
+//            requestData.put("items", new Gson().toJson(selectedItems));
+            Map<String, Object> requestData = new HashMap<>();
             requestData.put("payment_method", new SharedPrefHelper(this).getPaymentMethod().getValue());
-            requestData.put("items", new Gson().toJson(selectedItems));
 
-//            new RetrofitClient()
-//                    .callAPI()
-//                    .createOrders(
-//                                requestData,
-//                                "Bearer " + new SharedPrefHelper(this).getToken()
-//                            )
-//                    .enqueue(new Callback<ApiResponse<Order>>() {
-//                        @Override
-//                        public void onResponse(Call<ApiResponse<Order>> call, Response<ApiResponse<Order>> response) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<ApiResponse<Order>> call, Throwable t) {
-//
-//                        }
-//                    });
+            List<Map<String, Object>> itemsList = new ArrayList<>();
+            for (CartItem item : selectedItems) {
+                Map<String, Object> itemMap = new HashMap<>();
+                itemMap.put("product_id", item.getProduct().get_id());
+                itemMap.put("quantity", item.getQuantity());
+                itemMap.put("price", item.getDiscounted_price());
+                itemsList.add(itemMap);
+            }
+            requestData.put("items", itemsList);
+
+
+            new RetrofitClient()
+                    .callAPI()
+                    .createOrders(
+                                requestData,
+                                "Bearer " + new SharedPrefHelper(this).getToken()
+                            )
+                    .enqueue(new Callback<ApiResponse<Order>>() {
+                        @Override
+                        public void onResponse(Call<ApiResponse<Order>> call, Response<ApiResponse<Order>> response) {
+                            if (response.isSuccessful() && response.body().getStatus() == 200) {
+                                SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_success));
+                                bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ApiResponse<Order>> call, Throwable t) {
+
+                        }
+                    });
         });
         FillAddress();
     }

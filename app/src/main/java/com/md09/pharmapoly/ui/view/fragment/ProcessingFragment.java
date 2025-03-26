@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.md09.pharmapoly.Adapters.PurchasedOrdersAdapter;
 import com.md09.pharmapoly.Models.Order;
@@ -78,6 +79,7 @@ public class ProcessingFragment extends Fragment {
     private List<Order> orders = new ArrayList<>();
     private RecyclerView rcv_order;
     private LinearLayout layout_empty;
+    private PurchasedOrdersAdapter purchasedOrdersAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -86,14 +88,14 @@ public class ProcessingFragment extends Fragment {
 
         InitUI(view);
         ProgressDialogHelper.showLoading(getContext());
-        PurchasedOrdersAdapter purchasedOrdersAdapter = new PurchasedOrdersAdapter(
+        purchasedOrdersAdapter = new PurchasedOrdersAdapter(
                 getContext(),
                 null,
                 Constants.OrderStatusGroup.PROCESSING,
                 new PurchasedOrdersAdapter.OrderActionListener() {
                     @Override
                     public void onCancelOrder(Order order) {
-
+                        CancelOrder(order);
                     }
 
                     @Override
@@ -116,6 +118,7 @@ public class ProcessingFragment extends Fragment {
                     public void onResponse(Call<ApiResponse<List<Order>>> call, Response<ApiResponse<List<Order>>> response) {
                         if (response.isSuccessful() && response.body().getStatus() == 200) {
                             List<Order> orders = response.body().getData();
+                            ProcessingFragment.this.orders = orders;
 
                             if (orders != null && orders.size() > 0) {
                                 purchasedOrdersAdapter.Update(response.body().getData());
@@ -135,6 +138,32 @@ public class ProcessingFragment extends Fragment {
                     }
                 });
         return view;
+    }
+
+    private void CancelOrder(Order order) {
+        ProgressDialogHelper.showLoading(getContext());
+        new RetrofitClient()
+                .callAPI()
+                .cancelOrder(
+                        order.get_id(),
+                        "Bearer " + new SharedPrefHelper(getContext()).getToken()
+                )
+                .enqueue(new Callback<ApiResponse<Order>>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse<Order>> call, Response<ApiResponse<Order>> response) {
+                        if (response.isSuccessful() && response.body().getStatus() == 200) {
+                            orders.remove(order);
+                            purchasedOrdersAdapter.Update(orders);
+                            Toast.makeText(getContext(), "Hủy thành công", Toast.LENGTH_SHORT).show();
+                        }
+                        ProgressDialogHelper.hideLoading();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponse<Order>> call, Throwable t) {
+                        ProgressDialogHelper.hideLoading();
+                    }
+                });
     }
 
 //    @Override

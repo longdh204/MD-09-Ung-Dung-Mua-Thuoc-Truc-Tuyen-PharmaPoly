@@ -146,4 +146,10 @@
     <string name="cancel_order_title">Xác nhận hủy đơn</string>
     <string name="cancel_order_message">Bạn có chắc chắn muốn hủy đơn hàng này không?</string>
     <string name="order_cancelled_success">Hủy đơn hàng thành công!</string>
+    <string name="ghn_shipping_code">Mã vận chuyển</string>
+
+    <string name="return_order">Trả hàng</string>
+    <string name="return_order_title">Xác nhận trả hàng</string>
+    <string name="return_order_message">Bạn có chắc chắn muốn trả hàng không?</string>
+    <string name="order_success">Đặt hàng thành công!</string>
 </resources>

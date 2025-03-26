@@ -145,4 +145,10 @@
     <string name="cancel_order_title">Confirm Order Cancellation</string>
     <string name="cancel_order_message">Are you sure you want to cancel this order?</string>
     <string name="order_cancelled_success">Order successfully canceled!</string>
+    <string name="ghn_shipping_code">Shipping Code</string>
+
+    <string name="return_order">Return item</string>
+    <string name="return_order_title">Confirm Return</string>
+    <string name="return_order_message">Are you sure you want to return this item?</string>
+    <string name="order_success">Order placed successfully!</string>
 </resources>

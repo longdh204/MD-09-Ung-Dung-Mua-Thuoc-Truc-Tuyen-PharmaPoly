@@ -60,15 +60,18 @@
                 android:orientation="vertical"
                 android:padding="12dp">
                 <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/layout_ghn_shipping_code"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/be_vietnam_pro_medium"
-                        android:text="@string/status"
+                        android:text="@string/ghn_shipping_code"
                         android:textColor="@color/black_333"
                         android:textSize="16sp"/>
 
@@ -87,7 +90,6 @@
                         android:textSize="14sp" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginTop="6dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">

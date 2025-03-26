@@ -41,9 +41,14 @@ import retrofit2.http.Url;
 
 public interface ApiService {
 
+    @POST("orders/{id}/cancel")
+    Call<ApiResponse<Order>> cancelOrder(
+            @Path("id") String orderId,
+            @Header("Authorization") String token
+    );
     @POST("orders/create")
     Call<ApiResponse<Order>> createOrders(
-            @Body Map<String, String> data,
+            @Body Map<String, Object> data,
             @Header("Authorization") String token
     );
     @GET("orders/{id}/detail")

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.md09.pharmapoly.Adapters.PurchasedOrdersAdapter;
 import com.md09.pharmapoly.Models.Order;
@@ -96,7 +97,7 @@ public class DeliveredFragment extends Fragment {
 
                     @Override
                     public void onReturnOrExchangeOrder(Order order) {
-
+                        Toast.makeText(getContext(), "Check", Toast.LENGTH_SHORT).show();
                     }
                 });
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 1);

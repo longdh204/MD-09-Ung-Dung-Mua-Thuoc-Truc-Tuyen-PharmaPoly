@@ -23,6 +23,7 @@ import com.md09.pharmapoly.Models.OrderItem;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.network.RetrofitClient;
+import com.md09.pharmapoly.utils.ProgressDialogHelper;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.squareup.picasso.Picasso;
 
@@ -43,8 +44,11 @@ public class OrderInfoActivity extends AppCompatActivity {
             tv_subtotal,
             tv_total_shipping_fee,
             tv_created_at,
-            tv_status;
-    private LinearLayout layout_order_item;
+            tv_status,
+            tv_order_code;
+    private LinearLayout
+            layout_order_item,
+            layout_ghn_shipping_code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +60,7 @@ public class OrderInfoActivity extends AppCompatActivity {
 //            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 //            return insets;
 //        });
-
+        ProgressDialogHelper.showLoading(this);
 
         InitUI();
         String orderId = getIntent().getStringExtra("order_id");
@@ -75,10 +79,12 @@ public class OrderInfoActivity extends AppCompatActivity {
                             FillAddress();
                             FillOrder();
                         }
+                        ProgressDialogHelper.hideLoading();
                     }
 
                     @Override
                     public void onFailure(Call<ApiResponse<Order>> call, Throwable t) {
+                        ProgressDialogHelper.hideLoading();
 
                     }
                 });
@@ -115,7 +121,10 @@ public class OrderInfoActivity extends AppCompatActivity {
         tv_created_at.setText(formattedDate);
         tv_status.setText(getDisplayStatus(this, order.getStatus()));
         tv_status.setTextColor(getStatusColor(this, order.getStatus()));
-
+        if (order.getOrder_code() != null && !order.getOrder_code().trim().isEmpty()) {
+            layout_ghn_shipping_code.setVisibility(View.VISIBLE);
+            tv_order_code.setText(order.getOrder_code());
+        }
     }
 
     private void FillAddress() {
@@ -136,7 +145,9 @@ public class OrderInfoActivity extends AppCompatActivity {
         tv_total_shipping_fee = findViewById(R.id.tv_total_shipping_fee);
         tv_created_at = findViewById(R.id.tv_created_at);
         tv_status = findViewById(R.id.tv_status);
+        tv_order_code = findViewById(R.id.tv_order_code);
 
+        layout_ghn_shipping_code = findViewById(R.id.layout_ghn_shipping_code);
         layout_order_item = findViewById(R.id.layout_order_item);
     }
 }
