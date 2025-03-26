@@ -49,10 +49,10 @@
             android:paddingBottom="24dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="170dp"
             android:orientation="horizontal"
-            android:layout_marginTop="55dp"
-            android:paddingTop="20dp">
+            android:paddingTop="20dp"
+            android:background="@drawable/hd_search">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/img_user_avatar"
@@ -60,14 +60,16 @@
                 android:layout_height="80dp"
                 android:scaleType="centerCrop"
                 app:shapeAppearance="@style/FullCornerImageView"
-                android:src="@drawable/perfil" />
+                android:src="@drawable/perfil"
+                android:layout_marginTop="20dp" />
 
             <LinearLayout
                 android:paddingLeft="12dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_weight="1"> <!-- Sử dụng layout_weight để cho phần này chiếm không gian còn lại -->
+                android:layout_weight="1"
+                android:layout_marginTop="20dp"> <!-- Sử dụng layout_weight để cho phần này chiếm không gian còn lại -->
 
                 <TextView
                     android:id="@+id/tv_full_name"
@@ -76,7 +78,7 @@
                     android:lines="1"
                     android:fontFamily="@font/be_vietnam_pro_bold"
                     android:textSize="20sp"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/white"
                     android:ellipsize="end"
                     android:textStyle="bold"
                     android:text="Name Profile" />
@@ -88,7 +90,7 @@
                     android:lines="1"
                     android:fontFamily="@font/overpass_regular"
                     android:textSize="14sp"
-                    android:textColor="#2F2F2F"
+                    android:textColor="#FFFFFF"
                     android:ellipsize="end"
                     android:text="Welcome to my App" />
 
@@ -105,11 +107,12 @@
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/logout"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/dangxuat"
                 android:gravity="center"
-                android:layout_alignParentEnd="true" /> <!-- Sử dụng gravity để căn nút về phía cuối -->
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="25dp" /> <!-- Sử dụng gravity để căn nút về phía cuối -->
         </LinearLayout>
 
 
