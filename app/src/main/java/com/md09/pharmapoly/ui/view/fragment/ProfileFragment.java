@@ -19,6 +19,8 @@ import com.bumptech.glide.Glide;
 import com.md09.pharmapoly.AddAddress;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.User;
+import com.md09.pharmapoly.ui.view.activity.AddressActivity;
+import com.md09.pharmapoly.ui.view.activity.OrderManagementActivity;
 import com.md09.pharmapoly.ui.view.activity.payment_card_manager;
 //import com.md09.pharmapoly.ui.view.activity.payment_card_manager_empty;
 import com.md09.pharmapoly.ui.view.activity.ChangePassword;
@@ -160,7 +162,7 @@ public class ProfileFragment extends Fragment {
         } else {
             tv_full_name.setText(user.getFull_name());
         }
-        tv_phone_number.setText(user.getPhone_number());
+//        tv_phone_number.setText(user.getPhone_number());
         if (user.getAvatar_url() != null && !user.getAvatar_url().isEmpty()) {
             Glide.with(this)
                     .load(user.getAvatar_url())
