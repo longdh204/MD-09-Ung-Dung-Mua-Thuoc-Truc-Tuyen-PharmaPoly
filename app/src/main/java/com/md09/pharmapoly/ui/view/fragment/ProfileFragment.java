@@ -15,11 +15,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.md09.pharmapoly.ui.view.activity.AddressActivity;
+import com.md09.pharmapoly.AddAddress;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.User;
+import com.md09.pharmapoly.ui.view.activity.payment_card_manager;
+//import com.md09.pharmapoly.ui.view.activity.payment_card_manager_empty;
 import com.md09.pharmapoly.ui.view.activity.ChangePassword;
-import com.md09.pharmapoly.ui.view.activity.OrderManagementActivity;
 import com.md09.pharmapoly.ui.view.activity.ProfileUpdate;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 
@@ -43,15 +44,6 @@ public class ProfileFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ProfileFragment newInstance(String param1, String param2) {
         ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
@@ -70,15 +62,9 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    private LinearLayout
-            btn_personal_info,
-            btn_change_password,
-            btn_manage_address,
-
-    btn_processing,
-            btn_shipping,
-            btn_delivered,
-            btn_exchange_return;
+    private LinearLayout btn_personal_info;
+    private LinearLayout btn_change_password;
+    private LinearLayout btn_manage_address, btn_manage_card;
     private TextView tv_phone_number, tv_full_name;
     private ImageView img_user_avatar;
 
@@ -90,24 +76,6 @@ public class ProfileFragment extends Fragment {
 
         InitUI(view);
 
-        btn_processing.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), OrderManagementActivity.class);
-            startActivity(intent);
-        });
-        btn_shipping.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), OrderManagementActivity.class);
-            startActivity(intent);
-        });
-        btn_delivered.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), OrderManagementActivity.class);
-            startActivity(intent);
-        });
-        btn_exchange_return.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), OrderManagementActivity.class);
-            startActivity(intent);
-        });
-
-
         btn_personal_info.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), ProfileUpdate.class);
             startActivity(intent);
@@ -117,9 +85,12 @@ public class ProfileFragment extends Fragment {
             Intent intent = new Intent(getActivity(), ChangePassword.class);
             startActivity(intent);
         });
-
         btn_manage_address.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), AddressActivity.class);
+            Intent intent = new Intent(getActivity(), AddAddress.class);
+            startActivity(intent);
+        });
+        btn_manage_card.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), payment_card_manager.class);
             startActivity(intent);
         });
         return view;
@@ -138,15 +109,9 @@ public class ProfileFragment extends Fragment {
         btn_personal_info = view.findViewById(R.id.btn_personal_info);
         btn_change_password = view.findViewById(R.id.btn_change_password);
         btn_manage_address = view.findViewById(R.id.btn_manage_address);
-
-        btn_processing = view.findViewById(R.id.btn_processing);
-        btn_shipping = view.findViewById(R.id.btn_shipping);
-        btn_delivered = view.findViewById(R.id.btn_delivered);
-        btn_exchange_return = view.findViewById(R.id.btn_exchange_return);
-
         tv_phone_number = view.findViewById(R.id.tv_phone_number);
         tv_full_name = view.findViewById(R.id.tv_full_name);
-
+        btn_manage_card = view.findViewById(R.id.btn_manage_card);
         img_user_avatar = view.findViewById(R.id.img_user_avatar);
 
         LoadUserInfo();
@@ -159,7 +124,7 @@ public class ProfileFragment extends Fragment {
         } else {
             tv_full_name.setText(user.getFull_name());
         }
-        tv_phone_number.setText(user.getPhone_number());
+//        tv_phone_number.setText(user.getPhone_number());
         if (user.getAvatar_url() != null && !user.getAvatar_url().isEmpty()) {
             Glide.with(this)
                     .load(user.getAvatar_url())

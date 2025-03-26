@@ -74,7 +74,7 @@
             android:name=".payment_card_manager_empty"
             android:exported="false" />
         <activity
-            android:name=".payment_card_manager"
+            android:name=".ui.view.activity.payment_card_manager"
             android:exported="false" />
         <activity
             android:name=".iteam_viewholder_card"

@@ -63,7 +63,7 @@ public class ProfileUpdate extends AppCompatActivity {
     private TextView profileUpdateComplete;
     private RetrofitClient retrofitClient;
     private TextView tvDateOfBirth;
-    private ImageButton btn_back;
+    //    private ImageButton btn_back;
     private User user;
     private User newUser;
     private File selectedAvatarFile;
@@ -102,9 +102,9 @@ public class ProfileUpdate extends AppCompatActivity {
         edtShippingPhoneNumber.addTextChangedListener(textWatcher);
 
         tvDateOfBirth.setOnClickListener(v -> showDatePickerDialog());
-        btn_back.setOnClickListener(v -> {
-            finish();
-        });
+//        btn_back.setOnClickListener(v -> {
+//            finish();
+//        });
         img_user_avatar.setOnClickListener(v -> {
             pickImageFromGallery();
         });
@@ -141,6 +141,7 @@ public class ProfileUpdate extends AppCompatActivity {
             updateButtonState();
         }
     }
+
     private String getRealPathFromURI(Uri uri) {
         String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
@@ -153,6 +154,7 @@ public class ProfileUpdate extends AppCompatActivity {
         }
         return null;
     }
+
     private void showDatePickerDialog() {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -169,6 +171,7 @@ public class ProfileUpdate extends AppCompatActivity {
 
         datePickerDialog.show();
     }
+
     private void loadUserData() {
         edtFullName.setText(user.getFull_name());
         edtPhoneNumber.setText(user.getPhone_number());
@@ -230,7 +233,7 @@ public class ProfileUpdate extends AppCompatActivity {
                 if (response.isSuccessful() && response.body().getStatus() == 200) {
                     new SharedPrefHelper(ProfileUpdate.this).updateUser(response.body().getData());
                     //user = response.body().getData();
-                    new SharedPrefHelper(ProfileUpdate.this).setBooleanState(USER_PROFILE_UPDATED_KEY,true);
+                    new SharedPrefHelper(ProfileUpdate.this).setBooleanState(USER_PROFILE_UPDATED_KEY, true);
                     SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.user_update_success));
                     bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
                     user = response.body().getData();
@@ -306,7 +309,7 @@ public class ProfileUpdate extends AppCompatActivity {
     }
 
     private void InitUI() {
-        btn_back = findViewById(R.id.btn_back);
+//        btn_back = findViewById(R.id.btn_back);
 
         edtFullName = findViewById(R.id.update_profile_full_name);
         edtPhoneNumber = findViewById(R.id.update_profile_phone_number);
