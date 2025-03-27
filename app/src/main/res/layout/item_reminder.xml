@@ -61,24 +61,24 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_gravity="center"
         android:gravity="center">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/update"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:text="Sửa"
-            android:background="@drawable/update"
-            android:textColor="@color/white"
-            android:layout_marginTop="5dp" />
+        <!--        <androidx.appcompat.widget.AppCompatButton-->
+        <!--            android:id="@+id/update"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="35dp"-->
+        <!--            android:text="Sửa"-->
+        <!--            android:background="@drawable/update"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:layout_marginTop="5dp" />-->
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/deleteButton"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="match_parent"
             android:text="Xóa"
             android:background="@drawable/delete"
             android:textColor="@color/white"

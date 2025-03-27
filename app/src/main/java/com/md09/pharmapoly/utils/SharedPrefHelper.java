@@ -126,8 +126,8 @@ public class SharedPrefHelper {
     }
 
     // Lưu danh sách nhắc nhở
+    // Lưu nhắc nhở hàng ngày (giữ nguyên vì không có thay đổi)
     public void saveReminder(String medicineName, int hour, int minute, boolean repeatDaily) {
-        // Lấy danh sách hiện tại
         List<Reminder> reminders = getReminders();
         reminders.add(new Reminder(medicineName, hour, minute, repeatDaily));
 
@@ -137,6 +137,37 @@ public class SharedPrefHelper {
         editor.apply();
     }
 
+    // Lưu thông tin nhắc nhở với nhiều giờ
+    public void saveReminderWithHours(String medicineName, int hour, int minute, boolean repeatHourly) {
+        List<Reminder> reminders = getReminders();
+
+        // Tạo danh sách giờ nếu lặp theo giờ
+        List<Integer> hours = new ArrayList<>();
+        if (repeatHourly) {
+            hours.add(hour); // Thêm giờ vào danh sách (nếu muốn nhiều giờ, thêm nhiều lần)
+        }
+
+        reminders.add(new Reminder(medicineName, hour, minute, repeatHourly, hours));
+
+        // Lưu lại danh sách
+        String json = gson.toJson(reminders);
+        editor.putString("reminder_list", json);
+        editor.apply();
+    }
+
+    // Lấy các giờ nhắc nhở theo tên thuốc
+    public List<Integer> getReminderHours(String medicineName) {
+        List<Reminder> reminders = getReminders();
+        List<Integer> hours = new ArrayList<>();
+        for (Reminder reminder : reminders) {
+            if (reminder.getMedicineName().equals(medicineName)) {
+                hours.add(reminder.getHour());
+            }
+        }
+        return hours;
+    }
+
+    // Lấy danh sách nhắc nhở
     // Lấy danh sách nhắc nhở
     public List<Reminder> getReminders() {
         String json = sharedPreferences.getString("reminder_list", null);

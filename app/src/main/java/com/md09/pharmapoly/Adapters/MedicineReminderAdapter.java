@@ -47,12 +47,16 @@ public class MedicineReminderAdapter extends RecyclerView.Adapter<MedicineRemind
             holder.repeatType.setText("Lặp lại mỗi giờ");
         }
 
+        // Xử lý sự kiện xóa item
         holder.deleteButton.setOnClickListener(v -> {
             sharedPrefHelper.deleteReminder(position);
             reminderList.remove(position);
-            notifyItemRemoved(position);
+            notifyItemRemoved(position);  // Cập nhật lại RecyclerView
         });
+
+        
     }
+
 
     @Override
     public int getItemCount() {
