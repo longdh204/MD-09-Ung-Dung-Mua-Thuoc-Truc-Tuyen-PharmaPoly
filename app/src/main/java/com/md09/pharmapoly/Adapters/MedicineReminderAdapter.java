@@ -19,10 +19,17 @@ public class MedicineReminderAdapter extends RecyclerView.Adapter<MedicineRemind
 
     private List<Reminder> reminderList;
     private SharedPrefHelper sharedPrefHelper;
+    private UpdateReminderListener updateReminderListener;
 
-    public MedicineReminderAdapter(List<Reminder> reminderList, SharedPrefHelper sharedPrefHelper) {
+    // Interface để gọi lại phương thức trong Activity khi người dùng nhấn "Cập nhật"
+    public interface UpdateReminderListener {
+        void onUpdateReminder(Reminder reminder);
+    }
+
+    public MedicineReminderAdapter(List<Reminder> reminderList, SharedPrefHelper sharedPrefHelper, UpdateReminderListener listener) {
         this.reminderList = reminderList;
         this.sharedPrefHelper = sharedPrefHelper;
+        this.updateReminderListener = listener;
     }
 
     @Override
@@ -38,25 +45,36 @@ public class MedicineReminderAdapter extends RecyclerView.Adapter<MedicineRemind
         String time = String.format("%02d:%02d", reminder.getHour(), reminder.getMinute());
         holder.time.setText(time);
 
-        // Xử lý màu sắc dựa trên kiểu lặp lại
+        // Kiểm tra lặp lại mỗi ngày
+        StringBuilder repeatText = new StringBuilder();
         if (reminder.isRepeatDaily()) {
-            holder.time.setTextColor(Color.GREEN);  // Màu xanh cho lặp lại hàng ngày
-            holder.repeatType.setText("Lặp lại mỗi ngày");
-        } else {
-            holder.time.setTextColor(Color.BLUE);  // Màu xanh dương cho lặp lại theo giờ
-            holder.repeatType.setText("Lặp lại mỗi giờ");
+            repeatText.append("Lặp lại mỗi ngày");
         }
 
-        // Xử lý sự kiện xóa item
+        // Kiểm tra lặp lại mỗi giờ và hiển thị các giờ đã chọn
+        if (reminder.isRepeatHourly()) {
+            if (repeatText.length() > 0) {
+                repeatText.append(" & ");
+            }
+            repeatText.append("Lặp lại mỗi giờ: ");
+            // Đảm bảo hours không phải null trước khi lặp qua
+            if (reminder.getHours() != null && !reminder.getHours().isEmpty()) {
+                for (int hour : reminder.getHours()) {
+                    repeatText.append(String.format("%02d:00 ", hour));  // Thêm giờ vào danh sách
+                }
+            }
+        }
+
+        // Hiển thị thông tin lặp lại trên item
+        holder.repeatType.setText(repeatText.toString());
+
+        // Xử lý nút Xóa
         holder.deleteButton.setOnClickListener(v -> {
             sharedPrefHelper.deleteReminder(position);
             reminderList.remove(position);
-            notifyItemRemoved(position);  // Cập nhật lại RecyclerView
+            notifyItemRemoved(position);
         });
-
-        
     }
-
 
     @Override
     public int getItemCount() {
@@ -65,7 +83,7 @@ public class MedicineReminderAdapter extends RecyclerView.Adapter<MedicineRemind
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView medicineName, time, repeatType;
-        Button deleteButton;
+        Button deleteButton, updateButton;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -73,6 +91,7 @@ public class MedicineReminderAdapter extends RecyclerView.Adapter<MedicineRemind
             time = itemView.findViewById(R.id.time);
             repeatType = itemView.findViewById(R.id.repeatType);
             deleteButton = itemView.findViewById(R.id.deleteButton);
+            updateButton = itemView.findViewById(R.id.update);  // Gắn nút "Cập nhật"
         }
     }
 }

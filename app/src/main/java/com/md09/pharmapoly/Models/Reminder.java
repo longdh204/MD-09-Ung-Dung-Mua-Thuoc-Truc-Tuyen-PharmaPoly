@@ -8,26 +8,21 @@ public class Reminder {
     private int hour;
     private int minute;
     private boolean repeatDaily;
-    private List<Integer> hours; // Lưu danh sách giờ nếu lặp theo giờ
+    private boolean repeatHourly;
+    private List<Integer> hours;  // Lưu danh sách giờ
 
-    // Constructor khi chỉ lặp hàng ngày
-    public Reminder(String medicineName, int hour, int minute, boolean repeatDaily) {
+    // Constructor cho nhắc nhở với nhiều giờ
+    public Reminder(String medicineName, int hour, int minute, boolean repeatDaily, boolean repeatHourly, List<Integer> hours) {
         this.medicineName = medicineName;
         this.hour = hour;
         this.minute = minute;
         this.repeatDaily = repeatDaily;
-        this.hours = new ArrayList<>(); // Để mặc định là danh sách rỗng
+        this.repeatHourly = repeatHourly;
+        // Nếu hours là null, khởi tạo nó thành danh sách rỗng
+        this.hours = (hours != null) ? hours : new ArrayList<>();
     }
 
-    // Constructor khi lặp theo giờ
-    public Reminder(String medicineName, int hour, int minute, boolean repeatHourly, List<Integer> hours) {
-        this.medicineName = medicineName;
-        this.hour = hour;
-        this.minute = minute;
-        this.repeatDaily = false; // Không phải lặp hàng ngày nếu là lặp theo giờ
-        this.hours = hours != null ? hours : new ArrayList<>();
-    }
-
+    // Getter và setter
     public String getMedicineName() {
         return medicineName;
     }
@@ -44,7 +39,13 @@ public class Reminder {
         return repeatDaily;
     }
 
+    public boolean isRepeatHourly() {
+        return repeatHourly;
+    }
+
     public List<Integer> getHours() {
         return hours;
     }
 }
+
+
