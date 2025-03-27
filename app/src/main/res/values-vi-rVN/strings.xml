@@ -65,7 +65,7 @@
     <string name="processing">Đang xử lý</string>
     <string name="shipping">Đang giao</string>
     <string name="delivered">Đã giao</string>
-    <string name="exchange_return">Trả</string>
+    <string name="exchange_return">Trả/Hoàn tiền</string>
     <string name="account">Tài khoản</string>
     <string name="personal_info">Thông tin cá nhân</string>
     <string name="manage_address">Quản lý sổ địa chỉ</string>
@@ -120,4 +120,46 @@
     <string name="online_payment">Thanh toán trực tuyến</string>
     <string name="momo_payment">Thanh toán bằng ví điện tử Momo</string>
     <string name="agree">Đồng ý</string>
+    <string name="no_shipping_address">Bạn chưa có địa chỉ nhận hàng</string>
+    <string name="show_more">Xem thêm</string>
+    <string name="no_orders">Bạn chưa có đơn hàng nào cả</string>
+    <string name="cancel_order">Hủy đơn</string>
+    <string name="details">Chi tiết</string>
+    <string name="status_pending">Chờ xác nhận</string>
+    <string name="status_confirmed">Đã xác nhận</string>
+    <string name="status_ready_to_pick">Chờ GHN lấy hàng</string>
+    <string name="status_picking">GHN đang lấy hàng</string>
+    <string name="status_picked">GHN đã lấy hàng</string>
+    <string name="status_delivering">Đang giao hàng</string>
+    <string name="status_money_collect_delivering">Đang giao hàng (COD)</string>
+    <string name="status_delivered">Giao hàng thành công</string>
+    <string name="status_delivery_fail">Giao hàng thất bại</string>
+    <string name="status_waiting_to_return">Chờ hoàn hàng</string>
+    <string name="status_return">Đang hoàn hàng</string>
+    <string name="status_returned">Đã hoàn hàng</string>
+    <string name="status_return_fail">Hoàn hàng thất bại</string>
+    <string name="status_canceled">Đơn hàng bị hủy</string>
+    <string name="order_info">Thông tin đơn hàng</string>
+    <string name="shipping_address">Địa chỉ nhận hàng</string>
+    <string name="order_date">Ngày đặt hàng</string>
+    <string name="status">Trạng thái</string>
+    <string name="cancel_order_title">Xác nhận hủy đơn</string>
+    <string name="cancel_order_message">Bạn có chắc chắn muốn hủy đơn hàng này không?</string>
+    <string name="order_cancelled_success">Hủy đơn hàng thành công!</string>
+
+    <string name="ghn_shipping_code">Mã vận đơn</string>
+    <string name="return_order">Trả hàng</string>
+    <string name="return_order_title">Xác nhận trả hàng</string>
+    <string name="return_order_message">Bạn có chắc chắn muốn trả lại mặt hàng này không?</string>
+    <string name="order_success">Đặt hàng thành công!</string>
+
+    <string name="logout_title">Đăng xuất</string>
+    <string name="logout_message">Bạn có chắc chắn muốn đăng xuất không?</string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+
+    <string name="payment_status">Trạng thái thanh toán</string>
+    <string name="payment_paid">Đã thanh toán</string>
+    <string name="payment_pending">Chờ thanh toán</string>
+    <string name="payment_failed">Thanh toán thất bại</string>
 </resources>

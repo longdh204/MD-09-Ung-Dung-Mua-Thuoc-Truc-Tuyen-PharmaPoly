@@ -117,9 +117,16 @@ public class HomeFragment extends Fragment {
     private LinearLayout lnNoiBat;
     private LinearLayout lnTopRate;
     private LinearLayout lnMostReview;
-    private CategoryListAdapter categoryListAdapter;  // Đổi tên ở đây
+    private CategoryListAdapter categoryListAdapter;
 
-    private LinearLayout btnthucphamchucnang, btnduocmypham, btnthuoc, btnchamsoc, btnthietbiyte, btnthuocbovitamin;
+    private LinearLayout
+            btnthucphamchucnang,
+            btnduocmypham,
+            btnthuoc,
+            btnchamsoc,
+            btnthietbiyte,
+            btnthuocbovitamin,
+            layout_search;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -231,10 +238,9 @@ public class HomeFragment extends Fragment {
             }
         });
         // Trong phương thức onCreateView của HomeFragment
-        TextView textViewSearch = view.findViewById(R.id.textViewSearch);
-        textViewSearch.setOnClickListener(v -> {
-            // Khi nhấn vào TextView, chuyển sang màn hình tìm kiếm
-            Intent intent = new Intent(getContext(), SearchActivity.class); // Chuyển tới Activity bạn muốn
+        //TextView textViewSearch = view.findViewById(R.id.textViewSearch);
+        layout_search.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), SearchActivity.class);
             startActivity(intent);
         });
 
@@ -393,5 +399,6 @@ public class HomeFragment extends Fragment {
         btnchamsoc = view.findViewById(R.id.btnchamsoc);
         btnthietbiyte = view.findViewById(R.id.btnthietbiyte);
         btnthuocbovitamin = view.findViewById(R.id.btnthuocbovitamin);
+        layout_search = view.findViewById(R.id.layout_search);
     }
 }

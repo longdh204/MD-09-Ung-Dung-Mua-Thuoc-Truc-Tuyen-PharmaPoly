@@ -84,7 +84,6 @@ public class PaymentMethodActivity extends AppCompatActivity {
             }
         });
         btn_agree.setOnClickListener(v -> {
-            Toast.makeText(this, paymentMethod + "", Toast.LENGTH_SHORT).show();
             SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(this);
             sharedPrefHelper.savePaymentMethod(paymentMethod);
             finish();

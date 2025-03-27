@@ -16,6 +16,8 @@ public class Order {
     private int shipping_fee;
     private int total_price;
     private String status;
+    private String payment_status;
+    private String transaction_id;
     private Date delivered_at;
     private boolean cancel_request;
     private boolean return_request;
@@ -28,7 +30,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(String _id, String user_id, String order_code, String to_name, String to_phone, String to_address, String to_district_id, String to_ward_code, String payment_method, int shipping_fee, int total_price, String status, Date delivered_at, boolean cancel_request, boolean return_request, Date created_at, Date updated_at, List<OrderItem> items, District district, Province province, Ward ward) {
+    public Order(String _id, String user_id, String order_code, String to_name, String to_phone, String to_address, String to_district_id, String to_ward_code, String payment_method, int shipping_fee, int total_price, String status, String payment_status, String transaction_id, Date delivered_at, boolean cancel_request, boolean return_request, Date created_at, Date updated_at, List<OrderItem> items, District district, Province province, Ward ward) {
         this._id = _id;
         this.user_id = user_id;
         this.order_code = order_code;
@@ -41,6 +43,8 @@ public class Order {
         this.shipping_fee = shipping_fee;
         this.total_price = total_price;
         this.status = status;
+        this.payment_status = payment_status;
+        this.transaction_id = transaction_id;
         this.delivered_at = delivered_at;
         this.cancel_request = cancel_request;
         this.return_request = return_request;
@@ -146,6 +150,22 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getPayment_status() {
+        return payment_status;
+    }
+
+    public void setPayment_status(String payment_status) {
+        this.payment_status = payment_status;
+    }
+
+    public String getTransaction_id() {
+        return transaction_id;
+    }
+
+    public void setTransaction_id(String transaction_id) {
+        this.transaction_id = transaction_id;
     }
 
     public Date getDelivered_at() {

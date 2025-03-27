@@ -64,7 +64,7 @@
     <string name="processing">Processing</string>
     <string name="shipping">Shipping</string>
     <string name="delivered">Delivered</string>
-    <string name="exchange_return">Return</string>
+    <string name="exchange_return">Return/Refund</string>
     <string name="account">Account</string>
     <string name="personal_info">Personal Information</string>
     <string name="manage_address">Manage Address Book</string>
@@ -151,4 +151,15 @@
     <string name="return_order_title">Confirm Return</string>
     <string name="return_order_message">Are you sure you want to return this item?</string>
     <string name="order_success">Order placed successfully!</string>
+
+    <string name="logout_title">Logout</string>
+    <string name="logout_message">Are you sure you want to log out?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="payment_status">Payment Status</string>
+    <string name="payment_paid">Paid</string>
+    <string name="payment_pending">Pending</string>
+    <string name="payment_failed">Failed</string>
+
 </resources>

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,26 +69,26 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull CartAdapter.ViewHolder holder, int position) {
         Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), android.R.anim.slide_in_left);
         holder.itemView.startAnimation(animation);
-
         CartItem cartItem = cart.getCartItems().get(position);
+        //Log.e("Check Product Image",cartItem.getProduct().getImageUrl());
         if (cartItem != null) {
 
             holder.tv_product_name.setText(cartItem.getProduct().getName());
-            holder.tv_discounted_price.setText(formatCurrency(cartItem.getDiscounted_price(), "đ"));
-            if (cartItem.getProduct().getDiscount() != null) {
-                holder.tv_original_price.setVisibility(View.VISIBLE);
-                holder.layout_discount.setVisibility(View.VISIBLE);
-                holder.tv_original_price.setText(formatCurrency(cartItem.getOriginal_price(), "đ"));
-                holder.tv_original_price.setPaintFlags(holder.tv_original_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                holder.tv_discount.setText(
-                        context.getString(R.string.discount_now) + " " +
-                                cartItem.getProduct().getDiscount().getFormattedValue() + " " +
-                                context.getString(R.string.valid_until) + " " +
-                        cartItem.getProduct().getDiscount().getFormattedEndDate());
-            } else {
-                holder.tv_original_price.setVisibility(View.GONE);
-                holder.layout_discount.setVisibility(View.GONE);
-            }
+            holder.tv_original_price.setText(formatCurrency(cartItem.getOriginal_price(), "đ"));
+//            if (cartItem.getProduct().getDiscount() != null) {
+//                holder.tv_original_price.setVisibility(View.VISIBLE);
+//                holder.layout_discount.setVisibility(View.VISIBLE);
+//                holder.tv_original_price.setText(formatCurrency(cartItem.getOriginal_price(), "đ"));
+//                holder.tv_original_price.setPaintFlags(holder.tv_original_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+//                holder.tv_discount.setText(
+//                        context.getString(R.string.discount_now) + " " +
+//                                cartItem.getProduct().getDiscount().getFormattedValue() + " " +
+//                                context.getString(R.string.valid_until) + " " +
+//                        cartItem.getProduct().getDiscount().getFormattedEndDate());
+//            } else {
+//                holder.tv_original_price.setVisibility(View.GONE);
+//                holder.layout_discount.setVisibility(View.GONE);
+//            }
 
 
 
@@ -157,13 +158,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 btn_remove;
         private CheckBox cb_selected_item;
         private TextView
-                tv_discounted_price,
+                //tv_price,
                 tv_product_name,
-                tv_original_price,
-                tv_discount;
+                tv_original_price;
+                //tv_discount;
         private EditText edt_quantity;
         private ImageView img_product;
-        private CardView layout_discount;
+        //private CardView layout_discount;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -171,17 +172,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             btn_decrease_quantity = itemView.findViewById(R.id.btn_decrease_quantity);
             btn_increase_quantity = itemView.findViewById(R.id.btn_increase_quantity);
             btn_remove = itemView.findViewById(R.id.btn_remove);
-            tv_discounted_price = itemView.findViewById(R.id.tv_discounted_price);
+            //tv_price = itemView.findViewById(R.id.tv_price);
             tv_original_price = itemView.findViewById(R.id.tv_original_price);
             tv_product_name = itemView.findViewById(R.id.tv_product_name);
-            tv_discount = itemView.findViewById(R.id.tv_discount);
+            //tv_discount = itemView.findViewById(R.id.tv_price);
             edt_quantity = itemView.findViewById(R.id.edt_quantity);
 
             img_product = itemView.findViewById(R.id.img_product);
 
             cb_selected_item = itemView.findViewById(R.id.cb_selected_item);
 
-            layout_discount = itemView.findViewById(R.id.layout_discount);
+            //layout_discount = itemView.findViewById(R.id.layout_discount);
         }
     }
 }

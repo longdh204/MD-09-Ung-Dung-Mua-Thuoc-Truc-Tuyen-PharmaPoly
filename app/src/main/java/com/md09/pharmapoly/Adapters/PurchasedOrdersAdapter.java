@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.md09.pharmapoly.Models.Order;
@@ -31,6 +33,7 @@ import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.ui.view.activity.OrderInfoActivity;
 import com.md09.pharmapoly.utils.Constants;
 import com.md09.pharmapoly.utils.DialogHelper;
+import com.md09.pharmapoly.utils.PaymentMethod;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
@@ -77,6 +80,13 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
 
         Order order = orders.get(position);
 
+        if (order.getPayment_method().equals(PaymentMethod.ONLINE.getValue())) {
+            holder.tv_payment_status.setVisibility(View.VISIBLE);
+            updatePaymentStatus(holder.tv_payment_status,order.getPayment_status());
+        } else {
+            holder.tv_payment_status.setVisibility(View.GONE);
+        }
+
         holder.layout_order_item.removeAllViews();
         SetOrderStatus(holder, order);
 //        holder.tv_order_status.setText(context.getString(R.string.status) + getDisplayStatus(context, order.getStatus()));
@@ -92,12 +102,12 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
 
             TextView tv_quantity = view.findViewById(R.id.tv_quantity);
             TextView tv_product_name = view.findViewById(R.id.tv_product_name);
-            TextView tv_discounted_price = view.findViewById(R.id.tv_discounted_price);
+            TextView tv_original_price = view.findViewById(R.id.tv_original_price);
             ImageView img_product = view.findViewById(R.id.img_product);
 
             tv_quantity.setText("x" + item.getQuantity());
             tv_product_name.setText(item.getProduct().getName());
-            tv_discounted_price.setText(formatCurrency(item.getPrice(), "đ"));
+            tv_original_price.setText(formatCurrency(item.getPrice(), "đ"));
             Picasso.get().load(item.getProduct().getImageUrl()).into(img_product);
 
             holder.layout_order_item.addView(view);
@@ -178,6 +188,32 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
             context.startActivity(intent);
         });
     }
+    private void updatePaymentStatus(TextView tv_payment_status, String paymentStatus) {
+        int color;
+        String text;
+
+        switch (paymentStatus) {
+            case "paid":
+                color = ContextCompat.getColor(context, R.color.green_500);
+                text = context.getString(R.string.payment_paid);
+                break;
+            case "pending":
+                color = ContextCompat.getColor(context, R.color.orange_500);
+                text = context.getString(R.string.payment_pending);
+                break;
+            case "failed":
+            default:
+                color = ContextCompat.getColor(context, R.color.red_757);
+                text = context.getString(R.string.payment_failed);
+                break;
+        }
+
+        String statusTitle = context.getString(R.string.payment_status) + ": ";
+        SpannableString spannable = new SpannableString(statusTitle + text);
+        spannable.setSpan(new ForegroundColorSpan(Color.BLACK), 0, statusTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannable.setSpan(new ForegroundColorSpan(color), statusTitle.length(), spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tv_payment_status.setText(spannable);
+    }
 
     private boolean canReturnOrder(Order order) {
         if (order.getDelivered_at() == null) return false;
@@ -213,7 +249,7 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
         private LinearLayout
                 layout_order_item,
                 btn_show_more;
-        private TextView tv_total_price, tv_order_status;
+        private TextView tv_total_price, tv_order_status, tv_payment_status;
         private CardView btn_order_item;
         private TextView tv_btn_order;
 
@@ -225,6 +261,7 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
             tv_total_price = itemView.findViewById(R.id.tv_total_price);
             btn_show_more = itemView.findViewById(R.id.btn_show_more);
             tv_order_status = itemView.findViewById(R.id.tv_order_status);
+            tv_payment_status = itemView.findViewById(R.id.tv_payment_status);
         }
     }
 }

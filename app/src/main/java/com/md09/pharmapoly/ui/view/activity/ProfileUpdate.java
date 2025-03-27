@@ -69,7 +69,7 @@ public class ProfileUpdate extends AppCompatActivity {
     private File selectedAvatarFile;
     private ImageView img_user_avatar;
     private boolean isDateSelected = false;
-
+    private ImageView btn_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,6 +121,9 @@ public class ProfileUpdate extends AppCompatActivity {
 
             newUser.setGender(selectedGender);
             updateButtonState();
+        });
+        btn_back.setOnClickListener(v -> {
+            finish();
         });
     }
 

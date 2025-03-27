@@ -1,5 +1,6 @@
 package com.md09.pharmapoly.network;
 
+import com.google.gson.JsonObject;
 import com.md09.pharmapoly.Models.Brand;
 import com.md09.pharmapoly.Models.Cart;
 import com.md09.pharmapoly.Models.CartItem;
@@ -40,7 +41,11 @@ import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 
 public interface ApiService {
-
+    @GET("test/qr")
+    Call<JsonObject> testQr(
+            @Header("Authorization") String token,
+            @Query("amount") int amount
+    );
     @GET("product/most-reviewed")
     Call<ApiResponse<PageDataClone<List<Product>>>> getMostReviewProducts(
             @Query("page") int page,
@@ -53,7 +58,7 @@ public interface ApiService {
             @Header("Authorization") String token
     );
     @POST("orders/create")
-    Call<ApiResponse<Order>> createOrders(
+    Call<ApiResponse<String>> createOrders(
             @Body Map<String, Object> data,
             @Header("Authorization") String token
     );

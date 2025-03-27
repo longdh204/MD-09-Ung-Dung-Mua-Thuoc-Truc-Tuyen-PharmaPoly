@@ -1,10 +1,14 @@
 package com.md09.pharmapoly.ui.view.fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+import static androidx.core.app.ActivityCompat.finishAffinity;
 import static com.md09.pharmapoly.utils.Constants.USER_PROFILE_UPDATED_KEY;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -21,10 +25,12 @@ import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.User;
 import com.md09.pharmapoly.ui.view.activity.AddressActivity;
 import com.md09.pharmapoly.ui.view.activity.OrderManagementActivity;
+import com.md09.pharmapoly.ui.view.activity.PhoneNumber;
 import com.md09.pharmapoly.ui.view.activity.payment_card_manager;
 //import com.md09.pharmapoly.ui.view.activity.payment_card_manager_empty;
 import com.md09.pharmapoly.ui.view.activity.ChangePassword;
 import com.md09.pharmapoly.ui.view.activity.ProfileUpdate;
+import com.md09.pharmapoly.utils.DialogHelper;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 
 /**
@@ -85,7 +91,7 @@ public class ProfileFragment extends Fragment {
             btn_exchange_return;
     private TextView tv_phone_number, tv_full_name;
     private ImageView img_user_avatar;
-
+    private AppCompatButton btn_logout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -125,7 +131,28 @@ public class ProfileFragment extends Fragment {
             Intent intent = new Intent(getActivity(), payment_card_manager.class);
             startActivity(intent);
         });
+        btn_logout.setOnClickListener(v -> {
+            DialogHelper.ShowConfirmationDialog(
+                    getContext(),
+                    getString(R.string.logout_title),
+                    getString(R.string.logout_message),
+                    getString(R.string.yes),
+                    getString(R.string.no),
+                    () -> {
+                        performLogout();
+                    }
+            );
+        });
         return view;
+    }
+    private void performLogout() {
+        SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(getContext());
+        sharedPrefHelper.clearData();
+
+        Intent intent = new Intent(getContext(), PhoneNumber.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finishAffinity(getActivity());
     }
 
     @Override
@@ -152,6 +179,7 @@ public class ProfileFragment extends Fragment {
         btn_manage_card = view.findViewById(R.id.btn_manage_card);
         img_user_avatar = view.findViewById(R.id.img_user_avatar);
 
+        btn_logout = view.findViewById(R.id.btn_logout);
         LoadUserInfo();
     }
 

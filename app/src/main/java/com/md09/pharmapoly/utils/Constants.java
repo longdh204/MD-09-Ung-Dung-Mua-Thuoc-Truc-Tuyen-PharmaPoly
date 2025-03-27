@@ -28,7 +28,7 @@ public class Constants {
     public static final String PRODUCT_ADDED_TO_CART_KEY = "PRODUCT_ADDED_TO_CART";
     public static final String USER_PROFILE_UPDATED_KEY = "USER_PROFILE_UPDATED";
     public static final String PAYMENT_METHOD_KEY = "PAYMENT_METHOD";
-
+    public static final String ORDER_KEY = "ORDER";
     public static final int PICK_IMAGE_REQUEST = 1;
     public static final int MAX_QUANTITY_PER_PRODUCT = 20;
     public static final String formatCurrency(int amount, String symbol) {

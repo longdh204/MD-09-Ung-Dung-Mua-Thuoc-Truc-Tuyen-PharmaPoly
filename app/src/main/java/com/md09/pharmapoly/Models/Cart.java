@@ -8,7 +8,6 @@ public class Cart {
     private String _id;
     private int total_price;
     private int total_items;
-    @SerializedName("cartItems")
     private List<CartItem> cartItems;
 
     public Cart() {

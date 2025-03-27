@@ -1,5 +1,6 @@
 package com.md09.pharmapoly.ui.view.fragment;
 
+import static com.md09.pharmapoly.utils.Constants.ORDER_KEY;
 import static com.md09.pharmapoly.utils.Constants.formatCurrency;
 
 import android.content.Intent;
@@ -105,6 +106,7 @@ public class CartFragment extends Fragment {
     private CartViewModel cartViewModel;
     private LinearLayout cart_main_layout,
             cart_sub_layout;
+    private List<CartItem> selectedItems;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -161,7 +163,7 @@ public class CartFragment extends Fragment {
         });
 
         btn_purchase.setOnClickListener(v -> {
-            List<CartItem> selectedItems = cart.getCartItems()
+            selectedItems = cart.getCartItems()
                     .stream()
                     .filter(CartItem::isSelected)
                     .collect(Collectors.toList());
@@ -214,6 +216,16 @@ public class CartFragment extends Fragment {
                 () -> {
                     RemoveCartItem(cartItem.get_id());
                 });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (new SharedPrefHelper(getContext()).getBooleanState(ORDER_KEY,false)) {
+            cart.getCartItems().removeAll(selectedItems);
+            cartAdapter.UpdateCart(cart);
+            new SharedPrefHelper(getContext()).resetBooleanState(ORDER_KEY);
+        }
     }
 
     private void RemoveCartItem(String id) {

@@ -111,6 +111,7 @@
                 android:layout_height="35dp"
                 android:background="@drawable/dangxuat"
                 android:gravity="center"
+                android:id="@+id/btn_logout"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="25dp" /> <!-- Sử dụng gravity để căn nút về phía cuối -->
         </LinearLayout>
@@ -146,14 +147,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
-                    <TextView
-                        android:id="@+id/btn_view_all"
-                        android:fontFamily="@font/be_vietnam_pro_semibold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/view_all"
-                        android:textColor="@color/blue_CE4"
-                        android:textSize="14sp" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/btn_view_all"-->
+<!--                        android:fontFamily="@font/be_vietnam_pro_semibold"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/view_all"-->
+<!--                        android:textColor="@color/blue_CE4"-->
+<!--                        android:textSize="14sp" />-->
                 </LinearLayout>
 
                 <LinearLayout
@@ -265,7 +266,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="14dp"
                     android:layout_marginHorizontal="24dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -277,7 +277,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/account"
                         android:textColor="@color/blue_CE4"
-                        android:textSize="15sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -292,12 +292,12 @@
 
                     <LinearLayout
                         android:id="@+id/btn_personal_info"
-                        android:paddingVertical="12dp"
+                        android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_margin="5dp">
+                        android:layout_margin="6dp">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -325,12 +325,12 @@
 
                     <LinearLayout
                         android:id="@+id/btn_change_password"
-                        android:paddingVertical="12dp"
+                        android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_margin="5dp">
+                        android:layout_margin="6dp">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -358,12 +358,12 @@
 
                     <LinearLayout
                         android:id="@+id/btn_manage_address"
-                        android:paddingVertical="12dp"
+                        android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_margin="5dp">
+                        android:layout_margin="6dp">
 
                         <ImageView
                             android:scaleX="1.6"
@@ -393,12 +393,12 @@
 
                     <LinearLayout
                         android:id="@+id/btn_manage_card"
-                        android:paddingVertical="12dp"
+                        android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_margin="5dp">
+                        android:layout_margin="6dp">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -438,7 +438,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/about_pharmapoly"
                         android:textColor="@color/blue_CE4"
-                        android:textSize="15sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -453,12 +453,12 @@
                     android:background="@drawable/rounded_shadow_background">
 
                     <LinearLayout
-                        android:paddingVertical="12dp"
+                        android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_margin="5dp">
+                        android:layout_margin="6dp">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -485,12 +485,12 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:paddingVertical="12dp"
+                        android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_margin="5dp">
+                        android:layout_margin="6dp">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -517,12 +517,12 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:paddingVertical="12dp"
+                        android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_margin="5dp">
+                        android:layout_margin="6dp">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -549,12 +549,12 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:paddingVertical="12dp"
+                        android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_margin="5dp">
+                        android:layout_margin="6dp">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -581,12 +581,12 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:paddingVertical="12dp"
+                        android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_margin="5dp">
+                        android:layout_margin="6dp">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -613,12 +613,12 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:paddingVertical="12dp"
+                        android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_margin="5dp">
+                        android:layout_margin="6dp">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -645,12 +645,12 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:paddingVertical="12dp"
+                        android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_margin="5dp">
+                        android:layout_margin="6dp">
 
                         <ImageView
                             android:layout_width="24dp"

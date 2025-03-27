@@ -1,6 +1,8 @@
 package com.md09.pharmapoly.ui.view.activity;
 
+import static com.md09.pharmapoly.utils.Constants.ORDER_KEY;
 import static com.md09.pharmapoly.utils.Constants.PRODUCT_ADDED_TO_CART_KEY;
+import static com.md09.pharmapoly.utils.Constants.USER_PROFILE_UPDATED_KEY;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -37,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
 
         InitUI();
+
+        new SharedPrefHelper(this).resetBooleanState(ORDER_KEY);
+        new SharedPrefHelper(this).resetBooleanState(PRODUCT_ADDED_TO_CART_KEY);
+        new SharedPrefHelper(this).resetBooleanState(USER_PROFILE_UPDATED_KEY);
+
         SetupBottomNavigation();
         cartViewModel.FetchCartData(this);
         cartViewModel.GetCart().observe(this, new Observer<Cart>() {

@@ -11,7 +11,6 @@ public class Product implements Serializable {
     private String brand_id;
     private String product_type_id;
     private int price;
-    private int discounted_price;
     private Discount discount;
     private String short_description;
     private String specification;
@@ -37,14 +36,13 @@ public class Product implements Serializable {
         return null;  // Nếu không có ảnh chính, trả về null
     }
 
-    public Product(String _id, String name, String category_id, String brand_id, String product_type_id, int price, int discounted_price, Discount discount, String short_description, String specification, String origin_country, String manufacturer, float average_rating, int review_count, String create_at, Category category, Brand brand, ProductType product_type, List<ProductImage> images, List<ProductSection> sections) {
+    public Product(String _id, String name, String category_id, String brand_id, String product_type_id, int price, Discount discount, String short_description, String specification, String origin_country, String manufacturer, float average_rating, int review_count, String create_at, Category category, Brand brand, ProductType product_type, List<ProductImage> images, List<ProductSection> sections) {
         this._id = _id;
         this.name = name;
         this.category_id = category_id;
         this.brand_id = brand_id;
         this.product_type_id = product_type_id;
         this.price = price;
-        this.discounted_price = discounted_price;
         this.discount = discount;
         this.short_description = short_description;
         this.specification = specification;
@@ -81,13 +79,6 @@ public class Product implements Serializable {
         return price;
     }
 
-    public int getDiscounted_price() {
-        return discounted_price;
-    }
-
-    public void setDiscounted_price(int discounted_price) {
-        this.discounted_price = discounted_price;
-    }
     public void setPrice(int price) {
         this.price = price;
     }
@@ -229,7 +220,6 @@ public class Product implements Serializable {
                 ", brand_id='" + brand_id + '\'' +
                 ", product_type_id='" + product_type_id + '\'' +
                 ", price=" + price +
-                ", discounted_price=" + discounted_price +
                 ", discount=" + discount +
                 ", short_description='" + short_description + '\'' +
                 ", specification='" + specification + '\'' +

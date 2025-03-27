@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/tv_discounted_price"
+                        android:id="@+id/tv_original_price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:minLines="1"
@@ -82,18 +82,18 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/be_vietnam_pro_bold"
                         android:text="666.666đ"/>
-                    <TextView
-                        android:id="@+id/tv_original_price"
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:minLines="1"
-                        android:maxLines="2"
-                        android:ellipsize="end"
-                        android:textColor="@color/gray_E9E"
-                        android:textSize="12sp"
-                        android:fontFamily="@font/be_vietnam_pro_bold"
-                        android:text="666.666đ"/>
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_original_price"-->
+<!--                        android:visibility="gone"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:minLines="1"-->
+<!--                        android:maxLines="2"-->
+<!--                        android:ellipsize="end"-->
+<!--                        android:textColor="@color/gray_E9E"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:fontFamily="@font/be_vietnam_pro_bold"-->
+<!--                        android:text="666.666đ"/>-->
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -154,37 +154,37 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/layout_discount"
-        android:layout_marginBottom="6dp"
-        android:layout_marginTop="12dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/white_FFF"
-        app:cardCornerRadius="12dp">
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/layout_discount"-->
+<!--        android:layout_marginBottom="6dp"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:cardBackgroundColor="@color/white_FFF"-->
+<!--        app:cardCornerRadius="12dp">-->
 
-        <LinearLayout
-            android:gravity="center_vertical"
-            android:padding="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_marginRight="12dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@drawable/ic_discount"
-                android:backgroundTint="@color/blue_CE4"/>
-            <TextView
-                android:id="@+id/tv_discount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:lines="1"
-                android:ellipsize="end"
-                android:textSize="16sp"
-                android:textColor="@color/black_333"
-                android:fontFamily="@font/be_vietnam_pro_medium"
-                android:text="Giảm ngay 66% đến ngày 6/6"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+<!--        <LinearLayout-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:padding="12dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
+<!--            <ImageView-->
+<!--                android:layout_marginRight="12dp"-->
+<!--                android:layout_width="24dp"-->
+<!--                android:layout_height="24dp"-->
+<!--                android:background="@drawable/ic_discount"-->
+<!--                android:backgroundTint="@color/blue_CE4"/>-->
+<!--            <TextView-->
+<!--                android:id="@+id/tv_discount"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:lines="1"-->
+<!--                android:ellipsize="end"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="@color/black_333"-->
+<!--                android:fontFamily="@font/be_vietnam_pro_medium"-->
+<!--                android:text="Giảm ngay 66% đến ngày 6/6"/>-->
+<!--        </LinearLayout>-->
+<!--    </androidx.cardview.widget.CardView>-->
 </LinearLayout>

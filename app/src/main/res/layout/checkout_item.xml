@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/tv_discounted_price"
+                        android:id="@+id/tv_original_price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:minLines="1"
@@ -63,18 +63,18 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/be_vietnam_pro_bold"
                         android:text="666.666đ"/>
-                    <TextView
-                        android:id="@+id/tv_original_price"
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:minLines="1"
-                        android:maxLines="2"
-                        android:ellipsize="end"
-                        android:textColor="@color/gray_E9E"
-                        android:textSize="12sp"
-                        android:fontFamily="@font/be_vietnam_pro_bold"
-                        android:text="666.666đ"/>
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_original_price"-->
+<!--                        android:visibility="gone"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:minLines="1"-->
+<!--                        android:maxLines="2"-->
+<!--                        android:ellipsize="end"-->
+<!--                        android:textColor="@color/gray_E9E"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:fontFamily="@font/be_vietnam_pro_bold"-->
+<!--                        android:text="666.666đ"/>-->
                 </LinearLayout>
 
                 <TextView

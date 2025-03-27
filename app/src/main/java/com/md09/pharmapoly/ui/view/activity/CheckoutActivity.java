@@ -1,13 +1,17 @@
 package com.md09.pharmapoly.ui.view.activity;
 
+import static com.md09.pharmapoly.utils.Constants.ORDER_KEY;
 import static com.md09.pharmapoly.utils.Constants.findObjectById;
 import static com.md09.pharmapoly.utils.Constants.formatCurrency;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -18,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
@@ -26,7 +31,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.google.common.reflect.TypeToken;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.md09.pharmapoly.Models.CartItem;
 import com.md09.pharmapoly.Models.GHNResponse;
 import com.md09.pharmapoly.Models.Order;
@@ -126,22 +137,15 @@ public class CheckoutActivity extends AppCompatActivity {
             startActivity(new Intent(CheckoutActivity.this,AddressActivity.class));
         });
         btn_order.setOnClickListener(v -> {
-//            Map<String, String> requestData = new HashMap<>();
-//            requestData.put("payment_method", new SharedPrefHelper(this).getPaymentMethod().getValue());
-//            requestData.put("items", new Gson().toJson(selectedItems));
             Map<String, Object> requestData = new HashMap<>();
-            requestData.put("payment_method", new SharedPrefHelper(this).getPaymentMethod().getValue());
+            String payment_method = new SharedPrefHelper(this).getPaymentMethod().getValue();
+            requestData.put("payment_method", payment_method);
 
-            List<Map<String, Object>> itemsList = new ArrayList<>();
+            List<String> selectedCartItemIds = new ArrayList<>();
             for (CartItem item : selectedItems) {
-                Map<String, Object> itemMap = new HashMap<>();
-                itemMap.put("product_id", item.getProduct().get_id());
-                itemMap.put("quantity", item.getQuantity());
-                itemMap.put("price", item.getDiscounted_price());
-                itemsList.add(itemMap);
+                selectedCartItemIds.add(item.get_id());
             }
-            requestData.put("items", itemsList);
-
+            requestData.put("cart_item_ids", selectedCartItemIds);
 
             new RetrofitClient()
                     .callAPI()
@@ -149,22 +153,67 @@ public class CheckoutActivity extends AppCompatActivity {
                                 requestData,
                                 "Bearer " + new SharedPrefHelper(this).getToken()
                             )
-                    .enqueue(new Callback<ApiResponse<Order>>() {
+                    .enqueue(new Callback<ApiResponse<String>>() {
                         @Override
-                        public void onResponse(Call<ApiResponse<Order>> call, Response<ApiResponse<Order>> response) {
+                        public void onResponse(Call<ApiResponse<String>> call, Response<ApiResponse<String>> response) {
                             if (response.isSuccessful() && response.body().getStatus() == 200) {
-                                SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_success));
-                                bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
+                                if (payment_method.equals("COD")) {
+                                    SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_success));
+                                    bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
+                                } else {
+                                    String qrCodeUrl = response.body().getData();
+                                    showQrDialog(qrCodeUrl);
+                                }
+                                new SharedPrefHelper(CheckoutActivity.this).setBooleanState(ORDER_KEY,true);
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<ApiResponse<Order>> call, Throwable t) {
+                        public void onFailure(Call<ApiResponse<String>> call, Throwable t) {
 
                         }
                     });
         });
         FillAddress();
+
+    }
+
+    private void listenForPaymentStatus(String userId, Dialog dialog) {
+        DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference("payment_status")
+                .child(userId);
+
+        orderRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String status = snapshot.getValue(String.class);
+                    if ("PAID".equals(status)) {
+                        SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_success));
+                        bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
+                        dialog.dismiss();
+                        orderRef.removeValue();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Firebase", "Lỗi khi lắng nghe trạng thái thanh toán: " + error.getMessage());
+            }
+        });
+    }
+
+    private void showQrDialog(String qrCodeUrl) {
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_qr_code);
+        dialog.setCancelable(false);
+
+        ImageView qrImageView = dialog.findViewById(R.id.qr_image);
+        Picasso.get().load(qrCodeUrl).into(qrImageView);
+
+        dialog.show();
+        listenForPaymentStatus(new SharedPrefHelper(this).getUser().get_id(), dialog);
     }
 
     @Override
@@ -193,12 +242,12 @@ public class CheckoutActivity extends AppCompatActivity {
         TextView
                 tv_quantity = view.findViewById(R.id.tv_quantity),
                 tv_product_name = view.findViewById(R.id.tv_product_name),
-                tv_discounted_price = view.findViewById(R.id.tv_discounted_price);
+                tv_original_price = view.findViewById(R.id.tv_original_price);
         ImageView img_product = view.findViewById(R.id.img_product);
 
         tv_quantity.setText("x" + cartItem.getQuantity());
         tv_product_name.setText(cartItem.getProduct().getName());
-        tv_discounted_price.setText(formatCurrency(cartItem.getDiscounted_price(), "đ"));
+        tv_original_price.setText(formatCurrency(cartItem.getOriginal_price(), "đ"));
         Picasso.get().load(cartItem.getProduct().getImageUrl()).into(img_product);
 
         layout_cart_item.addView(view);

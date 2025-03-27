@@ -7,7 +7,7 @@ public class ProductImage implements Serializable {
     private String _id;
     private String product_id;
     private String image_url;
-    private boolean is_primary;  // Trường này sẽ cho biết ảnh có phải ảnh chính hay không
+    private boolean is_primary;
     private float sort_order;
 
     public String get_id() {

@@ -62,22 +62,10 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_search);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        prevPageBtn = findViewById(R.id.prevPageBtn);
-        nextPageBtn = findViewById(R.id.nextPageBtn);
-        searchView = findViewById(R.id.searchView);
-        pageInfoTextView = findViewById(R.id.pageInfoTextView);
-        categoryScrollView = findViewById(R.id.categoryScrollView);
-        brandScrollView = findViewById(R.id.brandScrollView);
-        categoryLayout = findViewById(R.id.categoryLayout);
-        brandLayout = findViewById(R.id.brandLayout);
-        historyLayout = findViewById(R.id.historyLayout);  // Lịch sử tìm kiếm
-        imgback = findViewById(R.id.imgback);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        productAdapter = new ProductAdapter(this, new ArrayList<>());
-        recyclerView.setAdapter(productAdapter);
+        InitUI();
 
         sharedPrefHelper = new SharedPrefHelper(this);
         // Hiển thị lịch sử tìm kiếm khi mở màn hình tìm kiếm
@@ -112,6 +100,23 @@ public class SearchActivity extends AppCompatActivity {
                 displayPage(currentPage);
             }
         });
+    }
+
+    private void InitUI() {
+        recyclerView = findViewById(R.id.recyclerView);
+        prevPageBtn = findViewById(R.id.prevPageBtn);
+        nextPageBtn = findViewById(R.id.nextPageBtn);
+        searchView = findViewById(R.id.searchView);
+        pageInfoTextView = findViewById(R.id.pageInfoTextView);
+        categoryScrollView = findViewById(R.id.categoryScrollView);
+        brandScrollView = findViewById(R.id.brandScrollView);
+        categoryLayout = findViewById(R.id.categoryLayout);
+        brandLayout = findViewById(R.id.brandLayout);
+        historyLayout = findViewById(R.id.historyLayout);
+        imgback = findViewById(R.id.imgback);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        productAdapter = new ProductAdapter(this, new ArrayList<>());
+        recyclerView.setAdapter(productAdapter);
     }
 
     // Load lịch sử tìm kiếm từ SharedPreferences và hiển thị
