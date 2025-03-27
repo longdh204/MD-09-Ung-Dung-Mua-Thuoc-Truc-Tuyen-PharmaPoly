@@ -82,6 +82,7 @@ public class SharedPrefHelper {
         editor.clear();
         editor.apply();
     }
+
     public void saveSearchHistory(List<String> history) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Set<String> historySet = new HashSet<>(history);
@@ -93,6 +94,7 @@ public class SharedPrefHelper {
         Set<String> historySet = sharedPreferences.getStringSet("search_history", new HashSet<>());
         return new ArrayList<>(historySet);
     }
+
     public void savePaymentMethod(PaymentMethod method) {
         editor.putString(PAYMENT_METHOD_KEY, method.getValue());
         editor.apply();
@@ -101,5 +103,21 @@ public class SharedPrefHelper {
     public PaymentMethod getPaymentMethod() {
         String method = sharedPreferences.getString(PAYMENT_METHOD_KEY, "COD");
         return PaymentMethod.fromString(method);
+    }
+
+    // Lưu thông tin thuốc và thời gian uống thuốc
+    public void saveMedicineReminder(String medicineName, int hour, int minute) {
+        editor.putString("medicine_name", medicineName);
+        editor.putInt("hour", hour);
+        editor.putInt("minute", minute);
+        editor.apply();
+    }
+
+    // Lấy thông tin thuốc và thời gian uống
+    public String getMedicineReminder() {
+        String medicineName = sharedPreferences.getString("medicine_name", null);
+        int hour = sharedPreferences.getInt("hour", -1);
+        int minute = sharedPreferences.getInt("minute", -1);
+        return (medicineName != null) ? medicineName + " at " + hour + ":" + minute : null;
     }
 }

@@ -31,6 +31,7 @@ import com.md09.pharmapoly.Adapters.CategoryAdapter;
 import com.md09.pharmapoly.Adapters.CategoryListAdapter;
 import com.md09.pharmapoly.Adapters.ProductAdapter;
 import com.md09.pharmapoly.Adapters.SliderAdapter;
+import com.md09.pharmapoly.MedicineReminderActivity;
 import com.md09.pharmapoly.Models.Category;
 import com.md09.pharmapoly.Models.ItemCategoryHome;
 import com.md09.pharmapoly.Models.PageData;
@@ -180,6 +181,14 @@ public class HomeFragment extends Fragment {
         categoryListAdapter.setOnCategoryClickListener(category -> {
             if (category.getName().equals("Tìm nhà thuốc")) {
                 Intent intent = new Intent(getContext(), PharmacyMapActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // Xử lý sự kiện click vào category
+        categoryListAdapter.setOnCategoryClickListener(category -> {
+            if (category.getName().equals("Nhắc uống thuốc")) {
+                Intent intent = new Intent(getContext(), MedicineReminderActivity.class);
                 startActivity(intent);
             }
         });
