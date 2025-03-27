@@ -72,6 +72,3 @@ public class MedicineReminderAdapter extends RecyclerView.Adapter<MedicineRemind
         }
     }
 }
-
-
-

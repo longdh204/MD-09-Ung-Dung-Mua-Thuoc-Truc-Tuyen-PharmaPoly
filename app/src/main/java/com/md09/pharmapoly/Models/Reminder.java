@@ -29,4 +29,3 @@ public class Reminder {
         return repeatDaily;
     }
 }
-

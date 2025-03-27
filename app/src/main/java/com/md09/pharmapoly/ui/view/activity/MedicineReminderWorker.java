@@ -32,8 +32,8 @@ public class MedicineReminderWorker extends Worker {
         // Gửi thông báo nhắc nhở người dùng uống thuốc
         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notification = new NotificationCompat.Builder(getApplicationContext(), "medication_channel")
-                .setContentTitle("Đã đến giờ uống thuốc!")
-                .setContentText("Đã đến giờ uống thuốc: " + medicineName)
+                .setContentTitle("ĐỖ LONG hỏi bạn đã uống thuốc gì chưa nhỉ :(")
+                .setContentText("Uống : " + medicineName + " mà bạn đã cài đặt đi không ĐỖ LONG cho ăn đấm bây giờ")
                 .setSmallIcon(R.drawable.ic_nhacuongthuoc)
                 .build();
 
