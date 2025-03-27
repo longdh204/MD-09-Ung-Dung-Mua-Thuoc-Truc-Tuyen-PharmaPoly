@@ -10,9 +10,12 @@ import static com.md09.pharmapoly.utils.Constants.USER_KEY;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.md09.pharmapoly.Models.Reminder;
 import com.md09.pharmapoly.data.model.User;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -26,6 +29,7 @@ public class SharedPrefHelper {
 
     public SharedPrefHelper(Context context) {
         sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences("MedicineReminderPrefs", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         gson = new Gson();
     }
@@ -119,5 +123,36 @@ public class SharedPrefHelper {
         int hour = sharedPreferences.getInt("hour", -1);
         int minute = sharedPreferences.getInt("minute", -1);
         return (medicineName != null) ? medicineName + " at " + hour + ":" + minute : null;
+    }
+
+    // Lưu danh sách nhắc nhở
+    public void saveReminder(String medicineName, int hour, int minute, boolean repeatDaily) {
+        // Lấy danh sách hiện tại
+        List<Reminder> reminders = getReminders();
+        reminders.add(new Reminder(medicineName, hour, minute, repeatDaily));
+
+        // Lưu lại danh sách
+        String json = gson.toJson(reminders);
+        editor.putString("reminder_list", json);
+        editor.apply();
+    }
+
+    // Lấy danh sách nhắc nhở
+    public List<Reminder> getReminders() {
+        String json = sharedPreferences.getString("reminder_list", null);
+        Type type = new TypeToken<List<Reminder>>() {
+        }.getType();
+        return json == null ? new ArrayList<>() : gson.fromJson(json, type);
+    }
+
+    // Xóa nhắc nhở theo chỉ mục
+    public void deleteReminder(int index) {
+        List<Reminder> reminders = getReminders();
+        if (index >= 0 && index < reminders.size()) {
+            reminders.remove(index);
+            String json = gson.toJson(reminders);
+            editor.putString("reminder_list", json);
+            editor.apply();
+        }
     }
 }
