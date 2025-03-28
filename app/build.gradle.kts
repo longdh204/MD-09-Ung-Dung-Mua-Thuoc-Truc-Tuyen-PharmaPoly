@@ -58,5 +58,5 @@ dependencies {
     implementation("com.google.android.gms:play-services-safetynet:18.0.1")
     implementation("com.google.android.recaptcha:recaptcha:18.4.0")
     implementation ("com.google.firebase:firebase-database:20.1.0")
-
+    implementation ("io.socket:socket.io-client:2.1.0")
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Constants {
-    public static final String BASE_URL = "https://pharmapoly-server.onrender.com/api/";
+    public static final String BASE_URL = "http://192.168.1.72:3000/api/";
     public static final String GHN_URL = "https://dev-online-gateway.ghn.vn/";
     public static final Pattern PHONE_PATTERN = Pattern.compile("^(0|\\+84)[1-9][0-9]{8}$");
     public static final String PASSWORD_PATTERN = "^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+=|<>?{}\\[\\]~-]).{8,}$";

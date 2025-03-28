@@ -337,7 +337,7 @@ public class ProductDetail extends AppCompatActivity {
     // fetch review sản phẩm từ người dùng
     private void fetchProductReviews(String productId, String token) {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        String url = "https://pharmapoly-server.onrender.com/api/product/" + productId + "/reviews";
+        String url = "http://192.168.1.72:3000/api/product/" + productId + "/reviews";
         Call<ApiResponse<List<ProductReview>>> reviewCall = apiService.getProductReviews(url, token);
         reviewCall.enqueue(new Callback<ApiResponse<List<ProductReview>>>() {
             @Override

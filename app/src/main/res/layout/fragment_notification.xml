@@ -4,11 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.view.fragment.NotificationFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:layout_marginBottom="150dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvChatAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <EditText
+            android:background="#90B4CA"
+            android:id="@+id/edtMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập tin nhắn" />
+
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gửi" />
+    </LinearLayout>
 </FrameLayout>

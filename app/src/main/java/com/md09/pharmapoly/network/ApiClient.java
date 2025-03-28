@@ -5,11 +5,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static Retrofit retrofit = null;
-
+//    MD09_Pass@
     public static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("https://pharmapoly-server.onrender.com/api/")
+                    .baseUrl("http://192.168.1.72:3000/api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
