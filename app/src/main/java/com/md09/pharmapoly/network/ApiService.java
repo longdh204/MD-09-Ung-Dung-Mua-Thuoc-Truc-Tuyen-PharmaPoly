@@ -41,37 +41,49 @@ import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 
 public interface ApiService {
+    @GET("product/{productId}/images")
+        // Đảm bảo URL là đúng với API của bạn
+    Call<ApiResponse<List<String>>> getProductImages(
+            @Path("productId") String productId,
+            @Header("Authorization") String token);
+
     @GET("test/qr")
     Call<JsonObject> testQr(
             @Header("Authorization") String token,
             @Query("amount") int amount
     );
+
     @GET("product/most-reviewed")
     Call<ApiResponse<PageDataClone<List<Product>>>> getMostReviewProducts(
             @Query("page") int page,
             @Query("limit") int limit,
             @Header("Authorization") String token
     );
+
     @POST("orders/{id}/cancel")
     Call<ApiResponse<Order>> cancelOrder(
             @Path("id") String orderId,
             @Header("Authorization") String token
     );
+
     @POST("orders/create")
     Call<ApiResponse<String>> createOrders(
             @Body Map<String, Object> data,
             @Header("Authorization") String token
     );
+
     @GET("orders/{id}/detail")
     Call<ApiResponse<Order>> getOrderDetail(
             @Path("id") String orderId,
             @Header("Authorization") String token
     );
+
     @GET("orders")
     Call<ApiResponse<List<Order>>> getOrders(
             @Query("group") String group,
             @Header("Authorization") String token
     );
+
     @POST("calculate-shipping-fee")
     Call<GHNResponse<Object>> calculateShippingFee(
             @Header("Authorization") String token,
@@ -85,6 +97,7 @@ public interface ApiService {
             @Query("limit") int limit,
             @Header("Authorization") String token
     );
+
     @Headers({
             "Content-Type: application/json",
             "Authorization: Bearer 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"
@@ -94,20 +107,24 @@ public interface ApiService {
 
     @POST("refresh-token")
     Call<ApiResponse<User>> refreshToken(@Body Map<String, String> refreshTokenRequest);
+
     @PUT("user/address/update")
     Call<ApiResponse<UserAddress>> updateAddress(
             @Body UserAddress userAddress,
             @Header("Authorization") String token
     );
+
     @GET("user/cart")
     Call<ApiResponse<Cart>> cart(
             @Header("Authorization") String token
     );
+
     @POST("cart-item/add")
     Call<ApiResponse<CartItem>> addProductToCart(
             @Body CartItem cartItem,
             @Header("Authorization") String token
     );
+
     @FormUrlEncoded
     @POST("cart-item/update")
     Call<ApiResponse<CartItem>> updateCartItem(
@@ -121,6 +138,7 @@ public interface ApiService {
             @Query("cart_item_id") String cartItemId,
             @Header("Authorization") String token
     );
+
     @GET("category/{id}/products")
     Call<ApiResponse<PageData<List<Product>>>> getProductsByCategory(
             @Path("id") String categoryId,
@@ -137,12 +155,14 @@ public interface ApiService {
     Call<ApiResponse<List<Question>>> getProductQuestions(
             @Path("productId") String productId,
             @Header("Authorization") String token);
+
     @GET("api/product/{productId}/details")
     Call<Product> getProductDetails(@Path("productId") String productId);
+
     @GET
     Call<ApiResponse<List<ProductReview>>> getProductReviews(@Url String url, @Header("Authorization") String token);
 
-//    @GET("product/top-rated/{limit}")
+    //    @GET("product/top-rated/{limit}")
 //    Call<ApiResponse<List<Product>>> getTopRatedProducts(
 //            @Path("limit") int limit,
 //            @Header("Authorization") String token
@@ -154,7 +174,7 @@ public interface ApiService {
             @Header("Authorization") String token
     );
 
-//    @GET("product/{id}/reviews")
+    //    @GET("product/{id}/reviews")
 //    Call<ApiResponse<List<ProductReview>>>
 //    getProductReviews(
 //            @Path("id") String productId,
@@ -170,11 +190,13 @@ public interface ApiService {
     getProduct(
             @Path("id") String id,
             @Header("Authorization") String token);
+
     @GET("product/{id}/details")
     Call<ApiResponse<Product>>
     getProductDetails(
             @Path("id") String id,
             @Header("Authorization") String token);
+
     @POST("user/check-phone")
     Call<ApiResponse<Void>>
     checkPhone(

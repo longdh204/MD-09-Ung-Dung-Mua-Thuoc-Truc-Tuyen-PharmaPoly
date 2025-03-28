@@ -20,12 +20,13 @@
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/productImage"
                 android:layout_width="match_parent"
                 android:layout_height="194dp"
                 app:shapeAppearance="@style/CornerImageViewTop_LeftRight"
-                android:src="@drawable/product_image"/>
+                android:src="@drawable/product_image" />
 
 
             <TextView
@@ -39,13 +40,15 @@
                 android:lines="2"
                 android:ellipsize="end"
                 android:textSize="16sp"
-                android:textColor="@color/black_333"/>
+                android:textColor="@color/black_333" />
+
             <LinearLayout
                 android:layout_marginTop="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
+
                 <TextView
                     android:paddingHorizontal="6dp"
                     android:id="@+id/productPrice"
@@ -54,11 +57,13 @@
                     android:fontFamily="@font/be_vietnam_pro_semibold"
                     android:singleLine="true"
                     android:text="666.666đ"
-                    android:textColor="@color/blue_CE4"/>
+                    android:textColor="@color/blue_CE4" />
+
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
+
                 <LinearLayout
                     android:layout_width="60dp"
                     android:layout_height="30dp"
@@ -90,38 +95,38 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            tools:ignore="MissingConstraints">
+        <!--        <RelativeLayout-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_alignParentTop="true"-->
+        <!--            android:layout_alignParentStart="true"-->
+        <!--            tools:ignore="MissingConstraints">-->
 
-            <!-- Nền Tam giác -->
-            <View
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:background="@drawable/sale_tag"/>
+        <!--            &lt;!&ndash; Nền Tam giác &ndash;&gt;-->
+        <!--            <View-->
+        <!--                android:layout_width="70dp"-->
+        <!--                android:layout_height="70dp"-->
+        <!--                android:layout_alignParentTop="true"-->
+        <!--                android:layout_alignParentStart="true"-->
+        <!--                android:background="@drawable/sale_tag"/>-->
 
-            <!-- Chữ "SALE" -->
-            <TextView
-                android:id="@+id/saleLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SALE"
-                android:textColor="#FFFFFF"
-                android:textSize="15sp"
-                android:fontFamily="@font/be_vietnam_pro_bold"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:rotation="-45"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"/>
-        </RelativeLayout>
+        <!--            &lt;!&ndash; Chữ "SALE" &ndash;&gt;-->
+        <!--            <TextView-->
+        <!--                android:id="@+id/saleLabel"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="SALE"-->
+        <!--                android:textColor="#FFFFFF"-->
+        <!--                android:textSize="15sp"-->
+        <!--                android:fontFamily="@font/be_vietnam_pro_bold"-->
+        <!--                android:layout_centerInParent="true"-->
+        <!--                android:gravity="center"-->
+        <!--                android:rotation="-45"-->
+        <!--                android:layout_alignParentTop="true"-->
+        <!--                android:layout_alignParentStart="true"-->
+        <!--                android:layout_marginStart="5dp"-->
+        <!--                android:layout_marginTop="10dp"/>-->
+        <!--        </RelativeLayout>-->
 
     </RelativeLayout>
 
