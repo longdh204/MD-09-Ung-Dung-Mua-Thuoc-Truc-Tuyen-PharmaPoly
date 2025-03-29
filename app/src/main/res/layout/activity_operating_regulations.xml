@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.view.aboutpharmapoly.pharmacy_introduction">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Header Section -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="30dp"
+                    android:src="@drawable/arrow_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass_regular"
+                    android:text="Quy chế hoạt động"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_back"
+                    android:layout_marginLeft="40dp"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Content Section -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- Section: Nguyên tắc chung -->
+                <TextView
+                    android:id="@+id/textViewPrinciples"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:text="I. Nguyên tắc chung"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textViewPrinciplesContent"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Nhà thuốc ABC hoạt động với mục tiêu cung cấp các sản phẩm và dịch vụ chăm sóc sức khỏe chất lượng, an toàn và hiệu quả. Mọi hành động và giao dịch tại Nhà thuốc ABC đều phải tuân thủ các nguyên tắc sau:
+
+Đảm bảo sự minh bạch trong mọi hoạt động giao dịch.
+
+Đảm bảo tính chính xác và hợp pháp của các sản phẩm cung cấp.
+
+Tôn trọng quyền lợi của khách hàng và đối tác."
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewPrinciples"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp" />
+
+                <!-- Section: Quy định chung -->
+                <TextView
+                    android:id="@+id/textViewRegulations"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:text="II. Quy định chung"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewPrinciplesContent" />
+
+                <TextView
+                    android:id="@+id/textViewRegulationsContent"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Các quy định chung của Nhà thuốc ABC nhằm đảm bảo rằng mọi giao dịch, hoạt động kinh doanh diễn ra một cách hợp pháp, an toàn và bảo mật. Mọi khách hàng và đối tác tham gia vào hệ thống của Nhà thuốc ABC phải tuân thủ các quy định sau:
+
+Tất cả các giao dịch phải được thực hiện một cách minh bạch.
+
+Sản phẩm cung cấp phải có chứng nhận chất lượng từ các cơ quan có thẩm quyền.
+
+Đảm bảo việc bảo vệ thông tin cá nhân của khách hàng."
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewRegulations"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp" />
+
+                <!-- Section: Quy trình giao dịch -->
+                <TextView
+                    android:id="@+id/textViewTransactionProcess"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:text="III. Quy trình giao dịch"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewRegulationsContent" />
+
+                <TextView
+                    android:id="@+id/textViewTransactionProcessContent"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Quy trình giao dịch tại Nhà thuốc ABC được xây dựng để thuận tiện cho khách hàng, bao gồm các bước sau:
+
+Đăng ký tài khoản (nếu chưa có).
+
+Chọn sản phẩm từ danh mục và thêm vào giỏ hàng.
+
+Xác nhận thông tin giao dịch và thanh toán.
+
+Nhận hàng tại địa chỉ đã đăng ký hoặc lựa chọn hình thức giao hàng khác."
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTransactionProcess"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp" />
+
+                <!-- Section: Quy trình thanh toán -->
+                <TextView
+                    android:id="@+id/textViewPaymentProcess"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:text="IV. Quy trình thanh toán"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTransactionProcessContent" />
+
+                <TextView
+                    android:id="@+id/textViewPaymentProcessContent"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Chúng tôi cung cấp nhiều hình thức thanh toán để đáp ứng nhu cầu của khách hàng, bao gồm:
+
+Thanh toán qua thẻ tín dụng hoặc thẻ ghi nợ.
+
+Thanh toán qua ví điện tử (Ví MoMo, ZaloPay, VNPAY, v.v.).
+
+Thanh toán qua chuyển khoản ngân hàng.
+
+Thanh toán khi nhận hàng.
+Tất cả các giao dịch thanh toán phải được thực hiện an toàn, bảo mật và đảm bảo tính minh bạch."
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewPaymentProcess"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp" />
+
+                <!-- Section: Đảm bảo an toàn giao dịch -->
+                <TextView
+                    android:id="@+id/textViewTransactionSecurity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:text="V. Đảm bảo an toàn giao dịch"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewPaymentProcessContent" />
+
+                <TextView
+                    android:id="@+id/textViewTransactionSecurityContent"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Nhà thuốc ABC cam kết bảo vệ an toàn giao dịch cho khách hàng thông qua các biện pháp bảo mật tối ưu như:
+
+Mã hóa dữ liệu khi thực hiện giao dịch thanh toán.
+
+Kiểm tra và xác thực thông tin khách hàng trước khi hoàn tất giao dịch.
+
+Đảm bảo an toàn thông tin qua các cổng thanh toán bảo mật."
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTransactionSecurity"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp" />
+
+                <!-- Section: Bảo vệ thông tin cá nhân -->
+                <TextView
+                    android:id="@+id/textViewPrivacyProtection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:text="VI. Bảo vệ thông tin cá nhân"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTransactionSecurityContent" />
+
+                <TextView
+                    android:id="@+id/textViewPrivacyProtectionContent"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Nhà thuốc ABC cam kết bảo vệ thông tin cá nhân của khách hàng theo chính sách bảo mật nghiêm ngặt. Chúng tôi sẽ không chia sẻ thông tin cá nhân của khách hàng cho bên thứ ba mà không có sự đồng ý của khách hàng.
+
+Mọi thông tin cá nhân đều được bảo mật trong suốt quá trình giao dịch.
+
+Quy trình bảo mật sẽ được cải tiến liên tục để bảo vệ tốt nhất cho khách hàng."
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewPrivacyProtection"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp" />
+
+                <!-- Section: Quản lý thông tin xấu -->
+                <TextView
+                    android:id="@+id/textViewBadInfoManagement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:text="VII. Quản lý thông tin xấu"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewPrivacyProtectionContent" />
+
+                <TextView
+                    android:id="@+id/textViewBadInfoManagementContent"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Nhà thuốc ABC sẽ chủ động giám sát và loại bỏ thông tin xấu, thông tin không chính xác hoặc gây hại cho người dùng khỏi hệ thống. Các biện pháp xử lý bao gồm:
+
+Kiểm duyệt nội dung trước khi đăng tải.
+
+Báo cáo và xử lý các thông tin vi phạm quy định về bảo mật, bảo vệ quyền lợi người tiêu dùng.
+
+Chịu trách nhiệm giải quyết khi có thông tin sai lệch hoặc không đúng."
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewBadInfoManagement"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp" />
+
+                <!-- Section: Trách nhiệm trong trường hợp phát sinh lỗi kỹ thuật -->
+                <TextView
+                    android:id="@+id/textViewTechnicalError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:text="VIII. Trách nhiệm"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewBadInfoManagementContent" />
+
+                <TextView
+                    android:id="@+id/textViewTechnicalErrorContent"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Nhà thuốc ABC cam kết khắc phục kịp thời mọi sự cố kỹ thuật phát sinh trong quá trình giao dịch. Trách nhiệm của chúng tôi bao gồm:
+
+Cung cấp hỗ trợ kỹ thuật cho khách hàng trong trường hợp gặp sự cố với hệ thống.
+
+Đảm bảo hệ thống hoạt động ổn định và an toàn.
+
+Tiến hành bảo trì và sửa chữa các lỗi kỹ thuật nhanh chóng để không làm gián đoạn trải nghiệm của khách hàng."
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTechnicalError"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp" />
+
+                <!-- Section: Quyền và nghĩa vụ của ban quản lý -->
+                <TextView
+                    android:id="@+id/textViewManagementRights"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:text="IX. Quyền và nghĩa vụ của ban quản lý"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTechnicalErrorContent" />
+
+                <TextView
+                    android:id="@+id/textViewManagementRightsContent"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Ban quản lý Nhà thuốc ABC có quyền và nghĩa vụ sau:
+
+Giám sát toàn bộ hoạt động của nhà thuốc để đảm bảo quy trình diễn ra đúng theo quy định.
+
+Xử lý khiếu nại của khách hàng và bảo vệ quyền lợi của khách hàng.
+
+Đảm bảo chất lượng sản phẩm và dịch vụ luôn đạt yêu cầu."
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewManagementRights"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp" />
+
+                <!-- Section: Quyền và trách nhiệm thành viên tham gia -->
+                <TextView
+                    android:id="@+id/textViewMemberRights"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:text="X. Quyền và trách nhiệm thành viên"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewManagementRightsContent" />
+
+                <TextView
+                    android:id="@+id/textViewMemberRightsContent"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Thành viên tham gia tại Nhà thuốc ABC có quyền và trách nhiệm như sau:
+
+Quyền lợi:
+
+Được quyền tham gia vào các chương trình khuyến mãi, giảm giá và ưu đãi từ Nhà thuốc ABC.
+
+Được hỗ trợ tư vấn chăm sóc sức khỏe từ đội ngũ chuyên gia.
+
+Được bảo vệ quyền lợi khi tham gia giao dịch tại nhà thuốc.
+
+Trách nhiệm:
+
+Tuân thủ các quy định của nhà thuốc khi sử dụng dịch vụ.
+
+Cung cấp thông tin chính xác khi đăng ký tài khoản và giao dịch.
+
+Chịu trách nhiệm về các thông tin mà mình cung cấp và sử dụng tại Nhà thuốc ABC."
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewMemberRights"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

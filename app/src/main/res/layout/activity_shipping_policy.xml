@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pharmacy_shipping_policy">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Header Section -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/arrow_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass_regular"
+                    android:text="Chính sách vận chuyển"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_back"
+                    android:layout_marginLeft="20dp"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Policy Content -->
+            <TextView
+                android:id="@+id/textViewPolicy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chính sách vận chuyển tại Nhà thuốc ABC"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="22dp"
+                android:layout_marginTop="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_back" />
+
+            <TextView
+                android:id="@+id/textViewContent1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I. Phạm vi và khu vực giao hàng"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewPolicy" />
+
+            <TextView
+                android:id="@+id/textViewContentDescription1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nhà thuốc ABC cung cấp dịch vụ giao hàng trên toàn quốc. Tuy nhiên, tùy theo khu vực, thời gian giao hàng có thể khác nhau. Khách hàng vui lòng kiểm tra phạm vi giao hàng và thời gian ước tính trên website hoặc liên hệ với bộ phận chăm sóc khách hàng."
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewContent1" />
+
+            <TextView
+                android:id="@+id/textViewContent2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="II. Phí vận chuyển"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewContentDescription1" />
+
+            <TextView
+                android:id="@+id/textViewContentDescription2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phí vận chuyển sẽ được tính tùy theo địa chỉ giao hàng và khối lượng đơn hàng. Trong trường hợp khách hàng có yêu cầu giao hàng gấp, phí vận chuyển có thể thay đổi và sẽ được thông báo trước khi hoàn tất đơn hàng."
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewContent2" />
+
+            <TextView
+                android:id="@+id/textViewContent3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="III. Thời gian giao hàng"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewContentDescription2" />
+
+            <TextView
+                android:id="@+id/textViewContentDescription3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Thời gian giao hàng phụ thuộc vào khu vực và tính khả dụng của sản phẩm. Trung bình, thời gian giao hàng sẽ là từ 2 đến 7 ngày làm việc. Trong trường hợp có sự cố phát sinh, chúng tôi sẽ thông báo kịp thời tới khách hàng."
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewContent3" />
+
+            <TextView
+                android:id="@+id/textViewContent4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IV. Xử lý trường hợp giao hàng không thành công"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewContentDescription3" />
+
+            <TextView
+                android:id="@+id/textViewContentDescription4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Trong trường hợp không thể giao hàng do thông tin địa chỉ sai hoặc người nhận không có mặt tại địa chỉ, nhà thuốc sẽ cố gắng liên lạc để xử lý và sẽ có thể thực hiện giao hàng lại hoặc yêu cầu khách hàng cung cấp thông tin chính xác hơn."
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewContent4" />
+
+            <TextView
+                android:id="@+id/textViewContent5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="V. Chính sách giao hàng miễn phí"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewContentDescription4" />
+
+            <TextView
+                android:id="@+id/textViewContentDescription5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chính sách giao hàng miễn phí áp dụng cho các đơn hàng có giá trị từ 500.000 VND trở lên đối với khu vực nội thành. Đối với các khu vực ngoại thành hoặc các đơn hàng có giá trị thấp hơn, phí vận chuyển sẽ được tính theo các tiêu chuẩn đã công bố."
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewContent5" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

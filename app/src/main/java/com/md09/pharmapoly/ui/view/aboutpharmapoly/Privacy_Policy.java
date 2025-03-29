@@ -1,4 +1,4 @@
-package com.md09.pharmapoly;
+package com.md09.pharmapoly.ui.view.aboutpharmapoly;
 
 import android.os.Bundle;
 
@@ -8,13 +8,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class pharmacy_introduction extends AppCompatActivity {
+import com.md09.pharmapoly.R;
+
+public class Privacy_Policy extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_pharmacy_introduction);
+        setContentView(R.layout.activity_privacy_policy);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

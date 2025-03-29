@@ -1,11 +1,9 @@
 package com.md09.pharmapoly.ui.view.fragment;
 
-import static android.content.Context.MODE_PRIVATE;
 import static androidx.core.app.ActivityCompat.finishAffinity;
 import static com.md09.pharmapoly.utils.Constants.USER_PROFILE_UPDATED_KEY;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -14,15 +12,20 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.md09.pharmapoly.AddAddress;
+import com.md09.pharmapoly.ui.view.aboutpharmapoly.Content_Policy;
+import com.md09.pharmapoly.ui.view.aboutpharmapoly.Deposit_Policy;
+import com.md09.pharmapoly.ui.view.aboutpharmapoly.Medicine_Return_Policy;
+import com.md09.pharmapoly.ui.view.aboutpharmapoly.Operating_Regulations;
+import com.md09.pharmapoly.ui.view.aboutpharmapoly.Privacy_Policy;
 import com.md09.pharmapoly.R;
+import com.md09.pharmapoly.ui.view.aboutpharmapoly.Shipping_Policy;
 import com.md09.pharmapoly.data.model.User;
+import com.md09.pharmapoly.ui.view.aboutpharmapoly.pharmacy_introduction;
 import com.md09.pharmapoly.ui.view.activity.AddressActivity;
 import com.md09.pharmapoly.ui.view.activity.OrderManagementActivity;
 import com.md09.pharmapoly.ui.view.activity.PhoneNumber;
@@ -88,10 +91,18 @@ public class ProfileFragment extends Fragment {
             btn_processing,
             btn_shipping,
             btn_delivered,
-            btn_exchange_return;
+            btn_exchange_return,
+            introduction,
+            Operating_regulations,
+            deposit_policy,
+            content_policy,
+            medicine_return_policy,
+            Shipping_Policy,
+            privacy_policy;
     private TextView tv_phone_number, tv_full_name;
     private ImageView img_user_avatar;
     private AppCompatButton btn_logout;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -112,7 +123,6 @@ public class ProfileFragment extends Fragment {
         }
 
 
-
         btn_personal_info.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), ProfileUpdate.class);
             startActivity(intent);
@@ -131,6 +141,34 @@ public class ProfileFragment extends Fragment {
             Intent intent = new Intent(getActivity(), payment_card_manager.class);
             startActivity(intent);
         });
+        introduction.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), pharmacy_introduction.class);
+            startActivity(intent);
+        });
+        Operating_regulations.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Operating_Regulations.class);
+            startActivity(intent);
+        });
+        deposit_policy.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Deposit_Policy.class);
+            startActivity(intent);
+        });
+        content_policy.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Content_Policy.class);
+            startActivity(intent);
+        });
+        medicine_return_policy.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Medicine_Return_Policy.class);
+            startActivity(intent);
+        });
+        Shipping_Policy.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Shipping_Policy.class);
+            startActivity(intent);
+        });
+        privacy_policy.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Privacy_Policy.class);
+            startActivity(intent);
+        });
         btn_logout.setOnClickListener(v -> {
             DialogHelper.ShowConfirmationDialog(
                     getContext(),
@@ -145,6 +183,7 @@ public class ProfileFragment extends Fragment {
         });
         return view;
     }
+
     private void performLogout() {
         SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(getContext());
         sharedPrefHelper.clearData();
@@ -180,6 +219,13 @@ public class ProfileFragment extends Fragment {
         img_user_avatar = view.findViewById(R.id.img_user_avatar);
 
         btn_logout = view.findViewById(R.id.btn_logout);
+        introduction = view.findViewById(R.id.introduction);
+        Operating_regulations = view.findViewById(R.id.Operating_regulations);
+        deposit_policy = view.findViewById(R.id.deposit_policy);
+        content_policy = view.findViewById(R.id.content_policy);
+        medicine_return_policy = view.findViewById(R.id.medicine_return_policy);
+        Shipping_Policy = view.findViewById(R.id.Shipping_Policy);
+        privacy_policy = view.findViewById(R.id.privacy_policy);
         LoadUserInfo();
     }
 

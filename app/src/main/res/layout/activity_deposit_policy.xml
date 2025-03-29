@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.view.aboutpharmapoly.pharmacy_introduction">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Title Header -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="30dp"
+                    android:src="@drawable/arrow_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass_regular"
+                    android:text="Chính sách đặt cọc"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_back"
+                    android:layout_marginLeft="40dp"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Policy Content -->
+
+            <TextView
+                android:id="@+id/textViewDeposit1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I. Mục đích của chính sách đặt cọc"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="30dp"
+
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewDepositDescription1"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:text="Chính sách đặt cọc tại Nhà thuốc ABC nhằm đảm bảo quyền lợi của cả khách hàng và nhà thuốc khi giao dịch các sản phẩm, đặc biệt đối với những sản phẩm có số lượng hạn chế hoặc yêu cầu đặt hàng trước. Đặt cọc giúp chúng tôi chuẩn bị sản phẩm nhanh chóng và chính xác, đồng thời giúp khách hàng yên tâm về việc sản phẩm sẽ được giữ lại và giao đúng hẹn."
+                android:textColor="@color/black"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewDeposit1" />
+
+            <TextView
+                android:id="@+id/textViewDeposit2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="II. Điều kiện đặt cọc"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="30dp"
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewDepositDescription1" />
+
+            <TextView
+                android:id="@+id/textViewDepositDescription2"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:text="Khách hàng phải cung cấp thông tin cá nhân chính xác khi yêu cầu đặt cọc. Đặt cọc có thể thực hiện qua các hình thức thanh toán như thẻ tín dụng, chuyển khoản ngân hàng, hoặc ví điện tử."
+                android:textColor="@color/black"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewDeposit2" />
+
+            <TextView
+                android:id="@+id/textViewDeposit3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="III. Mức độ và số tiền đặt cọc"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="30dp"
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewDepositDescription2" />
+
+            <TextView
+                android:id="@+id/textViewDepositDescription3"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:text="Mức đặt cọc thông thường là 20% – 50% giá trị sản phẩm, tùy thuộc vào loại sản phẩm và yêu cầu của nhà thuốc."
+                android:textColor="@color/black"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewDeposit3" />
+
+            <TextView
+                android:id="@+id/textViewDeposit4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IV. Quy trình đặt cọc"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewDepositDescription3" />
+
+            <TextView
+                android:id="@+id/textViewDepositDescription4"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:text="Khách hàng lựa chọn sản phẩm, cung cấp thông tin đặt cọc và thanh toán. Nhà thuốc xác nhận và giữ sản phẩm cho khách hàng."
+                android:textColor="@color/black"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewDeposit4" />
+
+            <TextView
+                android:id="@+id/textViewDeposit5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="V. Quyền lợi của khách hàng khi đặt cọc"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewDepositDescription4" />
+
+            <TextView
+                android:id="@+id/textViewDepositDescription5"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:text="Đảm bảo sản phẩm được giữ lại cho khách hàng, tránh tình trạng hết hàng. Quá trình thanh toán đơn giản và linh hoạt."
+                android:textColor="@color/black"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewDeposit5" />
+
+            <!-- More sections as needed -->
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
