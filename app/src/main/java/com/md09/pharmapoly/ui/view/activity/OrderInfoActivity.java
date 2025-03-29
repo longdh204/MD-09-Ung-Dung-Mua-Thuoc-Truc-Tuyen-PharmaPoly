@@ -45,10 +45,12 @@ public class OrderInfoActivity extends AppCompatActivity {
             tv_total_shipping_fee,
             tv_created_at,
             tv_status,
-            tv_order_code;
+            tv_order_code,
+            tv_delivery_date;
     private LinearLayout
             layout_order_item,
-            layout_ghn_shipping_code;
+            layout_ghn_shipping_code,
+            layout_delivery_date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +114,7 @@ public class OrderInfoActivity extends AppCompatActivity {
 
             layout_order_item.addView(view);
         }
-
+        //if (order.)
         tv_subtotal.setText(formatCurrency(subtotal,"đ"));
         tv_total_shipping_fee.setText(formatCurrency(order.getShipping_fee(),"đ"));
         tv_total_payment.setText(formatCurrency(order.getTotal_price(),"đ"));

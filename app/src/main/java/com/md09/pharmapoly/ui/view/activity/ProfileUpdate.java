@@ -312,7 +312,7 @@ public class ProfileUpdate extends AppCompatActivity {
     }
 
     private void InitUI() {
-//        btn_back = findViewById(R.id.btn_back);
+        btn_back = findViewById(R.id.btn_back);
 
         edtFullName = findViewById(R.id.update_profile_full_name);
         edtPhoneNumber = findViewById(R.id.update_profile_phone_number);

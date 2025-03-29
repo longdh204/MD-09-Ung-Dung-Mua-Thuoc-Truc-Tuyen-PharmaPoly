@@ -64,6 +64,15 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
         this.orders = orders;
         notifyDataSetChanged();
     }
+    public void UpdateItem(Order updatedOrder) {
+        for (int i = 0; i < orders.size(); i++) {
+            if (orders.get(i).get_id().equals(updatedOrder.get_id())) {
+                orders.set(i, updatedOrder);
+                notifyItemChanged(i);
+                break;
+            }
+        }
+    }
 
     @NonNull
     @Override
@@ -82,19 +91,18 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
 
         if (order.getPayment_method().equals(PaymentMethod.ONLINE.getValue())) {
             holder.tv_payment_status.setVisibility(View.VISIBLE);
-            updatePaymentStatus(holder.tv_payment_status,order.getPayment_status());
+            updatePaymentStatus(holder.tv_payment_status, order.getPayment_status());
         } else {
             holder.tv_payment_status.setVisibility(View.GONE);
         }
 
         holder.layout_order_item.removeAllViews();
         SetOrderStatus(holder, order);
-//        holder.tv_order_status.setText(context.getString(R.string.status) + getDisplayStatus(context, order.getStatus()));
-//        holder.tv_order_status.setTextColor(getStatusColor(context, order.getStatus()));
 
         List<OrderItem> items = order.getItems();
         int itemCount = items.size();
         int productCount = 0;
+
 
         for (OrderItem item : items) {
             productCount += item.getQuantity();
@@ -144,6 +152,19 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
                 holder.layout_order_item.setLayoutParams(params);
             });
         });
+        if (order.isCancel_request() || order.isReturn_request()) {
+            holder.btn_order_item.setVisibility(View.GONE);
+        } else {
+            handleOrderActionButton(holder, order, orderStatusGroup);
+        }
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, OrderInfoActivity.class);
+            intent.putExtra("order_id", order.get_id());
+            context.startActivity(intent);
+        });
+    }
+
+    private void handleOrderActionButton(ViewHolder holder, Order order, Constants.OrderStatusGroup orderStatusGroup) {
         if (orderStatusGroup == Constants.OrderStatusGroup.PROCESSING) {
             holder.btn_order_item.setCardBackgroundColor(context.getResources().getColor(R.color.red_757));
             holder.tv_btn_order.setText(R.string.cancel_order);
@@ -182,12 +203,10 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
             holder.btn_order_item.setCardBackgroundColor(context.getResources().getColor(R.color.blue_CE4));
             holder.tv_btn_order.setText(R.string.details);
         }
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, OrderInfoActivity.class);
-            intent.putExtra("order_id", order.get_id());
-            context.startActivity(intent);
-        });
     }
+
+
+
     private void updatePaymentStatus(TextView tv_payment_status, String paymentStatus) {
         int color;
         String text;
@@ -201,10 +220,10 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
                 color = ContextCompat.getColor(context, R.color.orange_500);
                 text = context.getString(R.string.payment_pending);
                 break;
-            case "failed":
+            case "refunded":
             default:
-                color = ContextCompat.getColor(context, R.color.red_757);
-                text = context.getString(R.string.payment_failed);
+                color = ContextCompat.getColor(context, R.color.green_500);
+                text = context.getString(R.string.payment_refunded);
                 break;
         }
 
@@ -224,7 +243,8 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
     }
 
     private void SetOrderStatus(ViewHolder holder, Order order) {
-        String prefix = context.getString(R.string.status) + ": ";
+        //String prefix = context.getString(R.string.order_status_title) + ": ";
+        String prefix = "";
         String displayStatus = getDisplayStatus(context, order.getStatus());
 
         SpannableStringBuilder spannable = new SpannableStringBuilder();
@@ -236,6 +256,18 @@ public class PurchasedOrdersAdapter extends RecyclerView.Adapter<PurchasedOrders
         int start = spannable.length();
         spannable.append(displayStatus);
         spannable.setSpan(new ForegroundColorSpan(statusColor), start, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        if (order.isCancel_request()) {
+            String cancelRequestText = " - " + context.getString(R.string.cancel_request_sent);
+            spannable.append(cancelRequestText);
+            spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context, R.color.red_757)), spannable.length() - cancelRequestText.length(), spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        if (order.isReturn_request()) {
+            String returnRequestText = " - " + context.getString(R.string.return_request_sent);
+            int returnStart = spannable.length();
+            spannable.append(returnRequestText);
+            spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context, R.color.blue_CE4)), returnStart, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
         holder.tv_order_status.setText(spannable);
     }
 

@@ -1,5 +1,7 @@
 package com.md09.pharmapoly.ui.view.fragment;
 
+import static com.md09.pharmapoly.utils.Constants.CANCELED_KEY;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,6 +22,7 @@ import com.md09.pharmapoly.network.RetrofitClient;
 import com.md09.pharmapoly.utils.Constants;
 import com.md09.pharmapoly.utils.ProgressDialogHelper;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
+import com.md09.pharmapoly.utils.SuccessMessageBottomSheet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +81,7 @@ public class DeliveredFragment extends Fragment {
     private List<Order> orders = new ArrayList<>();
     private RecyclerView rcv_order;
     private LinearLayout layout_empty;
+    private PurchasedOrdersAdapter purchasedOrdersAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -85,7 +89,7 @@ public class DeliveredFragment extends Fragment {
 
         InitUI(view);
         ProgressDialogHelper.showLoading(getContext());
-        PurchasedOrdersAdapter purchasedOrdersAdapter = new PurchasedOrdersAdapter(
+        purchasedOrdersAdapter = new PurchasedOrdersAdapter(
                 getContext(),
                 null,
                 Constants.OrderStatusGroup.DELIVERED,
@@ -97,7 +101,7 @@ public class DeliveredFragment extends Fragment {
 
                     @Override
                     public void onReturnOrExchangeOrder(Order order) {
-                        Toast.makeText(getContext(), "Check", Toast.LENGTH_SHORT).show();
+                        ReturnOrExchangeOrder(order);
                     }
                 });
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 1);
@@ -135,6 +139,34 @@ public class DeliveredFragment extends Fragment {
                 });
         return view;
     }
+
+    private void ReturnOrExchangeOrder(Order order) {
+        ProgressDialogHelper.showLoading(getContext());
+        new RetrofitClient()
+                .callAPI()
+                .returnOrder(
+                        order.get_id(),
+                        "Bearer " + new SharedPrefHelper(getContext()).getToken()
+                ).enqueue(new Callback<ApiResponse<Order>>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse<Order>> call, Response<ApiResponse<Order>> response) {
+                        if (response.isSuccessful() && response.body().getStatus() == 200) {
+                            order.setReturn_request(true);
+                            purchasedOrdersAdapter.UpdateItem(order);
+                            SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.return_request_success));
+                            bottomSheet.show(getParentFragmentManager(), "SuccessMessageBottomSheet");
+                            new SharedPrefHelper(getContext()).setBooleanState(CANCELED_KEY,true);
+                        }
+                        ProgressDialogHelper.hideLoading();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponse<Order>> call, Throwable t) {
+                        ProgressDialogHelper.hideLoading();
+                    }
+                });
+    }
+
     private void InitUI(View view) {
         rcv_order = view.findViewById(R.id.rcv_order);
         layout_empty = view.findViewById(R.id.layout_empty);

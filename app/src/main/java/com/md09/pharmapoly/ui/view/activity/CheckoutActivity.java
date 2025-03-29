@@ -231,8 +231,8 @@ public class CheckoutActivity extends AppCompatActivity {
                 tv_payment_method.setText(getString(R.string.cod));
                 break;
             case ONLINE:
-                img_icon_payment_method.setBackground(getDrawable(R.drawable.ic_momo));
-                tv_payment_method.setText(getString(R.string.momo_payment));
+                img_icon_payment_method.setBackground(getDrawable(R.drawable.ic_online_payment));
+                tv_payment_method.setText(getString(R.string.online_payment));
                 break;
         }
     }

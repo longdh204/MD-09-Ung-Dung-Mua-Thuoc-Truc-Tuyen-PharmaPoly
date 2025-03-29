@@ -145,6 +145,8 @@
     <string name="cancel_order_title">Confirm Order Cancellation</string>
     <string name="cancel_order_message">Are you sure you want to cancel this order?</string>
     <string name="order_cancelled_success">Order successfully canceled!</string>
+    <string name="order_cancelled_request_sent">Cancellation request sent</string>
+
     <string name="ghn_shipping_code">Shipping Code</string>
 
     <string name="return_order">Return item</string>
@@ -161,5 +163,18 @@
     <string name="payment_paid">Paid</string>
     <string name="payment_pending">Pending</string>
     <string name="payment_failed">Failed</string>
+    <string name="payment_refunded">Refunded</string>
+    <string name="cancel_request_sent">Cancellation request sent</string>
+    <string name="return_request_sent">Return request sent</string>
+    <string name="delivery_date">Delivery Date</string>
+    <string name="product_information">Product Information</string>
 
+    <string name="order_status_title">Order Status</string>
+    <string name="return_request_success">Your return request has been submitted successfully!</string>
+    <string name="category">Category</string>
+    <string name="specification">Specification</string>
+    <string name="origin_country">Country of origin</string>
+    <string name="manufacturer">Manufacturer</string>
+    <string name="short_description">Short description</string>
+    <string name="supported_banks">Supported banks</string>
 </resources>

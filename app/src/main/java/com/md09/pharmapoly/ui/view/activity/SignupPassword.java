@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -57,7 +58,7 @@ public class SignupPassword extends AppCompatActivity {
         Intent intent = getIntent();
         phone_number = intent.getStringExtra(PHONE_NUMBER_KEY);
         uid = intent.getStringExtra(UID_KEY);
-
+        Log.e("Check UID", uid);
         btn_create_account.setOnClickListener(v -> {
             String password = edt_new_password.getText().toString().trim();
             String confirm_password = edt_confirm_password.getText().toString().trim();

@@ -1,6 +1,7 @@
 package com.md09.pharmapoly.ui.view.activity;
 
 import static com.md09.pharmapoly.utils.Constants.PRODUCT_ADDED_TO_CART_KEY;
+import static com.md09.pharmapoly.utils.Constants.formatCurrency;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -71,6 +72,7 @@ public class ProductDetail extends AppCompatActivity {
     private List<Question> questionList;
     private Button showMoreReviewsButton;
     private LinearLayout btn_purchase;
+    private ImageView backBtn;
     private boolean isProductAdded = false;
     private PurchaseBottomSheet purchaseBottomSheet;
     @SuppressLint("CutPasteId")
@@ -91,6 +93,7 @@ public class ProductDetail extends AppCompatActivity {
         percentage3 = findViewById(R.id.percentage3);
         percentage2 = findViewById(R.id.percentage2);
         percentage1 = findViewById(R.id.percentage1);
+        backBtn = findViewById(R.id.backBtn);
 
         // san pham lien quan
         RecyclerView recyclerViewKhac = findViewById(R.id.sanphamlienquan);
@@ -129,7 +132,7 @@ public class ProductDetail extends AppCompatActivity {
         fetchProductData("67d3f1df5a228bc7cc5bbd20");
 
         // nút xem thêm toàn bộ thông tin trong product details
-        Button showProductDetailsButton = findViewById(R.id.showProductDetails);
+        TextView showProductDetailsButton = findViewById(R.id.showProductDetails);
         showProductDetailsButton.setOnClickListener(v -> {
             if (product != null) {
                 Intent intent = new Intent(ProductDetail.this, ProductDetailAllActivity.class);
@@ -144,6 +147,9 @@ public class ProductDetail extends AppCompatActivity {
             }
         });
 
+        backBtn.setOnClickListener(v -> {
+            finish();
+        });
 
 // Khởi tạo RecyclerView và Adapter
         questionRecyclerView = findViewById(R.id.questionRecyclerView);
@@ -271,16 +277,23 @@ public class ProductDetail extends AppCompatActivity {
     private void FillData(Product product) {
         productName.setText(product.getName());
         productBrand.setText(getString(R.string.brand) + ": " + product.getBrand().getName());
+//        if (product.getProduct_type() != null) {
+//            productPrice.setText(formatCurrency(product.getPrice(), "đ") + "/" + product.getProduct_type().getName());
+//        } else {
+//            productPrice.setText(product.getPrice() + "/ N/A");
+//        }
+        String type = "";
         if (product.getProduct_type() != null) {
-            productPrice.setText(product.getPrice() + "/" + product.getProduct_type().getName());
-        } else {
-            productPrice.setText(product.getPrice() + "/ N/A");
+            type = "/" + product.getProduct_type().getName();
         }
+        productPrice.setText(
+                formatCurrency(product.getPrice(), "đ") + type);
+
         productRating.setText(String.valueOf(product.getAverage_rating()));
         productReviewCount.setText(product.getReview_count() + " " + getString(R.string.review).toLowerCase());
         productReviewCount2.setText(product.getReview_count() + " " + getString(R.string.reviewr).toLowerCase());
         productCategory.setText(product.getCategory().getName());
-        productSpecification.setText(product.getSpecification());
+        productSpecification.setText(product.getProduct_type().getName() + " " + product.getSpecification());
         productOriginCountry.setText(product.getOrigin_country());
         productManufacturer.setText(product.getManufacturer());
         productShortDescription.setText(product.getShort_description());

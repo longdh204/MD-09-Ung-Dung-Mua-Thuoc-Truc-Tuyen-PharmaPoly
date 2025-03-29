@@ -144,6 +144,38 @@
                         android:textColor="@color/black_333"
                         android:textSize="14sp" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/layout_delivery_date"
+                    android:layout_marginTop="6dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/be_vietnam_pro_medium"
+                        android:text="@string/delivery_date"
+                        android:textColor="@color/black_333"
+                        android:textSize="16sp"/>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tv_delivery_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/be_vietnam_pro_bold"
+                        android:text="Date"
+                        android:textColor="@color/black_333"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
                 <TextView
                     android:layout_marginTop="6dp"
                     android:layout_width="wrap_content"

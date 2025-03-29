@@ -1,74 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_CE4"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="48dp"
+        android:paddingBottom="24dp">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_arrow_back1"
+            android:backgroundTint="@color/white_FFF" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/be_vietnam_pro_bold"
+            android:text="@string/product_information"
+            android:textAlignment="center"
+            android:textColor="@color/white_FFF"
+            android:textSize="18sp" />
+    </LinearLayout>
+
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:paddingVertical="24dp"
+            android:paddingHorizontal="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Thông tin sản phẩm"
-                android:textSize="25dp"
-                android:fontFamily="@font/overpass_regular"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/border"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/overpass_regular"
-                android:text="Tên sản phẩm :"
+                android:text="@string/category"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:layout_marginTop="30dp"
-                />
-            <TextView
-                android:id="@+id/productName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="17sp"
-                android:text=""
-                android:fontFamily="@font/overpass_regular"
+                android:textColor="@color/black_333"
+                android:fontFamily="@font/be_vietnam_pro_bold"
 
                 />
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/overpass_regular"
-                android:text="short_description:"
-                />
-            <TextView
-                android:id="@+id/shortDescription"
+                android:id="@+id/category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="17dp"
                 android:fontFamily="@font/overpass_regular"
 
                 />
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:layout_marginTop="10dp"
-                android:text="specification: "
-                android:fontFamily="@font/overpass_regular"
+                android:textColor="@color/black_333"
+                android:text="@string/specification"
+                android:fontFamily="@font/be_vietnam_pro_bold"
 
                 />
             <TextView
@@ -80,15 +77,17 @@
 
                 />
 
+
+
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="origin_country"
+                android:text="@string/origin_country"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
+                android:textColor="@color/black_333"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/overpass_regular"
+                android:fontFamily="@font/be_vietnam_pro_bold"
 
                 />
             <TextView
@@ -104,12 +103,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="manufacturer"
+                android:text="@string/manufacturer"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
+                android:textColor="@color/black_333"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/overpass_regular"
+                android:fontFamily="@font/be_vietnam_pro_bold"
 
                 />
             <TextView
@@ -124,137 +122,141 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="category"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
+                android:textColor="@color/black_333"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/overpass_regular"
-
+                android:fontFamily="@font/be_vietnam_pro_bold"
+                android:text="@string/short_description"
                 />
             <TextView
-                android:id="@+id/category"
+                android:id="@+id/shortDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="17dp"
                 android:fontFamily="@font/overpass_regular"
 
                 />
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/layout_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="brand"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/overpass_regular"
+                android:orientation="vertical">
 
-                />
-            <TextView
-                android:id="@+id/brand"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="17dp"
-                android:fontFamily="@font/overpass_regular"
+            </LinearLayout>
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="brand"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textColor="#000000"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:fontFamily="@font/overpass_regular"-->
 
-                />
+<!--                />-->
+<!--            <TextView-->
+<!--                android:id="@+id/brand"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="17dp"-->
+<!--                android:fontFamily="@font/overpass_regular"-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="averageRating"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/overpass_regular"
+<!--                />-->
 
-                />
-            <TextView
-                android:id="@+id/averageRating"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="17dp"
-                android:fontFamily="@font/overpass_regular"
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="averageRating"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textColor="#000000"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:fontFamily="@font/overpass_regular"-->
 
-                />
+<!--                />-->
+<!--            <TextView-->
+<!--                android:id="@+id/averageRating"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="17dp"-->
+<!--                android:fontFamily="@font/overpass_regular"-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="reviewCount"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/overpass_regular"
+<!--                />-->
 
-                />
-            <TextView
-                android:id="@+id/reviewCount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="17dp"
-                android:fontFamily="@font/overpass_regular"
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="reviewCount"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textColor="#000000"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:fontFamily="@font/overpass_regular"-->
 
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="brand_description"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/overpass_regular"
+<!--                />-->
+<!--            <TextView-->
+<!--                android:id="@+id/reviewCount"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="17dp"-->
+<!--                android:fontFamily="@font/overpass_regular"-->
 
-                />
-            <TextView
-                android:id="@+id/productBrandDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="17dp"
-                android:fontFamily="@font/overpass_regular"
+<!--                />-->
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="brand_description"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textColor="#000000"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:fontFamily="@font/overpass_regular"-->
 
-                />
+<!--                />-->
+<!--            <TextView-->
+<!--                android:id="@+id/productBrandDescription"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="17dp"-->
+<!--                android:fontFamily="@font/overpass_regular"-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="product_type_name"
-                android:textSize="18sp"
-                android:fontFamily="@font/overpass_regular"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:layout_marginTop="10dp"
-                />
-            <TextView
-                android:id="@+id/productTypeName"
-                android:layout_width="match_parent"
-                android:fontFamily="@font/overpass_regular"
-                android:layout_height="wrap_content"
-                android:textSize="17dp"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="sections"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/overpass_regular"
-                />
-            <TextView
-                android:id="@+id/productSections"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="17dp"
-                android:fontFamily="@font/overpass_regular"
-                />
+<!--                />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="product_type_name"-->
+<!--                android:textSize="18sp"-->
+<!--                android:fontFamily="@font/overpass_regular"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textColor="#000000"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                />-->
+<!--            <TextView-->
+<!--                android:id="@+id/productTypeName"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:fontFamily="@font/overpass_regular"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="17dp"-->
+<!--                />-->
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="sections"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textColor="#000000"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:fontFamily="@font/overpass_regular"-->
+<!--                />-->
+<!--            <TextView-->
+<!--                android:id="@+id/productSections"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="17dp"-->
+<!--                android:fontFamily="@font/overpass_regular"-->
+<!--                />-->
         </LinearLayout>
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

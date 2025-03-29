@@ -89,15 +89,14 @@ public class VerifyPhone extends AppCompatActivity {
                             public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
                                 auth.signInWithCredential(credential)
                                         .addOnCompleteListener(VerifyPhone.this, task -> {
-                                            ProgressDialogHelper.hideLoading();
 
                                             FirebaseUser user = auth.getCurrentUser();
                                             if (task.isSuccessful()) {
                                                 uid = user.getUid();
-
+                                                Log.e("Check Send UID",uid);
                                                 Intent intent = new Intent(VerifyPhone.this, SignupPassword.class);
                                                 intent.putExtra(PHONE_NUMBER_KEY,phone_number);
-                                                intent.putExtra(UID_KEY,phone_number);
+                                                intent.putExtra(UID_KEY,uid);
                                                 startActivity(intent);
                                             } else {
                                                 Toast.makeText(VerifyPhone.this, "Xác thực OTP thất bại!", Toast.LENGTH_SHORT).show();
@@ -185,7 +184,7 @@ public class VerifyPhone extends AppCompatActivity {
 
                                 Intent intent = new Intent(VerifyPhone.this, SignupPassword.class);
                                 intent.putExtra(PHONE_NUMBER_KEY,phone_number);
-                                intent.putExtra(UID_KEY,phone_number);
+                                intent.putExtra(UID_KEY,uid);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(VerifyPhone.this, "Xác thực OTP thất bại!", Toast.LENGTH_SHORT).show();

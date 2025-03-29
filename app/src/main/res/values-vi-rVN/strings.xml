@@ -146,6 +146,7 @@
     <string name="cancel_order_title">Xác nhận hủy đơn</string>
     <string name="cancel_order_message">Bạn có chắc chắn muốn hủy đơn hàng này không?</string>
     <string name="order_cancelled_success">Hủy đơn hàng thành công!</string>
+    <string name="order_cancelled_request_sent">Đã gửi yêu cầu hủy đơn</string>
 
     <string name="ghn_shipping_code">Mã vận đơn</string>
     <string name="return_order">Trả hàng</string>
@@ -162,4 +163,18 @@
     <string name="payment_paid">Đã thanh toán</string>
     <string name="payment_pending">Chờ thanh toán</string>
     <string name="payment_failed">Thanh toán thất bại</string>
+    <string name="payment_refunded">Đã hoàn tiền</string>
+    <string name="cancel_request_sent">Đã gửi yêu cầu hủy đơn</string>
+    <string name="return_request_sent">Đã gửi yêu cầu trả hàng</string>
+    <string name="delivery_date">Ngày nhận hàng</string>
+    <string name="product_information">Thông tin sản phẩm</string>
+
+    <string name="order_status_title">Trạng thái đơn hàng</string>
+    <string name="return_request_success">Yêu cầu trả hàng của bạn đã được gửi thành công!</string>
+    <string name="category">Danh mục sản phẩm</string>
+    <string name="specification">Quy cách</string>
+    <string name="origin_country">Xuất xứ thương hiệu</string>
+    <string name="manufacturer">Nhà sản xuất</string>
+    <string name="short_description">Mô tả ngắn</string>
+    <string name="supported_banks">Các ngân hàng hỗ trợ</string>
 </resources>

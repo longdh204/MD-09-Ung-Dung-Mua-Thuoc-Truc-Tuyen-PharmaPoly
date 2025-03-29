@@ -1,5 +1,8 @@
 package com.md09.pharmapoly.ui.view.fragment;
 
+import static com.md09.pharmapoly.utils.Constants.CANCELED_KEY;
+
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -77,14 +80,14 @@ public class CancelledFragment extends Fragment {
     private List<Order> orders = new ArrayList<>();
     private RecyclerView rcv_order;
     private LinearLayout layout_empty;
+    private PurchasedOrdersAdapter purchasedOrdersAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cancelled, container, false);
 
         InitUI(view);
-        ProgressDialogHelper.showLoading(getContext());
-        PurchasedOrdersAdapter purchasedOrdersAdapter = new PurchasedOrdersAdapter(
+        purchasedOrdersAdapter = new PurchasedOrdersAdapter(
                 getContext(),
                 null,
                 Constants.OrderStatusGroup.CANCELED,
@@ -103,6 +106,12 @@ public class CancelledFragment extends Fragment {
         rcv_order.setLayoutManager(layoutManager);
         rcv_order.setAdapter(purchasedOrdersAdapter);
 
+        UpdateOrder();
+        return view;
+    }
+
+    private void UpdateOrder() {
+        ProgressDialogHelper.showLoading(getContext());
         new RetrofitClient()
                 .callAPI()
                 .getOrders(
@@ -132,8 +141,17 @@ public class CancelledFragment extends Fragment {
                         ProgressDialogHelper.hideLoading();
                     }
                 });
-        return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (new SharedPrefHelper(getContext()).getBooleanState(CANCELED_KEY,false)) {
+            UpdateOrder();
+            new SharedPrefHelper(getContext()).resetBooleanState(CANCELED_KEY);
+        }
+    }
+
     private void InitUI(View view) {
         rcv_order = view.findViewById(R.id.rcv_order);
         layout_empty = view.findViewById(R.id.layout_empty);

@@ -30,7 +30,13 @@ public class RetrofitClient {
                 .build()
                 .create(ApiService.class);
     }
-
+    public static ApiService getVietQrApiService() {
+        Retrofit vietQrRetrofit = new Retrofit.Builder()
+                .baseUrl("https://api.vietqr.io/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return vietQrRetrofit.create(ApiService.class);
+    }
     public ApiService callAPI() {
         return requestInterface;
     }

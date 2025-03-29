@@ -185,7 +185,7 @@ public class ProfileFragment extends Fragment {
 
     private void LoadUserInfo() {
         User user = new SharedPrefHelper(getContext()).getUser();
-        if (user.getFull_name().trim().isEmpty()) {
+        if (user.getFull_name() == null || user.getFull_name().trim().isEmpty()) {
             tv_full_name.setText(getString(R.string.customer));
         } else {
             tv_full_name.setText(user.getFull_name());

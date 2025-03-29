@@ -1,5 +1,7 @@
 package com.md09.pharmapoly.ui.view.fragment;
 
+import static com.md09.pharmapoly.utils.Constants.CANCELED_KEY;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -21,6 +23,7 @@ import com.md09.pharmapoly.network.RetrofitClient;
 import com.md09.pharmapoly.utils.Constants;
 import com.md09.pharmapoly.utils.ProgressDialogHelper;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
+import com.md09.pharmapoly.utils.SuccessMessageBottomSheet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,15 +52,7 @@ public class ProcessingFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProcessingFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static ProcessingFragment newInstance(String param1, String param2) {
         ProcessingFragment fragment = new ProcessingFragment();
         Bundle args = new Bundle();
@@ -152,9 +147,11 @@ public class ProcessingFragment extends Fragment {
                     @Override
                     public void onResponse(Call<ApiResponse<Order>> call, Response<ApiResponse<Order>> response) {
                         if (response.isSuccessful() && response.body().getStatus() == 200) {
-                            orders.remove(order);
-                            purchasedOrdersAdapter.Update(orders);
-                            Toast.makeText(getContext(), "Hủy thành công", Toast.LENGTH_SHORT).show();
+                            order.setCancel_request(true);
+                            purchasedOrdersAdapter.UpdateItem(order);
+                            SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_cancelled_success));
+                            bottomSheet.show(getParentFragmentManager(), "SuccessMessageBottomSheet");
+                            new SharedPrefHelper(getContext()).setBooleanState(CANCELED_KEY,true);
                         }
                         ProgressDialogHelper.hideLoading();
                     }

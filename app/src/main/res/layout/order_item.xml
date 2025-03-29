@@ -21,6 +21,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_order_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:layout_gravity="right"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/be_vietnam_pro_medium"
+                android:textSize="14sp"/>
             <LinearLayout
                 android:id="@+id/layout_order_item"
                 android:gravity="center_vertical"
@@ -86,13 +95,13 @@
                         android:text="Status"
                         android:fontFamily="@font/be_vietnam_pro_medium"
                         android:textSize="14sp"/>
-                    <TextView
-                        android:id="@+id/tv_order_status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Status"
-                        android:fontFamily="@font/be_vietnam_pro_medium"
-                        android:textSize="14sp"/>
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_order_status"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Status"-->
+<!--                        android:fontFamily="@font/be_vietnam_pro_medium"-->
+<!--                        android:textSize="14sp"/>-->
                 </LinearLayout>
                 <RelativeLayout
                     android:layout_width="0dp"

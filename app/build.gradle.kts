@@ -62,4 +62,5 @@ dependencies {
     implementation("com.google.android.gms:play-services-maps:17.0.1")
     implementation("androidx.work:work-runtime:2.7.1")
 
+    implementation("com.google.firebase:firebase-messaging:23.1.2")
 }

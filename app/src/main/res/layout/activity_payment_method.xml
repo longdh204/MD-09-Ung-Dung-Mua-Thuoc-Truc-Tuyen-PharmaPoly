@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:animateLayoutChanges="true"
     tools:context=".ui.view.activity.PaymentMethodActivity">
 
     <LinearLayout
@@ -50,112 +50,10 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/btn_purchase"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
                 android:layout_marginTop="12dp"
-                app:cardBackgroundColor="@color/white_FFF"
-                app:cardCornerRadius="12dp">
-
-                <LinearLayout
-                    android:id="@+id/btn_selectedAddress"
-                    android:animateLayoutChanges="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="12dp">
-                    <LinearLayout
-                        android:id="@+id/payment_online"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingVertical="12dp"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:text="@string/online_payment"
-                            android:fontFamily="@font/be_vietnam_pro_medium"
-                            android:textSize="14sp"/>
-                        <ImageView
-                            android:id="@+id/img_arrow_right"
-                            android:rotation="90"
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:background="@drawable/ic_arrow_right"
-                            android:backgroundTint="@color/black_333"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:id="@+id/layout_payment_online"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <LinearLayout
-                            android:id="@+id/payment_momo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingVertical="12dp"
-                            android:orientation="horizontal">
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:background="@drawable/ic_momo"/>
-                            <TextView
-                                android:layout_marginHorizontal="12dp"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:lines="1"
-                                android:ellipsize="end"
-                                android:text="@string/momo_payment"
-                                android:textSize="14sp"
-                                android:fontFamily="@font/be_vietnam_pro_medium"/>
-                            <CheckBox
-                                android:button="@drawable/cus_cbo"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:id="@+id/cb_momo_selected"/>
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/payment_visa"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingVertical="12dp"
-                            android:orientation="horizontal">
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:background="@drawable/ic_visa"/>
-                            <TextView
-                                android:layout_marginHorizontal="12dp"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:lines="1"
-                                android:ellipsize="end"
-                                android:text="@string/cod"
-                                android:textSize="14sp"
-                                android:fontFamily="@font/be_vietnam_pro_medium"/>
-                            <CheckBox
-                                android:button="@drawable/cus_cbo"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:id="@+id/cb_visa_selected"/>
-
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_marginTop="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
-                android:layout_marginBottom="12dp"
                 app:cardBackgroundColor="@color/white_FFF"
                 app:cardCornerRadius="12dp">
 
@@ -166,40 +64,130 @@
                     android:orientation="horizontal"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="12dp">
+
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:background="@drawable/ic_money"/>
+                        android:background="@drawable/ic_money" />
+
                     <TextView
-                        android:layout_marginHorizontal="12dp"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:lines="1"
+                        android:layout_marginHorizontal="12dp"
+                        android:layout_weight="1"
                         android:ellipsize="end"
+                        android:fontFamily="@font/be_vietnam_pro_bold"
+                        android:lines="1"
                         android:text="@string/cod"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/be_vietnam_pro_medium"/>
+                        android:textSize="14sp" />
+
                     <CheckBox
-                        android:button="@drawable/cus_cbo"
+                        android:id="@+id/cb_cod_selected"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:id="@+id/cb_cod_selected"/>
+                        android:button="@drawable/cus_cbo" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <Button
-                android:layout_marginTop="56dp"
-                android:layout_marginHorizontal="24dp"
-                android:id="@+id/btn_agree"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btn_purchase"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/agree"
-                android:textColor="@android:color/white"
-                android:backgroundTint="@color/blue_CE4"
-                android:padding="12dp"
-                android:fontFamily="@font/be_vietnam_pro_medium"/>
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/white_FFF"
+                app:cardCornerRadius="12dp">
+
+                <LinearLayout
+                    android:id="@+id/btn_selectedAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="12dp">
+
+                    <LinearLayout
+                        android:id="@+id/payment_onl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingVertical="12dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:background="@drawable/ic_online_payment" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="12dp"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/be_vietnam_pro_bold"
+                            android:lines="1"
+                            android:text="@string/online_payment"
+                            android:textSize="14sp" />
+
+                        <CheckBox
+                            android:id="@+id/cb_online_selected"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:button="@drawable/cus_cbo" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/payment_online"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingVertical="12dp">
+
+                        <TextView
+                            android:id="@+id/tv_supported_banks"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/be_vietnam_pro_medium"
+                            android:text="@string/supported_banks"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/img_arrow_right"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:background="@drawable/ic_arrow_right"
+                            android:backgroundTint="@color/black_333"
+                            android:rotation="90" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_payment_online"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:layout_marginBottom="24dp"
+        android:id="@+id/btn_agree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/blue_CE4"
+        android:fontFamily="@font/be_vietnam_pro_medium"
+        android:padding="12dp"
+        android:text="@string/agree"
+        android:textColor="@android:color/white" />
 </LinearLayout>

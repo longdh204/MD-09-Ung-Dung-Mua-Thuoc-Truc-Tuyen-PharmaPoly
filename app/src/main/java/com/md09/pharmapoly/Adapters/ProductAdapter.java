@@ -1,5 +1,8 @@
 package com.md09.pharmapoly.Adapters;
 
+import static com.md09.pharmapoly.utils.Constants.findObjectById;
+import static com.md09.pharmapoly.utils.Constants.formatCurrency;
+
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -7,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +37,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product = productList.get(position);
+        holder.layout_sale.setVisibility(View.GONE);
         // Kiểm tra dữ liệu từ API (Logcat để debug)
         Log.d("PRODUCT_DEBUG", "Name: " + product.getName() +
                 " | Price: " + product.getPrice() +
@@ -40,16 +46,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.productName.setText(product.getName() != null ? product.getName() : "Không có tên");
 
         // Hiển thị giá (Nếu giá <= 0, hiển thị 'Liên hệ')
-        if (product.getPrice() > 0) {
-            holder.productPrice.setText(product.getPrice() + "đ / " +
-                    (product.getProduct_type() != null ? product.getProduct_type().getName() : "N/A"));
-        } else {
-            holder.productPrice.setText("Liên hệ");
-        }
+//        if (product.getPrice() > 0) {
+//            holder.productPrice.setText(product.getPrice() + "đ / " +
+//                    (product.getProduct_type() != null ? product.getProduct_type().getName() : "N/A"));
+//        } else {
+//            holder.productPrice.setText("Liên hệ");
+//        }
+        holder.productPrice.setText(formatCurrency(product.getPrice(),"đ") + "/" +
+                (product.getProduct_type() != null ? product.getProduct_type().getName() : "N/A"));
+
         // Hiển thị đánh giá (Nếu 0.0 thì không hiển thị)
         if (product.getAverage_rating() > 0) {
             holder.productRating.setText(String.valueOf(product.getAverage_rating()));
         } else {
+            holder.layout_rating.setVisibility(View.GONE);
             holder.productRating.setText("-"); // Thay vì "-"
         }
         // Load hình ảnh sản phẩm
@@ -82,8 +92,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView productName, productPrice, productRating;
         ImageView productImage;
+        RelativeLayout layout_sale;
+        LinearLayout layout_rating;
         public ViewHolder(View itemView) {
             super(itemView);
+            layout_sale = itemView.findViewById(R.id.layout_sale);
+            layout_rating = itemView.findViewById(R.id.layout_rating);
             productName = itemView.findViewById(R.id.productName);
             productPrice = itemView.findViewById(R.id.productPrice);
             productRating = itemView.findViewById(R.id.productRating);
