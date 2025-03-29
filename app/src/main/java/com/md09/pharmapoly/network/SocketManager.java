@@ -56,7 +56,7 @@ public class SocketManager {
             });
 
             // 🔥 Nhận phản hồi khi gửi tin nhắn thành công
-            socket.on("messageSent", args -> {
+            socket.on("messageSentSuccess", args -> {
                 try {
                     JSONObject data = (JSONObject) args[0];
                     JSONObject lastMessage = data.getJSONObject("data");
@@ -66,7 +66,6 @@ public class SocketManager {
                             lastMessage.getString("senderId"),
                             lastMessage.getString("timestamp")
                     );
-
                     updateChatFragment.updateMessage(newMessage);
                 } catch (JSONException e) {
                     Log.e("socket_io", Objects.requireNonNull(e.getMessage()));

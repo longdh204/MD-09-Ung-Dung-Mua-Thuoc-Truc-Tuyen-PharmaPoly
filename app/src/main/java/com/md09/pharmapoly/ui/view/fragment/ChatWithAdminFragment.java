@@ -7,43 +7,30 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.md09.pharmapoly.Adapters.ChatAdminAdapter;
 import com.md09.pharmapoly.Models.Message;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.network.SocketManager;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.List;
-import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link NotificationFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class NotificationFragment extends Fragment implements SocketManager.UpdateChatFragment {
+public class ChatWithAdminFragment extends Fragment implements SocketManager.UpdateChatFragment {
     private SocketManager socketManager;
     private RecyclerView rvChatAdmin;
-
     private EditText edTextMessage;
     private Button btnSendMessage;
 
-    public NotificationFragment() {}
+    public ChatWithAdminFragment() {}
 
-    public static NotificationFragment newInstance() {
-        return new NotificationFragment();
+    public static ChatWithAdminFragment newInstance() {
+        return new ChatWithAdminFragment();
     }
 
     @Override
@@ -54,7 +41,7 @@ public class NotificationFragment extends Fragment implements SocketManager.Upda
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_notification, container, false);
+        View view = inflater.inflate(R.layout.fragment_chat_with_admin, container, false);
         rvChatAdmin = view.findViewById(R.id.rvChatAdmin);
         btnSendMessage= view.findViewById(R.id.btnSend);
         edTextMessage= view.findViewById(R.id.edtMessage);
