@@ -19,21 +19,16 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <me.relex.circleindicator.CircleIndicator3
-                    android:id="@+id/indicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="300dp"
-                    android:layout_marginLeft="200dp" />
+                android:layout_height="wrap_content"
+                android:background="@color/darkGrey">
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/productImageSlider"
                     android:layout_width="match_parent"
                     android:layout_height="360dp"
-                    android:layout_marginTop="12dp" />
-                <!-- Nút Next và Previous -->
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/logomomo" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -41,20 +36,47 @@
                     android:layout_marginBottom="292dp"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:background="@drawable/bg_slider_show">
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/prevButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="35dp"
+                        android:layout_height="30dp"
                         android:layout_marginEnd="16dp"
-                        android:text="Previous" />
+                        android:background="@drawable/next_search1" />
 
-                    <Button
-                        android:id="@+id/nextButton"
+                    <!--                    <me.relex.circleindicator.CircleIndicator3-->
+                    <!--                        android:id="@+id/indicator"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content" />-->
+                    <!-- Nút Next và Previous -->
+                    <TextView
+                        android:id="@+id/pageIndicator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Next" />
+                        android:gravity="center"
+                        android:layout_marginRight="13dp"
+                        android:text="0"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <!--                    <TextView-->
+                    <!--                        android:id="@+id/pageIndicator2"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:text="0"-->
+                    <!--                        android:layout_gravity="center"-->
+                    <!--                        android:layout_marginTop="8dp"-->
+                    <!--                        android:textSize="16sp"-->
+                    <!--                        android:textColor="@android:color/black" />-->
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/nextButton"
+                        android:layout_width="35dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/next_search" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -151,6 +173,13 @@
 
             <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
+            <!--            <me.relex.circleindicator.CircleIndicator3-->
+            <!--                android:id="@+id/indicator"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="50dp"-->
+            <!--                android:background="@color/gray_E9E"-->
+            <!--                android:gravity="center" />-->
+            <!-- Dots indicator for ViewPager2 -->
             <LinearLayout
                 android:paddingHorizontal="12dp"
                 android:layout_width="match_parent"

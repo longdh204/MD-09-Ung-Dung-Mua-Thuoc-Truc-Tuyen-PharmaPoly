@@ -61,5 +61,6 @@ dependencies {
     //google map
     implementation("com.google.android.gms:play-services-maps:17.0.1")
     implementation("androidx.work:work-runtime:2.7.1")
+    implementation("com.google.android.material:material:1.6.0")
 
 }
