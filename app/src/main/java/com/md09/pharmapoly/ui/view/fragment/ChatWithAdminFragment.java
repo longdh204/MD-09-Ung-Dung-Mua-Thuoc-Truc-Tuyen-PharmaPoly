@@ -23,34 +23,27 @@ import com.md09.pharmapoly.utils.SharedPrefHelper;
 
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link NotificationFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class NotificationFragment extends Fragment implements SocketManager.UpdateChatFragment {
+public class ChatWithAdminFragment extends Fragment implements SocketManager.UpdateChatFragment {
     private SocketManager socketManager;
     private RecyclerView rvChatAdmin;
     private EditText edTextMessage;
     private Button btnSendMessage;
 
-    public NotificationFragment() {
+    public ChatWithAdminFragment() {
     }
 
-    public static NotificationFragment newInstance() {
-        return new NotificationFragment();
+    public static ChatWithAdminFragment newInstance() {
+        return new ChatWithAdminFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chat_with_admin, container, false);
         rvChatAdmin = view.findViewById(R.id.rvChatAdmin);
         btnSendMessage = view.findViewById(R.id.btnSend);

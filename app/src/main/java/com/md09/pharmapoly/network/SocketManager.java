@@ -17,7 +17,7 @@ import io.socket.client.Socket;
 
 public class SocketManager {
     private UpdateChatFragment updateChatFragment;
-    private static final String SERVER_URL = "http://192.168.1.72:3000";
+    private static final String SERVER_URL = "https://pharmapoly-server.onrender.com/api/";
     private static SocketManager instance;
     private Socket socket;
     private final String userId;
@@ -57,7 +57,7 @@ public class SocketManager {
             });
 
             // 🔥 Nhận phản hồi khi gửi tin nhắn thành công
-            socket.on("messageSent", args -> {
+            socket.on("messageSentSuccess", args -> {
                 try {
                     JSONObject data = (JSONObject) args[0];
                     JSONObject lastMessage = data.getJSONObject("data");

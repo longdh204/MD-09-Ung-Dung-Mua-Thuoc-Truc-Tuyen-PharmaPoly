@@ -38,7 +38,7 @@ public class ChatAdminAdapter extends RecyclerView.Adapter<ChatAdminAdapter.View
         if (viewType == TYPE_USER) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_user, parent, false);
         } else {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_bot, parent, false);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_admin, parent, false);
         }
         return new ViewHolder(view);
     }
