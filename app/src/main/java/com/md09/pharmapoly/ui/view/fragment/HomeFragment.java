@@ -137,6 +137,7 @@ public class HomeFragment extends Fragment {
 
         InitUI(view);
         token = sharedPrefHelper.getToken();
+        System.out.println("token" + token);
 
         SetupRecyclerView(view);
         GetTopRatedProducts();

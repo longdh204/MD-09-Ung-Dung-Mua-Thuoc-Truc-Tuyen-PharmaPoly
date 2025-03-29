@@ -62,5 +62,5 @@ dependencies {
     implementation("com.google.android.gms:play-services-maps:17.0.1")
     implementation("androidx.work:work-runtime:2.7.1")
     implementation("com.google.android.material:material:1.6.0")
-
+    implementation("io.socket:socket.io-client:2.1.0")
 }
