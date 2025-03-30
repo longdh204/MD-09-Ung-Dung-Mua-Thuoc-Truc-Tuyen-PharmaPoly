@@ -191,16 +191,34 @@ public class CheckoutActivity extends AppCompatActivity {
                         SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_success));
                         bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
                         dialog.dismiss();
-                        orderRef.removeValue();
+                        DeleteOrderStatus();
                     }
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("Firebase", "Lỗi khi lắng nghe trạng thái thanh toán: " + error.getMessage());
             }
         });
+    }
+
+    private void DeleteOrderStatus() {
+        ProgressDialogHelper.showLoading(this);
+        new RetrofitClient()
+                .callAPI()
+                .deletePaymentStatus("Bearer " + new SharedPrefHelper(this).getToken())
+                .enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        ProgressDialogHelper.hideLoading();
+                        finish();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        ProgressDialogHelper.hideLoading();
+                    }
+                });
     }
 
     private void showQrDialog(String qrCodeUrl) {

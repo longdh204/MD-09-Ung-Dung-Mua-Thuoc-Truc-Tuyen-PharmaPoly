@@ -177,4 +177,9 @@
     <string name="manufacturer">Manufacturer</string>
     <string name="short_description">Short description</string>
     <string name="supported_banks">Supported banks</string>
+
+    <string name="confirm_received">Confirm Received</string>
+    <string name="confirm_received_title">Order Received</string>
+    <string name="confirm_received_message">Have you received this order?</string>
+    <string name="language">Language</string>
 </resources>

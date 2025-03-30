@@ -4,7 +4,10 @@ import static com.md09.pharmapoly.utils.Constants.CANCELED_KEY;
 import static com.md09.pharmapoly.utils.Constants.ORDER_KEY;
 import static com.md09.pharmapoly.utils.Constants.PRODUCT_ADDED_TO_CART_KEY;
 import static com.md09.pharmapoly.utils.Constants.USER_PROFILE_UPDATED_KEY;
+import static com.md09.pharmapoly.utils.Constants.setLocale;
 
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -22,9 +25,10 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.md09.pharmapoly.Models.Cart;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.ui.components.ViewPagerBottomNavigationMainAdapter;
-import com.md09.pharmapoly.ui.view.fragment.CartFragment;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.md09.pharmapoly.viewmodel.CartViewModel;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
 
         InitUI();
+        loadLocale();
 
         new SharedPrefHelper(this).resetBooleanState(ORDER_KEY);
         new SharedPrefHelper(this).resetBooleanState(PRODUCT_ADDED_TO_CART_KEY);
@@ -55,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
                 UpdateCartBadge(cart.getCartItems().size());
             }
         });
+    }
+    private void loadLocale() {
+        String langCode = new SharedPrefHelper(this).getLanguage();
+        setLocale(this,langCode);
     }
     @Override
     public void onResume() {

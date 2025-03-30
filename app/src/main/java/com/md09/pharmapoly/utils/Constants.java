@@ -1,6 +1,7 @@
 package com.md09.pharmapoly.utils;
 
 import android.content.Context;
+import android.content.res.Configuration;
 
 import androidx.core.content.ContextCompat;
 
@@ -11,6 +12,7 @@ import com.md09.pharmapoly.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class Constants {
@@ -30,6 +32,7 @@ public class Constants {
     public static final String PAYMENT_METHOD_KEY = "PAYMENT_METHOD";
     public static final String CANCELED_KEY = "CANCELED";
     public static final String ORDER_KEY = "ORDER";
+    public static final String LANGUAGE_KEY = "LANGUAGE";
     public static final int PICK_IMAGE_REQUEST = 1;
     public static final int MAX_QUANTITY_PER_PRODUCT = 20;
     public static final String formatCurrency(int amount, String symbol) {
@@ -162,7 +165,14 @@ public class Constants {
         PROCESSING,
         SHIPPING,
         DELIVERED,
-        RETURNING,
+        //RETURNING,
         CANCELED
+    }
+    public static final void setLocale(Context context,String langCode) {
+        Locale locale = new Locale(langCode);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+        context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
     }
 }

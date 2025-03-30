@@ -23,8 +23,8 @@ public class ViewPagerBottomNavigationMyOrders extends FragmentStateAdapter {
             case 0: return new ProcessingFragment();
             case 1: return new ShippingFragment();
             case 2: return new DeliveredFragment();
-            case 3: return new ReturnFragment();
-            case 4: return new CancelledFragment();
+            //case 3: return new ReturnFragment();
+            case 3: return new CancelledFragment();
 
             default:break;
         }
@@ -32,6 +32,6 @@ public class ViewPagerBottomNavigationMyOrders extends FragmentStateAdapter {
     }
     @Override
     public int getItemCount() {
-        return 5;
+        return 4;
     }
 }

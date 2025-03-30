@@ -20,7 +20,7 @@ public class Order {
     private String transaction_id;
     private Date delivered_at;
     private boolean cancel_request;
-    private boolean return_request;
+//    private boolean return_request;
     private Date created_at;
     private Date updated_at;
     private List<OrderItem> items;
@@ -30,7 +30,30 @@ public class Order {
     public Order() {
     }
 
-    public Order(String _id, String user_id, String order_code, String to_name, String to_phone, String to_address, String to_district_id, String to_ward_code, String payment_method, int shipping_fee, int total_price, String status, String payment_status, String transaction_id, Date delivered_at, boolean cancel_request, boolean return_request, Date created_at, Date updated_at, List<OrderItem> items, District district, Province province, Ward ward) {
+    public Order(
+            String _id,
+            String user_id,
+            String order_code,
+            String to_name,
+            String to_phone,
+            String to_address,
+            String to_district_id,
+            String to_ward_code,
+            String payment_method,
+            int shipping_fee,
+            int total_price,
+            String status,
+            String payment_status,
+            String transaction_id,
+            Date delivered_at,
+            boolean cancel_request,
+            //boolean return_request,
+            Date created_at,
+            Date updated_at,
+            List<OrderItem> items,
+            District district,
+            Province province,
+            Ward ward) {
         this._id = _id;
         this.user_id = user_id;
         this.order_code = order_code;
@@ -47,7 +70,7 @@ public class Order {
         this.transaction_id = transaction_id;
         this.delivered_at = delivered_at;
         this.cancel_request = cancel_request;
-        this.return_request = return_request;
+//        this.return_request = return_request;
         this.created_at = created_at;
         this.updated_at = updated_at;
         this.items = items;
@@ -184,13 +207,13 @@ public class Order {
         this.cancel_request = cancel_request;
     }
 
-    public boolean isReturn_request() {
-        return return_request;
-    }
-
-    public void setReturn_request(boolean return_request) {
-        this.return_request = return_request;
-    }
+//    public boolean isReturn_request() {
+//        return return_request;
+//    }
+//
+//    public void setReturn_request(boolean return_request) {
+//        this.return_request = return_request;
+//    }
 
     public Date getCreated_at() {
         return created_at;

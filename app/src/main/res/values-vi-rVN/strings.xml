@@ -177,4 +177,10 @@
     <string name="manufacturer">Nhà sản xuất</string>
     <string name="short_description">Mô tả ngắn</string>
     <string name="supported_banks">Các ngân hàng hỗ trợ</string>
+
+    <string name="confirm_received">Xác nhận đã nhận</string>
+    <string name="confirm_received_title">Xác nhận đơn hàng</string>
+    <string name="confirm_received_message">Bạn đã nhận được đơn hàng này chưa?</string>
+    <string name="language">Ngôn ngữ</string>
+
 </resources>

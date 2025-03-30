@@ -108,6 +108,13 @@ public class SharedPrefHelper {
         String method = sharedPreferences.getString(PAYMENT_METHOD_KEY, "COD");
         return PaymentMethod.fromString(method);
     }
+    public void saveLanguage(String langCode) {
+        editor.putString(Constants.LANGUAGE_KEY, langCode);
+        editor.apply();
+    }
+    public String getLanguage() {
+        return sharedPreferences.getString(Constants.LANGUAGE_KEY, "vi");
+    }
 
     // Lưu thông tin thuốc và thời gian uống thuốc
     public void saveMedicineReminder(String medicineName, int hour, int minute) {

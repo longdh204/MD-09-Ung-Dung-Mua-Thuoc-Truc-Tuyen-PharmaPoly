@@ -1,11 +1,12 @@
 package com.md09.pharmapoly.ui.view.fragment;
 
-import static android.content.Context.MODE_PRIVATE;
 import static androidx.core.app.ActivityCompat.finishAffinity;
+import static androidx.core.app.ActivityCompat.recreate;
 import static com.md09.pharmapoly.utils.Constants.USER_PROFILE_UPDATED_KEY;
+import static com.md09.pharmapoly.utils.Constants.setLocale;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -14,13 +15,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.md09.pharmapoly.AddAddress;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.User;
 import com.md09.pharmapoly.ui.view.activity.AddressActivity;
@@ -32,6 +31,8 @@ import com.md09.pharmapoly.ui.view.activity.ChangePassword;
 import com.md09.pharmapoly.ui.view.activity.ProfileUpdate;
 import com.md09.pharmapoly.utils.DialogHelper;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
+
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,14 +85,19 @@ public class ProfileFragment extends Fragment {
             btn_personal_info,
             btn_change_password,
             btn_manage_address,
-            btn_manage_card,
-            btn_processing,
+    //btn_manage_card,
+    btn_processing,
             btn_shipping,
             btn_delivered,
-            btn_exchange_return;
+            btn_cancelled,
+            btn_language,
+            layout_language,
+            btn_vietnamese,
+            btn_english;
     private TextView tv_phone_number, tv_full_name;
-    private ImageView img_user_avatar;
+    private ImageView img_user_avatar, img_arrow_right_language;
     private AppCompatButton btn_logout;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -100,7 +106,7 @@ public class ProfileFragment extends Fragment {
 
         InitUI(view);
 
-        LinearLayout[] buttons = {btn_processing, btn_shipping, btn_delivered, btn_exchange_return};
+        LinearLayout[] buttons = {btn_processing, btn_shipping, btn_delivered, btn_cancelled};
 
         for (int i = 0; i < buttons.length; i++) {
             final int index = i;
@@ -110,7 +116,6 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             });
         }
-
 
 
         btn_personal_info.setOnClickListener(v -> {
@@ -127,10 +132,33 @@ public class ProfileFragment extends Fragment {
             Intent intent = new Intent(getActivity(), AddressActivity.class);
             startActivity(intent);
         });
-        btn_manage_card.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), payment_card_manager.class);
-            startActivity(intent);
+        btn_language.setOnClickListener(v -> {
+            if (layout_language.getVisibility() == View.VISIBLE) {
+                layout_language.animate().scaleY(0).setDuration(300).withEndAction(() -> {
+                    layout_language.setVisibility(View.GONE);
+                }).start();
+                img_arrow_right_language.animate().rotation(0).setDuration(300).start();
+            } else {
+                layout_language.setVisibility(View.VISIBLE);
+                layout_language.setScaleY(0);
+                layout_language.animate().scaleY(1).setDuration(300).start();
+                img_arrow_right_language.animate().rotation(90).setDuration(300).start();
+            }
         });
+
+        btn_vietnamese.setOnClickListener(v -> {
+            new SharedPrefHelper(getContext()).saveLanguage("vi");
+            setLocale(getContext(),"vi");
+        });
+        btn_english.setOnClickListener(v -> {
+            new SharedPrefHelper(getContext()).saveLanguage("en");
+            setLocale(getContext(),"en");
+        });
+
+//        btn_manage_card.setOnClickListener(v -> {
+//            Intent intent = new Intent(getActivity(), payment_card_manager.class);
+//            startActivity(intent);
+//        });
         btn_logout.setOnClickListener(v -> {
             DialogHelper.ShowConfirmationDialog(
                     getContext(),
@@ -145,6 +173,7 @@ public class ProfileFragment extends Fragment {
         });
         return view;
     }
+
     private void performLogout() {
         SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(getContext());
         sharedPrefHelper.clearData();
@@ -172,14 +201,19 @@ public class ProfileFragment extends Fragment {
         btn_processing = view.findViewById(R.id.btn_processing);
         btn_shipping = view.findViewById(R.id.btn_shipping);
         btn_delivered = view.findViewById(R.id.btn_delivered);
-        btn_exchange_return = view.findViewById(R.id.btn_exchange_return);
+        btn_cancelled = view.findViewById(R.id.btn_cancelled);
 
         tv_phone_number = view.findViewById(R.id.tv_phone_number);
         tv_full_name = view.findViewById(R.id.tv_full_name);
-        btn_manage_card = view.findViewById(R.id.btn_manage_card);
+        //btn_manage_card = view.findViewById(R.id.btn_manage_card);
         img_user_avatar = view.findViewById(R.id.img_user_avatar);
+        img_arrow_right_language = view.findViewById(R.id.img_arrow_right_language);
 
         btn_logout = view.findViewById(R.id.btn_logout);
+        btn_language = view.findViewById(R.id.btn_language);
+        btn_vietnamese = view.findViewById(R.id.btn_vietnamese);
+        btn_english = view.findViewById(R.id.btn_english);
+        layout_language = view.findViewById(R.id.layout_language);
         LoadUserInfo();
     }
 

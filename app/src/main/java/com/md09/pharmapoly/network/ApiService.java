@@ -45,6 +45,8 @@ import retrofit2.http.Url;
 public interface ApiService {
     @GET("v2/banks")
     Call<BankResponse> getBanks();
+    @DELETE("orders/delete-payment-status/{userId}")
+    Call<Void> deletePaymentStatus( @Header("Authorization") String token);
     @GET("product/most-reviewed")
     Call<ApiResponse<PageDataClone<List<Product>>>> getMostReviewProducts(
             @Query("page") int page,

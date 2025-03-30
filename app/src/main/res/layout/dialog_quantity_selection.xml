@@ -259,27 +259,27 @@
                 android:paddingBottom="3dp"
                 android:fontFamily="@font/be_vietnam_pro_bold"/>
         </LinearLayout>
-        <RelativeLayout
-            android:layout_width="24dp"
-            android:layout_height="wrap_content"/>
-        <LinearLayout
-            android:id="@+id/btn_purchase"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="52dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:backgroundTint="@color/blue_CE4"
-            android:background="@drawable/rounded_button">
+<!--        <RelativeLayout-->
+<!--            android:layout_width="24dp"-->
+<!--            android:layout_height="wrap_content"/>-->
+<!--        <LinearLayout-->
+<!--            android:id="@+id/btn_purchase"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="52dp"-->
+<!--            android:orientation="vertical"-->
+<!--            android:gravity="center"-->
+<!--            android:backgroundTint="@color/blue_CE4"-->
+<!--            android:background="@drawable/rounded_button">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/buy_now"
-                android:textColor="@color/white_FFF"
-                android:textSize="16sp"
-                android:paddingBottom="3dp"
-                android:fontFamily="@font/be_vietnam_pro_bold"/>
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/buy_now"-->
+<!--                android:textColor="@color/white_FFF"-->
+<!--                android:textSize="16sp"-->
+<!--                android:paddingBottom="3dp"-->
+<!--                android:fontFamily="@font/be_vietnam_pro_bold"/>-->
+<!--        </LinearLayout>-->
     </LinearLayout>
 </LinearLayout>

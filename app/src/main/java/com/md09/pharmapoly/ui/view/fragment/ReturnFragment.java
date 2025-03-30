@@ -83,54 +83,60 @@ public class ReturnFragment extends Fragment {
 
         InitUI(view);
         ProgressDialogHelper.showLoading(getContext());
-        PurchasedOrdersAdapter purchasedOrdersAdapter = new PurchasedOrdersAdapter(
-                getContext(),
-                null,
-                Constants.OrderStatusGroup.RETURNING,
-                new PurchasedOrdersAdapter.OrderActionListener() {
-                    @Override
-                    public void onCancelOrder(Order order) {
-
-                    }
-
-                    @Override
-                    public void onReturnOrExchangeOrder(Order order) {
-
-                    }
-                });
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 1);
-        rcv_order.setLayoutManager(layoutManager);
-        rcv_order.setAdapter(purchasedOrdersAdapter);
-
-        new RetrofitClient()
-                .callAPI()
-                .getOrders(
-                        Constants.OrderStatusGroup.RETURNING.toString().toLowerCase(),
-                        "Bearer " + new SharedPrefHelper(getContext()).getToken()
-                )
-                .enqueue(new Callback<ApiResponse<List<Order>>>() {
-                    @Override
-                    public void onResponse(Call<ApiResponse<List<Order>>> call, Response<ApiResponse<List<Order>>> response) {
-                        ProgressDialogHelper.hideLoading();
-                        if (response.isSuccessful() && response.body().getStatus() == 200) {
-                            List<Order> orders = response.body().getData();
-
-                            if (orders != null && orders.size() > 0) {
-                                purchasedOrdersAdapter.Update(response.body().getData());
-                                layout_empty.setVisibility(View.GONE);
-                                rcv_order.setVisibility(View.VISIBLE);
-                            } else {
-                                layout_empty.setVisibility(View.VISIBLE);
-                                rcv_order.setVisibility(View.GONE);
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ApiResponse<List<Order>>> call, Throwable t) {
-                        ProgressDialogHelper.hideLoading();
-                    }
-                });
+//        PurchasedOrdersAdapter purchasedOrdersAdapter = new PurchasedOrdersAdapter(
+//                getContext(),
+//                null,
+//                Constants.OrderStatusGroup.RETURNING,
+//                new PurchasedOrdersAdapter.OrderActionListener() {
+//                    @Override
+//                    public void onCancelOrder(Order order) {
+//
+//                    }
+//
+////                    @Override
+////                    public void onReturnOrExchangeOrder(Order order) {
+////
+////                    }
+////
+////                    @Override
+////                    public void onConfirmReceived(Order order) {
+////
+////                    }
+//
+//                });
+//        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 1);
+//        rcv_order.setLayoutManager(layoutManager);
+//        rcv_order.setAdapter(purchasedOrdersAdapter);
+//
+//        new RetrofitClient()
+//                .callAPI()
+//                .getOrders(
+//                        Constants.OrderStatusGroup.RETURNING.toString().toLowerCase(),
+//                        "Bearer " + new SharedPrefHelper(getContext()).getToken()
+//                )
+//                .enqueue(new Callback<ApiResponse<List<Order>>>() {
+//                    @Override
+//                    public void onResponse(Call<ApiResponse<List<Order>>> call, Response<ApiResponse<List<Order>>> response) {
+//                        ProgressDialogHelper.hideLoading();
+//                        if (response.isSuccessful() && response.body().getStatus() == 200) {
+//                            List<Order> orders = response.body().getData();
+//
+//                            if (orders != null && orders.size() > 0) {
+//                                purchasedOrdersAdapter.Update(response.body().getData());
+//                                layout_empty.setVisibility(View.GONE);
+//                                rcv_order.setVisibility(View.VISIBLE);
+//                            } else {
+//                                layout_empty.setVisibility(View.VISIBLE);
+//                                rcv_order.setVisibility(View.GONE);
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ApiResponse<List<Order>>> call, Throwable t) {
+//                        ProgressDialogHelper.hideLoading();
+//                    }
+//                });
         return view;
     }
     private void InitUI(View view) {

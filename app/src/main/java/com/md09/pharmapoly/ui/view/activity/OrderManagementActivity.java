@@ -53,7 +53,7 @@ public class OrderManagementActivity extends AppCompatActivity {
                 getString(R.string.processing),
                 getString(R.string.shipping),
                 getString(R.string.delivered),
-                getString(R.string.exchange_return),
+                //getString(R.string.exchange_return),
                 getString(R.string.cancelled));
 
         OrderStatusAdapter adapter = new OrderStatusAdapter(orderStatuses, (itemView, position) -> {

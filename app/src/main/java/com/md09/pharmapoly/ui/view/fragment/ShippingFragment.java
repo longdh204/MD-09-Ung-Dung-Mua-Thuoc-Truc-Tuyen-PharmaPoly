@@ -93,10 +93,15 @@ public class ShippingFragment extends Fragment {
 
                     }
 
-                    @Override
-                    public void onReturnOrExchangeOrder(Order order) {
-
-                    }
+//                    @Override
+//                    public void onReturnOrExchangeOrder(Order order) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onConfirmReceived(Order order) {
+//
+//                    }
                 });
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 1);
         rcv_order.setLayoutManager(layoutManager);

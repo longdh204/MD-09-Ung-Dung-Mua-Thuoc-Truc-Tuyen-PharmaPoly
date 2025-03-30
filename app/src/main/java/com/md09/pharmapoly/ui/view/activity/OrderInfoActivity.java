@@ -23,6 +23,7 @@ import com.md09.pharmapoly.Models.OrderItem;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.network.RetrofitClient;
+import com.md09.pharmapoly.utils.Constants;
 import com.md09.pharmapoly.utils.ProgressDialogHelper;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.squareup.picasso.Picasso;
@@ -114,15 +115,26 @@ public class OrderInfoActivity extends AppCompatActivity {
 
             layout_order_item.addView(view);
         }
-        //if (order.)
-        tv_subtotal.setText(formatCurrency(subtotal,"đ"));
-        tv_total_shipping_fee.setText(formatCurrency(order.getShipping_fee(),"đ"));
-        tv_total_payment.setText(formatCurrency(order.getTotal_price(),"đ"));
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd/MM/yyyy", Locale.getDefault());
-        String formattedDate = sdf.format(order.getCreated_at());
-        tv_created_at.setText(formattedDate);
+
+        if (order.getStatus().equals("delivered")) {
+            layout_delivery_date.setVisibility(View.VISIBLE);
+            String formattedDeliveryDate = sdf.format(order.getDelivered_at());
+            tv_delivery_date.setText(formattedDeliveryDate);
+        } else {
+            layout_delivery_date.setVisibility(View.GONE);
+        }
+
+        tv_subtotal.setText(formatCurrency(subtotal, "đ"));
+        tv_total_shipping_fee.setText(formatCurrency(order.getShipping_fee(), "đ"));
+        tv_total_payment.setText(formatCurrency(order.getTotal_price(), "đ"));
+
+        String formattedCreatedAt = sdf.format(order.getCreated_at());
+        tv_created_at.setText(formattedCreatedAt);
+
         tv_status.setText(getDisplayStatus(this, order.getStatus()));
         tv_status.setTextColor(getStatusColor(this, order.getStatus()));
+
         if (order.getOrder_code() != null && !order.getOrder_code().trim().isEmpty()) {
             layout_ghn_shipping_code.setVisibility(View.VISIBLE);
             tv_order_code.setText(order.getOrder_code());
@@ -148,8 +160,10 @@ public class OrderInfoActivity extends AppCompatActivity {
         tv_created_at = findViewById(R.id.tv_created_at);
         tv_status = findViewById(R.id.tv_status);
         tv_order_code = findViewById(R.id.tv_order_code);
+        tv_delivery_date = findViewById(R.id.tv_delivery_date);
 
         layout_ghn_shipping_code = findViewById(R.id.layout_ghn_shipping_code);
         layout_order_item = findViewById(R.id.layout_order_item);
+        layout_delivery_date = findViewById(R.id.layout_delivery_date);
     }
 }

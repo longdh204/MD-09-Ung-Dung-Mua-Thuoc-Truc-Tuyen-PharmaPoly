@@ -99,10 +99,15 @@ public class DeliveredFragment extends Fragment {
 
                     }
 
-                    @Override
-                    public void onReturnOrExchangeOrder(Order order) {
-                        ReturnOrExchangeOrder(order);
-                    }
+//                    @Override
+//                    public void onReturnOrExchangeOrder(Order order) {
+//                        ReturnOrExchangeOrder(order);
+//                    }
+
+//                    @Override
+//                    public void onConfirmReceived(Order order) {
+//
+//                    }
                 });
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 1);
         rcv_order.setLayoutManager(layoutManager);
@@ -140,32 +145,32 @@ public class DeliveredFragment extends Fragment {
         return view;
     }
 
-    private void ReturnOrExchangeOrder(Order order) {
-        ProgressDialogHelper.showLoading(getContext());
-        new RetrofitClient()
-                .callAPI()
-                .returnOrder(
-                        order.get_id(),
-                        "Bearer " + new SharedPrefHelper(getContext()).getToken()
-                ).enqueue(new Callback<ApiResponse<Order>>() {
-                    @Override
-                    public void onResponse(Call<ApiResponse<Order>> call, Response<ApiResponse<Order>> response) {
-                        if (response.isSuccessful() && response.body().getStatus() == 200) {
-                            order.setReturn_request(true);
-                            purchasedOrdersAdapter.UpdateItem(order);
-                            SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.return_request_success));
-                            bottomSheet.show(getParentFragmentManager(), "SuccessMessageBottomSheet");
-                            new SharedPrefHelper(getContext()).setBooleanState(CANCELED_KEY,true);
-                        }
-                        ProgressDialogHelper.hideLoading();
-                    }
-
-                    @Override
-                    public void onFailure(Call<ApiResponse<Order>> call, Throwable t) {
-                        ProgressDialogHelper.hideLoading();
-                    }
-                });
-    }
+//    private void ReturnOrExchangeOrder(Order order) {
+//        ProgressDialogHelper.showLoading(getContext());
+//        new RetrofitClient()
+//                .callAPI()
+//                .returnOrder(
+//                        order.get_id(),
+//                        "Bearer " + new SharedPrefHelper(getContext()).getToken()
+//                ).enqueue(new Callback<ApiResponse<Order>>() {
+//                    @Override
+//                    public void onResponse(Call<ApiResponse<Order>> call, Response<ApiResponse<Order>> response) {
+//                        if (response.isSuccessful() && response.body().getStatus() == 200) {
+//                            order.setReturn_request(true);
+//                            purchasedOrdersAdapter.UpdateItem(order);
+//                            SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.return_request_success));
+//                            bottomSheet.show(getParentFragmentManager(), "SuccessMessageBottomSheet");
+//                            new SharedPrefHelper(getContext()).setBooleanState(CANCELED_KEY,true);
+//                        }
+//                        ProgressDialogHelper.hideLoading();
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ApiResponse<Order>> call, Throwable t) {
+//                        ProgressDialogHelper.hideLoading();
+//                    }
+//                });
+//    }
 
     private void InitUI(View view) {
         rcv_order = view.findViewById(R.id.rcv_order);
