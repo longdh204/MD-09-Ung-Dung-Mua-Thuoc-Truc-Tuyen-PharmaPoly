@@ -147,14 +147,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/btn_view_all"-->
-<!--                        android:fontFamily="@font/be_vietnam_pro_semibold"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="@string/view_all"-->
-<!--                        android:textColor="@color/blue_CE4"-->
-<!--                        android:textSize="14sp" />-->
+                    <!--                    <TextView-->
+                    <!--                        android:id="@+id/btn_view_all"-->
+                    <!--                        android:fontFamily="@font/be_vietnam_pro_semibold"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:text="@string/view_all"-->
+                    <!--                        android:textColor="@color/blue_CE4"-->
+                    <!--                        android:textSize="14sp" />-->
                 </LinearLayout>
 
                 <LinearLayout
@@ -557,6 +557,7 @@
                     android:background="@drawable/rounded_shadow_background">
 
                     <LinearLayout
+                        android:id="@+id/introduction"
                         android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
@@ -589,6 +590,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/Operating_regulations"
                         android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
@@ -611,7 +613,7 @@
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:text="@string/business_license"
+                            android:text="Operating regulations"
                             android:textColor="#3A3A3A" />
 
                         <ImageView
@@ -621,6 +623,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/deposit_policy"
                         android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
@@ -653,6 +656,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/content_policy"
                         android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
@@ -685,6 +689,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/medicine_return_policy"
                         android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
@@ -717,6 +722,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/Shipping_Policy"
                         android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
@@ -749,6 +755,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/privacy_policy"
                         android:paddingVertical="6dp"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"

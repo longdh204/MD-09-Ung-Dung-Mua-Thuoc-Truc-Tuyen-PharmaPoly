@@ -47,6 +47,12 @@ public interface ApiService {
     Call<BankResponse> getBanks();
     @DELETE("orders/delete-payment-status/{userId}")
     Call<Void> deletePaymentStatus( @Header("Authorization") String token);
+    @GET("product/{productId}/images")
+        // Đảm bảo URL là đúng với API của bạn
+    Call<ApiResponse<List<String>>> getProductImages(
+            @Path("productId") String productId,
+            @Header("Authorization") String token);
+
     @GET("product/most-reviewed")
     Call<ApiResponse<PageDataClone<List<Product>>>> getMostReviewProducts(
             @Query("page") int page,

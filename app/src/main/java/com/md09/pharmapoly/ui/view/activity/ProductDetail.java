@@ -25,12 +25,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.md09.pharmapoly.Adapters.ProductAdapter;
+import com.md09.pharmapoly.Adapters.ProductImageAdapter;
 import com.md09.pharmapoly.Adapters.QuestionAdapter;
 import com.md09.pharmapoly.Adapters.ReviewAdapter;
 import com.md09.pharmapoly.Models.CartItem;
 import com.md09.pharmapoly.Models.Product;
+import com.md09.pharmapoly.Models.ProductImage;
 import com.md09.pharmapoly.Models.ProductReview;
 import com.md09.pharmapoly.Models.Question;
 import com.md09.pharmapoly.R;
@@ -47,6 +50,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.relex.circleindicator.CircleIndicator3;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -75,6 +79,15 @@ public class ProductDetail extends AppCompatActivity {
     private ImageView backBtn;
     private boolean isProductAdded = false;
     private PurchaseBottomSheet purchaseBottomSheet;
+
+    // slider show trong product details
+    private ViewPager2 productImageSlider;
+    CircleIndicator3 indicator;
+    Button prevButton, nextButton;
+    ProductImageAdapter adapter;
+    TextView pageIndicator, pageIndicator2;
+    private List<String> images = new ArrayList<>();
+
     @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +133,7 @@ public class ProductDetail extends AppCompatActivity {
         token = sharedPrefHelper.getToken();
         if (token != null) {
             Log.d("Token", token);
-        }else{
+        } else {
             Log.d("Token", "Token is null");
         }
         String token = "Bearer " + sharedPrefHelper.getToken();
@@ -151,14 +164,14 @@ public class ProductDetail extends AppCompatActivity {
             finish();
         });
 
-// Khởi tạo RecyclerView và Adapter
+        // Khởi tạo RecyclerView và Adapter
         questionRecyclerView = findViewById(R.id.questionRecyclerView);
         questionRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         questionList = new ArrayList<>();  // Khởi tạo lại danh sách câu hỏi
         questionAdapter = new QuestionAdapter(this, questionList);
         questionRecyclerView.setAdapter(questionAdapter);
 
-// Fetch dữ liệu câu hỏi từ API
+        // Fetch dữ liệu câu hỏi từ API
         String productId = getIntent().getStringExtra("product_id");
         fetchProductQuestions(productId, token, questionAdapter);
 
@@ -184,7 +197,6 @@ public class ProductDetail extends AppCompatActivity {
                 Log.d("ProductDetailActivity", "Product is null");
             }
         });
-//
         // Khởi tạo nút "Xem thêm đánh giá"
         showMoreReviewsButton = findViewById(R.id.showMoreReviewsButton);
 
@@ -194,8 +206,6 @@ public class ProductDetail extends AppCompatActivity {
             List<ProductReview> reviewList = new ArrayList<>();
             startActivity(intent);
         });
-
-
         btn_purchase.setOnClickListener(v -> {
             purchaseBottomSheet = new PurchaseBottomSheet(
                     product,
@@ -207,20 +217,131 @@ public class ProductDetail extends AppCompatActivity {
                     });
             purchaseBottomSheet.show(getSupportFragmentManager(), "QuantitySelectionDialog");
         });
+
+
+        //slider show
+        List<String> images = new ArrayList<>();
+        List<String> imageUrls = new ArrayList<>();
+        fetchProductImages(productId);  // Gọi API để lấy danh sách hình ảnh sản phẩm
+
+        // Khởi tạo Adapter cho ViewPager2
+        adapter = new ProductImageAdapter(this, imageUrls);
+        productImageSlider.setAdapter(adapter);
+        // Lắng nghe sự thay đổi trang
+        productImageSlider.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                // Cập nhật số trang khi thay đổi trang
+                int currentPage = position + 1;  // Vì `position` bắt đầu từ 0
+                int totalPages = images.size();  // Sử dụng biến images
+                pageIndicator.setText(currentPage + " / " + totalPages);  // Cập nhật số trang
+            }
+        });
+        // Thiết lập điều hướng "Next" và "Prev"
+        setupImageNavigationButtons(productImageSlider);
+        // Fetch product images
+        fetchProductImages(productId);
+        // Setup ViewPager and page indicator
+        setupViewPager();
+    }
+
+    private void setupViewPager() {
+        adapter = new ProductImageAdapter(this, images);
+        productImageSlider.setAdapter(adapter);
+
+        // Register onPageChangeListener for ViewPager2
+        productImageSlider.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                // Update page indicator
+                int currentPage = position + 1;
+                int totalPages = images.size();
+                pageIndicator.setText(currentPage + " / " + totalPages);
+            }
+        });
+
+        // Setup "Next" and "Prev" buttons
+        prevButton.setOnClickListener(v -> {
+            int currentItem = productImageSlider.getCurrentItem();
+            if (currentItem > 0) {
+                productImageSlider.setCurrentItem(currentItem - 1, true);
+            }
+        });
+
+        nextButton.setOnClickListener(v -> {
+            int currentItem = productImageSlider.getCurrentItem();
+            if (currentItem < productImageSlider.getAdapter().getItemCount() - 1) {
+                productImageSlider.setCurrentItem(currentItem + 1, true);
+            }
+        });
+    }
+
+    private void setupImageNavigationButtons(ViewPager2 productImageSlider) {
+        prevButton.setOnClickListener(v -> {
+            int currentItem = productImageSlider.getCurrentItem();
+            if (currentItem > 0) {
+                productImageSlider.setCurrentItem(currentItem - 1, true);  // Di chuyển về trước
+            }
+        });
+
+        nextButton.setOnClickListener(v -> {
+            int currentItem = productImageSlider.getCurrentItem();
+            if (currentItem < productImageSlider.getAdapter().getItemCount() - 1) {
+                productImageSlider.setCurrentItem(currentItem + 1, true);  // Di chuyển về sau
+            }
+        });
+    }
+
+    private void fetchProductImages(String productId) {
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+        apiService.getProductImages(productId, token).enqueue(new Callback<ApiResponse<List<String>>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<List<String>>> call, Response<ApiResponse<List<String>>> response) {
+                if (response.isSuccessful()) {
+                    List<String> imagesList = response.body().getData();
+                    updateProductImages(imagesList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<List<String>>> call, Throwable t) {
+                // Handle failure
+            }
+        });
+    }
+
+    private void updateProductImages(List<String> newImages) {
+        images.clear();
+        images.addAll(newImages);
+
+        // Update ViewPager
+        ProductImageAdapter adapter = (ProductImageAdapter) productImageSlider.getAdapter();
+        if (adapter != null) {
+            adapter.updateImages(images);
+        }
+
+        // Update page indicator
+        if (!images.isEmpty()) {
+            pageIndicator.setText("1 / " + images.size());
+        } else {
+            pageIndicator.setText("0 / 0");
+        }
     }
 
     private void AddProductToCart(CartItem cartItem) {
         ProgressDialogHelper.showLoading(this);
         retrofitClient.callAPI().addProductToCart(
-                cartItem,
-                "Bearer " + new SharedPrefHelper(this).getToken())
+                        cartItem,
+                        "Bearer " + new SharedPrefHelper(this).getToken())
                 .enqueue(new Callback<ApiResponse<CartItem>>() {
                     @Override
                     public void onResponse(Call<ApiResponse<CartItem>> call, Response<ApiResponse<CartItem>> response) {
                         purchaseBottomSheet.dismiss();
                         ProgressDialogHelper.hideLoading();
                         if (response.isSuccessful() && response.body().getStatus() == 200) {
-                            new SharedPrefHelper(ProductDetail.this).setBooleanState(PRODUCT_ADDED_TO_CART_KEY,true);
+                            new SharedPrefHelper(ProductDetail.this).setBooleanState(PRODUCT_ADDED_TO_CART_KEY, true);
                             isProductAdded = true;
                             SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.cart_add_success));
                             bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
@@ -234,6 +355,7 @@ public class ProductDetail extends AppCompatActivity {
                     }
                 });
     }
+
     @Override
     public void finish() {
         Intent resultIntent = new Intent();
@@ -272,6 +394,7 @@ public class ProductDetail extends AppCompatActivity {
             percentage1.setText(percentage1Star + "%");
         });
     }
+
     // filldata
     private void FillData(Product product) {
         productName.setText(product.getName());
@@ -299,6 +422,7 @@ public class ProductDetail extends AppCompatActivity {
     }
 
     private void InitUI() {
+        // Initialize all the UI elements
         productName = findViewById(R.id.productName);
         productPrice = findViewById(R.id.productPrice);
         productRating = findViewById(R.id.productRating);
@@ -311,8 +435,17 @@ public class ProductDetail extends AppCompatActivity {
         productReviewCount2 = findViewById(R.id.productReviewCount2);
         productCategory = findViewById(R.id.productCategory);
         productImage = findViewById(R.id.productImage);
+        pageIndicator = findViewById(R.id.pageIndicator);
+        productImageSlider = findViewById(R.id.productImageSlider);
+        prevButton = findViewById(R.id.prevButton);
+        nextButton = findViewById(R.id.nextButton);
 
-        retrofitClient = new RetrofitClient();
+        // Setup RecyclerView for reviews
+        userReviewRecyclerView = findViewById(R.id.userReview);
+        userReviewRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        reviewList = new ArrayList<>();
+        reviewAdapter = new ReviewAdapter(this, reviewList);
+        userReviewRecyclerView.setAdapter(reviewAdapter);
     }
 
     // lấy product details
@@ -322,19 +455,54 @@ public class ProductDetail extends AppCompatActivity {
             @Override
             public void onResponse(Call<ApiResponse<Product>> call, Response<ApiResponse<Product>> response) {
                 ProgressDialogHelper.hideLoading();
+
                 if (response.isSuccessful() && response.body() != null) {
                     Product productDetails = response.body().getData();
-                    FillData(productDetails);
 
-                    if (productDetails.getImages() != null && !productDetails.getImages().isEmpty() && productDetails != null) {
-                        product = productDetails;  // Gán dữ liệu vào biến product
+                    if (productDetails != null) {
+                        // Gán dữ liệu vào biến product và gọi FillData
+                        product = productDetails;
                         FillData(productDetails);
                         Log.d("ProductDetailActivity", "Product fetched: " + productDetails);
-                        Picasso.get().load(productDetails.getImages().get(0).getImage_url()).into(productImage);
+
+                        // Kiểm tra nếu có hình ảnh trong sản phẩm
+                        if (productDetails.getImages() != null && !productDetails.getImages().isEmpty()) {
+                            // Lấy URL hình ảnh đầu tiên
+                            String imageUrl = productDetails.getImages().get(0).getImage_url();
+
+                            // Kiểm tra URL hình ảnh có hợp lệ không
+                            if (imageUrl != null && !imageUrl.isEmpty()) {
+                                if (productImage != null) { // Kiểm tra nếu productImage không phải là null
+                                    Picasso.get().load(imageUrl).into(productImage);
+                                } else {
+                                    Log.e("ProductDetailActivity", "productImage is null.");
+                                }
+                            } else {
+                                // Nếu URL không hợp lệ, sử dụng hình ảnh mặc định
+                                if (productImage != null) {
+                                    Picasso.get().load(R.drawable.ic_profile).into(productImage);
+                                }
+                                Log.e("ProductDetailActivity", "Image URL is null or empty.");
+                            }
+
+                            // Tạo danh sách các URL hình ảnh và cập nhật slider
+                            List<String> imageUrls = new ArrayList<>();
+                            for (ProductImage image : productDetails.getImages()) {
+                                String url = image.getImage_url();
+                                if (url != null && !url.isEmpty()) {
+                                    imageUrls.add(url);  // Thêm vào danh sách nếu URL hợp lệ
+                                }
+                            }
+
+                            // Cập nhật danh sách hình ảnh cho slider
+                            updateProductImages(imageUrls);
+                        } else {
+                            Log.d("ProductDetailActivity", "No images available for this product.");
+                        }
                     }
                 } else {
                     Toast.makeText(ProductDetail.this, "Failed to fetch product details", Toast.LENGTH_SHORT).show();
-                    Log.d("ProductDetailActivity", "Product details are null");
+                    Log.d("ProductDetailActivity", "Product details are null or request failed");
                 }
             }
 
@@ -342,6 +510,7 @@ public class ProductDetail extends AppCompatActivity {
             public void onFailure(Call<ApiResponse<Product>> call, Throwable t) {
                 ProgressDialogHelper.hideLoading();
                 Toast.makeText(ProductDetail.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("ProductDetailActivity", "Error fetching product details: " + t.getMessage());
             }
         });
     }
@@ -386,6 +555,7 @@ public class ProductDetail extends AppCompatActivity {
                     Log.e("APIError", "Failed to fetch reviews: " + response.message());
                 }
             }
+
             @Override
             public void onFailure(Call<ApiResponse<List<ProductReview>>> call, Throwable t) {
                 Toast.makeText(ProductDetail.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -421,6 +591,7 @@ public class ProductDetail extends AppCompatActivity {
                     Toast.makeText(ProductDetail.this, "Failed to fetch product", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(Call<ApiResponse<Product>> call, Throwable t) {
                 Log.e("APIError", "Error fetching product: " + t.getMessage());
@@ -462,6 +633,7 @@ public class ProductDetail extends AppCompatActivity {
             }
         });
     }
+
     private void showRatingDialog() {
         // Inflate custom dialog layout
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -541,7 +713,6 @@ public class ProductDetail extends AppCompatActivity {
     }
 
 
-
     // Update the stars based on rating
     private void updateStars(ImageView star1, ImageView star2, ImageView star3, ImageView star4, ImageView star5, int rating) {
         // Reset all stars to empty
@@ -586,6 +757,7 @@ public class ProductDetail extends AppCompatActivity {
                     Log.e("APIError", "Failed to submit review: " + response.message());
                 }
             }
+
             @Override
             public void onFailure(Call<ApiResponse<Void>> call, Throwable t) {
                 Toast.makeText(ProductDetail.this, "Lỗi: " + t.getMessage(), Toast.LENGTH_SHORT).show();
