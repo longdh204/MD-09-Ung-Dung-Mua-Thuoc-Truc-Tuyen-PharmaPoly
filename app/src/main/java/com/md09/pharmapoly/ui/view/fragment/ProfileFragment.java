@@ -173,7 +173,6 @@ public class ProfileFragment extends Fragment {
         });
         return view;
     }
-
     private void performLogout() {
         SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(getContext());
         sharedPrefHelper.clearData();

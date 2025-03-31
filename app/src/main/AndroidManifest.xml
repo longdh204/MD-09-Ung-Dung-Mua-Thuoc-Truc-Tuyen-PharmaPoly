@@ -204,12 +204,6 @@
             android:name=".PayMent"
             android:exported="false" />
         <activity
-            android:name=".CartEmpty"
-            android:exported="false" />
-        <activity
-            android:name=".ShoppingCart"
-            android:exported="false" />
-        <activity
             android:name=".ui.view.activity.MainActivity"
             android:exported="true"/>
         <activity
