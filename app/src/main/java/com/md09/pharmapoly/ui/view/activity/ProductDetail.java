@@ -95,6 +95,7 @@ public class ProductDetail extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_product_detail);
 
+        retrofitClient = new RetrofitClient();
         btn_purchase = findViewById(R.id.btn_purchase);
         progress5 = findViewById(R.id.progress5);
         progress4 = findViewById(R.id.progress4);
@@ -413,7 +414,7 @@ public class ProductDetail extends AppCompatActivity {
 
         productRating.setText(String.valueOf(product.getAverage_rating()));
         productReviewCount.setText(product.getReview_count() + " " + getString(R.string.review).toLowerCase());
-        productReviewCount2.setText(product.getReview_count() + " " + getString(R.string.reviewr).toLowerCase());
+        productReviewCount2.setText(product.getReview_count() + " " + getString(R.string.review_count).toLowerCase());
         productCategory.setText(product.getCategory().getName());
         productSpecification.setText(product.getProduct_type().getName() + " " + product.getSpecification());
         productOriginCountry.setText(product.getOrigin_country());
@@ -501,7 +502,7 @@ public class ProductDetail extends AppCompatActivity {
                         }
                     }
                 } else {
-                    Toast.makeText(ProductDetail.this, "Failed to fetch product details", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ProductDetail.this, "Failed to fetch product details", Toast.LENGTH_SHORT).show();
                     Log.d("ProductDetailActivity", "Product details are null or request failed");
                 }
             }
@@ -509,7 +510,7 @@ public class ProductDetail extends AppCompatActivity {
             @Override
             public void onFailure(Call<ApiResponse<Product>> call, Throwable t) {
                 ProgressDialogHelper.hideLoading();
-                Toast.makeText(ProductDetail.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ProductDetail.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.e("ProductDetailActivity", "Error fetching product details: " + t.getMessage());
             }
         });
@@ -551,14 +552,14 @@ public class ProductDetail extends AppCompatActivity {
                         Log.d("APIResponse", "No reviews found.");
                     }
                 } else {
-                    Toast.makeText(ProductDetail.this, "Failed to fetch reviews", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ProductDetail.this, "Failed to fetch reviews", Toast.LENGTH_SHORT).show();
                     Log.e("APIError", "Failed to fetch reviews: " + response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ApiResponse<List<ProductReview>>> call, Throwable t) {
-                Toast.makeText(ProductDetail.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ProductDetail.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.e("APIError", "Error fetching reviews: " + t.getMessage());
             }
         });
@@ -585,17 +586,17 @@ public class ProductDetail extends AppCompatActivity {
                     }
                     productList.add(product);
                     productAdapter.notifyDataSetChanged();
-                    Toast.makeText(ProductDetail.this, "Lấy dữ liệu thành công", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(ProductDetail.this, "Lấy dữ liệu thành công", Toast.LENGTH_LONG).show();
                 } else {
                     Log.e("APIError", "Failed to fetch product: " + response.message());
-                    Toast.makeText(ProductDetail.this, "Failed to fetch product", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ProductDetail.this, "Failed to fetch product", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ApiResponse<Product>> call, Throwable t) {
                 Log.e("APIError", "Error fetching product: " + t.getMessage());
-                Toast.makeText(ProductDetail.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ProductDetail.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -760,7 +761,7 @@ public class ProductDetail extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ApiResponse<Void>> call, Throwable t) {
-                Toast.makeText(ProductDetail.this, "Lỗi: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ProductDetail.this, "Lỗi: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.e("APIError", "Error submitting review: " + t.getMessage());
             }
         });

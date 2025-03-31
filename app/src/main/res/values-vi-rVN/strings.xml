@@ -186,4 +186,6 @@
     <string name="check_user_info">Vui lòng kiểm tra lại thông tin cá nhân!</string>
     <string name="search_product">Tìm kiếm sản phẩm</string>
     <string name="search_history">Lịch sử tìm kiếm</string>
+    <string name="review_count">Số lượng người đánh giá</string>
+    <string name="hi">Xin chào</string>
 </resources>

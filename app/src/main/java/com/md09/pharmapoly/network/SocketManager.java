@@ -103,6 +103,8 @@ public class SocketManager {
     }
 
     public void sendMessage(String receiverId, String message) {
+        Log.e("Check receiverId",receiverId);
+        Log.e("Check message",message);
         if (socket != null && socket.connected()) {
             try {
                 JSONObject data = new JSONObject();

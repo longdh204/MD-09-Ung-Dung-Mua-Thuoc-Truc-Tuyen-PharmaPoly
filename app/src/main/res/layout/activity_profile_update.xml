@@ -73,8 +73,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/change_avatar"
-                android:fontFamily="@font/overpass_regular"
-                android:textSize="20sp"
+                android:fontFamily="@font/be_vietnam_pro_light"
+                android:textSize="14sp"
                 android:textColor="@color/blue"
                 android:ellipsize="end"
                 android:textStyle="bold" />
@@ -256,7 +256,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/be_vietnam_pro_bold"
-                        android:text="Update"
+                        android:text="@string/update"
                         android:textColor="@color/white"
                         android:textSize="18sp" />
                 </RelativeLayout>

@@ -107,7 +107,9 @@ public class SearchActivity extends AppCompatActivity {
                 return false;
             }
         });
-
+        imgback.setOnClickListener(v -> {
+            finish();
+        });
         searchView.requestFocus();
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
@@ -141,6 +143,7 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         productAdapter = new ProductAdapter(this, new ArrayList<>());
         recyclerView.setAdapter(productAdapter);
+        imgback = findViewById(R.id.imgback);
     }
 
     // Load lịch sử tìm kiếm từ SharedPreferences và hiển thị

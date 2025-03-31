@@ -39,6 +39,7 @@ import com.md09.pharmapoly.Models.PageDataClone;
 import com.md09.pharmapoly.Models.Product;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
+import com.md09.pharmapoly.data.model.User;
 import com.md09.pharmapoly.network.RetrofitClient;
 import com.md09.pharmapoly.ui.view.activity.ChatbotActivity;
 import com.md09.pharmapoly.ui.view.activity.Nav_FunctionalFoodActivity;
@@ -128,7 +129,7 @@ public class HomeFragment extends Fragment {
             btnthietbiyte,
             btnthuocbovitamin,
             layout_search;
-
+    private TextView txt_greeting;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -410,5 +411,13 @@ public class HomeFragment extends Fragment {
         btnthietbiyte = view.findViewById(R.id.btnthietbiyte);
         btnthuocbovitamin = view.findViewById(R.id.btnthuocbovitamin);
         layout_search = view.findViewById(R.id.layout_search);
+
+        txt_greeting = view.findViewById(R.id.txt_greeting);
+        User user = new SharedPrefHelper(getContext()).getUser();
+        if (user.getFull_name() != null && !user.getFull_name().isEmpty()) {
+            txt_greeting.setText(getString(R.string.hi) + ", " + user.getFull_name());
+        } else {
+            txt_greeting.setText(getString(R.string.hi));
+        }
     }
 }
