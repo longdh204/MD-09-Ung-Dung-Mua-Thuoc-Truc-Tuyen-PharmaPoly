@@ -183,4 +183,7 @@
     <string name="confirm_received_message">Bạn đã nhận được đơn hàng này chưa?</string>
     <string name="language">Ngôn ngữ</string>
 
+    <string name="check_user_info">Vui lòng kiểm tra lại thông tin cá nhân!</string>
+    <string name="search_product">Tìm kiếm sản phẩm</string>
+    <string name="search_history">Lịch sử tìm kiếm</string>
 </resources>

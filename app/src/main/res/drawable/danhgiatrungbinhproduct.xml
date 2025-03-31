@@ -13,7 +13,7 @@
             <corners android:topLeftRadius="16dp" android:bottomLeftRadius="16dp" />
 
             <!-- Kích thước của hình chữ nhật -->
-            <size android:width="200dp" android:height="40dp" />
+<!--            <size android:width="w" android:height="40dp" />-->
         </shape>
     </item>
 

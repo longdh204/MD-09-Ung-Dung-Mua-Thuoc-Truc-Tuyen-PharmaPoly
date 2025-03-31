@@ -1,6 +1,7 @@
 package com.md09.pharmapoly.utils;
 
 import static com.md09.pharmapoly.utils.Constants.MAX_QUANTITY_PER_PRODUCT;
+import static com.md09.pharmapoly.utils.Constants.formatCurrency;
 
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -38,8 +39,9 @@ public class PurchaseBottomSheet extends BottomSheetDialogFragment {
     }
     private TextView
             tv_product_name,
-            tv_discounted_price,
-            tv_original_price;
+            //tv_discounted_price,
+            tv_original_price,
+            tv_subtotal;
     private EditText edt_quantity;
     private ImageView img_product;
     private ImageButton btn_close;
@@ -66,10 +68,13 @@ public class PurchaseBottomSheet extends BottomSheetDialogFragment {
                 product.getPrice(),
                 product);
 
-        SpannableString spannable = new SpannableString("666.666đ");
-        spannable.setSpan(new StrikethroughSpan(), 0, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tv_original_price.setText(spannable);
-        tv_original_price.getPaint().setStrokeWidth(3);
+//        SpannableString spannable = new SpannableString(String.valueOf(product.getPrice()));
+//        spannable.setSpan(new StrikethroughSpan(), 0, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        tv_original_price.setText(spannable);
+//        tv_original_price.getPaint().setStrokeWidth(3);
+
+        tv_original_price.setText(formatCurrency(product.getPrice(), "đ"));
+        tv_subtotal.setText(formatCurrency(product.getPrice(), "đ"));
 
         tv_product_name.setText(product.getName());
         Picasso.get().load(product.getImageUrl()).into(img_product);
@@ -95,10 +100,12 @@ public class PurchaseBottomSheet extends BottomSheetDialogFragment {
     private void UpdateCartItemQuantity(CartItem cartItem, int newQuantity) {
         cartItem.setQuantity(newQuantity);
         edt_quantity.setText(String.valueOf(newQuantity));
+        int price = newQuantity * product.getPrice();
+        tv_subtotal.setText(formatCurrency(price, "đ"));
     }
     private void InitUI(View view) {
         tv_product_name = view.findViewById(R.id.tv_product_name);
-        tv_discounted_price = view.findViewById(R.id.tv_discounted_price);
+        //tv_discounted_price = view.findViewById(R.id.tv_discounted_price);
         tv_original_price = view.findViewById(R.id.tv_original_price);
 
         img_product = view.findViewById(R.id.img_product);
@@ -110,6 +117,8 @@ public class PurchaseBottomSheet extends BottomSheetDialogFragment {
 
         edt_quantity = view.findViewById(R.id.edt_quantity);
         edt_quantity.setText(String.valueOf(1));
+
+        tv_subtotal = view.findViewById(R.id.tv_subtotal);
 
         btn_decrease_quantity = view.findViewById(R.id.btn_decrease_quantity);
         btn_increase_quantity = view.findViewById(R.id.btn_increase_quantity);

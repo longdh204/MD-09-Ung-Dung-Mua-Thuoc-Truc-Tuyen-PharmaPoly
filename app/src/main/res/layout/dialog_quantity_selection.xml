@@ -58,10 +58,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-
                 android:id="@+id/tv_product_name"
                 android:minLines="1"
                 android:maxLines="2"
+                android:ellipsize="end"
                 android:elevation="@dimen/cardview_compat_inset_shadow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
                 android:fontFamily="@font/be_vietnam_pro_medium"/>
             <TextView
                 android:letterSpacing="-0.05"
-                android:id="@+id/tv_discounted_price"
+                android:id="@+id/tv_original_price"
                 android:layout_marginTop="6dp"
                 android:minLines="1"
                 android:maxLines="2"
@@ -82,18 +82,18 @@
                 android:textSize="16sp"
                 android:textColor="@color/blue_CE4"
                 android:fontFamily="@font/be_vietnam_pro_bold"/>
-            <TextView
-                android:letterSpacing="-0.05"
-                android:id="@+id/tv_original_price"
-                android:minLines="1"
-                android:maxLines="2"
-                android:elevation="@dimen/cardview_compat_inset_shadow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="666.666đ"
-                android:textSize="14sp"
-                android:textColor="@color/gray_E9E"
-                android:fontFamily="@font/be_vietnam_pro_medium"/>
+<!--            <TextView-->
+<!--                android:letterSpacing="-0.05"-->
+<!--                android:id="@+id/tv_original_price"-->
+<!--                android:minLines="1"-->
+<!--                android:maxLines="2"-->
+<!--                android:elevation="@dimen/cardview_compat_inset_shadow"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="666.666đ"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textColor="@color/gray_E9E"-->
+<!--                android:fontFamily="@font/be_vietnam_pro_medium"/>-->
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -191,6 +191,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
+            android:id="@+id/tv_subtotal"
             android:letterSpacing="-0.05"
             android:minLines="1"
             android:maxLines="2"
@@ -203,6 +204,7 @@
             android:fontFamily="@font/be_vietnam_pro_semibold"/>
     </LinearLayout>
     <LinearLayout
+        android:visibility="gone"
         android:layout_marginTop="8dp"
         android:paddingHorizontal="24dp"
         android:layout_width="match_parent"

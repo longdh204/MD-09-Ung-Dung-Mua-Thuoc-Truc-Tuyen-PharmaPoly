@@ -1,19 +1,14 @@
 package com.md09.pharmapoly.ui.view.activity;
 
 import static com.md09.pharmapoly.utils.Constants.ORDER_KEY;
-import static com.md09.pharmapoly.utils.Constants.findObjectById;
 import static com.md09.pharmapoly.utils.Constants.formatCurrency;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,12 +19,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.bumptech.glide.Glide;
 import com.google.common.reflect.TypeToken;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,13 +27,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.md09.pharmapoly.Models.CartItem;
 import com.md09.pharmapoly.Models.GHNResponse;
-import com.md09.pharmapoly.Models.Order;
-import com.md09.pharmapoly.Models.Product;
-import com.md09.pharmapoly.Models.Province;
-import com.md09.pharmapoly.Models.UserAddress;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.data.model.User;
@@ -53,10 +38,6 @@ import com.md09.pharmapoly.utils.ProgressDialogHelper;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.md09.pharmapoly.utils.SuccessMessageBottomSheet;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -137,6 +118,11 @@ public class CheckoutActivity extends AppCompatActivity {
             startActivity(new Intent(CheckoutActivity.this,AddressActivity.class));
         });
         btn_order.setOnClickListener(v -> {
+            if (!isUserInfoValid(user)) {
+                Toast.makeText(this, getString(R.string.check_user_info), Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             Map<String, Object> requestData = new HashMap<>();
             String payment_method = new SharedPrefHelper(this).getPaymentMethod().getValue();
             requestData.put("payment_method", payment_method);
@@ -177,8 +163,36 @@ public class CheckoutActivity extends AppCompatActivity {
         FillAddress();
 
     }
+    private boolean isUserInfoValid(User user) {
+        if (user == null) return false;
+        if (user.getFull_name() == null || user.getFull_name().trim().isEmpty()) {
+            return false;
+        }
 
-    private void listenForPaymentStatus(String userId, Dialog dialog) {
+        if (user.getPhone_number() == null || user.getPhone_number().trim().isEmpty()) {
+            return false;
+        }
+
+        if (user.getShipping_phone_number() == null || user.getShipping_phone_number().trim().isEmpty()) {
+            return false;
+        }
+
+        if (user.getAddress() == null) {
+            return false;
+        }
+
+        String paymentMethod = new SharedPrefHelper(this).getPaymentMethod().getValue();
+        if (paymentMethod == null || paymentMethod.trim().isEmpty()) {
+            return false;
+        }
+
+//        if (user.getStatus() == 0) {
+//            return false;
+//        }
+
+        return true;
+    }
+    private void ListenForPaymentStatus(String userId, Dialog dialog) {
         DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference("payment_status")
                 .child(userId);
 
@@ -231,7 +245,7 @@ public class CheckoutActivity extends AppCompatActivity {
         Picasso.get().load(qrCodeUrl).into(qrImageView);
 
         dialog.show();
-        listenForPaymentStatus(new SharedPrefHelper(this).getUser().get_id(), dialog);
+        ListenForPaymentStatus(new SharedPrefHelper(this).getUser().get_id(), dialog);
     }
 
     @Override

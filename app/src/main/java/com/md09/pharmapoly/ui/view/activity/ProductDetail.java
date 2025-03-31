@@ -197,7 +197,6 @@ public class ProductDetail extends AppCompatActivity {
 
 
         btn_purchase.setOnClickListener(v -> {
-
             purchaseBottomSheet = new PurchaseBottomSheet(
                     product,
                     new PurchaseBottomSheet.AddToCartListener() {

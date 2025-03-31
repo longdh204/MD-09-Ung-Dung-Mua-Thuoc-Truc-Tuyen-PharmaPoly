@@ -1,12 +1,18 @@
 package com.md09.pharmapoly.ui.view.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,7 +51,8 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProductAdapter productAdapter;
     private Button prevPageBtn, nextPageBtn;
-    private SearchView searchView;
+    //private SearchView searchView;
+    private EditText searchView;
     private TextView pageInfoTextView;
     private Set<String> categories = new HashSet<>();
     private Set<String> brands = new HashSet<>();
@@ -71,21 +78,38 @@ public class SearchActivity extends AppCompatActivity {
         // Hiển thị lịch sử tìm kiếm khi mở màn hình tìm kiếm
         loadSearchHistory();
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                if (!TextUtils.isEmpty(query)) {
+//                    fetchSearchResults(query);  // Gọi hàm tìm kiếm khi người dùng submit query
+//                    saveSearchHistory(query);  // Lưu lịch sử tìm kiếm
+//                }
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return false;
+//            }
+//        });
+        searchView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                if (!TextUtils.isEmpty(query)) {
-                    fetchSearchResults(query);  // Gọi hàm tìm kiếm khi người dùng submit query
-                    saveSearchHistory(query);  // Lưu lịch sử tìm kiếm
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    String query = searchView.getText().toString().trim();
+                    if (!TextUtils.isEmpty(query)) {
+                        fetchSearchResults(query);
+                        saveSearchHistory(query);
+                    }
+                    return true;
                 }
                 return false;
             }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
         });
+
+        searchView.requestFocus();
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
         prevPageBtn.setOnClickListener(v -> {
             if (currentPage > 0) {
@@ -139,7 +163,9 @@ public class SearchActivity extends AppCompatActivity {
             historyButton.setAllCaps(false);  // Hiển thị chữ thường
 
             historyButton.setOnClickListener(v -> {
-                searchView.setQuery(keyword, false);
+//                searchView.setQuery(keyword, false);
+                searchView.setText(keyword);
+                searchView.setSelection(keyword.length());
                 fetchSearchResults(keyword);
             });
             historyLayout.addView(historyButton);

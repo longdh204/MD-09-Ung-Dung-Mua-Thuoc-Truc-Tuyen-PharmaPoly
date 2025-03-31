@@ -82,7 +82,7 @@
                                 android:layout_marginRight="6dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/total_payment"
+                                android:text="@string/subtotal"
                                 android:textSize="16sp"
                                 android:textColor="@color/black_333"
                                 android:fontFamily="@font/be_vietnam_pro_medium"/>

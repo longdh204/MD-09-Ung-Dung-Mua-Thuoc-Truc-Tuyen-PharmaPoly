@@ -192,7 +192,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.view.activity.MainActivity"
-            android:exported="true" />
+            android:exported="true"/>
         <activity
             android:name=".ui.view.activity.ProfileUpdate"
             android:exported="true" />
