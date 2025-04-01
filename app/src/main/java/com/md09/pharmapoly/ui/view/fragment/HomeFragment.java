@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.md09.pharmapoly.Adapters.CategoryAdapter;
 import com.md09.pharmapoly.Adapters.CategoryListAdapter;
 import com.md09.pharmapoly.Adapters.ProductAdapter;
@@ -47,6 +48,7 @@ import com.md09.pharmapoly.ui.view.activity.Nav_Medical_Equiment;
 import com.md09.pharmapoly.ui.view.activity.Nav_Medicine;
 import com.md09.pharmapoly.ui.view.activity.Nav_Personalcare;
 import com.md09.pharmapoly.ui.view.activity.Nav_Pharmaceutical_Cosmetics;
+import com.md09.pharmapoly.ui.view.activity.NotificationActivity;
 import com.md09.pharmapoly.ui.view.activity.NotificationsActivity;
 import com.md09.pharmapoly.ui.view.activity.PharmacyMapActivity;
 import com.md09.pharmapoly.ui.view.activity.SearchActivity;
@@ -89,6 +91,28 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        // Lấy FCM Token
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.w("FCM", "Fetching FCM registration token failed", task.getException());
+                        return;
+                    }
+
+                    // Lấy FCM Token
+                    String token = task.getResult();
+                    Log.d("FCM", "FCM Token: " + token);
+
+                    // Gửi token đến server của bạn
+                    sendTokenToServer(token);
+                });
+    }
+
+    // Giả sử bạn có một phương thức để gửi token lên server
+    private void sendTokenToServer(String token) {
+        // Gửi token đến server của bạn để lưu trữ
+        Log.d("FCM", "Sending token to server: " + token);
+        // Ví dụ: Sử dụng Retrofit hoặc một HTTP request để gửi token lên server
     }
 
     private RecyclerView recyclerView;
@@ -130,6 +154,8 @@ public class HomeFragment extends Fragment {
             btnthuocbovitamin,
             layout_search;
     private TextView txt_greeting;
+    private ImageView bell_icon;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -290,6 +316,13 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        bell_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), NotificationActivity.class); // Chuyển tới Activity bạn muốn
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -411,7 +444,7 @@ public class HomeFragment extends Fragment {
         btnthietbiyte = view.findViewById(R.id.btnthietbiyte);
         btnthuocbovitamin = view.findViewById(R.id.btnthuocbovitamin);
         layout_search = view.findViewById(R.id.layout_search);
-
+        bell_icon = view.findViewById(R.id.bell_icon);
         txt_greeting = view.findViewById(R.id.txt_greeting);
         User user = new SharedPrefHelper(getContext()).getUser();
         if (user.getFull_name() != null && !user.getFull_name().isEmpty()) {

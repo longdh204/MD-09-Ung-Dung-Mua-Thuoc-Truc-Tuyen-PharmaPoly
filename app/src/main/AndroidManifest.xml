@@ -8,7 +8,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -40,6 +39,20 @@
         android:theme="@style/Theme.MD09_PharmaPoly"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <service
+            android:name=".network.MyFirebaseMessagingService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
+        <activity
+            android:name=".ui.view.activity.NotificationDetailActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.view.aboutpharmapoly.Privacy_Policy"
             android:exported="false" />
@@ -168,6 +181,9 @@
             android:name=".ui.view.activity.PharmacyMapActivity"
             android:exported="true" />
         <activity
+            android:name=".ui.view.activity.NotificationActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.view.activity.PhoneNumber"
             android:exported="true">
             <intent-filter>
@@ -205,7 +221,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.view.activity.MainActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".ui.view.activity.ProfileUpdate"
             android:exported="true" />
