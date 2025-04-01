@@ -4,14 +4,11 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,7 +30,6 @@ import com.md09.pharmapoly.Adapters.CategoryListAdapter;
 import com.md09.pharmapoly.Adapters.ProductAdapter;
 import com.md09.pharmapoly.Adapters.SliderAdapter;
 import com.md09.pharmapoly.MedicineReminderActivity;
-import com.md09.pharmapoly.Models.Category;
 import com.md09.pharmapoly.Models.ItemCategoryHome;
 import com.md09.pharmapoly.Models.PageData;
 import com.md09.pharmapoly.Models.PageDataClone;
@@ -49,7 +45,6 @@ import com.md09.pharmapoly.ui.view.activity.Nav_Medicine;
 import com.md09.pharmapoly.ui.view.activity.Nav_Personalcare;
 import com.md09.pharmapoly.ui.view.activity.Nav_Pharmaceutical_Cosmetics;
 import com.md09.pharmapoly.ui.view.activity.NotificationActivity;
-import com.md09.pharmapoly.ui.view.activity.NotificationsActivity;
 import com.md09.pharmapoly.ui.view.activity.PharmacyMapActivity;
 import com.md09.pharmapoly.ui.view.activity.SearchActivity;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
@@ -189,7 +184,7 @@ public class HomeFragment extends Fragment {
 
         ImageView bellIcon = view.findViewById(R.id.bell_icon);
         bellIcon.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), NotificationsActivity.class);
+            Intent intent = new Intent(getContext(), NotificationActivity.class);
             startActivity(intent);
         });
 
@@ -233,7 +228,7 @@ public class HomeFragment extends Fragment {
             int id = item.getItemId();
             if (id == R.id.nav_notification) {
                 Toast.makeText(getContext(), "Thông báo", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getContext(), NotificationsActivity.class));
+                startActivity(new Intent(getContext(), NotificationActivity.class));
                 return true;
             } else if (id == R.id.nav_healthcare) {
                 Toast.makeText(getContext(), "Thực phẩm chức năng", Toast.LENGTH_SHORT).show();

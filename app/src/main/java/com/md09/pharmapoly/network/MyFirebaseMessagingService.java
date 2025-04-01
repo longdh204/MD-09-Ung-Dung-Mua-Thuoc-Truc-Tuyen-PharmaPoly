@@ -7,6 +7,7 @@ import com.md09.pharmapoly.R;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.md09.pharmapoly.utils.SharedPrefHelper;
 
 import android.app.NotificationManager;
 
@@ -17,50 +18,50 @@ import android.app.NotificationChannel;
 import android.content.Context;
 import android.util.Log;
 
-public class MyFirebaseMessagingService extends FirebaseMessagingService {
+import java.util.ArrayList;
 
+public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        // Kiểm tra xem thông báo có chứa dữ liệu không
         if (remoteMessage.getData().size() > 0) {
             String title = remoteMessage.getData().get("title");
             String message = remoteMessage.getData().get("message");
             String time = remoteMessage.getData().get("time");
 
-            // Hiển thị thông báo trong hệ thống
-            displayNotification(title, message, time);
+            // Lưu thông báo vào SharedPreferences
+            SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(getApplicationContext());
+            sharedPrefHelper.saveReminder(title, 0, 0, true, false, new ArrayList<>());
+
+            // Gửi thông báo đến UI (nếu cần)
+            sendNotification(title, message, time);
         }
 
+        // Nếu thông báo có phần thông báo (notification), xử lý thông báo đó
         if (remoteMessage.getNotification() != null) {
-            String notificationTitle = remoteMessage.getNotification().getTitle();
-            String notificationBody = remoteMessage.getNotification().getBody();
-            displayNotification(notificationTitle, notificationBody, "N/A");
+            // Xử lý thông báo theo nhu cầu (hiển thị thông báo trên thanh trạng thái)
+            String title = remoteMessage.getNotification().getTitle();
+            String message = remoteMessage.getNotification().getBody();
+            sendNotification(title, message, null);
         }
     }
 
-    private void displayNotification(String title, String message, String time) {
-        // Lấy NotificationManager
+
+    // Hàm gửi thông báo đến thiết bị
+    private void sendNotification(String title, String messageBody, String time) {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        // Tạo notification channel cho Android 8.0 trở lên
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String channelId = "default";
-            CharSequence channelName = "Default Channel";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
-            channel.setDescription("Channel for general notifications");
-            notificationManager.createNotificationChannel(channel);
-        }
-
-        // Tạo thông báo
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "default")
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "default")
                 .setSmallIcon(R.drawable.ic_bell)
                 .setContentTitle(title)
-                .setContentText(message)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentText(messageBody)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true);
 
-        // Hiển thị thông báo
-        notificationManager.notify(0, builder.build());
-    }
-}
+        if (time != null) {
+            notificationBuilder.setSubText("Thời gian: " + time);
+        }
 
+        notificationManager.notify(0, notificationBuilder.build());
+    }
+
+}

@@ -9,6 +9,7 @@ import static com.md09.pharmapoly.utils.Constants.USER_KEY;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
@@ -26,6 +27,7 @@ public class SharedPrefHelper {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private Gson gson;
+
 
     public SharedPrefHelper(Context context) {
         sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
@@ -108,10 +110,12 @@ public class SharedPrefHelper {
         String method = sharedPreferences.getString(PAYMENT_METHOD_KEY, "COD");
         return PaymentMethod.fromString(method);
     }
+
     public void saveLanguage(String langCode) {
         editor.putString(Constants.LANGUAGE_KEY, langCode);
         editor.apply();
     }
+
     public String getLanguage() {
         return sharedPreferences.getString(Constants.LANGUAGE_KEY, "vi");
     }
@@ -135,20 +139,22 @@ public class SharedPrefHelper {
     // Lưu danh sách nhắc nhở
     // Lưu nhắc nhở hàng ngày (giữ nguyên vì không có thay đổi)
     // Lưu nhắc nhở với tất cả các giờ đã chọn
+// Lưu danh sách nhắc nhở vào SharedPreferences
+// Lưu nhắc nhở vào SharedPreferences
+    // Lưu nhắc nhở vào SharedPreferences
     public void saveReminder(String medicineName, int hour, int minute, boolean repeatDaily, boolean repeatHourly, List<Integer> selectedHours) {
         List<Reminder> reminders = getReminders();
 
-        // Nếu selectedHours là null, khởi tạo nó thành danh sách rỗng
         if (selectedHours == null) {
             selectedHours = new ArrayList<>();
         }
 
-        // Lưu nhắc nhở vào danh sách
+        // Thêm nhắc nhở vào danh sách
         reminders.add(new Reminder(medicineName, hour, minute, repeatDaily, repeatHourly, selectedHours));
 
-        // Lưu lại danh sách
+        // Chuyển đổi danh sách nhắc nhở thành chuỗi JSON và lưu vào SharedPreferences
         String json = gson.toJson(reminders);
-        editor.putString("reminder_list", json);
+        editor.putString("reminder_list", json);  // Lưu với khóa "reminder_list"
         editor.apply();
     }
 
@@ -186,12 +192,18 @@ public class SharedPrefHelper {
 
     // Lấy danh sách nhắc nhở
     // Lấy danh sách nhắc nhở
+// Lấy danh sách nhắc nhở từ SharedPreferences
     public List<Reminder> getReminders() {
-        String json = sharedPreferences.getString("reminder_list", null);
+        String json = sharedPreferences.getString("reminder_list", null);  // Lấy dữ liệu
+        if (json == null) {
+            Log.e("SharedPreferences", "Không tìm thấy dữ liệu reminder_list!");
+        }
+
         Type type = new TypeToken<List<Reminder>>() {
         }.getType();
-        return json == null ? new ArrayList<>() : gson.fromJson(json, type);
+        return json == null ? new ArrayList<>() : gson.fromJson(json, type);  // Nếu không có dữ liệu trả về danh sách rỗng
     }
+
 
     // Xóa nhắc nhở theo chỉ mục
     public void deleteReminder(int index) {

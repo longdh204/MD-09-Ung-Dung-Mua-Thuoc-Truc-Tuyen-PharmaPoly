@@ -10,46 +10,44 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import com.md09.pharmapoly.Models.NotificationModel;
+import com.md09.pharmapoly.Models.Reminder;  // Đảm bảo Reminder được import
 import com.md09.pharmapoly.R;
 
 import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
-    private List<NotificationModel> notificationList;
+    private List<Reminder> reminderList;  // Sử dụng Reminder thay vì NotificationModel
     private Context context;
 
-    public NotificationAdapter(Context context, List<NotificationModel> notificationList) {
+    public NotificationAdapter(Context context, List<Reminder> reminderList) {
         this.context = context;
-        this.notificationList = notificationList;
+        this.reminderList = reminderList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notification, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_notification, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        NotificationModel notification = notificationList.get(position);
+        Reminder reminder = reminderList.get(position);
 
-        holder.txtTitle.setText(notification.getTitle());
-        holder.txtTime.setText(notification.getTime());
-        holder.imgIcon.setImageResource(notification.getIcon());
+        holder.txtTitle.setText(reminder.getMedicineName());  // Hiển thị tên thuốc hoặc thông báo
+        holder.txtTime.setText(reminder.getHour() + ":" + reminder.getMinute());  // Hiển thị giờ
 
-        if (notification.isUnread()) {
-            holder.unreadDot.setVisibility(View.VISIBLE);
-        } else {
-            holder.unreadDot.setVisibility(View.GONE);
-        }
+        // Chỉnh sửa nếu có icon hoặc thông tin khác
+        holder.imgIcon.setImageResource(R.drawable.ic_bell); // Hoặc thay đổi biểu tượng nếu cần
+
+        // Nếu bạn muốn thêm logic về chưa đọc hay đã đọc, có thể sử dụng thuộc tính nào đó từ Reminder
+        holder.unreadDot.setVisibility(View.VISIBLE);  // Điều chỉnh lại logic hiển thị dấu chấm đỏ
     }
 
     @Override
     public int getItemCount() {
-        return notificationList.size();
+        return reminderList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -66,4 +64,3 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         }
     }
 }
-

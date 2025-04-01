@@ -15,9 +15,21 @@ public class NotificationModel implements Serializable {
         this.isUnread = isUnread;
     }
 
-    public String getTitle() { return title; }
-    public String getTime() { return time; }
-    public int getIcon() { return icon; }
-    public boolean isUnread() { return isUnread; }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public int getIcon() {
+        return icon;
+    }
+
+    public boolean isUnread() {
+        return isUnread;
+    }
 }
 
