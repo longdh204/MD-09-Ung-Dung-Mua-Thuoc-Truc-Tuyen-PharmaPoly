@@ -9,7 +9,7 @@ public class Product implements Serializable {
     private String name;
     private String category_id;
     private String brand_id;
-    private String product_type_id;
+    //private String product_type_id;
     private int price;
     private Discount discount;
     private String short_description;
@@ -21,10 +21,21 @@ public class Product implements Serializable {
     private String create_at;
     private Category category;
     private Brand brand;
-    private ProductType product_type;
+    //private ProductType product_type;
     private List<ProductImage> images;
+    private List<ProductProductType> product_types;
     private List<ProductSection> sections;
     // Lấy URL của ảnh chính
+
+    private int selectedTypeIndex = 0;
+
+    public int getSelectedTypeIndex() {
+        return selectedTypeIndex;
+    }
+
+    public void setSelectedTypeIndex(int selectedTypeIndex) {
+        this.selectedTypeIndex = selectedTypeIndex;
+    }
     public String getImageUrl() {
         if (images != null && !images.isEmpty()) {
             for (ProductImage image : images) {
@@ -36,12 +47,31 @@ public class Product implements Serializable {
         return null;  // Nếu không có ảnh chính, trả về null
     }
 
-    public Product(String _id, String name, String category_id, String brand_id, String product_type_id, int price, Discount discount, String short_description, String specification, String origin_country, String manufacturer, float average_rating, int review_count, String create_at, Category category, Brand brand, ProductType product_type, List<ProductImage> images, List<ProductSection> sections) {
+    public Product(
+            String _id,
+            String name,
+            String category_id,
+            String brand_id,
+//            String product_type_id,
+            int price,
+            Discount discount,
+            String short_description,
+            String specification,
+            String origin_country,
+            String manufacturer,
+            float average_rating,
+            int review_count,
+            String create_at,
+            Category category,
+            Brand brand,
+//            ProductType product_type,
+            List<ProductImage> images,
+            List<ProductSection> sections) {
         this._id = _id;
         this.name = name;
         this.category_id = category_id;
         this.brand_id = brand_id;
-        this.product_type_id = product_type_id;
+//        this.product_type_id = product_type_id;
         this.price = price;
         this.discount = discount;
         this.short_description = short_description;
@@ -53,7 +83,7 @@ public class Product implements Serializable {
         this.create_at = create_at;
         this.category = category;
         this.brand = brand;
-        this.product_type = product_type;
+//        this.product_type = product_type;
         this.images = images;
         this.sections = sections;
     }
@@ -107,12 +137,20 @@ public class Product implements Serializable {
         this.brand_id = brand_id;
     }
 
-    public String getProduct_type_id() {
-        return product_type_id;
+//    public String getProduct_type_id() {
+//        return product_type_id;
+//    }
+//
+//    public void setProduct_type_id(String product_type_id) {
+//        this.product_type_id = product_type_id;
+//    }
+
+    public List<ProductProductType> getProduct_types() {
+        return product_types;
     }
 
-    public void setProduct_type_id(String product_type_id) {
-        this.product_type_id = product_type_id;
+    public void setProduct_types(List<ProductProductType> product_types) {
+        this.product_types = product_types;
     }
 
     public Category getCategory() {
@@ -131,13 +169,13 @@ public class Product implements Serializable {
         this.brand = brand;
     }
 
-    public ProductType getProduct_type() {
-        return product_type;
-    }
-
-    public void setProduct_type(ProductType product_type) {
-        this.product_type = product_type;
-    }
+//    public ProductType getProduct_type() {
+//        return product_type;
+//    }
+//
+//    public void setProduct_type(ProductType product_type) {
+//        this.product_type = product_type;
+//    }
 
     public List<ProductSection> getSections() {
         return sections;
@@ -218,7 +256,6 @@ public class Product implements Serializable {
                 ", name='" + name + '\'' +
                 ", category_id='" + category_id + '\'' +
                 ", brand_id='" + brand_id + '\'' +
-                ", product_type_id='" + product_type_id + '\'' +
                 ", price=" + price +
                 ", discount=" + discount +
                 ", short_description='" + short_description + '\'' +
@@ -230,8 +267,8 @@ public class Product implements Serializable {
                 ", create_at='" + create_at + '\'' +
                 ", category=" + category +
                 ", brand=" + brand +
-                ", product_type=" + product_type +
                 ", images=" + images +
+                ", product_types=" + product_types +
                 ", sections=" + sections +
                 '}';
     }

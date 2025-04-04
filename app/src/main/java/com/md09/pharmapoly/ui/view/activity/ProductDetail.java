@@ -22,6 +22,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +35,7 @@ import com.md09.pharmapoly.Adapters.ReviewAdapter;
 import com.md09.pharmapoly.Models.CartItem;
 import com.md09.pharmapoly.Models.Product;
 import com.md09.pharmapoly.Models.ProductImage;
+import com.md09.pharmapoly.Models.ProductProductType;
 import com.md09.pharmapoly.Models.ProductReview;
 import com.md09.pharmapoly.Models.Question;
 import com.md09.pharmapoly.R;
@@ -49,6 +51,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import me.relex.circleindicator.CircleIndicator3;
 import retrofit2.Call;
@@ -75,7 +78,7 @@ public class ProductDetail extends AppCompatActivity {
     private QuestionAdapter questionAdapter;
     private List<Question> questionList;
     private Button showMoreReviewsButton;
-    private LinearLayout btn_purchase;
+    private LinearLayout btn_purchase, layout_product_type;
     private ImageView backBtn;
     private boolean isProductAdded = false;
     private PurchaseBottomSheet purchaseBottomSheet;
@@ -87,7 +90,7 @@ public class ProductDetail extends AppCompatActivity {
     ProductImageAdapter adapter;
     TextView pageIndicator, pageIndicator2;
     private List<String> images = new ArrayList<>();
-
+    private int selectedTypeIndex = 0;
     @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +117,7 @@ public class ProductDetail extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerViewKhac.setLayoutManager(layoutManager);
         productList = new ArrayList<>();
-        productAdapter = new ProductAdapter(this, productList);
+        productAdapter = new ProductAdapter(this, null);
         recyclerViewKhac.setAdapter(productAdapter);
 
         ProgressDialogHelper.showLoading(this);
@@ -123,7 +126,7 @@ public class ProductDetail extends AppCompatActivity {
         sharedPrefHelper = new SharedPrefHelper(this);
         token = "Bearer " + sharedPrefHelper.getToken();
         productId = getIntent().getStringExtra("product_id");
-
+        selectedTypeIndex = getIntent().getIntExtra("selectedTypeIndex",0);
         userReviewRecyclerView = findViewById(R.id.userReview);
         reviewList = new ArrayList<>();
         reviewAdapter = new ReviewAdapter(this, reviewList);
@@ -149,11 +152,14 @@ public class ProductDetail extends AppCompatActivity {
         TextView showProductDetailsButton = findViewById(R.id.showProductDetails);
         showProductDetailsButton.setOnClickListener(v -> {
             if (product != null) {
+                Log.e("Check Product", product.toString());
+                Log.e("Check Product Section", product.getSections().toString());
+
                 Intent intent = new Intent(ProductDetail.this, ProductDetailAllActivity.class);
                 // Gửi thêm thông tin qua Intent
                 intent.putExtra("product", product);
-                intent.putExtra("brand_description", product.getBrand().getDescription());
-                intent.putExtra("product_type_name", product.getProduct_type().getName());
+                //intent.putExtra("brand_description", product.getBrand().getDescription());
+                //intent.putExtra("product_type_name", product.getProduct_type().getName());
                 intent.putExtra("sections", new ArrayList<>(product.getSections()));
                 startActivity(intent);
             } else {
@@ -223,7 +229,7 @@ public class ProductDetail extends AppCompatActivity {
         //slider show
         List<String> images = new ArrayList<>();
         List<String> imageUrls = new ArrayList<>();
-        fetchProductImages(productId);  // Gọi API để lấy danh sách hình ảnh sản phẩm
+        //fetchProductImages(productId);  // Gọi API để lấy danh sách hình ảnh sản phẩm
 
         // Khởi tạo Adapter cho ViewPager2
         adapter = new ProductImageAdapter(this, imageUrls);
@@ -242,7 +248,7 @@ public class ProductDetail extends AppCompatActivity {
         // Thiết lập điều hướng "Next" và "Prev"
         setupImageNavigationButtons(productImageSlider);
         // Fetch product images
-        fetchProductImages(productId);
+        //fetchProductImages(productId);
         // Setup ViewPager and page indicator
         setupViewPager();
     }
@@ -295,23 +301,6 @@ public class ProductDetail extends AppCompatActivity {
         });
     }
 
-    private void fetchProductImages(String productId) {
-        ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        apiService.getProductImages(productId, token).enqueue(new Callback<ApiResponse<List<String>>>() {
-            @Override
-            public void onResponse(Call<ApiResponse<List<String>>> call, Response<ApiResponse<List<String>>> response) {
-                if (response.isSuccessful()) {
-                    List<String> imagesList = response.body().getData();
-                    updateProductImages(imagesList);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ApiResponse<List<String>>> call, Throwable t) {
-                // Handle failure
-            }
-        });
-    }
 
     private void updateProductImages(List<String> newImages) {
         images.clear();
@@ -332,6 +321,7 @@ public class ProductDetail extends AppCompatActivity {
     }
 
     private void AddProductToCart(CartItem cartItem) {
+        Log.e("Check data cart item", cartItem.toString());
         ProgressDialogHelper.showLoading(this);
         retrofitClient.callAPI().addProductToCart(
                         cartItem,
@@ -398,6 +388,7 @@ public class ProductDetail extends AppCompatActivity {
 
     // filldata
     private void FillData(Product product) {
+        product.setSelectedTypeIndex(selectedTypeIndex);
         productName.setText(product.getName());
         productBrand.setText(getString(R.string.brand) + ": " + product.getBrand().getName());
 //        if (product.getProduct_type() != null) {
@@ -405,25 +396,63 @@ public class ProductDetail extends AppCompatActivity {
 //        } else {
 //            productPrice.setText(product.getPrice() + "/ N/A");
 //        }
-        String type = "";
-        if (product.getProduct_type() != null) {
-            type = "/" + product.getProduct_type().getName();
-        }
+
+        List<String> imageUrls = product.getImages().stream()
+                .map(ProductImage::getImage_url)
+                .collect(Collectors.toList());
+
+        updateProductImages(imageUrls);
+
+        String type = "/" + product.getProduct_types().get(0).getName();
         productPrice.setText(
-                formatCurrency(product.getPrice(), "đ") + type);
+                formatCurrency(product.getProduct_types().get(0).getPrice(), "đ") + type);
 
         productRating.setText(String.valueOf(product.getAverage_rating()));
         productReviewCount.setText(product.getReview_count() + " " + getString(R.string.review).toLowerCase());
         productReviewCount2.setText(product.getReview_count() + " " + getString(R.string.review_count).toLowerCase());
         productCategory.setText(product.getCategory().getName());
-        productSpecification.setText(product.getProduct_type().getName() + " " + product.getSpecification());
+        //productSpecification.setText(product.getProduct_type().getName() + " " + product.getSpecification());
         productOriginCountry.setText(product.getOrigin_country());
         productManufacturer.setText(product.getManufacturer());
         productShortDescription.setText(product.getShort_description());
+
+
+        List<View> typeViews = new ArrayList<>();
+
+        for (ProductProductType item : product.getProduct_types()) {
+            View view = LayoutInflater.from(this).inflate(R.layout.item_product_type_wrap, null, false);
+            CardView product_type = view.findViewById(R.id.product_type);
+            TextView tv_type_name = view.findViewById(R.id.tv_type_name);
+            tv_type_name.setText(item.getName());
+
+            typeViews.add(view);
+
+            view.setOnClickListener(v -> {
+                for (View vType : typeViews) {
+                    CardView card = vType.findViewById(R.id.product_type);
+                    TextView tv = vType.findViewById(R.id.tv_type_name);
+                    card.setCardBackgroundColor(getColor(R.color.gray_6F4));
+                    tv.setTextColor(getColor(R.color.black_333));
+                }
+
+
+                product_type.setCardBackgroundColor(getColor(R.color.blue_CE4));
+                tv_type_name.setTextColor(getColor(R.color.white_FFF));
+                productPrice.setText(
+                        formatCurrency(item.getPrice(), "đ") +
+                                "/" +
+                                item.getName());
+            });
+            layout_product_type.addView(view);
+        }
+        if (!typeViews.isEmpty()) {
+            typeViews.get(product.getSelectedTypeIndex()).performClick();
+        }
     }
 
     private void InitUI() {
         // Initialize all the UI elements
+        layout_product_type = findViewById(R.id.layout_product_type);
         productName = findViewById(R.id.productName);
         productPrice = findViewById(R.id.productPrice);
         productRating = findViewById(R.id.productRating);
@@ -459,7 +488,7 @@ public class ProductDetail extends AppCompatActivity {
 
                 if (response.isSuccessful() && response.body() != null) {
                     Product productDetails = response.body().getData();
-
+                    Log.e("Check Product", productDetails.toString());
                     if (productDetails != null) {
                         // Gán dữ liệu vào biến product và gọi FillData
                         product = productDetails;

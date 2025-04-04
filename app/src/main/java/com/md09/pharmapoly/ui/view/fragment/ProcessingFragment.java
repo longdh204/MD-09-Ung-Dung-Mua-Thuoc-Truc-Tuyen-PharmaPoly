@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,6 +136,8 @@ public class ProcessingFragment extends Fragment {
                     @Override
                     public void onFailure(Call<ApiResponse<List<Order>>> call, Throwable t) {
                         ProgressDialogHelper.hideLoading();
+                        Log.e("Check Error",t.getMessage());
+//                        Log.e("Check Error",t.);
                     }
                 });
         return view;

@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,31 +71,23 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), android.R.anim.slide_in_left);
         holder.itemView.startAnimation(animation);
         CartItem cartItem = cart.getCartItems().get(position);
-        //Log.e("Check Product Image",cartItem.getProduct().getImageUrl());
+
         if (cartItem != null) {
 
-            holder.tv_product_name.setText(cartItem.getProduct().getName());
-            holder.tv_original_price.setText(formatCurrency(cartItem.getOriginal_price(), "đ"));
-//            if (cartItem.getProduct().getDiscount() != null) {
-//                holder.tv_original_price.setVisibility(View.VISIBLE);
-//                holder.layout_discount.setVisibility(View.VISIBLE);
-//                holder.tv_original_price.setText(formatCurrency(cartItem.getOriginal_price(), "đ"));
-//                holder.tv_original_price.setPaintFlags(holder.tv_original_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-//                holder.tv_discount.setText(
-//                        context.getString(R.string.discount_now) + " " +
-//                                cartItem.getProduct().getDiscount().getFormattedValue() + " " +
-//                                context.getString(R.string.valid_until) + " " +
-//                        cartItem.getProduct().getDiscount().getFormattedEndDate());
-//            } else {
-//                holder.tv_original_price.setVisibility(View.GONE);
-//                holder.layout_discount.setVisibility(View.GONE);
-//            }
-
+            holder.tv_product_name.setText(cartItem.getProductType().getProduct().getName());
+            holder.tv_original_price.setText(formatCurrency(cartItem.getOriginal_price(), "đ") + "/" + cartItem.getProductType().getProductType().getName());
 
 
             holder.edt_quantity.setText(String.valueOf(cartItem.getQuantity()));
-
-            Picasso.get().load(cartItem.getProduct().getImageUrl()).into(holder.img_product);
+            holder.edt_quantity.setOnKeyListener((v, keyCode, event) -> {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    UpdateCartItemQuantity(cartItem,Integer.parseInt(holder.edt_quantity.getText().toString().trim()),holder);
+                    holder.edt_quantity.clearFocus();
+                    return true;
+                }
+                return false;
+            });
+            Picasso.get().load(cartItem.getProductType().getProduct().getImageUrl()).into(holder.img_product);
 
             holder.edt_quantity.setOnFocusChangeListener((v, hasFocus) -> {
                 if (hasFocus) {

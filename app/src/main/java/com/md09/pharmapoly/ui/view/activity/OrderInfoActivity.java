@@ -109,9 +109,9 @@ public class OrderInfoActivity extends AppCompatActivity {
             ImageView img_product = view.findViewById(R.id.img_product);
 
             tv_quantity.setText("x" + item.getQuantity());
-            tv_product_name.setText(item.getProduct().getName());
-            tv_original_price.setText(formatCurrency(item.getPrice(), "đ"));
-            Picasso.get().load(item.getProduct().getImageUrl()).into(img_product);
+            tv_product_name.setText(item.getProductType().getProduct().getName());
+            tv_original_price.setText(formatCurrency(item.getPrice(), "đ/") + item.getProductType().getProductType().getName());
+            Picasso.get().load(item.getProductType().getProduct().getImageUrl()).into(img_product);
 
             layout_order_item.addView(view);
         }

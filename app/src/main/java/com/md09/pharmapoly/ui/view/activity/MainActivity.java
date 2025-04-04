@@ -68,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        if (new SharedPrefHelper(this).getBooleanState(PRODUCT_ADDED_TO_CART_KEY,false)) {
+        if (new SharedPrefHelper(this).getBooleanState(PRODUCT_ADDED_TO_CART_KEY,false) ||
+                new SharedPrefHelper(this).getBooleanState(ORDER_KEY,false)) {
             cartViewModel.FetchCartData(this);
         }
     }

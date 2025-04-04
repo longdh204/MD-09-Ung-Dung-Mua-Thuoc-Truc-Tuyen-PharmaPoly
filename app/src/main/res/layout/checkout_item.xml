@@ -17,7 +17,7 @@
             android:layout_width="86dp"
             android:layout_height="86dp"
             android:scaleType="centerCrop"
-            android:layout_marginHorizontal="12dp"
+            android:layout_marginRight="12dp"
             app:shapeAppearance="@style/CornerImageView10dp"
             android:src="@color/blue"/>
         <LinearLayout

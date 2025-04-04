@@ -106,7 +106,6 @@ public class CheckoutActivity extends AppCompatActivity {
                             " (" + total_quantity + " " + getString(R.string.product).toLowerCase() + ")");
             tv_total_amount.setText(formatCurrency(total_price,"đ"));
             tv_subtotal.setText(formatCurrency(total_price,"đ"));
-
         }
         btn_back.setOnClickListener(v -> {
             finish();
@@ -209,7 +208,6 @@ public class CheckoutActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -278,9 +276,12 @@ public class CheckoutActivity extends AppCompatActivity {
         ImageView img_product = view.findViewById(R.id.img_product);
 
         tv_quantity.setText("x" + cartItem.getQuantity());
-        tv_product_name.setText(cartItem.getProduct().getName());
-        tv_original_price.setText(formatCurrency(cartItem.getOriginal_price(), "đ"));
-        Picasso.get().load(cartItem.getProduct().getImageUrl()).into(img_product);
+        //tv_product_name.setText(cartItem.getProduct().getName());
+        tv_product_name.setText(cartItem.getProductType().getProduct().getName());
+
+        tv_original_price.setText(formatCurrency(cartItem.getOriginal_price(), "đ") + "/" + cartItem.getProductType().getProductType().getName());
+        //Picasso.get().load(cartItem.getProduct().getImageUrl()).into(img_product);
+        Picasso.get().load(cartItem.getProductType().getProduct().getImageUrl()).into(img_product);
 
         layout_cart_item.addView(view);
     }
@@ -293,7 +294,8 @@ public class CheckoutActivity extends AppCompatActivity {
             tv_total_shipping_fee.setText(formatCurrency(0, "đ"));
             ProgressDialogHelper.hideLoading();
         } else {
-            String addressLine = user.getFull_name() + " | " +
+            String fullName = (user.getFull_name() != null) ? user.getFull_name() : getString(R.string.customer);
+            String addressLine = fullName + " | " +
                     user.getShipping_phone_number() + "\n" +
                     user.getAddress().getStreet_address() + ", ";
             addressLine += user.getAddress().getWard().getWardName() + ", ";

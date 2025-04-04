@@ -1,5 +1,7 @@
 package com.md09.pharmapoly.network;
 
+import static com.md09.pharmapoly.utils.Constants.BASE_URL;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -9,7 +11,7 @@ public class ApiClient {
     public static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("https://pharmapoly-server.onrender.com/api/")
+                    .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

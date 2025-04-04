@@ -8,18 +8,23 @@ import com.md09.pharmapoly.Models.Cart;
 import com.md09.pharmapoly.Models.CartItem;
 import com.md09.pharmapoly.Models.ChatRequest;
 import com.md09.pharmapoly.Models.ChatResponse;
+import com.md09.pharmapoly.Models.District;
+import com.md09.pharmapoly.Models.DistrictRequest;
 import com.md09.pharmapoly.Models.GHNResponse;
 import com.md09.pharmapoly.Models.Order;
 import com.md09.pharmapoly.Models.PageData;
 import com.md09.pharmapoly.Models.PageDataClone;
 import com.md09.pharmapoly.Models.ProductReview;
+import com.md09.pharmapoly.Models.Province;
 import com.md09.pharmapoly.Models.Question;
 import com.md09.pharmapoly.Models.SearchResponse;
 import com.md09.pharmapoly.Models.UserAddress;
+import com.md09.pharmapoly.Models.Ward;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.Models.Product;
 import com.md09.pharmapoly.data.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,10 +48,18 @@ import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 
 public interface ApiService {
+    @GET("provinces")
+    Call<GHNResponse<ArrayList<Province>>> getListProvince(@Header("Authorization") String token);
+
+    @POST("districts")
+    Call<GHNResponse<ArrayList<District>>> getListDistrict(@Body DistrictRequest districtRequest,@Header("Authorization") String token);
+
+    @GET("wards")
+    Call<GHNResponse<ArrayList<Ward>>> getListWard(@Query("district_id") int district_id,@Header("Authorization") String token);
     @GET("v2/banks")
     Call<BankResponse> getBanks();
     @DELETE("orders/delete-payment-status/{userId}")
-    Call<Void> deletePaymentStatus( @Header("Authorization") String token);
+    Call<Void> deletePaymentStatus(@Header("Authorization") String token);
     @GET("product/{productId}/images")
         // Đảm bảo URL là đúng với API của bạn
     Call<ApiResponse<List<String>>> getProductImages(

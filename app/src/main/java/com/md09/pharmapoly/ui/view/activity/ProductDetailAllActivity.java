@@ -54,40 +54,12 @@ public class ProductDetailAllActivity extends AppCompatActivity {
         // Ánh xạ các TextView từ layout
         InitUI();
 
-        // Lấy đối tượng product từ Intent
         product = (Product) getIntent().getSerializableExtra("product");
-        String brandDescription = getIntent().getStringExtra("brand_description");
-        String productTypeNameText = getIntent().getStringExtra("product_type_name");
+
         List<ProductSection> sections = (List<ProductSection>) getIntent().getSerializableExtra("sections");
 
-        // Kiểm tra nếu đối tượng product không phải null
-        if (product != null) {
-            //productName.setText(product.getName());
-            shortDescription.setText(product.getShort_description());
-            specification.setText(product.getSpecification());
-            originCountry.setText(product.getOrigin_country());
-            manufacturer.setText(product.getManufacturer());
-            category.setText(product.getCategory().getName());
-//            brand.setText(product.getBrand().getName());
-//            averageRating.setText(String.valueOf(product.getAverage_rating()));
-//            reviewCount.setText(String.valueOf(product.getReview_count()));
-
-            // Hiển thị thêm thông tin
-//            productBrandDescription.setText("Brand Description: " + brandDescription);
-//            productTypeName.setText("Product Type: " + productTypeNameText);
-
-            // Hiển thị các sections
-//            if (sections != null && !sections.isEmpty()) {
-//                StringBuilder sectionText = new StringBuilder();
-//                for (ProductSection section : sections) {
-//                    sectionText.append("Section: ").append(section.getSection().getName()).append("\n");
-//                    for (ProductSectionDetail detail : section.getDetails()) {
-//                        sectionText.append(detail.getTitle()).append(": ").append(detail.getContent()).append("\n");
-//                    }
-//                }
-//                productSections.setText(sectionText.toString());
-//            }
-            layout_section.removeAllViews(); // Xóa các view cũ nếu có
+        if (sections != null) {
+            layout_section.removeAllViews();
 
             for (ProductSection section : sections) {
                 View view = LayoutInflater.from(this).inflate(R.layout.item_section,null,false);
@@ -118,21 +90,30 @@ public class ProductDetailAllActivity extends AppCompatActivity {
                 }
                 layout_section.addView(view);
             }
+        }
+        // Kiểm tra nếu đối tượng product không phải null
+        if (product != null) {
+            //productName.setText(product.getName());
+            shortDescription.setText(product.getShort_description());
+            specification.setText(product.getSpecification());
+            originCountry.setText(product.getOrigin_country());
+            manufacturer.setText(product.getManufacturer());
+            category.setText(product.getCategory().getName());
+//            brand.setText(product.getBrand().getName());
+//            averageRating.setText(String.valueOf(product.getAverage_rating()));
+//            reviewCount.setText(String.valueOf(product.getReview_count()));
+
+            // Hiển thị thêm thông tin
+//            productBrandDescription.setText("Brand Description: " + brandDescription);
+//            productTypeName.setText("Product Type: " + productTypeNameText);
+
+
         } else {
             Log.d("ProductDetailAllActivity", "Product is null");
         }
         btn_back.setOnClickListener(v -> {
             finish();
         });
-    }
-    private TextView createSectionTitle(String text) {
-        TextView textView = new TextView(this);
-        textView.setText(text);
-        textView.setTextSize(20);
-        Typeface typeface = ResourcesCompat.getFont(this, R.font.be_vietnam_pro_medium);
-        textView.setTypeface(typeface, Typeface.BOLD);
-        //textView.setPadding(16, 16, 16, 8);
-        return textView;
     }
 
     private TextView createDetailTitle(String text) {

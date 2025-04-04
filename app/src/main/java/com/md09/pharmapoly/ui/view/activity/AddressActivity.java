@@ -7,7 +7,6 @@ import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -29,22 +28,16 @@ import com.md09.pharmapoly.Models.DistrictRequest;
 import com.md09.pharmapoly.Models.UserAddress;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.data.model.User;
-import com.md09.pharmapoly.network.GHNRequest;
 import com.md09.pharmapoly.Models.GHNResponse;
 import com.md09.pharmapoly.Models.Province;
 import com.md09.pharmapoly.Models.Ward;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.network.RetrofitClient;
-import com.md09.pharmapoly.utils.PopupHelper;
 import com.md09.pharmapoly.utils.ProgressDialogHelper;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.md09.pharmapoly.utils.SuccessMessageBottomSheet;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,7 +50,7 @@ public class AddressActivity extends AppCompatActivity {
     private SpinnerDistrictAdapter spinnerDistrictAdapter;
     private SpinnerWardAdapter spinnerWardAdapter;
     private ImageButton btn_back;
-    private GHNRequest ghnRequest;
+//    private GHNRequest ghnRequest;
     private UserAddress userAddress;
     private Province getProvince = null;
     private District getDistrict = null;
@@ -89,11 +82,20 @@ public class AddressActivity extends AppCompatActivity {
                     Province province = (Province)parent.getAdapter().getItem(position);
                     getProvince = province;
                     DistrictRequest districtRequest = new DistrictRequest(province.getProvinceID());
-                    ghnRequest.callAPI().getListDistrict(districtRequest).enqueue(getDistricts);
+                    //ghnRequest.callAPI().getListDistrict(districtRequest).enqueue(getDistricts);
+                    new RetrofitClient()
+                            .callAPI()
+                            .getListDistrict(districtRequest,"Bearer " + new SharedPrefHelper(AddressActivity.this).getToken())
+                            .enqueue(getDistricts);
                 } else if (parent.getId() == R.id.spinner_district) {
                     District district = (District) parent.getAdapter().getItem(position);
                     getDistrict = district;
-                    ghnRequest.callAPI().getListWard(district.getDistrictID()).enqueue(getWards);
+                    //ghnRequest.callAPI().getListWard(district.getDistrictID()).enqueue(getWards);
+                    new RetrofitClient()
+                            .callAPI()
+                            .getListWard(district.getDistrictID(), "Bearer " + new SharedPrefHelper(AddressActivity.this).getToken())
+                            .enqueue(getWards);
+
                 } else if (parent.getId() == R.id.spinner_ward) {
                     Ward ward = (Ward) parent.getAdapter().getItem(position);
                     getWard = ward;
@@ -112,8 +114,11 @@ public class AddressActivity extends AppCompatActivity {
         if (userAddress != null) {
             edt_myAddress.setText(userAddress.getStreet_address());
         }
-        ghnRequest.callAPI().getListProvince().enqueue(getProvinces);
-
+        //ghnRequest.callAPI().getListProvince().enqueue(getProvinces);
+        new RetrofitClient()
+                .callAPI()
+                .getListProvince("Bearer " + new SharedPrefHelper(this).getToken())
+                .enqueue(getProvinces);
         btn_back.setOnClickListener(v -> {
             finish();
         });
@@ -302,6 +307,6 @@ public class AddressActivity extends AppCompatActivity {
 
         profile_update_complete = findViewById(R.id.profile_update_complete);
 
-        ghnRequest = new GHNRequest();
+//        ghnRequest = new GHNRequest();
     }
 }

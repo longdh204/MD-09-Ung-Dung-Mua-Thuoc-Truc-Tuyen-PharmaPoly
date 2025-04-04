@@ -41,4 +41,14 @@ public class ProductSectionDetail implements Serializable {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "ProductSectionDetail{" +
+                "_id='" + _id + '\'' +
+                ", product_section_id='" + product_section_id + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }

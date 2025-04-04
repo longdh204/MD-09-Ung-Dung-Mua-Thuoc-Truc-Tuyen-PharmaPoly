@@ -16,15 +16,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.md09.pharmapoly.Models.CartItem;
 import com.md09.pharmapoly.Models.Product;
+import com.md09.pharmapoly.Models.ProductProductType;
 import com.md09.pharmapoly.R;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PurchaseBottomSheet extends BottomSheetDialogFragment {
     private Product product;
@@ -47,14 +53,15 @@ public class PurchaseBottomSheet extends BottomSheetDialogFragment {
     private ImageButton btn_close;
     private LinearLayout
             btn_add_to_cart,
-            btn_purchase;
+            btn_purchase,
+            layout_product_type;
     private RelativeLayout
             btn_decrease_quantity,
             btn_increase_quantity;
 
     private CartItem cartItem;
 
-
+    private ProductProductType currentProductType = null;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,8 +72,9 @@ public class PurchaseBottomSheet extends BottomSheetDialogFragment {
                 new SharedPrefHelper(getContext()).getCartId(),
                 product.get_id(),
                 1,
-                product.getPrice(),
-                product);
+                product.getPrice()
+//                product
+        );
 
 //        SpannableString spannable = new SpannableString(String.valueOf(product.getPrice()));
 //        spannable.setSpan(new StrikethroughSpan(), 0, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -95,12 +103,47 @@ public class PurchaseBottomSheet extends BottomSheetDialogFragment {
         btn_add_to_cart.setOnClickListener(v -> {
             listener.onAddToCart(cartItem);
         });
+
+        List<View> typeViews = new ArrayList<>();
+        for (ProductProductType item : product.getProduct_types()) {
+            View view_product_type = LayoutInflater.from(getContext()).inflate(R.layout.item_product_type_wrap, null, false);
+            CardView product_type = view_product_type.findViewById(R.id.product_type);
+            TextView tv_type_name = view_product_type.findViewById(R.id.tv_type_name);
+            tv_type_name.setText(item.getName());
+
+            typeViews.add(view_product_type);
+
+            view_product_type.setOnClickListener(v -> {
+                currentProductType = item;
+                cartItem.setProduct_product_type_id(item.get_id());
+                for (View vType : typeViews) {
+                    CardView card = vType.findViewById(R.id.product_type);
+                    TextView tv = vType.findViewById(R.id.tv_type_name);
+                    card.setCardBackgroundColor(getContext().getColor(R.color.gray_6F4));
+                    tv.setTextColor(getContext().getColor(R.color.black_333));
+                }
+
+
+                product_type.setCardBackgroundColor(getContext().getColor(R.color.blue_CE4));
+                tv_type_name.setTextColor(getContext().getColor(R.color.white_FFF));
+                tv_original_price.setText(
+                        formatCurrency(item.getPrice(), "đ") +
+                                "/" +
+                                item.getName());
+                UpdateCartItemQuantity(cartItem, cartItem.getQuantity());
+            });
+            layout_product_type.addView(view_product_type);
+        }
+        if (!typeViews.isEmpty()) {
+            typeViews.get(product.getSelectedTypeIndex()).performClick();
+        }
+
         return view;
     }
     private void UpdateCartItemQuantity(CartItem cartItem, int newQuantity) {
         cartItem.setQuantity(newQuantity);
         edt_quantity.setText(String.valueOf(newQuantity));
-        int price = newQuantity * product.getPrice();
+        int price = newQuantity * currentProductType.getPrice();
         tv_subtotal.setText(formatCurrency(price, "đ"));
     }
     private void InitUI(View view) {
@@ -122,5 +165,7 @@ public class PurchaseBottomSheet extends BottomSheetDialogFragment {
 
         btn_decrease_quantity = view.findViewById(R.id.btn_decrease_quantity);
         btn_increase_quantity = view.findViewById(R.id.btn_increase_quantity);
+
+        layout_product_type = view.findViewById(R.id.layout_product_type);
     }
 }
