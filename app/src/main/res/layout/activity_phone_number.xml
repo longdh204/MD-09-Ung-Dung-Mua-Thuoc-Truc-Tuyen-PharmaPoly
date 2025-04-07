@@ -63,7 +63,7 @@
         android:textColorHint="@color/gray_DCD"
         android:textSize="16sp"
         android:paddingHorizontal="24dp"
-        android:text="0327735943"
+        android:text=""
         android:hint="@string/enter_phone_number"
         android:layout_marginTop="12dp"
         android:layout_width="match_parent"

@@ -29,7 +29,6 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private Context context;
     private List<Product> productList;
-    private int maxHeight = 0;
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
@@ -47,6 +46,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         Product product = productList.get(position);
         holder.layout_sale.setVisibility(View.GONE);
 
+        if (product == null) return;
         holder.productName.setText(product.getName() != null ? product.getName() : "Không có tên");
         holder.tv_specification.setText(product.getSpecification());
         List<View> typeViews = new ArrayList<>();
@@ -132,24 +132,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             context.startActivity(intent);
         });
 
-        holder.itemView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                holder.itemView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-
-                int height = holder.itemView.getHeight();
-                if (height > maxHeight) {
-                    maxHeight = height;
-                    notifyDataSetChanged();
-                }
-
-                ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
-                params.height = maxHeight;
-                holder.itemView.setLayoutParams(params);
-            }
-        });
-
     }
+
 
     @Override
     public int getItemCount() {

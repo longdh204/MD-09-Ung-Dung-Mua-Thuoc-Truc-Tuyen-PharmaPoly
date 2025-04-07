@@ -187,4 +187,5 @@
     <string name="search_history">Search history</string>
     <string name="review_count">Number of reviewers</string>
     <string name="hi">Hi</string>
+    <string name="rejected">Rejected</string>
 </resources>

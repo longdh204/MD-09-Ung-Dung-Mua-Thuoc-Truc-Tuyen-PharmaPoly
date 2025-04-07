@@ -122,6 +122,8 @@ public class CheckoutActivity extends AppCompatActivity {
                 return;
             }
 
+            ProgressDialogHelper.showLoading(this);
+
             Map<String, Object> requestData = new HashMap<>();
             String payment_method = new SharedPrefHelper(this).getPaymentMethod().getValue();
             requestData.put("payment_method", payment_method);
@@ -144,17 +146,22 @@ public class CheckoutActivity extends AppCompatActivity {
                             if (response.isSuccessful() && response.body().getStatus() == 200) {
                                 if (payment_method.equals("COD")) {
                                     SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_success));
+                                    bottomSheet.setOnDismissListener(() -> {
+                                        finish();
+                                    });
                                     bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
                                 } else {
                                     String qrCodeUrl = response.body().getData();
                                     showQrDialog(qrCodeUrl);
                                 }
                                 new SharedPrefHelper(CheckoutActivity.this).setBooleanState(ORDER_KEY,true);
+                                ProgressDialogHelper.hideLoading();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<ApiResponse<String>> call, Throwable t) {
+                            ProgressDialogHelper.hideLoading();
 
                         }
                     });

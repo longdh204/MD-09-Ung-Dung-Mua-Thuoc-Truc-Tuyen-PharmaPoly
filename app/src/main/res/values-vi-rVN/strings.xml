@@ -188,4 +188,5 @@
     <string name="search_history">Lịch sử tìm kiếm</string>
     <string name="review_count">Số lượng người đánh giá</string>
     <string name="hi">Xin chào</string>
+    <string name="rejected">Đơn hàng bị từ chối</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.md09.pharmapoly.utils;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,6 +19,15 @@ import com.md09.pharmapoly.R;
 public class SuccessMessageBottomSheet extends DialogFragment {
     private static final String ARG_MESSAGE = "message";
     private String message;
+    public interface OnBottomSheetDismissListener {
+        void onBottomSheetDismiss();
+    }
+
+    private OnBottomSheetDismissListener dismissListener;
+
+    public void setOnDismissListener(OnBottomSheetDismissListener listener) {
+        this.dismissListener = listener;
+    }
 
     public static SuccessMessageBottomSheet newInstance(String message) {
         SuccessMessageBottomSheet fragment = new SuccessMessageBottomSheet();
@@ -25,6 +35,13 @@ public class SuccessMessageBottomSheet extends DialogFragment {
         args.putString(ARG_MESSAGE, message);
         fragment.setArguments(args);
         return fragment;
+    }
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        if (dismissListener != null) {
+            dismissListener.onBottomSheetDismiss();
+        }
     }
 
     @Override

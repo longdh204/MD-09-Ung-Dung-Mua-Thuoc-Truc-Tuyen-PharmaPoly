@@ -64,7 +64,7 @@ public class NotificationFragment extends Fragment implements SocketManager.Upda
                     Toast.makeText(getContext(), "Vui lòng nhập tin nhắn", Toast.LENGTH_LONG).show();
                     return;
                 }
-                socketManager.sendMessage("W7LRUTJQUEVBBthDw80GYhPK07E2", message);
+                socketManager.sendMessage("67b344c3744eaa2ff0f0ce7d", message);
             }
         });
         return view;

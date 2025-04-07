@@ -69,6 +69,9 @@ public class Constants {
             case "confirmed":
                 stringResId = R.string.status_confirmed;
                 break;
+            case "rejected":
+                stringResId = R.string.rejected;
+                break;
             case "ready_to_pick":
                 stringResId = R.string.status_ready_to_pick;
                 break;
@@ -118,6 +121,9 @@ public class Constants {
                 break;
             case "confirmed":
                 colorResId = R.color.status_confirmed;
+                break;
+            case "rejected":
+                colorResId = R.color.status_canceled;
                 break;
             case "ready_to_pick":
                 colorResId = R.color.status_ready_to_pick;
