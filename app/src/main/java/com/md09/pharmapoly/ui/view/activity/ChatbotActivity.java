@@ -10,15 +10,18 @@ import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.md09.pharmapoly.Adapters.ChatAdapter;
 import com.md09.pharmapoly.Models.ChatMessage;
 import com.md09.pharmapoly.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +31,7 @@ public class ChatbotActivity extends AppCompatActivity {
     private ImageButton sendButton;
     private ChatAdapter chatAdapter;
     private List<ChatMessage> chatMessages;
-    private LinearLayout suggestionLayout,suggestionLayout2;
+    private LinearLayout suggestionLayout, suggestionLayout2;
     private DatabaseReference chatbotRef;
 
     @Override
@@ -92,7 +95,7 @@ public class ChatbotActivity extends AppCompatActivity {
             button.setText(suggestion);
             button.setAllCaps(false);
             button.setPadding(16, 8, 16, 8);
-            button.setBackgroundResource(R.drawable.bg_suggestion_button);
+            button.setBackgroundResource(R.drawable.border);
             button.setTextColor(getResources().getColor(R.color.black));
 
             // Khi nhấn vào button, nội dung sẽ đổ vào ô nhập tin nhắn
@@ -109,7 +112,7 @@ public class ChatbotActivity extends AppCompatActivity {
             button.setText(suggestion2);
             button.setAllCaps(false);
             button.setPadding(16, 8, 16, 8);
-            button.setBackgroundResource(R.drawable.bg_suggestion_button);
+            button.setBackgroundResource(R.drawable.border);
             button.setTextColor(getResources().getColor(R.color.black));
 
             // Khi nhấn vào button, nội dung sẽ đổ vào ô nhập tin nhắn
