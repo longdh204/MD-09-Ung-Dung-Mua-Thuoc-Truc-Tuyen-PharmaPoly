@@ -13,6 +13,7 @@ import android.util.Log;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.md09.pharmapoly.Models.NotificationItem;
 import com.md09.pharmapoly.Models.Reminder;
 import com.md09.pharmapoly.data.model.User;
 
@@ -28,13 +29,12 @@ public class SharedPrefHelper {
     private SharedPreferences.Editor editor;
     private Gson gson;
 
-
     public SharedPrefHelper(Context context) {
         sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        sharedPreferences = context.getSharedPreferences("MedicineReminderPrefs", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         gson = new Gson();
     }
+
 
     public void saveUser(User user, String token, String refreshToken) {
         editor.putString(USER_KEY, gson.toJson(user));
@@ -120,7 +120,6 @@ public class SharedPrefHelper {
         return sharedPreferences.getString(Constants.LANGUAGE_KEY, "vi");
     }
 
-    // Lưu thông tin thuốc và thời gian uống thuốc
     public void saveMedicineReminder(String medicineName, int hour, int minute) {
         editor.putString("medicine_name", medicineName);
         editor.putInt("hour", hour);
@@ -128,7 +127,6 @@ public class SharedPrefHelper {
         editor.apply();
     }
 
-    // Lấy thông tin thuốc và thời gian uống
     public String getMedicineReminder() {
         String medicineName = sharedPreferences.getString("medicine_name", null);
         int hour = sharedPreferences.getInt("hour", -1);
@@ -136,12 +134,6 @@ public class SharedPrefHelper {
         return (medicineName != null) ? medicineName + " at " + hour + ":" + minute : null;
     }
 
-    // Lưu danh sách nhắc nhở
-    // Lưu nhắc nhở hàng ngày (giữ nguyên vì không có thay đổi)
-    // Lưu nhắc nhở với tất cả các giờ đã chọn
-// Lưu danh sách nhắc nhở vào SharedPreferences
-// Lưu nhắc nhở vào SharedPreferences
-    // Lưu nhắc nhở vào SharedPreferences
     public void saveReminder(String medicineName, int hour, int minute, boolean repeatDaily, boolean repeatHourly, List<Integer> selectedHours) {
         List<Reminder> reminders = getReminders();
 
@@ -214,5 +206,46 @@ public class SharedPrefHelper {
             editor.putString("reminder_list", json);
             editor.apply();
         }
+    }
+
+    public void saveNotification(NotificationItem notification) {
+        // Lấy dữ liệu hiện tại từ SharedPreferences
+        List<NotificationItem> notificationList = getNotifications();
+
+        // Thêm thông báo vào danh sách
+        notificationList.add(notification);
+
+        // Log dữ liệu trước khi lưu
+        Log.d("SharedPrefHelper", "Saving notification: " + notification.getTitle());
+        Log.d("SharedPrefHelper", "Notification list size: " + notificationList.size());
+
+        // Chuyển danh sách thành JSON và lưu vào SharedPreferences
+        String json = gson.toJson(notificationList);
+        editor.putString("notification_list", json); // Lưu vào SharedPreferences
+
+        // Sử dụng commit để kiểm tra việc lưu
+        boolean result = editor.commit();
+        if (result) {
+            Log.d("SharedPrefHelper", "Notification saved successfully.");
+        } else {
+            Log.e("SharedPrefHelper", "Failed to save notification.");
+        }
+    }
+
+    public List<NotificationItem> getNotifications() {
+        // Lấy chuỗi JSON từ SharedPreferences
+        String json = sharedPreferences.getString("notification_list", null);
+        if (json == null) {
+            Log.e("SharedPrefHelper", "No notifications found in SharedPreferences!");
+            return new ArrayList<>();  // Trả về danh sách rỗng nếu không tìm thấy dữ liệu
+        }
+
+        // Log dữ liệu lấy được từ SharedPreferences
+        Log.d("SharedPrefHelper", "Notifications found in SharedPreferences: " + json);
+
+        // Chuyển từ JSON thành List<NotificationItem>
+        Type type = new TypeToken<List<NotificationItem>>() {
+        }.getType();
+        return gson.fromJson(json, type);
     }
 }

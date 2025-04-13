@@ -16,6 +16,7 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class Constants {
+    //    public static final String BASE_URL = "http://192.168.1.184:3000/api/";
     public static final String BASE_URL = "https://pharmapoly-server.onrender.com/api/";
     public static final String GHN_URL = "https://dev-online-gateway.ghn.vn/";
     public static final Pattern PHONE_PATTERN = Pattern.compile("^(0|\\+84)[1-9][0-9]{8}$");
@@ -35,11 +36,13 @@ public class Constants {
     public static final String LANGUAGE_KEY = "LANGUAGE";
     public static final int PICK_IMAGE_REQUEST = 1;
     public static final int MAX_QUANTITY_PER_PRODUCT = 20;
+
     public static final String formatCurrency(int amount, String symbol) {
         DecimalFormat formatter = new DecimalFormat("#,###");
         return formatter.format(amount) + symbol;
     }
-    public static final  <T> T findObjectById(ArrayList<T> list, String id) {
+
+    public static final <T> T findObjectById(ArrayList<T> list, String id) {
         for (T item : list) {
             if (item instanceof Province) {
                 Province province = (Province) item;
@@ -60,6 +63,7 @@ public class Constants {
         }
         return null;
     }
+
     public static final String getDisplayStatus(Context context, String status) {
         int stringResId;
         switch (status) {
@@ -110,6 +114,7 @@ public class Constants {
         }
         return context.getString(stringResId);
     }
+
     public static final int getStatusColor(Context context, String status) {
         int colorResId;
         switch (status) {
@@ -168,7 +173,8 @@ public class Constants {
         //RETURNING,
         CANCELED
     }
-    public static final void setLocale(Context context,String langCode) {
+
+    public static final void setLocale(Context context, String langCode) {
         Locale locale = new Locale(langCode);
         Locale.setDefault(locale);
         Configuration config = new Configuration();

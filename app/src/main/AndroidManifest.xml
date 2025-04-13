@@ -39,7 +39,6 @@
         android:theme="@style/Theme.MD09_PharmaPoly"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
         <service
             android:name=".network.MyFirebaseMessagingService"
             android:permission="android.permission.BIND_JOB_SERVICE"
@@ -49,6 +48,14 @@
             </intent-filter>
         </service>
 
+        <receiver
+            android:name=".network.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="false"> <!-- Đảm bảo rằng nó được đăng ký -->
+            <intent-filter>
+                <action android:name="com.md09.pharmapoly.NEW_NOTIFICATION" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".ui.view.activity.NotificationDetailActivity"
@@ -154,7 +161,7 @@
             android:name=".ui.view.activity.ProductReviewsActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.view.activity.NotificationsActivity"
+            android:name=".ui.view.activity.NotificationActivity"
             android:exported="true" />
         <activity
             android:name=".ui.view.activity.Nav_FunctionalFoodActivity"
@@ -179,9 +186,6 @@
             android:exported="true" />
         <activity
             android:name=".ui.view.activity.PharmacyMapActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.view.activity.NotificationActivity"
             android:exported="true" />
         <activity
             android:name=".ui.view.activity.PhoneNumber"

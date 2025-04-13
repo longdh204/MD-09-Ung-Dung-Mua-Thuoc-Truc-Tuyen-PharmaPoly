@@ -64,4 +64,6 @@ dependencies {
     implementation("com.google.android.material:material:1.6.0")
     implementation("io.socket:socket.io-client:2.1.0")
     implementation("com.google.firebase:firebase-messaging:21.1.0")
+    implementation("com.google.firebase:firebase-database:20.0.3")  // Đối với Firebase Realtime Database
+    implementation("com.google.firebase:firebase-firestore:24.0.0") // Đối với Firestore
 }

@@ -9,7 +9,7 @@ public class ApiClient {
     public static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("https://pharmapoly-server.onrender.com/api/")
+                    .baseUrl("http://192.168.1.184:3000/api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

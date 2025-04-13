@@ -216,12 +216,12 @@ public class HomeFragment extends Fragment {
         });
 
         // Xử lý sự kiện click vào category
-        categoryListAdapter.setOnCategoryClickListener(category -> {
-            if (category.getName().equals("Nhắc uống thuốc")) {
-                Intent intent = new Intent(getContext(), MedicineReminderActivity.class);
-                startActivity(intent);
-            }
-        });
+//        categoryListAdapter.setOnCategoryClickListener(category -> {
+//            if (category.getName().equals("Nhắc uống thuốc")) {
+//                Intent intent = new Intent(getContext(), MedicineReminderActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         menuIcon.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
         navigationView.setNavigationItemSelectedListener(item -> {

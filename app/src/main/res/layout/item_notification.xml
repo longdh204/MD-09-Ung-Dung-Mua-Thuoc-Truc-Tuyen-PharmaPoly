@@ -2,59 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:padding="12dp"
-    android:background="@android:color/white"
-    android:gravity="center_vertical">
+    android:padding="8dp"
+    android:background="@android:color/white">
 
-    <!-- Icon loại thông báo -->
     <ImageView
         android:id="@+id/img_notification_icon"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@drawable/ic_bell"
-        app:tint="#9B9B9B" />
+        android:src="@drawable/ic_bell" />
 
-    <!-- Nội dung thông báo -->
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_marginStart="12dp">
+        android:paddingStart="16dp">
 
         <TextView
             android:id="@+id/txt_notification_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thông báo 1"
-            android:padding="5dp"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@color/black" />
+            android:text="Title"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txt_notification_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="11/12/2004 vào 12:01"
-            android:padding="5dp"
-            android:textSize="14sp"
-            android:textColor="#8C8C8C" />
+            android:text="Time" />
     </LinearLayout>
 
-    <!-- Chấm đỏ nếu chưa đọc -->
     <View
         android:id="@+id/unread_dot"
-        android:layout_width="8dp"
-        android:layout_height="8dp"
-        android:background="#E91E63"
-        android:visibility="gone"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_gravity="center"
-        android:clipToOutline="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true" />
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginEnd="16dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/circle_red" />
 </LinearLayout>
