@@ -5,10 +5,16 @@ import static android.view.View.VISIBLE;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.AbsoluteSizeSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,6 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -42,6 +50,7 @@ import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.data.model.User;
 import com.md09.pharmapoly.network.RetrofitClient;
 import com.md09.pharmapoly.ui.view.activity.ChatbotActivity;
+import com.md09.pharmapoly.ui.view.activity.CustomTypefaceSpan;
 import com.md09.pharmapoly.ui.view.activity.Nav_FunctionalFoodActivity;
 import com.md09.pharmapoly.ui.view.activity.Nav_Medical_Equiment;
 import com.md09.pharmapoly.ui.view.activity.Nav_Medicine;
@@ -130,6 +139,7 @@ public class HomeFragment extends Fragment {
             btnthuocbovitamin,
             layout_search;
     private TextView txt_greeting;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -160,6 +170,17 @@ public class HomeFragment extends Fragment {
         drawerLayout = view.findViewById(R.id.drawer_layout);
         ImageView menuIcon = view.findViewById(R.id.menu_icon);
         NavigationView navigationView = view.findViewById(R.id.navigation_view);
+        Typeface customFont = ResourcesCompat.getFont(requireContext(), R.font.be_vietnam_pro_bold);
+        navigationView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white));
+
+        Menu menu = navigationView.getMenu();
+        for (int i = 0; i < menu.size(); i++) {
+            MenuItem menuItem = menu.getItem(i);
+            SpannableString s = new SpannableString(menuItem.getTitle());
+            s.setSpan(new CustomTypefaceSpan("", customFont), 0, s.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            s.setSpan(new AbsoluteSizeSpan(15, true), 0, s.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // 18sp
+            menuItem.setTitle(s);
+        }
 
         ImageView bellIcon = view.findViewById(R.id.bell_icon);
         bellIcon.setOnClickListener(v -> {

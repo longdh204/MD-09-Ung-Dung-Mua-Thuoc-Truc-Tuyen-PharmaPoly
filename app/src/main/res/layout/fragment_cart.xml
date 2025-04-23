@@ -7,10 +7,46 @@
     android:background="@color/white_FFF"
     tools:context=".ui.view.fragment.CartFragment">
 
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_bottom_corners"
+        android:backgroundTint="@color/blue_CE4"
+        android:orientation="vertical"
+        android:paddingTop="48dp"
+        android:paddingBottom="24dp">
+        <!-- Phần đầu tiêu đề -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_arrow_back1"
+                android:backgroundTint="@color/white_FFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/be_vietnam_pro_bold"
+                android:text="Giỏ hàng"
+                android:textAlignment="center"
+                android:textColor="@color/white_FFF"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:paddingTop="48dp"
-        android:paddingBottom="108dp"
+        android:paddingBottom="168dp"
         android:paddingHorizontal="12dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,63 +57,75 @@
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="80dp">
+
             <LinearLayout
                 android:id="@+id/cart_header_layout"
                 android:paddingBottom="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/your_cart"
                     android:fontFamily="@font/be_vietnam_pro_medium"
-                    android:textSize="16sp"
-                    android:textColor="@color/black_333"/>
+                    android:textSize="18sp"
+                    android:textColor="@color/black" />
             </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:id="@+id/rcv_cart_item"/>
+                android:id="@+id/rcv_cart_item" />
+
             <LinearLayout
                 android:paddingTop="12dp"
                 android:paddingHorizontal="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <CheckBox
                         android:layout_marginRight="12dp"
                         android:button="@drawable/cus_cbo"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:id="@+id/cb_selected_all_item"/>
+                        android:id="@+id/cb_selected_all_item" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/all"
                         android:textSize="16sp"
                         android:textColor="@color/black_333"
-                        android:fontFamily="@font/be_vietnam_pro_medium"/>
+                        android:fontFamily="@font/be_vietnam_pro_medium" />
+
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1" />
+
                     <LinearLayout
                         android:gravity="right"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
+
                             <TextView
                                 android:layout_marginRight="6dp"
                                 android:layout_width="wrap_content"
@@ -85,7 +133,8 @@
                                 android:text="@string/subtotal"
                                 android:textSize="16sp"
                                 android:textColor="@color/black_333"
-                                android:fontFamily="@font/be_vietnam_pro_medium"/>
+                                android:fontFamily="@font/be_vietnam_pro_medium" />
+
                             <TextView
                                 android:id="@+id/tv_price"
                                 android:layout_width="wrap_content"
@@ -93,7 +142,7 @@
                                 android:text="0đ"
                                 android:textSize="16sp"
                                 android:textColor="@color/blue_CE4"
-                                android:fontFamily="@font/be_vietnam_pro_semibold"/>
+                                android:fontFamily="@font/be_vietnam_pro_semibold" />
                         </LinearLayout>
 
                         <androidx.cardview.widget.CardView
@@ -126,25 +175,28 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/cart_sub_layout"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <ImageView
                 android:layout_gravity="center"
                 android:layout_width="124dp"
                 android:layout_height="124dp"
                 android:background="@drawable/ic_empty_cart"
-                android:backgroundTint="@color/blue_CE4"/>
+                android:backgroundTint="@color/blue_CE4" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cart_empty"
                 android:fontFamily="@font/be_vietnam_pro_medium"
                 android:textSize="18sp"
-                android:textColor="@color/blue_CE4"/>
+                android:textColor="@color/blue_CE4" />
 
         </LinearLayout>
 

@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -48,6 +49,9 @@ import com.md09.pharmapoly.utils.ProgressDialogHelper;
 import com.md09.pharmapoly.utils.PurchaseBottomSheet;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.squareup.picasso.Picasso;
+
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,6 +95,7 @@ public class ProductDetail extends AppCompatActivity {
     TextView pageIndicator, pageIndicator2;
     private List<String> images = new ArrayList<>();
     private int selectedTypeIndex = 0;
+
     @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +131,7 @@ public class ProductDetail extends AppCompatActivity {
         sharedPrefHelper = new SharedPrefHelper(this);
         token = "Bearer " + sharedPrefHelper.getToken();
         productId = getIntent().getStringExtra("product_id");
-        selectedTypeIndex = getIntent().getIntExtra("selectedTypeIndex",0);
+        selectedTypeIndex = getIntent().getIntExtra("selectedTypeIndex", 0);
         userReviewRecyclerView = findViewById(R.id.userReview);
         reviewList = new ArrayList<>();
         reviewAdapter = new ReviewAdapter(this, reviewList);
@@ -251,6 +256,7 @@ public class ProductDetail extends AppCompatActivity {
         //fetchProductImages(productId);
         // Setup ViewPager and page indicator
         setupViewPager();
+
     }
 
     private void setupViewPager() {
@@ -712,9 +718,9 @@ public class ProductDetail extends AppCompatActivity {
         // Tạo đối tượng dialog từ builder
         AlertDialog dialog = builder.create();
 
-        // Hiển thị dialog ở cuối màn hình
-        dialog.getWindow().setGravity(Gravity.BOTTOM);  // Đặt vị trí ở cuối
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); // nếu muốn nền dialog trong suốt
+
 
         // Handle click for 'Gửi' button
         Button sendButton = dialogView.findViewById(R.id.sendButton);
@@ -736,6 +742,15 @@ public class ProductDetail extends AppCompatActivity {
         Button cancelButton = dialogView.findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(v -> {
             dialog.dismiss(); // Đóng dialog khi bấm Hủy
+        });
+        dialog.setOnShowListener(dialogInterface -> {
+            Window window = dialog.getWindow();
+            if (window != null) {
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                window.setGravity(Gravity.BOTTOM);
+                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                window.setWindowAnimations(R.style.DialogAnimation); // nếu muốn có animation
+            }
         });
 
         // Hiển thị dialog
