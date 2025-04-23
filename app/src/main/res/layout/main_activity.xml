@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,17 +10,19 @@
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/viewPagerMain"/>
+        android:id="@+id/viewPagerMain" />
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="170dp"
         android:backgroundTint="@color/blue_CE4"
         app:fabCradleMargin="24dp"
         app:fabAlignmentMode="center"
         app:fabAnchorMode="cradle"
         app:fabCradleRoundedCornerRadius="56dp"
         android:layout_gravity="bottom">
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationMain"
             app:itemActiveIndicatorStyle="@null"
@@ -32,7 +33,7 @@
             android:elevation="0dp"
             app:itemRippleColor="@color/transparent"
             app:itemIconTint="@color/bottom_nav_color"
-            app:menu="@menu/bottom_menu"/>
+            app:menu="@menu/bottom_menu" />
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -44,6 +45,6 @@
         app:shapeAppearanceOverlay="@style/RoundedFAB"
         app:tint="@color/white_FFF"
         android:src="@drawable/ic_headphones"
-        app:maxImageSize="32dp"/>
+        app:maxImageSize="32dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
