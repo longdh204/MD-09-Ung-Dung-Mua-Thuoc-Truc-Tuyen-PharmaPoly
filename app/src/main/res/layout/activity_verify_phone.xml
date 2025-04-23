@@ -5,25 +5,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="48dp"
-    android:layout_marginBottom="56dp"
-    android:layout_marginHorizontal="36dp"
     tools:context=".ui.view.activity.VerifyPhone">
-    <ImageButton
-        android:id="@+id/btn_back"
-        android:backgroundTint="@color/black_333"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:background="@drawable/ic_arrow_back1"/>
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_bottom_corners"
+        android:backgroundTint="@color/blue_CE4"
+        android:orientation="vertical"
+        android:paddingTop="48dp"
+        android:paddingBottom="24dp">
+        <!-- Phần đầu tiêu đề -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_arrow_back1"
+                android:backgroundTint="@color/white_FFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/be_vietnam_pro_bold"
+                android:text="Nhập số điện thoại"
+                android:textAlignment="center"
+                android:textColor="@color/white_FFF"
+                android:textSize="25sp" />
+        </LinearLayout>
+    </LinearLayout>
+
 
     <TextView
         android:layout_marginTop="56dp"
         android:fontFamily="@font/be_vietnam_pro_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/verification_code_input"
+        android:text="Nhập mã xác minh"
         android:textColor="@color/black_333"
-        android:textSize="24sp"/>
+        android:textSize="24sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
 
     <TextView
         android:id="@+id/tv_phone_number"
@@ -31,9 +62,11 @@
         android:layout_marginTop="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/verification_code_sent_message"
+        android:text="Chúng tôi vừa gửi cho bạn mã xác minh qua điện thoại:"
         android:textColor="@color/gray_E9E"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
 
     <TextView
         android:id="@+id/tv_email_otp_auth"
@@ -52,7 +85,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
         <EditText
             android:fontFamily="@font/be_vietnam_pro_medium"
             android:textAlignment="center"
@@ -64,11 +100,12 @@
             android:textColor="@color/black_333"
             android:textSize="24sp"
             android:hint="0"
-            android:textColorHint="@color/gray_DCD"/>
+            android:textColorHint="@color/gray_DCD" />
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <EditText
             android:fontFamily="@font/be_vietnam_pro_medium"
@@ -81,11 +118,12 @@
             android:textColor="@color/black_333"
             android:textSize="24sp"
             android:hint="0"
-            android:textColorHint="@color/gray_DCD"/>
+            android:textColorHint="@color/gray_DCD" />
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <EditText
             android:fontFamily="@font/be_vietnam_pro_medium"
@@ -98,11 +136,12 @@
             android:textColor="@color/black_333"
             android:textSize="24sp"
             android:hint="0"
-            android:textColorHint="@color/gray_DCD"/>
+            android:textColorHint="@color/gray_DCD" />
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <EditText
             android:fontFamily="@font/be_vietnam_pro_medium"
@@ -115,11 +154,12 @@
             android:textColor="@color/black_333"
             android:textSize="24sp"
             android:hint="0"
-            android:textColorHint="@color/gray_DCD"/>
+            android:textColorHint="@color/gray_DCD" />
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <EditText
             android:fontFamily="@font/be_vietnam_pro_medium"
@@ -132,11 +172,12 @@
             android:textColor="@color/black_333"
             android:textSize="24sp"
             android:hint="0"
-            android:textColorHint="@color/gray_DCD"/>
+            android:textColorHint="@color/gray_DCD" />
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <EditText
             android:fontFamily="@font/be_vietnam_pro_medium"
@@ -149,11 +190,12 @@
             android:textColor="@color/black_333"
             android:textSize="24sp"
             android:hint="0"
-            android:textColorHint="@color/gray_DCD"/>
+            android:textColorHint="@color/gray_DCD" />
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
 
     </LinearLayout>
@@ -171,9 +213,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/verification_code_expiration"
+            android:text="Mã xác minh sẽ hết hạn trong"
             android:textColor="@color/black_333"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
+
         <TextView
             android:id="@+id/tv_countdown_timer"
             android:fontFamily="@font/be_vietnam_pro_light"
@@ -182,7 +225,7 @@
             android:layout_gravity="center"
             android:text="00:00"
             android:textColor="@color/blue_CE4"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
@@ -191,28 +234,32 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         app:cardBackgroundColor="@color/blue_CE4"
-        app:cardCornerRadius="12dp">
+        app:cardCornerRadius="12dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/tv_verify"
                 android:fontFamily="@font/be_vietnam_pro_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/verify"
+                android:text="Xác minh"
                 android:textColor="@color/white_FFF"
                 android:textSize="18sp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
     <TextView
         android:id="@+id/btn_resend_code"
         android:layout_marginTop="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/resend_code"
+        android:text="Gửi lại mã"
         android:layout_gravity="center"
-        android:textColor="@color/blue_CE4"/>
+        android:textColor="@color/blue_CE4" />
 </LinearLayout>
