@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +38,7 @@ public class ChatbotActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chatbot);
 
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
@@ -95,7 +97,7 @@ public class ChatbotActivity extends AppCompatActivity {
             button.setText(suggestion);
             button.setAllCaps(false);
             button.setPadding(16, 8, 16, 8);
-            button.setBackgroundResource(R.drawable.border);
+            button.setBackgroundResource(R.drawable.bg_edittext_rounded);
             button.setTextColor(getResources().getColor(R.color.black));
 
             // Khi nhấn vào button, nội dung sẽ đổ vào ô nhập tin nhắn
@@ -112,7 +114,7 @@ public class ChatbotActivity extends AppCompatActivity {
             button.setText(suggestion2);
             button.setAllCaps(false);
             button.setPadding(16, 8, 16, 8);
-            button.setBackgroundResource(R.drawable.border);
+            button.setBackgroundResource(R.drawable.bg_edittext_rounded);
             button.setTextColor(getResources().getColor(R.color.black));
 
             // Khi nhấn vào button, nội dung sẽ đổ vào ô nhập tin nhắn

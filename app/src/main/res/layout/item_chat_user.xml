@@ -1,44 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    >
+    android:layout_marginTop="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="end">
+        android:gravity="end"
+        android:paddingVertical="6dp"
+        android:paddingHorizontal="10dp"
+        tools:ignore="MissingConstraints">
 
+        <!-- Tin nhắn chatbot -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_user_message"
-            android:gravity="end"
-            android:padding="8dp"
-            >
+            android:background="@drawable/bg_bot_message"
+            android:gravity="start"
+            android:padding="12dp"
+            android:layout_marginEnd="8dp"
+            android:elevation="3dp">
 
             <TextView
                 android:id="@+id/text_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/overpass_regular"
-                android:padding="3dp"
                 android:text="chat here"
-                android:textColor="@android:color/black"
-                android:textSize="15sp"/>
-
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:maxWidth="230dp"
+                android:lineSpacingExtra="4dp" />
         </LinearLayout>
 
+        <!-- Avatar chatbot -->
         <ImageView
-            android:layout_width="35dp"
-            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:padding="5dp"
             android:src="@drawable/ic_profile"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"/>
+            android:background="@drawable/circle_background"
+            android:contentDescription="ChatBot Avatar"
+            android:scaleType="centerCrop"
+            android:elevation="2dp"
+            android:layout_gravity="center" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

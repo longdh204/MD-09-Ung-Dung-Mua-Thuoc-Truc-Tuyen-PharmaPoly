@@ -1,5 +1,6 @@
 package com.md09.pharmapoly.ui.view.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,8 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.md09.pharmapoly.Adapters.ChatAdminAdapter;
@@ -28,6 +31,7 @@ public class ChatWithAdminFragment extends Fragment implements SocketManager.Upd
     private RecyclerView rvChatAdmin;
     private EditText edTextMessage;
     private Button btnSendMessage;
+    private LinearLayout chatLayout;  // Thêm vào
 
     public ChatWithAdminFragment() {
     }
@@ -48,18 +52,53 @@ public class ChatWithAdminFragment extends Fragment implements SocketManager.Upd
         rvChatAdmin = view.findViewById(R.id.rvChatAdmin);
         btnSendMessage = view.findViewById(R.id.btnSend);
         edTextMessage = view.findViewById(R.id.edtMessage);
+        chatLayout = view.findViewById(R.id.chatLayout);  // Khởi tạo
+        // Cài đặt listener để ẩn bàn phím khi ấn ra ngoài EditText
+        view.setOnTouchListener((v, event) -> {
+            // Kiểm tra nếu người dùng ấn vào bất kỳ vị trí nào ngoài EditText
+            if (getActivity() != null && edTextMessage.isFocused()) {
+                // Ẩn bàn phím
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(edTextMessage.getWindowToken(), 0);
+                // Bỏ focus khỏi EditText
+                edTextMessage.clearFocus();
+            }
+            return false;
+        });
 
-        btnSendMessage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String message = edTextMessage.getText().toString();
-                if (message.length() == 0) {
-                    Toast.makeText(getContext(), "Vui lòng nhập tin nhắn", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                socketManager.sendMessage("67b344c3744eaa2ff0f0ce7d", message);
+        btnSendMessage.setOnClickListener(view1 -> {
+            String message = edTextMessage.getText().toString();
+            if (message.length() == 0) {
+                Toast.makeText(getContext(), "Vui lòng nhập tin nhắn", Toast.LENGTH_LONG).show();
+                return;
+            }
+            socketManager.sendMessage("67b344c3744eaa2ff0f0ce7d", message);
+            edTextMessage.setText("");  // Sau khi gửi tin nhắn, làm sạch EditText
+        });
+
+        int defaultMarginBottom = getResources().getDimensionPixelSize(R.dimen.default_margin_bottom);
+
+        edTextMessage.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                // Khi bắt đầu nhập, thay đổi marginBottom thành 0dp
+                chatLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                ) {{
+                    bottomMargin = 0; // Đặt bottomMargin về 0 khi bắt đầu nhập
+                }});
+            } else {
+                // Khi thoát khỏi phần nhập, quay lại marginBottom như cũ
+                chatLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                ) {{
+                    bottomMargin = defaultMarginBottom; // Khôi phục giá trị cũ
+                }});
             }
         });
+
+
         return view;
     }
 
@@ -87,7 +126,6 @@ public class ChatWithAdminFragment extends Fragment implements SocketManager.Upd
             rvChatAdmin.setAdapter(chatAdminAdapter);
             rvChatAdmin.setLayoutManager(new LinearLayoutManager(getContext()));
             rvChatAdmin.scrollToPosition(rvChatAdmin.getAdapter().getItemCount() - 1);
-
         });
     }
 

@@ -178,9 +178,10 @@ public class HomeFragment extends Fragment {
             MenuItem menuItem = menu.getItem(i);
             SpannableString s = new SpannableString(menuItem.getTitle());
             s.setSpan(new CustomTypefaceSpan("", customFont), 0, s.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-            s.setSpan(new AbsoluteSizeSpan(15, true), 0, s.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // 18sp
+            s.setSpan(new AbsoluteSizeSpan(14, true), 0, s.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // 18sp
             menuItem.setTitle(s);
         }
+
 
         ImageView bellIcon = view.findViewById(R.id.bell_icon);
         bellIcon.setOnClickListener(v -> {

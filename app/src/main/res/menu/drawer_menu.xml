@@ -6,7 +6,8 @@
     <item
         android:id="@+id/nav_healthcare"
         android:title="Thực phẩm chức năng"
-        android:checkable="true" />
+        android:checkable="true"
+        />
 
     <item
         android:id="@+id/nav_pharmacy"
