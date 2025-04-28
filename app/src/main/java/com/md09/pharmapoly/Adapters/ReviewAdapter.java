@@ -1,6 +1,7 @@
 package com.md09.pharmapoly.Adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,16 +30,15 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ProductReview review = reviewList.get(position);
+        Log.e("Check review", review.toString());
         holder.reviewerName.setText(""+ review.getUser().getFull_name());
         holder.rating.setText(String.valueOf(review.getRating()));
         holder.reviewContent.setText(review.getReview());
-        String rawDate = review.getCreated_at();
-        if (rawDate != null && !rawDate.isEmpty()) {
+        Date rawDate = review.getCreated_at();
+        if (rawDate != null) {
             try {
-                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
-                Date date = inputFormat.parse(rawDate);
                 SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
-                String formattedDate = outputFormat.format(date);
+                String formattedDate = outputFormat.format(rawDate);
                 holder.reviewDate.setText(formattedDate);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -47,6 +47,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
         } else {
             holder.reviewDate.setText("N/A");
         }
+
     }
     @Override
     public int getItemCount() {

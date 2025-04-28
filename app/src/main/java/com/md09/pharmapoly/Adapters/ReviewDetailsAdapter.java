@@ -40,7 +40,21 @@ public class ReviewDetailsAdapter extends RecyclerView.Adapter<ReviewDetailsAdap
         holder.reviewerName.setText(review.getUser().getFull_name());
         holder.reviewContent.setText(review.getReview());
         holder.rating.setText(review.getRating() + " sao");
-        holder.reviewDate.setText(review.getCreated_at());
+//        holder.reviewDate.setText(review.getCreated_at());
+        Date rawDate = review.getCreated_at();  // Bây giờ là Date thay vì String
+        if (rawDate != null) {
+            try {
+                SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+                String formattedDate = outputFormat.format(rawDate);
+                holder.reviewDate.setText(formattedDate);
+            } catch (Exception e) {
+                e.printStackTrace();
+                holder.reviewDate.setText("N/A");
+            }
+        } else {
+            holder.reviewDate.setText("N/A");
+        }
+
     }
 
     @Override

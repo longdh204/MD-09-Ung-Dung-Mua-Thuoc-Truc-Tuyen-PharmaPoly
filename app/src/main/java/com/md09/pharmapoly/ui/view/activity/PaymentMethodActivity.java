@@ -9,6 +9,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,8 @@ import com.md09.pharmapoly.utils.ProgressDialogHelper;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.squareup.picasso.Picasso;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -136,6 +139,13 @@ public class PaymentMethodActivity extends AppCompatActivity {
 
     private void FillBank(List<Bank> banks) {
         tv_supported_banks.setText(getString(R.string.supported_banks) + "(" + banks.size() + ")");
+        Collections.sort(banks, new Comparator<Bank>() {
+            @Override
+            public int compare(Bank b1, Bank b2) {
+                return Integer.compare(b2.getSupport(), b1.getSupport());
+            }
+        });
+
         for (Bank item:banks) {
             View view = LayoutInflater.from(this).inflate(R.layout.item_bank,null,false);
             TextView tv_bank_name = view.findViewById(R.id.tv_bank_name);

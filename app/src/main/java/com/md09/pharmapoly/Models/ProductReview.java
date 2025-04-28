@@ -3,6 +3,7 @@ package com.md09.pharmapoly.Models;
 import com.md09.pharmapoly.data.model.User;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class ProductReview implements Serializable {
     private String _id;
@@ -10,11 +11,9 @@ public class ProductReview implements Serializable {
     private String product_id;
     private float rating;
     private String review;
-    private String create_at;
-    private String created_at;
+    private Date created_at;
+//    private String created_at;
     private User user;
-
-
 
     public User getUser() {
         return user;
@@ -24,11 +23,19 @@ public class ProductReview implements Serializable {
         this.user = user;
     }
 
-    public String getCreated_at() {
+//    public String getCreated_at() {
+//        return created_at;
+//    }
+//
+//    public void setCreated_at(String created_at) {
+//        this.created_at = created_at;
+//    }
+
+    public Date getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(String created_at) {
+    public void setCreated_at(Date created_at) {
         this.created_at = created_at;
     }
 
@@ -72,11 +79,16 @@ public class ProductReview implements Serializable {
         this.review = review;
     }
 
-    public String getCreate_at() {
-        return create_at;
-    }
-
-    public void setCreate_at(String create_at) {
-        this.create_at = create_at;
+    @Override
+    public String toString() {
+        return "ProductReview{" +
+                "_id='" + _id + '\'' +
+                ", user_id='" + user_id + '\'' +
+                ", product_id='" + product_id + '\'' +
+                ", rating=" + rating +
+                ", review='" + review + '\'' +
+                ", created_at=" + created_at +
+                ", user=" + user +
+                '}';
     }
 }

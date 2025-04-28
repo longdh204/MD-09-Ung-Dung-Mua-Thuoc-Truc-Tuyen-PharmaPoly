@@ -17,8 +17,7 @@ import java.util.regex.Pattern;
 
 public class Constants {
 //    public static final String BASE_URL = "https://pharmapoly-server.onrender.com/api/";
-    public static final String BASE_URL = "http://192.168.9.223:3000/api/";
-    public static final String GHN_URL = "https://dev-online-gateway.ghn.vn/";
+    public static final String BASE_URL = "http://192.168.1.7:3000/api/";
     public static final Pattern PHONE_PATTERN = Pattern.compile("^(0|\\+84)[1-9][0-9]{8}$");
     public static final String PASSWORD_PATTERN = "^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+=|<>?{}\\[\\]~-]).{8,}$";
     public static final String PHONE_NUMBER_KEY = "PHONE_NUMBER";
@@ -30,6 +29,7 @@ public class Constants {
     public static final String PRODUCT_ADDED_TO_CART_KEY = "PRODUCT_ADDED_TO_CART";
     public static final String USER_PROFILE_UPDATED_KEY = "USER_PROFILE_UPDATED";
     public static final String PAYMENT_METHOD_KEY = "PAYMENT_METHOD";
+    public static final String BANK_CODE_KEY = "BANK_CODE";
     public static final String CANCELED_KEY = "CANCELED";
     public static final String ORDER_KEY = "ORDER";
     public static final String LANGUAGE_KEY = "LANGUAGE";

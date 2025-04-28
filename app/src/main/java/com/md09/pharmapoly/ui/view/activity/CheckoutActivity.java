@@ -6,6 +6,7 @@ import static com.md09.pharmapoly.utils.Constants.formatCurrency;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -140,10 +141,40 @@ public class CheckoutActivity extends AppCompatActivity {
                                 requestData,
                                 "Bearer " + new SharedPrefHelper(this).getToken()
                             )
-                    .enqueue(new Callback<ApiResponse<String>>() {
+//                    .enqueue(new Callback<ApiResponse<String>>() {
+//                        @Override
+//                        public void onResponse(Call<ApiResponse<String>> call, Response<ApiResponse<String>> response) {
+//                            if (response.isSuccessful() && response.body().getStatus() == 200) {
+//                                if (payment_method.equals("COD")) {
+//                                    SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_success));
+//                                    bottomSheet.setOnDismissListener(() -> {
+//                                        finish();
+//                                    });
+//                                    bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
+//                                } else {
+//                                    String qrCodeUrl = response.body().getData();
+//                                    showQrDialog(qrCodeUrl);
+//                                }
+//                                new SharedPrefHelper(CheckoutActivity.this).setBooleanState(ORDER_KEY,true);
+//                                ProgressDialogHelper.hideLoading();
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<ApiResponse<String>> call, Throwable t) {
+//                            ProgressDialogHelper.hideLoading();
+//
+//                        }
+//                    });
+                    .enqueue(new Callback<ApiResponse<Map<String, Object>>>() {
                         @Override
-                        public void onResponse(Call<ApiResponse<String>> call, Response<ApiResponse<String>> response) {
+                        public void onResponse(Call<ApiResponse<Map<String, Object>>> call, Response<ApiResponse<Map<String, Object>>> response) {
                             if (response.isSuccessful() && response.body().getStatus() == 200) {
+                                Map<String, Object> data = response.body().getData();
+
+                                String orderId = data.get("order_id").toString();
+                                String qrCodeUrl = data.get("qr_code_url") != null ? data.get("qr_code_url").toString() : null;
+
                                 if (payment_method.equals("COD")) {
                                     SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_success));
                                     bottomSheet.setOnDismissListener(() -> {
@@ -151,23 +182,22 @@ public class CheckoutActivity extends AppCompatActivity {
                                     });
                                     bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
                                 } else {
-                                    String qrCodeUrl = response.body().getData();
-                                    showQrDialog(qrCodeUrl);
+                                    showQrDialog(qrCodeUrl,orderId);
                                 }
-                                new SharedPrefHelper(CheckoutActivity.this).setBooleanState(ORDER_KEY,true);
+
+                                new SharedPrefHelper(CheckoutActivity.this).setBooleanState(ORDER_KEY, true);
                                 ProgressDialogHelper.hideLoading();
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<ApiResponse<String>> call, Throwable t) {
+                        public void onFailure(Call<ApiResponse<Map<String, Object>>> call, Throwable t) {
                             ProgressDialogHelper.hideLoading();
-
                         }
                     });
+
         });
         FillAddress();
-
     }
     private boolean isUserInfoValid(User user) {
         if (user == null) return false;
@@ -192,34 +222,30 @@ public class CheckoutActivity extends AppCompatActivity {
             return false;
         }
 
-//        if (user.getStatus() == 0) {
-//            return false;
-//        }
-
         return true;
     }
-    private void ListenForPaymentStatus(String userId, Dialog dialog) {
-        DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference("payment_status")
-                .child(userId);
-
-        orderRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    String status = snapshot.getValue(String.class);
-                    if ("PAID".equals(status)) {
-                        SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_success));
-                        bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
-                        dialog.dismiss();
-                        DeleteOrderStatus();
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
+//    private void ListenForPaymentStatus(String userId, Dialog dialog) {
+//        DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference("payment_status")
+//                .child(userId);
+//
+//        orderRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.exists()) {
+//                    String status = snapshot.getValue(String.class);
+//                    if ("PAID".equals(status)) {
+//                        SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_success));
+//                        bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
+//                        dialog.dismiss();
+//                        DeleteOrderStatus();
+//                    }
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//            }
+//        });
+//    }
 
     private void DeleteOrderStatus() {
         ProgressDialogHelper.showLoading(this);
@@ -240,7 +266,7 @@ public class CheckoutActivity extends AppCompatActivity {
                 });
     }
 
-    private void showQrDialog(String qrCodeUrl) {
+    private void showQrDialog(String qrCodeUrl,String orderId) {
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_qr_code);
@@ -250,7 +276,45 @@ public class CheckoutActivity extends AppCompatActivity {
         Picasso.get().load(qrCodeUrl).into(qrImageView);
 
         dialog.show();
-        ListenForPaymentStatus(new SharedPrefHelper(this).getUser().get_id(), dialog);
+        //ListenForPaymentStatus(new SharedPrefHelper(this).getUser().get_id(), dialog);
+        StartCheckingOrderStatus(orderId, dialog);
+    }
+    private void StartCheckingOrderStatus(String orderId, Dialog dialog) {
+        Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                checkOrderStatus(orderId, dialog);
+                handler.postDelayed(this, 10000);
+            }
+        };
+
+        handler.post(runnable);
+    }
+    private void checkOrderStatus(String orderId, Dialog dialog) {
+        new RetrofitClient()
+                .callAPI()
+                .getOrderStatus(orderId, "Bearer " + new SharedPrefHelper(this).getToken())
+                .enqueue(new Callback<ApiResponse<Map<String, Object>>>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse<Map<String, Object>>> call, Response<ApiResponse<Map<String, Object>>> response) {
+                        if (response.isSuccessful() && response.body().getStatus() == 200) {
+                            Map<String, Object> data = response.body().getData();
+                            String status = data.get("payment_status").toString();
+
+                            if (status.equals("paid")) {
+                                dialog.dismiss();
+                                SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_success));
+                                bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
+                                DeleteOrderStatus();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponse<Map<String, Object>>> call, Throwable t) {
+                    }
+                });
     }
 
     @Override

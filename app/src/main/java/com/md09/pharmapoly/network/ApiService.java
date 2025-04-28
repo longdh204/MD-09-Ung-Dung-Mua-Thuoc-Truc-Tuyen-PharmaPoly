@@ -48,12 +48,15 @@ import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 
 public interface ApiService {
+    @GET("orders/{orderId}/status")
+    Call<ApiResponse<Map<String, Object>>> getOrderStatus(
+            @Path("orderId") String orderId,
+            @Header("Authorization") String token
+    );
     @GET("provinces")
     Call<GHNResponse<ArrayList<Province>>> getListProvince(@Header("Authorization") String token);
-
     @POST("districts")
     Call<GHNResponse<ArrayList<District>>> getListDistrict(@Body DistrictRequest districtRequest,@Header("Authorization") String token);
-
     @GET("wards")
     Call<GHNResponse<ArrayList<Ward>>> getListWard(@Query("district_id") int district_id,@Header("Authorization") String token);
     @GET("v2/banks")
@@ -82,8 +85,13 @@ public interface ApiService {
             @Path("id") String orderId,
             @Header("Authorization") String token
     );
+//    @POST("orders/create")
+//    Call<ApiResponse<String>> createOrders(
+//            @Body Map<String, Object> data,
+//            @Header("Authorization") String token
+//    );
     @POST("orders/create")
-    Call<ApiResponse<String>> createOrders(
+    Call<ApiResponse<Map<String, Object>>> createOrders(
             @Body Map<String, Object> data,
             @Header("Authorization") String token
     );
