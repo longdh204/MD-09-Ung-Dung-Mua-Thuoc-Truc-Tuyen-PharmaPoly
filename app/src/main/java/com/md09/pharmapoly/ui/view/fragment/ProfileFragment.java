@@ -1,12 +1,10 @@
 package com.md09.pharmapoly.ui.view.fragment;
 
 import static androidx.core.app.ActivityCompat.finishAffinity;
-import static androidx.core.app.ActivityCompat.recreate;
 import static com.md09.pharmapoly.utils.Constants.USER_PROFILE_UPDATED_KEY;
 import static com.md09.pharmapoly.utils.Constants.setLocale;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -25,14 +23,11 @@ import com.md09.pharmapoly.data.model.User;
 import com.md09.pharmapoly.ui.view.activity.AddressActivity;
 import com.md09.pharmapoly.ui.view.activity.OrderManagementActivity;
 import com.md09.pharmapoly.ui.view.activity.PhoneNumber;
-import com.md09.pharmapoly.ui.view.activity.payment_card_manager;
 //import com.md09.pharmapoly.ui.view.activity.payment_card_manager_empty;
 import com.md09.pharmapoly.ui.view.activity.ChangePassword;
 import com.md09.pharmapoly.ui.view.activity.ProfileUpdate;
 import com.md09.pharmapoly.utils.DialogHelper;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
-
-import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.

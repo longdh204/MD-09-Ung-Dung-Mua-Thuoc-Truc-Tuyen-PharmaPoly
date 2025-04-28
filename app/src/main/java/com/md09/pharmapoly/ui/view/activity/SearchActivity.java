@@ -40,6 +40,7 @@ import com.md09.pharmapoly.utils.SharedPrefHelper;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import retrofit2.Call;
@@ -99,7 +100,7 @@ public class SearchActivity extends AppCompatActivity {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     String query = searchView.getText().toString().trim();
                     if (!TextUtils.isEmpty(query)) {
-                        fetchSearchResults(query);
+                        fetchSearchResults(query,-1);
                         saveSearchHistory(query);
                     }
                     return true;
@@ -169,7 +170,7 @@ public class SearchActivity extends AppCompatActivity {
 //                searchView.setQuery(keyword, false);
                 searchView.setText(keyword);
                 searchView.setSelection(keyword.length());
-                fetchSearchResults(keyword);
+                fetchSearchResults(keyword,-1);
             });
             historyLayout.addView(historyButton);
         }
@@ -188,38 +189,74 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    private void fetchSearchResults(String keyword) {
+    private void fetchSearchResults(String keyword, int page) {
+        if (page == -1) {
+            page = 1;
+        }
         String token = sharedPrefHelper.getToken();  // Lấy token từ SharedPreferences
         if (token != null && !token.isEmpty()) {
-            ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+//            ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+//
+//            // Gửi request tìm kiếm với tham số phân trang không có phân trang (giới hạn số sản phẩm trong 1 lần)
+//            Call<ApiResponse<SearchResponse>> call = apiService.searchProducts(keyword, 1, 10, "Bearer " + token);
+//
+//            call.enqueue(new Callback<ApiResponse<SearchResponse>>() {
+//                @Override
+//                public void onResponse(Call<ApiResponse<SearchResponse>> call, Response<ApiResponse<SearchResponse>> response) {
+//                    if (response.isSuccessful() && response.body() != null) {
+//                        ApiResponse<SearchResponse> apiResponse = response.body();
+//                        List<Product> allProducts = apiResponse.getData().getProducts();
+//
+//                        if (allProducts != null && !allProducts.isEmpty()) {
+//                            totalProducts = allProducts;
+//                            updateCategoriesAndBrands(allProducts);
+//                            displayPage(currentPage);
+//                        } else {
+//                            Toast.makeText(SearchActivity.this, "Không có sản phẩm", Toast.LENGTH_SHORT).show();
+//                        }
+//                    } else {
+//                        Toast.makeText(SearchActivity.this, "Không thể tải dữ liệu", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<ApiResponse<SearchResponse>> call, Throwable t) {
+//                    Toast.makeText(SearchActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                }
+//            });
 
-            // Gửi request tìm kiếm với tham số phân trang không có phân trang (giới hạn số sản phẩm trong 1 lần)
-            Call<ApiResponse<SearchResponse>> call = apiService.searchProducts(keyword, 1, 100, "Bearer " + token);
+            new RetrofitClient()
+                    .callAPI()
+                    .searchProducts(keyword, page, 10, "Bearer " + new SharedPrefHelper(this).getToken())
+                    .enqueue(new Callback<ApiResponse<SearchResponse>>() {
+                        @Override
+                        public void onResponse(Call<ApiResponse<SearchResponse>> call, Response<ApiResponse<SearchResponse>> response) {
+                            if (response.isSuccessful() && response.body() != null) {
+                                ApiResponse<SearchResponse> apiResponse = response.body();
+                                SearchResponse searchData = apiResponse.getData();
 
-            call.enqueue(new Callback<ApiResponse<SearchResponse>>() {
-                @Override
-                public void onResponse(Call<ApiResponse<SearchResponse>> call, Response<ApiResponse<SearchResponse>> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        ApiResponse<SearchResponse> apiResponse = response.body();
-                        List<Product> allProducts = apiResponse.getData().getProducts();
+                                if (searchData != null) {
+                                    List<Product> allProducts = searchData.getProducts();
 
-                        if (allProducts != null && !allProducts.isEmpty()) {
-                            totalProducts = allProducts;
-                            updateCategoriesAndBrands(allProducts);
-                            displayPage(currentPage);
-                        } else {
-                            Toast.makeText(SearchActivity.this, "Không có sản phẩm", Toast.LENGTH_SHORT).show();
+                                    if (allProducts != null && !allProducts.isEmpty()) {
+                                        totalProducts = allProducts;
+                                        updateCategoriesAndBrands(allProducts);  // Nếu cần xử lý category, brand thì cũng dễ lấy luôn
+                                        displayPage(currentPage);
+                                    } else {
+                                        Toast.makeText(SearchActivity.this, "Không có sản phẩm", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            } else {
+                                Toast.makeText(SearchActivity.this, "Không thể tải dữ liệu", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    } else {
-                        Toast.makeText(SearchActivity.this, "Không thể tải dữ liệu", Toast.LENGTH_SHORT).show();
-                    }
-                }
 
-                @Override
-                public void onFailure(Call<ApiResponse<SearchResponse>> call, Throwable t) {
-                    Toast.makeText(SearchActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                        @Override
+                        public void onFailure(Call<ApiResponse<SearchResponse>> call, Throwable t) {
+                            // Handle lỗi
+                        }
+                    });
+
         } else {
             Toast.makeText(SearchActivity.this, "Token không hợp lệ", Toast.LENGTH_SHORT).show();
         }

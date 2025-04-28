@@ -17,9 +17,8 @@ import io.socket.client.Socket;
 
 public class SocketManager {
     private UpdateChatFragment updateChatFragment;
-    //private static final String SERVER_URL = "https://pharmapoly-server.onrender.com/api/";
-    private static final String SERVER_URL = "http://192.168.9.223:3000";
-
+    private static final String SERVER_URL = "https://pharmapoly-server.onrender.com/api/";
+//    private static final String SERVER_URL = "http://192.168.9.223:3000";
     private static SocketManager instance;
     private Socket socket;
     private final String userId;

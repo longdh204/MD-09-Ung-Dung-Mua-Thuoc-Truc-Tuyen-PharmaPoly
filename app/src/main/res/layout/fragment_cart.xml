@@ -24,12 +24,12 @@
             android:layout_marginTop="70dp"
             android:layout_marginBottom="20dp">
 
-            <ImageButton
-                android:id="@+id/btn_back"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/arrow_back"
-                android:backgroundTint="@color/white_FFF" />
+<!--            <ImageButton-->
+<!--                android:id="@+id/btn_back"-->
+<!--                android:layout_width="25dp"-->
+<!--                android:layout_height="25dp"-->
+<!--                android:background="@drawable/arrow_back"-->
+<!--                android:backgroundTint="@color/white_FFF" />-->
 
             <TextView
                 android:layout_width="0dp"
@@ -47,7 +47,7 @@
 
     <LinearLayout
         android:paddingTop="48dp"
-        android:paddingBottom="168dp"
+        android:paddingBottom="132dp"
         android:paddingHorizontal="12dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

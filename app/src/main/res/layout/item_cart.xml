@@ -79,7 +79,7 @@
                         android:maxLines="2"
                         android:ellipsize="end"
                         android:textColor="@color/blue_CE4"
-                        android:textSize="16sp"
+                        android:textSize="15sp"
                         android:fontFamily="@font/be_vietnam_pro_bold"
                         android:text="666.666đ"/>
 <!--                    <TextView-->

@@ -4,10 +4,8 @@ import static com.md09.pharmapoly.utils.Constants.MAX_QUANTITY_PER_PRODUCT;
 import static com.md09.pharmapoly.utils.Constants.formatCurrency;
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +19,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.md09.pharmapoly.Models.Cart;
@@ -61,7 +58,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     @NonNull
     @Override
     public CartAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(this.context).inflate(R.layout.cart_item,parent,false);
+        View view = LayoutInflater.from(this.context).inflate(R.layout.item_cart,parent,false);
         return new ViewHolder(view);
     }
 

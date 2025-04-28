@@ -103,12 +103,19 @@ public interface ApiService {
             @Body Map<String, String> params
     );
 
+//    @GET("search")
+//    Call<ApiResponse<SearchResponse>> searchProducts(
+//            @Query("keyword") String keyword,
+//            @Query("page") int page,
+//            @Query("limit") int limit,
+//            @Header("Authorization") String token
+//    );
     @GET("search")
     Call<ApiResponse<SearchResponse>> searchProducts(
-            @Query("keyword") String keyword,
-            @Query("page") int page,
-            @Query("limit") int limit,
-            @Header("Authorization") String token
+        @Query("keyword") String keyword,
+        @Query("page") int page,
+        @Query("limit") int limit,
+        @Header("Authorization") String token
     );
     @Headers({
             "Content-Type: application/json",

@@ -116,6 +116,11 @@ public class VerifyPhone extends AppCompatActivity {
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         finish();
                                     }
+                                }).setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialogInterface) {
+                                        finish();
+                                    }
                                 });
                             }
 

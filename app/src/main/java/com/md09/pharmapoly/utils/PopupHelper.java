@@ -7,7 +7,7 @@ import android.content.DialogInterface;
 import androidx.annotation.Nullable;
 
 public class PopupHelper {
-    public static void ShowPopup(Context context, String title, String message, @Nullable DialogInterface.OnClickListener okListener) {
+    public static AlertDialog ShowPopup(Context context, String title, String message, @Nullable DialogInterface.OnClickListener okListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
         builder.setMessage(message);
@@ -20,6 +20,7 @@ public class PopupHelper {
         builder.setPositiveButton("OK", okListener);
         AlertDialog dialog = builder.create();
         dialog.show();
+        return dialog;
     }
 }
 

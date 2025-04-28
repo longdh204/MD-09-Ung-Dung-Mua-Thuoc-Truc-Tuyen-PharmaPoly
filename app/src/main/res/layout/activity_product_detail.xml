@@ -202,7 +202,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/blue_CE4"
                     android:textSize="12dp"
-                    android:fontFamily="@font/overpass_regular"
+                    android:fontFamily="@font/be_vietnam_pro_medium"
                     android:layout_marginTop="12dp" />
 
                 <TextView
@@ -213,7 +213,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/blue_CB7"
                     android:textSize="25dp"
-                    android:fontFamily="@font/overpass_regular" />
+                    android:fontFamily="@font/be_vietnam_pro_semibold" />
             </LinearLayout>
 
             <LinearLayout
@@ -573,6 +573,7 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_marginBottom="16dp"
+                android:layout_marginHorizontal="12dp"
                 android:layout_marginTop="10dp">
 
                 <!-- Số sao lớn -->
@@ -613,7 +614,6 @@
                         android:layout_height="wrap_content"
                         android:text="@string/review_count"
                         android:textSize="14sp"
-                        android:layout_marginLeft="16dp"
                         android:textColor="@android:color/darker_gray" />
                 </LinearLayout>
 
@@ -622,8 +622,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:orientation="vertical"
-                    android:layout_marginRight="15dp">
+                    android:orientation="vertical">
 
                     <!-- Tạo danh sách tiến trình đánh giá -->
                     <LinearLayout

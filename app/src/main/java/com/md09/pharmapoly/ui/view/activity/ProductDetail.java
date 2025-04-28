@@ -434,6 +434,7 @@ public class ProductDetail extends AppCompatActivity {
             typeViews.add(view);
 
             view.setOnClickListener(v -> {
+                product.setSelectedTypeIndex(product.getProduct_types().indexOf(item));
                 for (View vType : typeViews) {
                     CardView card = vType.findViewById(R.id.product_type);
                     TextView tv = vType.findViewById(R.id.tv_type_name);

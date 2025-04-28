@@ -137,6 +137,10 @@ public class PhoneNumber extends AppCompatActivity {
         });
         ProgressDialogHelper.showLoading(this);
         String refreshToken = new SharedPrefHelper(this).getRefreshToken();
+        if (refreshToken == null || refreshToken.isEmpty()) {
+            ProgressDialogHelper.hideLoading();
+            return;
+        }
         Map<String, String> requestBody = new HashMap<>();
         requestBody.put("refreshToken", refreshToken);
         retrofitClient.callAPI().refreshToken(requestBody).enqueue(new Callback<ApiResponse<User>>() {
