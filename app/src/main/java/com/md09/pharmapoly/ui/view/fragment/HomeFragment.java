@@ -213,12 +213,7 @@ public class HomeFragment extends Fragment {
             if (category.getName().equals("Tìm nhà thuốc")) {
                 Intent intent = new Intent(getContext(), PharmacyMapActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        // Xử lý sự kiện click vào category
-        categoryListAdapter.setOnCategoryClickListener(category -> {
-            if (category.getName().equals("Nhắc uống thuốc")) {
+            } else if (category.getName().equals("Nhắc uống thuốc")) {
                 Intent intent = new Intent(getContext(), MedicineReminderActivity.class);
                 startActivity(intent);
             }

@@ -28,6 +28,14 @@ import com.md09.pharmapoly.ui.components.ViewPagerBottomNavigationMainAdapter;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.md09.pharmapoly.viewmodel.CartViewModel;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -60,19 +68,30 @@ public class MainActivity extends AppCompatActivity {
                 UpdateCartBadge(cart.getCartItems().size());
             }
         });
+        FloatingActionButton fab1 = findViewById(R.id.fab1);
+        fab1.setOnClickListener(view -> {
+            // Tạo một Intent để mở liên kết Zalo
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://zalo.me/0967197293"));
+            startActivity(intent);
+        });
     }
+
+
     private void loadLocale() {
         String langCode = new SharedPrefHelper(this).getLanguage();
-        setLocale(this,langCode);
+        setLocale(this, langCode);
     }
+
     @Override
     public void onResume() {
         super.onResume();
-        if (new SharedPrefHelper(this).getBooleanState(PRODUCT_ADDED_TO_CART_KEY,false) ||
-                new SharedPrefHelper(this).getBooleanState(ORDER_KEY,false)) {
+        if (new SharedPrefHelper(this).getBooleanState(PRODUCT_ADDED_TO_CART_KEY, false) ||
+                new SharedPrefHelper(this).getBooleanState(ORDER_KEY, false)) {
             cartViewModel.FetchCartData(this);
         }
     }
+
     public void UpdateCartBadge(int cartCount) {
         BadgeDrawable badge = bottom_navigation_main.getOrCreateBadge(R.id.cart);
         if (cartCount > 0) {
@@ -84,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
             badge.setVisible(false);
         }
     }
+
     private void SetupBottomNavigation() {
         view_pager_main.setAdapter(bottom_navigation_main_adapter);
 
