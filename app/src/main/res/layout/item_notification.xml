@@ -3,8 +3,6 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:padding="12dp"
-    android:background="@android:color/white"
     android:gravity="center_vertical">
 
     <!-- Icon loại thông báo -->
@@ -13,26 +11,32 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:src="@drawable/ic_bell"
-        app:tint="#9B9B9B" />
+        app:tint="@color/gray_DCD"/>
 
     <!-- Nội dung thông báo -->
     <LinearLayout
+        android:layout_marginHorizontal="12dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_marginStart="12dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/txt_notification_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thông báo 1"
-            android:padding="5dp"
-            android:textStyle="bold"
+            android:text="Title"
+            android:fontFamily="@font/be_vietnam_pro_medium"
             android:textSize="16sp"
             android:textColor="@color/black"/>
-
+        <TextView
+            android:id="@+id/txt_notification_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Content"
+            android:fontFamily="@font/be_vietnam_pro_light"
+            android:textSize="14sp"
+            android:textColor="@color/black"/>
         <TextView
             android:id="@+id/txt_notification_time"
             android:layout_width="wrap_content"
@@ -40,20 +44,14 @@
             android:text="11/12/2004 vào 12:01"
             android:padding="5dp"
             android:textSize="14sp"
-            android:textColor="#8C8C8C"/>
+            android:textColor="@color/gray_DCD"/>
     </LinearLayout>
 
     <!-- Chấm đỏ nếu chưa đọc -->
-    <View
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="12dp"
+        android:layout_height="12dp"
         android:id="@+id/unread_dot"
-        android:layout_width="8dp"
-        android:layout_height="8dp"
-        android:background="#E91E63"
-        android:visibility="gone"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_gravity="center"
-        android:clipToOutline="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"/>
+        android:background="@color/red_757"
+        app:shapeAppearance="@style/FullCornerImageView"/>
 </LinearLayout>

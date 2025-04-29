@@ -18,7 +18,8 @@ public class Product implements Serializable {
     private String manufacturer;
     private float average_rating;
     private int review_count;
-    private String create_at;
+    private String status;
+    private String created_at;
     private Category category;
     private Brand brand;
     //private ProductType product_type;
@@ -80,7 +81,7 @@ public class Product implements Serializable {
         this.manufacturer = manufacturer;
         this.average_rating = average_rating;
         this.review_count = review_count;
-        this.create_at = create_at;
+        this.created_at = create_at;
         this.category = category;
         this.brand = brand;
 //        this.product_type = product_type;
@@ -233,12 +234,20 @@ public class Product implements Serializable {
         this.review_count = review_count;
     }
 
-    public String getCreate_at() {
-        return create_at;
+    public String getStatus() {
+        return status;
     }
 
-    public void setCreate_at(String create_at) {
-        this.create_at = create_at;
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
 
     public List<ProductImage> getImages() {
@@ -264,7 +273,7 @@ public class Product implements Serializable {
                 ", manufacturer='" + manufacturer + '\'' +
                 ", average_rating=" + average_rating +
                 ", review_count=" + review_count +
-                ", create_at='" + create_at + '\'' +
+                ", create_at='" + created_at + '\'' +
                 ", category=" + category +
                 ", brand=" + brand +
                 ", images=" + images +

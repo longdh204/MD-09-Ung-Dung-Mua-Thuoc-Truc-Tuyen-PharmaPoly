@@ -1,19 +1,24 @@
 package com.md09.pharmapoly.ui.view.activity;
 
 import static com.md09.pharmapoly.utils.Constants.CANCELED_KEY;
+import static com.md09.pharmapoly.utils.Constants.NOTIFICATION_READ_ALL_KEY;
 import static com.md09.pharmapoly.utils.Constants.ORDER_KEY;
 import static com.md09.pharmapoly.utils.Constants.PRODUCT_ADDED_TO_CART_KEY;
 import static com.md09.pharmapoly.utils.Constants.USER_PROFILE_UPDATED_KEY;
 import static com.md09.pharmapoly.utils.Constants.setLocale;
 
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -28,14 +33,13 @@ import com.md09.pharmapoly.ui.components.ViewPagerBottomNavigationMainAdapter;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.md09.pharmapoly.viewmodel.CartViewModel;
 
-import java.util.Locale;
-
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottom_navigation_main;
     private ViewPagerBottomNavigationMainAdapter bottom_navigation_main_adapter;
     private ViewPager2 view_pager_main;
     private CartViewModel cartViewModel;
+    private static final int REQUEST_NOTIFICATION_PERMISSION = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         new SharedPrefHelper(this).resetBooleanState(PRODUCT_ADDED_TO_CART_KEY);
         new SharedPrefHelper(this).resetBooleanState(USER_PROFILE_UPDATED_KEY);
         new SharedPrefHelper(this).resetBooleanState(CANCELED_KEY);
-
+        new SharedPrefHelper(this).resetBooleanState(NOTIFICATION_READ_ALL_KEY);
 
         SetupBottomNavigation();
         cartViewModel.FetchCartData(this);
@@ -60,7 +64,40 @@ public class MainActivity extends AppCompatActivity {
                 UpdateCartBadge(cart.getCartItems().size());
             }
         });
+        checkAndRequestNotificationPermission();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    "fcm_channel",
+                    "Thông báo",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
     }
+    private void checkAndRequestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.POST_NOTIFICATIONS},
+                        REQUEST_NOTIFICATION_PERMISSION);
+            }
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_NOTIFICATION_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //Toast.makeText(this, "Đã cấp quyền thông báo", Toast.LENGTH_SHORT).show();
+            } else {
+                //Toast.makeText(this, "Bạn cần cấp quyền để nhận thông báo", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     private void loadLocale() {
         String langCode = new SharedPrefHelper(this).getLanguage();
         setLocale(this,langCode);

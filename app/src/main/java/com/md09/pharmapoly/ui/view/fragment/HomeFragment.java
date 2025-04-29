@@ -3,6 +3,8 @@ package com.md09.pharmapoly.ui.view.fragment;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import static com.md09.pharmapoly.utils.Constants.NOTIFICATION_READ_ALL_KEY;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -20,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +54,7 @@ import com.md09.pharmapoly.data.model.User;
 import com.md09.pharmapoly.network.RetrofitClient;
 import com.md09.pharmapoly.ui.view.activity.ChatbotActivity;
 import com.md09.pharmapoly.ui.view.activity.CustomTypefaceSpan;
+import com.md09.pharmapoly.ui.view.activity.MainActivity;
 import com.md09.pharmapoly.ui.view.activity.Nav_FunctionalFoodActivity;
 import com.md09.pharmapoly.ui.view.activity.Nav_Medical_Equiment;
 import com.md09.pharmapoly.ui.view.activity.Nav_Medicine;
@@ -139,7 +143,8 @@ public class HomeFragment extends Fragment {
             btnthuocbovitamin,
             layout_search;
     private TextView txt_greeting;
-
+    private RelativeLayout layout_badge_notification;
+    private TextView tv_badge_notification;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -183,7 +188,8 @@ public class HomeFragment extends Fragment {
         }
 
 
-        ImageView bellIcon = view.findViewById(R.id.bell_icon);
+//        ImageView bellIcon = view.findViewById(R.id.bell_icon);
+        RelativeLayout bellIcon = view.findViewById(R.id.bell_icon);
         bellIcon.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), NotificationsActivity.class);
             startActivity(intent);
@@ -312,6 +318,7 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        GetNotificationUnreadCount();
         return view;
     }
 
@@ -332,6 +339,39 @@ public class HomeFragment extends Fragment {
     //        }
     //    }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        GetNotificationUnreadCount();
+    }
+    private void GetNotificationUnreadCount() {
+        new RetrofitClient()
+                .callAPI()
+                .notificationUnreadCount("Bearer " + new SharedPrefHelper(getContext()).getToken())
+                .enqueue(new Callback<ApiResponse<Integer>>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse<Integer>> call, Response<ApiResponse<Integer>> response) {
+                        if (response.isSuccessful() && response.isSuccessful()) {
+                            if (response.body().getStatus() == 200) {
+                                int unreadCount = response.body().getData();
+                                if (unreadCount == 0) {
+                                    layout_badge_notification.setVisibility(GONE);
+                                } else {
+                                    layout_badge_notification.setVisibility(VISIBLE);
+                                    tv_badge_notification.setText(String.valueOf(unreadCount));
+                                }
+                                new SharedPrefHelper(getContext()).resetBooleanState(NOTIFICATION_READ_ALL_KEY);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponse<Integer>> call, Throwable t) {
+
+                    }
+                });
+    }
     private void SetupRecyclerView(View view) {
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2); // Hiển thị 2 cột
         recyclerView.setLayoutManager(layoutManager);
@@ -415,6 +455,10 @@ public class HomeFragment extends Fragment {
 
     private void InitUI(View view) {
         retrofitClient = new RetrofitClient();
+
+        tv_badge_notification = view.findViewById(R.id.tv_badge_notification);
+        layout_badge_notification = view.findViewById(R.id.layout_badge_notification);
+
         sharedPrefHelper = new SharedPrefHelper(getContext());
         recyclerView = view.findViewById(R.id.recyclerView);
         viewPager2 = view.findViewById(R.id.viewPagerSlider);

@@ -153,6 +153,11 @@ public class CartFragment extends Fragment {
             if (cart != null && cart.getCartItems() != null) {
                 for (int i = 0; i < cart.getCartItems().size(); i++) {
                     CartItem item = cart.getCartItems().get(i);
+
+                    String productStatus = item.getProductType().getProduct().getStatus();
+                    if ("discontinued".equals(productStatus) || "paused".equals(productStatus) || "out_of_stock".equals(productStatus)) {
+                        continue;
+                    }
                     if (item.isSelected() != isChecked) {
                         item.setSelected(isChecked);
                         cartAdapter.notifyItemChanged(i);

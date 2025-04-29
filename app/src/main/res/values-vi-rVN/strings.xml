@@ -189,4 +189,9 @@
     <string name="review_count">người đánh giá</string>
     <string name="hi">Xin chào</string>
     <string name="rejected">Đơn hàng bị từ chối</string>
+    <string name="product_sold_out">Sản phẩm này đã ngừng bán viễn viễn</string>
+    <string name="product_suspended">Sản phẩm này tạm ngừng bán</string>
+    <string name="product_out_of_stock">Sản phẩm này hiện đã hết hàng</string>
+    <string name="clear_all">Xóa hết</string>
+    <string name="read_all">Đọc tất cả</string>
 </resources>

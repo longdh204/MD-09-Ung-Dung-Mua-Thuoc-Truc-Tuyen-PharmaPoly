@@ -32,6 +32,7 @@ public class Constants {
     public static final String CANCELED_KEY = "CANCELED";
     public static final String ORDER_KEY = "ORDER";
     public static final String LANGUAGE_KEY = "LANGUAGE";
+    public static final String NOTIFICATION_READ_ALL_KEY = "NOTIFICATION_REAL_ALL";
     public static final int PICK_IMAGE_REQUEST = 1;
     public static final int MAX_QUANTITY_PER_PRODUCT = 20;
 

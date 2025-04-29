@@ -14,6 +14,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.data.model.User;
@@ -55,65 +56,76 @@ public class LoginPassword extends AppCompatActivity {
         btn_login.setOnClickListener(v -> {
             ProgressDialogHelper.showLoading(LoginPassword.this);
             String password = edt_password.getText().toString().trim();
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("phone_number", phoneNumber);
-                jsonObject.put("password", password);
-            } catch (JSONException e) {
-                return;
-            }
 
-            RequestBody phoneRequest = RequestBody.create(
-                    MediaType.parse("application/json"), jsonObject.toString()
-            );
-            retrofitClient.callAPI().login(phoneRequest).enqueue(new Callback<ApiResponse<User>>() {
-                @Override
-                public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
-                    ProgressDialogHelper.hideLoading();
-                    if (response.isSuccessful()) {
-                        if (response.body().getStatus() == 200) {
-                            User user = response.body().getData();
-                            String token = response.body().getToken();
-                            String refreshToken = response.body().getRefreshToken();
-                            SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(LoginPassword.this);
-                            sharedPrefHelper.saveUser(user, token, refreshToken);
+            FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+                if (!task.isSuccessful()) {
+                    Log.w("FCM", "Fetching FCM token failed", task.getException());
+                    return;
+                }
+                String token = task.getResult();
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("phone_number", phoneNumber);
+                    jsonObject.put("password", password);
+                    jsonObject.put("fcm_token", token);
+                } catch (JSONException e) {
+                    return;
+                }
 
-                            startActivity(new Intent(LoginPassword.this, MainActivity.class));
-                            finishAffinity();
+                RequestBody phoneRequest = RequestBody.create(
+                        MediaType.parse("application/json"), jsonObject.toString()
+                );
+                retrofitClient.callAPI().login(phoneRequest).enqueue(new Callback<ApiResponse<User>>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
+                        ProgressDialogHelper.hideLoading();
+                        if (response.isSuccessful()) {
+                            if (response.body().getStatus() == 200) {
+                                User user = response.body().getData();
+                                String token = response.body().getToken();
+                                String refreshToken = response.body().getRefreshToken();
+                                SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(LoginPassword.this);
+                                sharedPrefHelper.saveUser(user, token, refreshToken);
+
+                                startActivity(new Intent(LoginPassword.this, MainActivity.class));
+                                finishAffinity();
+                            }
+                        } else {
+                            String message = "";
+                            switch (response.code()) {
+                                case 400:
+                                    message = getString(R.string.error_phone_password_required);
+                                    edt_password.setError(message);
+                                    edt_password.setFocusable(true);
+                                    break;
+                                case 404:
+                                    message = getString(R.string.error_user_not_found);
+                                    startActivity(new Intent(LoginPassword.this, PhoneNumber.class));
+                                    finish();
+                                    break;
+                                case 401:
+                                    message = getString(R.string.error_invalid_credentials);
+                                    edt_password.setError(message);
+                                    edt_password.setFocusable(true);
+                                    break;
+                                default:
+                                    message = getString(R.string.server_error);
+                                    break;
+                            }
+                            Toast.makeText(LoginPassword.this, message, Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        String message = "";
-                        switch (response.code()) {
-                            case 400:
-                                message = getString(R.string.error_phone_password_required);
-                                edt_password.setError(message);
-                                edt_password.setFocusable(true);
-                                break;
-                            case 404:
-                                message = getString(R.string.error_user_not_found);
-                                startActivity(new Intent(LoginPassword.this, PhoneNumber.class));
-                                finish();
-                                break;
-                            case 401:
-                                message = getString(R.string.error_invalid_credentials);
-                                edt_password.setError(message);
-                                edt_password.setFocusable(true);
-                                break;
-                            default:
-                                message = getString(R.string.server_error);
-                                break;
-                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponse<User>> call, Throwable t) {
+                        ProgressDialogHelper.hideLoading();
+                        String message = getString(R.string.server_error);
                         Toast.makeText(LoginPassword.this, message, Toast.LENGTH_SHORT).show();
                     }
-                }
-
-                @Override
-                public void onFailure(Call<ApiResponse<User>> call, Throwable t) {
-                    ProgressDialogHelper.hideLoading();
-                    String message = getString(R.string.server_error);
-                    Toast.makeText(LoginPassword.this, message, Toast.LENGTH_SHORT).show();
-                }
+                });
             });
+
+
 //            retrofitClient.callAPI().login(phoneRequest).enqueue(new Callback<ApiResponse<Void>>() {
 //                @Override
 //                public void onResponse(Call<ApiResponse<Void>> call, Response<ApiResponse<Void>> response) {

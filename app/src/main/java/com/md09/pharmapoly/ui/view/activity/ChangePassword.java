@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +44,7 @@ public class ChangePassword extends AppCompatActivity {
     private RetrofitClient retrofitClient;
     private String phoneNumber, uid, token;
     private TextView change_pass_complete;
-
+    private ImageButton btn_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +67,8 @@ public class ChangePassword extends AppCompatActivity {
         currentPassword.addTextChangedListener(textWatcher);
         newPassword.addTextChangedListener(textWatcher);
         confirmPassword.addTextChangedListener(textWatcher);
+
+        btn_back.setOnClickListener(v -> {finish();});
     }
 
     private void changePassword() {
@@ -220,6 +223,7 @@ public class ChangePassword extends AppCompatActivity {
     }
 
     private void initUI() {
+        btn_back = findViewById(R.id.btn_back);
         currentPassword = findViewById(R.id.current_change_password);
         newPassword = findViewById(R.id.new_change_password);
         confirmPassword = findViewById(R.id.confirm_change_password);

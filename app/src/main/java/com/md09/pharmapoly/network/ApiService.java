@@ -11,6 +11,7 @@ import com.md09.pharmapoly.Models.ChatResponse;
 import com.md09.pharmapoly.Models.District;
 import com.md09.pharmapoly.Models.DistrictRequest;
 import com.md09.pharmapoly.Models.GHNResponse;
+import com.md09.pharmapoly.Models.Notification;
 import com.md09.pharmapoly.Models.Order;
 import com.md09.pharmapoly.Models.PageData;
 import com.md09.pharmapoly.Models.PageDataClone;
@@ -83,8 +84,13 @@ public interface ApiService {
             @Header("Authorization") String token
     );
     @POST("orders/create")
-    Call<ApiResponse<String>> createOrders(
+    Call<ApiResponse<Map<String, Object>>> createOrders(
             @Body Map<String, Object> data,
+            @Header("Authorization") String token
+    );
+    @GET("orders/payment_status/:order_id")
+    Call<ApiResponse<Void>> getPaymentStatusStatus(
+            @Path("order_id") String order_id,
             @Header("Authorization") String token
     );
     @GET("orders/{id}/detail")
@@ -135,6 +141,23 @@ public interface ApiService {
     Call<ApiResponse<Cart>> cart(
             @Header("Authorization") String token
     );
+    @GET("user/notification")
+    Call<ApiResponse<List<Notification>>> getNotification(
+            @Header("Authorization") String token
+    );
+    @GET("user/notification/read-all")
+    Call<ApiResponse<List<Notification>>> notificationReadAll(
+            @Header("Authorization") String token
+    );
+    @GET("user/notification/unread-count")
+    Call<ApiResponse<Integer>> notificationUnreadCount(
+            @Header("Authorization") String token
+    );
+    @PUT("user/notification/read/{id}")
+    Call<ApiResponse<Notification>> readNotification(
+            @Path("id") String id,
+            @Header("Authorization") String token
+    );
     @POST("cart-item/add")
     Call<ApiResponse<CartItem>> addProductToCart(
             @Body CartItem cartItem,
@@ -171,8 +194,10 @@ public interface ApiService {
             @Header("Authorization") String token);
     @GET("api/product/{productId}/details")
     Call<Product> getProductDetails(@Path("productId") String productId);
-    @GET
-    Call<ApiResponse<List<ProductReview>>> getProductReviews(@Url String url, @Header("Authorization") String token);
+    @GET("api/product/{productId}/reviews")
+    Call<ApiResponse<List<ProductReview>>> getProductReviews(
+            @Path("productId") String productId,
+            @Header("Authorization") String token);
 
 //    @GET("product/top-rated/{limit}")
 //    Call<ApiResponse<List<Product>>> getTopRatedProducts(
@@ -186,7 +211,15 @@ public interface ApiService {
             @Header("Authorization") String token
     );
 
-//    @GET("product/{id}/reviews")
+    @GET("product/related")
+    Call<ApiResponse<List<Product>>> getRelatedProducts(
+            @Query("product_id") String productId,
+            @Query("limit") int limit,
+            @Header("Authorization") String token
+    );
+
+
+    //    @GET("product/{id}/reviews")
 //    Call<ApiResponse<List<ProductReview>>>
 //    getProductReviews(
 //            @Path("id") String productId,

@@ -66,7 +66,7 @@ public class SearchActivity extends AppCompatActivity {
     private LinearLayout categoryLayout, brandLayout;
     private LinearLayout historyLayout;  // Lịch sử tìm kiếm
     private ImageView imgback;
-
+    private String keyword = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,18 +114,28 @@ public class SearchActivity extends AppCompatActivity {
         searchView.requestFocus();
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
+//        prevPageBtn.setOnClickListener(v -> {
+//            if (currentPage > 0) {
+//                currentPage--;
+//                displayPage(currentPage);
+//            }
+//        });
+//
+//        nextPageBtn.setOnClickListener(v -> {
+//            if ((currentPage + 1) * ITEMS_PER_PAGE < totalProducts.size()) {
+//                currentPage++;
+//                displayPage(currentPage);
+//            }
+//        });
+
         prevPageBtn.setOnClickListener(v -> {
-            if (currentPage > 0) {
-                currentPage--;
-                displayPage(currentPage);
-            }
+            currentPage--;
+            fetchSearchResults(keyword, currentPage);
         });
 
         nextPageBtn.setOnClickListener(v -> {
-            if ((currentPage + 1) * ITEMS_PER_PAGE < totalProducts.size()) {
-                currentPage++;
-                displayPage(currentPage);
-            }
+            currentPage++;
+            fetchSearchResults(keyword, currentPage);
         });
     }
 
@@ -190,44 +200,17 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void fetchSearchResults(String keyword, int page) {
+        this.keyword = keyword;
         if (page == -1) {
             page = 1;
         }
+        currentPage = page;
         String token = sharedPrefHelper.getToken();  // Lấy token từ SharedPreferences
         if (token != null && !token.isEmpty()) {
-//            ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
-//
-//            // Gửi request tìm kiếm với tham số phân trang không có phân trang (giới hạn số sản phẩm trong 1 lần)
-//            Call<ApiResponse<SearchResponse>> call = apiService.searchProducts(keyword, 1, 10, "Bearer " + token);
-//
-//            call.enqueue(new Callback<ApiResponse<SearchResponse>>() {
-//                @Override
-//                public void onResponse(Call<ApiResponse<SearchResponse>> call, Response<ApiResponse<SearchResponse>> response) {
-//                    if (response.isSuccessful() && response.body() != null) {
-//                        ApiResponse<SearchResponse> apiResponse = response.body();
-//                        List<Product> allProducts = apiResponse.getData().getProducts();
-//
-//                        if (allProducts != null && !allProducts.isEmpty()) {
-//                            totalProducts = allProducts;
-//                            updateCategoriesAndBrands(allProducts);
-//                            displayPage(currentPage);
-//                        } else {
-//                            Toast.makeText(SearchActivity.this, "Không có sản phẩm", Toast.LENGTH_SHORT).show();
-//                        }
-//                    } else {
-//                        Toast.makeText(SearchActivity.this, "Không thể tải dữ liệu", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ApiResponse<SearchResponse>> call, Throwable t) {
-//                    Toast.makeText(SearchActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//            });
 
             new RetrofitClient()
                     .callAPI()
-                    .searchProducts(keyword, page, 10, "Bearer " + new SharedPrefHelper(this).getToken())
+                    .searchProducts(keyword, page, 8, "Bearer " + new SharedPrefHelper(this).getToken())
                     .enqueue(new Callback<ApiResponse<SearchResponse>>() {
                         @Override
                         public void onResponse(Call<ApiResponse<SearchResponse>> call, Response<ApiResponse<SearchResponse>> response) {
@@ -241,7 +224,12 @@ public class SearchActivity extends AppCompatActivity {
                                     if (allProducts != null && !allProducts.isEmpty()) {
                                         totalProducts = allProducts;
                                         updateCategoriesAndBrands(allProducts);  // Nếu cần xử lý category, brand thì cũng dễ lấy luôn
-                                        displayPage(currentPage);
+//                                        displayPage(currentPage);
+
+                                        productAdapter.Update(searchData.getProducts());
+//                                        updatePaginationButtons();
+                                        pageInfoTextView.setText("" + searchData.getCurrentPage() + " / " + searchData.getTotalPages());
+                                        updatePaginationButtons(searchData.isHasPrevPage(), searchData.isHasNextPage());
                                     } else {
                                         Toast.makeText(SearchActivity.this, "Không có sản phẩm", Toast.LENGTH_SHORT).show();
                                     }
@@ -259,6 +247,21 @@ public class SearchActivity extends AppCompatActivity {
 
         } else {
             Toast.makeText(SearchActivity.this, "Token không hợp lệ", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void updatePaginationButtons(boolean hasPrevPage, boolean hasNextPage) {
+        // Ẩn/Hiện nút Prev
+        if (hasPrevPage) {
+            prevPageBtn.setVisibility(View.VISIBLE);  // Hiển thị nút Prev
+        } else {
+            prevPageBtn.setVisibility(View.INVISIBLE);  // Ẩn nút Prev
+        }
+
+        // Ẩn/Hiện nút Next
+        if (hasNextPage) {
+            nextPageBtn.setVisibility(View.VISIBLE);  // Hiển thị nút Next
+        } else {
+            nextPageBtn.setVisibility(View.INVISIBLE);  // Ẩn nút Next
         }
     }
 
@@ -338,13 +341,13 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void displayPage(int pageIndex) {
-        int startIndex = pageIndex * ITEMS_PER_PAGE;
-        int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, totalProducts.size());
-
-        List<Product> currentPageProducts = totalProducts.subList(startIndex, endIndex);
-        productAdapter.Update(currentPageProducts);
-        updatePaginationButtons();
-        pageInfoTextView.setText("" + (currentPage + 1) + " / " + getTotalPages());
+//        int startIndex = pageIndex * ITEMS_PER_PAGE;
+//        int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, totalProducts.size());
+//
+//        List<Product> currentPageProducts = totalProducts.subList(startIndex, endIndex);
+//        productAdapter.Update(currentPageProducts);
+//        updatePaginationButtons();
+//        pageInfoTextView.setText("" + (currentPage + 1) + " / " + getTotalPages());
     }
 
     private void updatePaginationButtons() {

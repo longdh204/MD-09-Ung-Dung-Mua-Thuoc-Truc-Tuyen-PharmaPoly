@@ -15,6 +15,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -69,11 +70,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.itemView.startAnimation(animation);
         CartItem cartItem = cart.getCartItems().get(position);
 
-        if (cartItem != null) {
 
+
+        if (cartItem != null) {
             holder.tv_product_name.setText(cartItem.getProductType().getProduct().getName());
             holder.tv_original_price.setText(formatCurrency(cartItem.getOriginal_price(), "đ") + "/" + cartItem.getProductType().getProductType().getName());
-
 
             holder.edt_quantity.setText(String.valueOf(cartItem.getQuantity()));
             holder.edt_quantity.setOnKeyListener((v, keyCode, event) -> {
@@ -84,7 +85,27 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 }
                 return false;
             });
+
             Picasso.get().load(cartItem.getProductType().getProduct().getImageUrl()).into(holder.img_product);
+
+            String productStatus = cartItem.getProductType().getProduct().getStatus();
+
+            if ("discontinued".equals(productStatus) || "paused".equals(productStatus) || "out_of_stock".equals(productStatus)) {
+                holder.layout_price_and_quantity.setVisibility(View.GONE);
+                holder.tv_status.setVisibility(View.VISIBLE);
+                holder.cb_selected_item.setVisibility(View.GONE);
+                if ("discontinued".equals(productStatus)) {
+                    holder.tv_status.setText(context.getString(R.string.product_sold_out));
+                } else if ("paused".equals(productStatus)) {
+                    holder.tv_status.setText(context.getString(R.string.product_suspended));
+                } else if ("out_of_stock".equals(productStatus)) {
+                    holder.tv_status.setText(context.getString(R.string.product_out_of_stock));
+                }
+                return;
+            } else {
+                holder.layout_price_and_quantity.setVisibility(View.VISIBLE);
+                holder.tv_status.setVisibility(View.GONE);
+            }
 
             holder.edt_quantity.setOnFocusChangeListener((v, hasFocus) -> {
                 if (hasFocus) {
@@ -146,11 +167,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 btn_decrease_quantity,
                 btn_increase_quantity,
                 btn_remove;
+        private LinearLayout layout_price_and_quantity;
         private CheckBox cb_selected_item;
         private TextView
                 //tv_price,
                 tv_product_name,
-                tv_original_price;
+                tv_original_price,
+                tv_status;
                 //tv_discount;
         private EditText edt_quantity;
         private ImageView img_product;
@@ -165,6 +188,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             //tv_price = itemView.findViewById(R.id.tv_price);
             tv_original_price = itemView.findViewById(R.id.tv_original_price);
             tv_product_name = itemView.findViewById(R.id.tv_product_name);
+            tv_status = itemView.findViewById(R.id.tv_status);
             //tv_discount = itemView.findViewById(R.id.tv_price);
             edt_quantity = itemView.findViewById(R.id.edt_quantity);
 
@@ -172,6 +196,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
             cb_selected_item = itemView.findViewById(R.id.cb_selected_item);
 
+            layout_price_and_quantity = itemView.findViewById(R.id.layout_price_and_quantity);
             //layout_discount = itemView.findViewById(R.id.layout_discount);
         }
     }

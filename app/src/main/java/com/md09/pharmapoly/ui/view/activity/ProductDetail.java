@@ -148,10 +148,10 @@ public class ProductDetail extends AppCompatActivity {
         String token = "Bearer " + sharedPrefHelper.getToken();
         fetchProductReviews(productId, token);
         fetchProductDetails(productId, token);
-        fetchProductData("67d3df615a228bc7cc5bb8f5");
-        fetchProductData("67d3ec3a5a228bc7cc5bbbab");
-        fetchProductData("67d3ef595a228bc7cc5bbc9a");
-        fetchProductData("67d3f1df5a228bc7cc5bbd20");
+//        fetchProductData("67d3df615a228bc7cc5bb8f5");
+//        fetchProductData("67d3ec3a5a228bc7cc5bbbab");
+//        fetchProductData("67d3ef595a228bc7cc5bbc9a");
+//        fetchProductData("67d3f1df5a228bc7cc5bbd20");
 
         // nút xem thêm toàn bộ thông tin trong product details
         TextView showProductDetailsButton = findViewById(R.id.showProductDetails);
@@ -499,6 +499,7 @@ public class ProductDetail extends AppCompatActivity {
                     if (productDetails != null) {
                         // Gán dữ liệu vào biến product và gọi FillData
                         product = productDetails;
+                        fetchRelatedProducts(product.get_id());
                         FillData(productDetails);
                         Log.d("ProductDetailActivity", "Product fetched: " + productDetails);
 
@@ -552,12 +553,34 @@ public class ProductDetail extends AppCompatActivity {
         });
     }
 
+    private void fetchRelatedProducts(String productId) {
+        new RetrofitClient()
+                .callAPI()
+                .getRelatedProducts(productId,6,"Bearer " + new SharedPrefHelper(this).getToken())
+                .enqueue(new Callback<ApiResponse<List<Product>>>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse<List<Product>>> call, Response<ApiResponse<List<Product>>> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            RecyclerView recyclerViewKhac = findViewById(R.id.sanphamlienquan);
+                            GridLayoutManager layoutManager = new GridLayoutManager(ProductDetail.this, 2);
+                            recyclerViewKhac.setLayoutManager(layoutManager);
+                            productAdapter = new ProductAdapter(ProductDetail.this, response.body().getData());
+                            recyclerViewKhac.setAdapter(productAdapter);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponse<List<Product>>> call, Throwable t) {
+
+                    }
+                });
+    }
     // fetch review sản phẩm từ người dùng
     private void fetchProductReviews(String productId, String token) {
-        ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        String url = "https://pharmapoly-server.onrender.com/api/product/" + productId + "/reviews";
-        Call<ApiResponse<List<ProductReview>>> reviewCall = apiService.getProductReviews(url, token);
-        reviewCall.enqueue(new Callback<ApiResponse<List<ProductReview>>>() {
+//        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+//        String url = "https://pharmapoly-server.onrender.com/api/product/" + productId + "/reviews";
+//        Call<ApiResponse<List<ProductReview>>> reviewCall = apiService.getProductReviews(url, token);
+        new RetrofitClient().callAPI().getProductReviews(productId,token).enqueue(new Callback<ApiResponse<List<ProductReview>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<ProductReview>>> call, Response<ApiResponse<List<ProductReview>>> response) {
                 if (response.isSuccessful() && response.body() != null) {

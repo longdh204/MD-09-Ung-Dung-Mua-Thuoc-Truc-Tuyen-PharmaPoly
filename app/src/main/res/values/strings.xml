@@ -188,4 +188,9 @@
     <string name="review_count">Number of reviewers</string>
     <string name="hi">Hi</string>
     <string name="rejected">Rejected</string>
+    <string name="product_sold_out">This product has been discontinued forever</string>
+    <string name="product_suspended">This product is temporarily unavailable</string>
+    <string name="product_out_of_stock">This product is out of stock</string>
+    <string name="clear_all">Clear All</string>
+    <string name="read_all">Read All</string>
 </resources>

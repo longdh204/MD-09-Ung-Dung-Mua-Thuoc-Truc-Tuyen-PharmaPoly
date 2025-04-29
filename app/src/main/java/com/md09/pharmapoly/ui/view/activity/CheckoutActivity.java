@@ -6,6 +6,8 @@ import static com.md09.pharmapoly.utils.Constants.formatCurrency;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -29,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.md09.pharmapoly.Models.CartItem;
 import com.md09.pharmapoly.Models.GHNResponse;
+import com.md09.pharmapoly.Models.Product;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.data.model.User;
@@ -140,10 +143,14 @@ public class CheckoutActivity extends AppCompatActivity {
                                 requestData,
                                 "Bearer " + new SharedPrefHelper(this).getToken()
                             )
-                    .enqueue(new Callback<ApiResponse<String>>() {
+                    .enqueue(new Callback<ApiResponse<Map<String, Object>>>() {
                         @Override
-                        public void onResponse(Call<ApiResponse<String>> call, Response<ApiResponse<String>> response) {
+                        public void onResponse(Call<ApiResponse<Map<String, Object>>> call, Response<ApiResponse<Map<String, Object>>> response) {
                             if (response.isSuccessful() && response.body().getStatus() == 200) {
+                                Map<String, Object> data = response.body().getData();
+                                String orderId = (String) data.get("order_id");
+                                String qrCodeUrl = (String) data.get("qr_code_url");
+
                                 if (payment_method.equals("COD")) {
                                     SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_success));
                                     bottomSheet.setOnDismissListener(() -> {
@@ -151,8 +158,7 @@ public class CheckoutActivity extends AppCompatActivity {
                                     });
                                     bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
                                 } else {
-                                    String qrCodeUrl = response.body().getData();
-                                    showQrDialog(qrCodeUrl);
+                                    showQrDialog(orderId,qrCodeUrl);
                                 }
                                 new SharedPrefHelper(CheckoutActivity.this).setBooleanState(ORDER_KEY,true);
                                 ProgressDialogHelper.hideLoading();
@@ -160,14 +166,12 @@ public class CheckoutActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<ApiResponse<String>> call, Throwable t) {
+                        public void onFailure(Call<ApiResponse<Map<String, Object>>> call, Throwable t) {
                             ProgressDialogHelper.hideLoading();
-
                         }
                     });
         });
         FillAddress();
-
     }
     private boolean isUserInfoValid(User user) {
         if (user == null) return false;
@@ -198,49 +202,112 @@ public class CheckoutActivity extends AppCompatActivity {
 
         return true;
     }
-    private void ListenForPaymentStatus(String userId, Dialog dialog) {
-        DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference("payment_status")
-                .child(userId);
+//    private void ListenForPaymentStatus(String userId, Dialog dialog) {
+//        DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference("payment_status")
+//                .child(userId);
+//
+//        orderRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.exists()) {
+//                    String status = snapshot.getValue(String.class);
+//                    if ("PAID".equals(status)) {
+//                        SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_success));
+//                        bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
+//                        dialog.dismiss();
+//                        DeleteOrderStatus();
+//                    }
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//            }
+//        });
+//    }
 
-        orderRef.addValueEventListener(new ValueEventListener() {
+    private Handler handler;
+    private Runnable paymentStatusRunnable;
+    private int elapsedSeconds = 0;
+    private void ListenForPaymentStatus(String orderId, Dialog dialog) {
+        handler = new Handler(Looper.getMainLooper());
+        elapsedSeconds = 0;
+
+        paymentStatusRunnable = new Runnable() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    String status = snapshot.getValue(String.class);
-                    if ("PAID".equals(status)) {
-                        SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_success));
-                        bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
-                        dialog.dismiss();
-                        DeleteOrderStatus();
-                    }
-                }
+            public void run() {
+                new RetrofitClient().callAPI().getPaymentStatusStatus(orderId,
+                                "Bearer " + new SharedPrefHelper(CheckoutActivity.this).getToken())
+                        .enqueue(new Callback<ApiResponse<Void>>() {
+                            @Override
+                            public void onResponse(Call<ApiResponse<Void>> call, Response<ApiResponse<Void>> response) {
+                                if (response.isSuccessful() && response.body() != null) {
+                                    if (response.body().getStatus() == 200) {
+                                        SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_success));
+                                        bottomSheet.setOnDismissListener(() -> {
+                                            finish();
+                                        });
+                                        bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
+                                        dialog.dismiss();
+                                        stopListeningPaymentStatus();
+                                    } else {
+                                        scheduleNextCheck();
+                                    }
+                                } else {
+                                    scheduleNextCheck();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ApiResponse<Void>> call, Throwable t) {
+                                scheduleNextCheck();
+                            }
+                        });
             }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
+        };
+
+        handler.post(paymentStatusRunnable);
     }
 
-    private void DeleteOrderStatus() {
-        ProgressDialogHelper.showLoading(this);
-        new RetrofitClient()
-                .callAPI()
-                .deletePaymentStatus("Bearer " + new SharedPrefHelper(this).getToken())
-                .enqueue(new Callback<Void>() {
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        ProgressDialogHelper.hideLoading();
-                        finish();
-                    }
-
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-                        ProgressDialogHelper.hideLoading();
-                    }
-                });
+    private void scheduleNextCheck() {
+        elapsedSeconds += 10;
+        if (elapsedSeconds < 600) { // 600 giây = 10 phút
+            handler.postDelayed(paymentStatusRunnable, 10_000); // 10.000ms = 10s
+        } else {
+            stopListeningPaymentStatus(); // hết thời gian thì dừng
+        }
     }
 
-    private void showQrDialog(String qrCodeUrl) {
+    private void stopListeningPaymentStatus() {
+        if (handler != null && paymentStatusRunnable != null) {
+            handler.removeCallbacks(paymentStatusRunnable);
+        }
+    }
+//    private void ListenForPaymentStatus(String orderId, Dialog dialog) {
+//        new RetrofitClient().callAPI().getPaymentStatusStatus( orderId,
+//                "Bearer " + new SharedPrefHelper(this).getToken())
+//                .enqueue(new Callback<ApiResponse<Void>>() {
+//                    @Override
+//                    public void onResponse(Call<ApiResponse<Void>> call, Response<ApiResponse<Void>> response) {
+//                        if (response.isSuccessful() && response.body() != null) {
+//                            if (response.body().getStatus() == 200) {
+//                                SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_success));
+//                                bottomSheet.setOnDismissListener(() -> {
+//                                    finish();
+//                                });
+//                                bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
+//                                dialog.dismiss();
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ApiResponse<Void>> call, Throwable t) {
+//
+//                    }
+//                });
+//    }
+
+    private void showQrDialog(String orderId,String qrCodeUrl) {
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_qr_code);
@@ -250,7 +317,8 @@ public class CheckoutActivity extends AppCompatActivity {
         Picasso.get().load(qrCodeUrl).into(qrImageView);
 
         dialog.show();
-        ListenForPaymentStatus(new SharedPrefHelper(this).getUser().get_id(), dialog);
+//        ListenForPaymentStatus(new SharedPrefHelper(this).getUser().get_id(), dialog);
+        ListenForPaymentStatus(orderId, dialog);
     }
 
     @Override

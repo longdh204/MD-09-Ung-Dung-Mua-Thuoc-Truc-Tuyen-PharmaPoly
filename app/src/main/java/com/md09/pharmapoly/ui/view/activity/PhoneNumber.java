@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.data.model.User;
@@ -141,32 +142,40 @@ public class PhoneNumber extends AppCompatActivity {
             ProgressDialogHelper.hideLoading();
             return;
         }
-        Map<String, String> requestBody = new HashMap<>();
-        requestBody.put("refreshToken", refreshToken);
-        retrofitClient.callAPI().refreshToken(requestBody).enqueue(new Callback<ApiResponse<User>>() {
-            @Override
-            public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
-                ProgressDialogHelper.hideLoading();
-                if (response.isSuccessful()) {
-                    if (response.body().getStatus() == 200) {
-                        User user = response.body().getData();
-                        String token = response.body().getToken();
-                        String refreshToken = response.body().getRefreshToken();
-                        SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(PhoneNumber.this);
-                        sharedPrefHelper.saveUser(user, token, refreshToken);
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.w("FCM", "Fetching FCM token failed", task.getException());
+                        return;
+                    }
+                    String token = task.getResult();
+            Map<String, String> requestBody = new HashMap<>();
+            requestBody.put("refreshToken", refreshToken);
+            requestBody.put("fcm_token", token);
+            retrofitClient.callAPI().refreshToken(requestBody).enqueue(new Callback<ApiResponse<User>>() {
+                @Override
+                public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
+                    ProgressDialogHelper.hideLoading();
+                    if (response.isSuccessful()) {
+                        if (response.body().getStatus() == 200) {
+                            User user = response.body().getData();
+                            String token = response.body().getToken();
+                            String refreshToken = response.body().getRefreshToken();
+                            SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(PhoneNumber.this);
+                            sharedPrefHelper.saveUser(user, token, refreshToken);
 
-                        startActivity(new Intent(PhoneNumber.this, MainActivity.class));
-                        finishAffinity();
+                            startActivity(new Intent(PhoneNumber.this, MainActivity.class));
+                            finishAffinity();
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ApiResponse<User>> call, Throwable t) {
-                ProgressDialogHelper.hideLoading();
+                @Override
+                public void onFailure(Call<ApiResponse<User>> call, Throwable t) {
+                    ProgressDialogHelper.hideLoading();
 
-            }
-        });
+                }
+            });
+                });
     }
     private void UpdateButtonState(String phoneNumber) {
         boolean isValid = validateAndFormatPhoneNumber(phoneNumber) != null;
