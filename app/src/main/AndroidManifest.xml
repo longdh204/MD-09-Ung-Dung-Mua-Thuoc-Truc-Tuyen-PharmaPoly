@@ -15,13 +15,13 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <meta-data
         android:name="com.google.firebase.auth.api.FirebaseAuth"
@@ -42,6 +42,13 @@
         android:theme="@style/Theme.MD09_PharmaPoly"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity android:name=".ui.view.activity.cancer.CancerTypesActivity" />
+        <activity android:name=".ui.view.activity.cancer.ScreeningActivity" />
+        <activity android:name=".ui.view.activity.cancer.TreatmentActivity" />
+        <activity android:name=".ui.view.activity.cancer.PreventionActivity" />
+        <activity
+            android:name=".ui.view.activity.CancerInfoActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.view.aboutpharmapoly.Privacy_Policy"
             android:exported="false" />
@@ -94,8 +101,8 @@
             android:exported="false" />
         <activity
             android:name=".chatbot"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" /> <!-- <activity -->
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" /> <!-- <activity -->
         <!-- android:name=".ui.view.activity.functional_food" -->
         <!-- android:exported="false" /> -->
         <activity
@@ -154,8 +161,8 @@
             android:exported="true" />
         <activity
             android:name=".ui.view.activity.ChatbotActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.view.activity.Nav_Personalcare"
             android:exported="true" />

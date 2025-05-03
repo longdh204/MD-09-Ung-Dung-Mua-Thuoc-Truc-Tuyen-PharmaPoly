@@ -31,10 +31,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PharmacyMapActivity extends FragmentActivity implements OnMapReadyCallback {
-
     private GoogleMap mMap;
     private FusedLocationProviderClient fusedLocationClient;
-    private List<Pharmacy> pharmacies; // Danh sách các nhà thuốc
+    private List<Pharmacy> pharmacies;
     private static final int LOCATION_REQUEST_CODE = 1000;
     private RecyclerView recyclerView;
     private PharmacyAdapter pharmacyAdapter;

@@ -66,6 +66,7 @@ public class ProcessingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -76,6 +77,7 @@ public class ProcessingFragment extends Fragment {
     private RecyclerView rcv_order;
     private LinearLayout layout_empty;
     private PurchasedOrdersAdapter purchasedOrdersAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -136,7 +138,7 @@ public class ProcessingFragment extends Fragment {
                     @Override
                     public void onFailure(Call<ApiResponse<List<Order>>> call, Throwable t) {
                         ProgressDialogHelper.hideLoading();
-                        Log.e("Check Error",t.getMessage());
+                        Log.e("Check Error", t.getMessage());
 //                        Log.e("Check Error",t.);
                     }
                 });
@@ -159,7 +161,7 @@ public class ProcessingFragment extends Fragment {
                             purchasedOrdersAdapter.UpdateItem(order);
                             SuccessMessageBottomSheet bottomSheet = SuccessMessageBottomSheet.newInstance(getString(R.string.order_cancelled_success));
                             bottomSheet.show(getParentFragmentManager(), "SuccessMessageBottomSheet");
-                            new SharedPrefHelper(getContext()).setBooleanState(CANCELED_KEY,true);
+                            new SharedPrefHelper(getContext()).setBooleanState(CANCELED_KEY, true);
                         }
                         ProgressDialogHelper.hideLoading();
                     }

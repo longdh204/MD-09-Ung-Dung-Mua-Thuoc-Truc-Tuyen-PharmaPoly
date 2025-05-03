@@ -28,6 +28,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -49,8 +50,10 @@ import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.data.model.User;
 import com.md09.pharmapoly.network.RetrofitClient;
+import com.md09.pharmapoly.ui.view.activity.CancerInfoActivity;
 import com.md09.pharmapoly.ui.view.activity.ChatbotActivity;
 import com.md09.pharmapoly.ui.view.activity.CustomTypefaceSpan;
+import com.md09.pharmapoly.ui.view.activity.MainActivity;
 import com.md09.pharmapoly.ui.view.activity.Nav_FunctionalFoodActivity;
 import com.md09.pharmapoly.ui.view.activity.Nav_Medical_Equiment;
 import com.md09.pharmapoly.ui.view.activity.Nav_Medicine;
@@ -61,6 +64,7 @@ import com.md09.pharmapoly.ui.view.activity.PharmacyMapActivity;
 import com.md09.pharmapoly.ui.view.activity.SearchActivity;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.md09.pharmapoly.viewmodel.CartViewModel;
+import com.md09.pharmapoly.ui.view.activity.OrderManagementActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -216,6 +220,10 @@ public class HomeFragment extends Fragment {
             } else if (category.getName().equals("Nhắc uống thuốc")) {
                 Intent intent = new Intent(getContext(), MedicineReminderActivity.class);
                 startActivity(intent);
+            } else if (category.getName().equals("Đơn của tôi")) {
+                Intent intent = new Intent(getActivity(), OrderManagementActivity.class);
+                intent.putExtra("order_status", 0); // 0 là trạng thái "Đơn của tôi" (đang xử lý)
+                startActivity(intent);
             }
         });
 
@@ -308,7 +316,9 @@ public class HomeFragment extends Fragment {
             }
         });
         return view;
+
     }
+
 
     //    @Override
     //    public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -428,6 +438,12 @@ public class HomeFragment extends Fragment {
         btnthietbiyte = view.findViewById(R.id.btnthietbiyte);
         btnthuocbovitamin = view.findViewById(R.id.btnthuocbovitamin);
         layout_search = view.findViewById(R.id.layout_search);
+
+        // Add click handler for cancer info button
+        view.findViewById(R.id.btn_cancer_info).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), CancerInfoActivity.class);
+            startActivity(intent);
+        });
 
         txt_greeting = view.findViewById(R.id.txt_greeting);
         User user = new SharedPrefHelper(getContext()).getUser();
