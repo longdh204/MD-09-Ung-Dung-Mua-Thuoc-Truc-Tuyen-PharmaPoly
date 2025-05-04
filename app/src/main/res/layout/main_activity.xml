@@ -1,50 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<!--<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:layout_gravity="bottom"-->
+<!--    tools:context=".ui.view.activity.MainActivity">-->
+
+<!--    <androidx.viewpager2.widget.ViewPager2-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:id="@+id/viewPagerMain" />-->
+
+<!--    <com.google.android.material.bottomappbar.BottomAppBar-->
+<!--        android:id="@+id/bottomAppBar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:backgroundTint="@color/blue_CE4"-->
+<!--        app:fabCradleMargin="24dp"-->
+<!--        app:fabAlignmentMode="center"-->
+<!--        app:fabAnchorMode="cradle"-->
+<!--        app:fabCradleRoundedCornerRadius="56dp"-->
+<!--        android:layout_gravity="bottom">-->
+
+<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--            android:id="@+id/bottomNavigationMain"-->
+<!--            app:itemActiveIndicatorStyle="@null"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:labelVisibilityMode="unlabeled"-->
+<!--            android:background="@color/transparent"-->
+<!--            android:elevation="0dp"-->
+<!--            app:itemRippleColor="@color/transparent"-->
+<!--            app:itemIconTint="@color/bottom_nav_color"-->
+<!--            app:menu="@menu/bottom_menu" />-->
+<!--    </com.google.android.material.bottomappbar.BottomAppBar>-->
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fab1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_anchor="@id/bottomAppBar"-->
+<!--        android:backgroundTint="@color/blue_CE4"-->
+<!--        app:shapeAppearanceOverlay="@style/RoundedFAB"-->
+<!--        app:tint="@color/white_FFF"-->
+<!--        android:src="@drawable/ic_headphones"-->
+<!--        app:maxImageSize="32dp" />-->
+<!--    <com.google.android.material.navigation.NavigationView-->
+<!--        android:id="@+id/navigation_view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="start"-->
+<!--        app:headerLayout="@layout/nav_header"-->
+<!--        app:menu="@menu/drawer_menu" />-->
+<!--</androidx.coordinatorlayout.widget.CoordinatorLayout>-->
+
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="bottom"
-    tools:context=".ui.view.activity.MainActivity">
+    android:layout_height="match_parent">
 
-    <androidx.viewpager2.widget.ViewPager2
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/viewPagerMain" />
+        tools:context=".ui.view.activity.MainActivity">
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomAppBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue_CE4"
-        app:fabCradleMargin="24dp"
-        app:fabAlignmentMode="center"
-        app:fabAnchorMode="cradle"
-        app:fabCradleRoundedCornerRadius="56dp"
-        android:layout_gravity="bottom">
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationMain"
-            app:itemActiveIndicatorStyle="@null"
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:labelVisibilityMode="unlabeled"
-            android:background="@color/transparent"
-            android:elevation="0dp"
-            app:itemRippleColor="@color/transparent"
-            app:itemIconTint="@color/bottom_nav_color"
-            app:menu="@menu/bottom_menu" />
-    </com.google.android.material.bottomappbar.BottomAppBar>
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/blue_CE4"
+            app:fabAlignmentMode="center"
+            app:fabAnchorMode="cradle"
+            app:fabCradleMargin="24dp"
+            app:fabCradleRoundedCornerRadius="56dp">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab1"
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigationMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:elevation="0dp"
+                app:itemActiveIndicatorStyle="@null"
+                app:itemIconTint="@color/bottom_nav_color"
+                app:itemRippleColor="@color/transparent"
+                app:labelVisibilityMode="unlabeled"
+                app:menu="@menu/bottom_menu" />
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/blue_CE4"
+            android:src="@drawable/ic_headphones"
+            app:layout_anchor="@id/bottomAppBar"
+            app:maxImageSize="32dp"
+            app:shapeAppearanceOverlay="@style/RoundedFAB"
+            app:tint="@color/white_FFF" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@id/bottomAppBar"
-        android:backgroundTint="@color/blue_CE4"
-        app:shapeAppearanceOverlay="@style/RoundedFAB"
-        app:tint="@color/white_FFF"
-        android:src="@drawable/ic_headphones"
-        app:maxImageSize="32dp" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/drawer_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -90,7 +90,7 @@ public class NotificationFragment extends Fragment implements SocketManager.Upda
     public void showOldMessage(List<Message> messageList) {
         requireActivity().runOnUiThread(() -> {
             String userId = new SharedPrefHelper(requireContext()).getUser().get_id();
-            ChatAdminAdapter chatAdminAdapter = new ChatAdminAdapter(userId, messageList);
+            ChatAdminAdapter chatAdminAdapter = new ChatAdminAdapter(getContext(),userId, messageList);
             rvChatAdmin.setAdapter(chatAdminAdapter);
             rvChatAdmin.setLayoutManager(new LinearLayoutManager(getContext()));
             rvChatAdmin.scrollToPosition(rvChatAdmin.getAdapter().getItemCount() - 1);

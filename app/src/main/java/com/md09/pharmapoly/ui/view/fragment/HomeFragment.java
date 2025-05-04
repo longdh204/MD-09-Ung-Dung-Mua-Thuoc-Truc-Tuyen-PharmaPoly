@@ -172,9 +172,9 @@ public class HomeFragment extends Fragment {
 
         circleIndicator.setViewPager(viewPager2);
 
-        drawerLayout = view.findViewById(R.id.drawer_layout);
+        drawerLayout = requireActivity().findViewById(R.id.drawer_layout);
         ImageView menuIcon = view.findViewById(R.id.menu_icon);
-        NavigationView navigationView = view.findViewById(R.id.navigation_view);
+        NavigationView navigationView = requireActivity().findViewById(R.id.navigation_view);
         Typeface customFont = ResourcesCompat.getFont(requireContext(), R.font.be_vietnam_pro_bold);
         navigationView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white));
 

@@ -145,7 +145,7 @@ public interface ApiService {
     Call<ApiResponse<Cart>> cart(
             @Header("Authorization") String token
     );
-    @GET("user/notification")
+    @GET("user/notifications")
     Call<ApiResponse<List<Notification>>> getNotification(
             @Header("Authorization") String token
     );
@@ -196,9 +196,9 @@ public interface ApiService {
     Call<ApiResponse<List<Question>>> getProductQuestions(
             @Path("productId") String productId,
             @Header("Authorization") String token);
-    @GET("api/product/{productId}/details")
+    @GET("product/{productId}/details")
     Call<Product> getProductDetails(@Path("productId") String productId);
-    @GET("api/product/{productId}/reviews")
+    @GET("product/{productId}/reviews")
     Call<ApiResponse<List<ProductReview>>> getProductReviews(
             @Path("productId") String productId,
             @Header("Authorization") String token);

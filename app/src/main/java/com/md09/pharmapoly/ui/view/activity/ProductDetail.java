@@ -1,5 +1,6 @@
 package com.md09.pharmapoly.ui.view.activity;
 
+import static android.view.View.GONE;
 import static com.md09.pharmapoly.utils.Constants.PRODUCT_ADDED_TO_CART_KEY;
 import static com.md09.pharmapoly.utils.Constants.formatCurrency;
 
@@ -82,7 +83,7 @@ public class ProductDetail extends AppCompatActivity {
     private QuestionAdapter questionAdapter;
     private List<Question> questionList;
     private Button showMoreReviewsButton;
-    private LinearLayout btn_purchase, layout_product_type;
+    private LinearLayout btn_purchase, layout_product_type,layout_question;
     private ImageView backBtn;
     private boolean isProductAdded = false;
     private PurchaseBottomSheet purchaseBottomSheet;
@@ -187,7 +188,7 @@ public class ProductDetail extends AppCompatActivity {
         String productId = getIntent().getStringExtra("product_id");
         fetchProductQuestions(productId, token, questionAdapter);
 
-        Button ratingButton = findViewById(R.id.ratingButton); // giả sử bạn có một nút đánh giá
+        Button ratingButton = findViewById(R.id.ratingButton);
         ratingButton.setOnClickListener(v -> {
             showRatingDialog(); // Hiển thị dialog đánh giá khi người dùng nhấn nút
         });
@@ -483,6 +484,9 @@ public class ProductDetail extends AppCompatActivity {
         reviewList = new ArrayList<>();
         reviewAdapter = new ReviewAdapter(this, reviewList);
         userReviewRecyclerView.setAdapter(reviewAdapter);
+
+        layout_question = findViewById(R.id.layout_question);
+        layout_question.setVisibility(GONE);
     }
 
     // lấy product details
