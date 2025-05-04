@@ -235,6 +235,11 @@ public class CheckoutActivity extends AppCompatActivity {
         paymentStatusRunnable = new Runnable() {
             @Override
             public void run() {
+                if (isFinishing() || isDestroyed()) {
+                    stopListeningPaymentStatus();
+                    return;
+                }
+
                 new RetrofitClient().callAPI().getPaymentStatusStatus(orderId,
                                 "Bearer " + new SharedPrefHelper(CheckoutActivity.this).getToken())
                         .enqueue(new Callback<ApiResponse<Void>>() {
@@ -247,7 +252,7 @@ public class CheckoutActivity extends AppCompatActivity {
                                             finish();
                                         });
                                         bottomSheet.show(getSupportFragmentManager(), "SuccessMessageBottomSheet");
-                                        dialog.dismiss();
+                                        if (dialog != null) dialog.dismiss();
                                         stopListeningPaymentStatus();
                                     } else {
                                         scheduleNextCheck();
@@ -266,6 +271,16 @@ public class CheckoutActivity extends AppCompatActivity {
         };
 
         handler.post(paymentStatusRunnable);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopListeningPaymentStatus();
+    }
+    @Override
+    public void onBackPressed() {
+        stopListeningPaymentStatus();
+        super.onBackPressed();
     }
 
     private void scheduleNextCheck() {

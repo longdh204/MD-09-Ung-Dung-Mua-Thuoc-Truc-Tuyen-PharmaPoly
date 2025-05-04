@@ -1,5 +1,7 @@
 package com.md09.pharmapoly.network;
 
+import static com.md09.pharmapoly.utils.Constants.BASE_URL;
+
 import android.util.Log;
 
 import com.md09.pharmapoly.Models.Message;
@@ -17,7 +19,7 @@ import io.socket.client.Socket;
 
 public class SocketManager {
     private UpdateChatFragment updateChatFragment;
-    private static final String SERVER_URL = "https://pharmapoly-server.onrender.com/api/";
+//    private static final String SERVER_URL = "https://pharmapoly-server.onrender.com/api/";
 //    private static final String SERVER_URL = "http://192.168.9.223:3000";
     private static SocketManager instance;
     private Socket socket;
@@ -28,7 +30,7 @@ public class SocketManager {
         try {
             IO.Options options = new IO.Options();
             options.query = "userId=" + userId;
-            socket = IO.socket(SERVER_URL, options);
+            socket = IO.socket(BASE_URL, options);
         } catch (URISyntaxException e) {
             Log.e("SocketIO", "Lỗi kết nối Socket.IO: " + e.getMessage());
         }

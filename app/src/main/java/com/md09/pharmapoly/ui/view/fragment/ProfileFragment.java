@@ -15,11 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.md09.pharmapoly.R;
+import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.data.model.User;
+import com.md09.pharmapoly.network.RetrofitClient;
 import com.md09.pharmapoly.ui.view.activity.AddressActivity;
 import com.md09.pharmapoly.ui.view.activity.OrderManagementActivity;
 import com.md09.pharmapoly.ui.view.activity.PhoneNumber;
@@ -28,6 +31,12 @@ import com.md09.pharmapoly.ui.view.activity.ChangePassword;
 import com.md09.pharmapoly.ui.view.activity.ProfileUpdate;
 import com.md09.pharmapoly.utils.DialogHelper;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
+
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -89,9 +98,20 @@ public class ProfileFragment extends Fragment {
             layout_language,
             btn_vietnamese,
             btn_english;
-    private TextView tv_phone_number, tv_full_name;
+    private TextView
+            tv_badge_processing,
+            tv_badge_shipping,
+            tv_badge_delivered,
+            tv_badge_cancelled,
+            tv_phone_number,
+            tv_full_name;
     private ImageView img_user_avatar, img_arrow_right_language;
     private AppCompatButton btn_logout;
+    private RelativeLayout
+            layout_badge_processing,
+            layout_badge_shipping,
+            layout_badge_delivered,
+            layout_badge_cancelled;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -143,11 +163,11 @@ public class ProfileFragment extends Fragment {
 
         btn_vietnamese.setOnClickListener(v -> {
             new SharedPrefHelper(getContext()).saveLanguage("vi");
-            setLocale(getContext(),"vi");
+            setLocale(getContext(), "vi");
         });
         btn_english.setOnClickListener(v -> {
             new SharedPrefHelper(getContext()).saveLanguage("en");
-            setLocale(getContext(),"en");
+            setLocale(getContext(), "en");
         });
 
 //        btn_manage_card.setOnClickListener(v -> {
@@ -166,8 +186,10 @@ public class ProfileFragment extends Fragment {
                     }
             );
         });
+
         return view;
     }
+
     private void performLogout() {
         SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(getContext());
         sharedPrefHelper.clearData();
@@ -181,10 +203,52 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        getNewOrderCount();
         if (new SharedPrefHelper(getContext()).getBooleanState(USER_PROFILE_UPDATED_KEY, false)) {
             LoadUserInfo();
             new SharedPrefHelper(getContext()).resetBooleanState(USER_PROFILE_UPDATED_KEY);
         }
+    }
+
+    private void getNewOrderCount() {
+        new RetrofitClient()
+                .callAPI()
+                .getNewOrderCount("Bearer " + new SharedPrefHelper(getContext()).getToken())
+                .enqueue(new Callback<ApiResponse<Map<String, Integer>>>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse<Map<String, Integer>>> call, Response<ApiResponse<Map<String, Integer>>> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            Map<String, Integer> orderCounts = response.body().getData();
+
+                            int processingCount = orderCounts.get("processing");
+                            int shippingCount = orderCounts.get("shipping");
+                            int deliveredCount = orderCounts.get("delivered");
+                            int canceledCount = orderCounts.get("canceled");
+
+                            if (processingCount > 0) {
+                                layout_badge_processing.setVisibility(View.VISIBLE);
+                                tv_badge_processing.setText(String.valueOf(processingCount));
+                            } else layout_badge_processing.setVisibility(View.GONE);
+                            if (shippingCount > 0) {
+                                layout_badge_shipping.setVisibility(View.VISIBLE);
+                                tv_badge_shipping.setText(String.valueOf(shippingCount));
+                            } else layout_badge_shipping.setVisibility(View.GONE);
+//                            if (deliveredCount > 0) {
+//                                layout_badge_delivered.setVisibility(View.VISIBLE);
+//                                tv_badge_delivered.setText(String.valueOf(deliveredCount));
+//                            } else layout_badge_delivered.setVisibility(View.GONE);
+//                            if (canceledCount > 0) {
+//                                layout_badge_cancelled.setVisibility(View.VISIBLE);
+//                                tv_badge_cancelled.setText(String.valueOf(canceledCount));
+//                            } else layout_badge_cancelled.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponse<Map<String, Integer>>> call, Throwable t) {
+
+                    }
+                });
     }
 
     private void InitUI(View view) {
@@ -208,6 +272,17 @@ public class ProfileFragment extends Fragment {
         btn_vietnamese = view.findViewById(R.id.btn_vietnamese);
         btn_english = view.findViewById(R.id.btn_english);
         layout_language = view.findViewById(R.id.layout_language);
+
+        tv_badge_processing = view.findViewById(R.id.tv_badge_processing);
+        tv_badge_shipping = view.findViewById(R.id.tv_badge_shipping);
+        tv_badge_delivered = view.findViewById(R.id.tv_badge_delivered);
+        tv_badge_cancelled = view.findViewById(R.id.tv_badge_cancelled);
+
+        layout_badge_processing = view.findViewById(R.id.layout_badge_processing);
+        layout_badge_shipping = view.findViewById(R.id.layout_badge_shipping);
+        layout_badge_delivered = view.findViewById(R.id.layout_badge_delivered);
+        layout_badge_cancelled = view.findViewById(R.id.layout_badge_cancelled);
+
         LoadUserInfo();
     }
 

@@ -88,7 +88,7 @@ public interface ApiService {
             @Body Map<String, Object> data,
             @Header("Authorization") String token
     );
-    @GET("orders/payment_status/:order_id")
+    @GET("orders/payment_status/{order_id}")
     Call<ApiResponse<Void>> getPaymentStatusStatus(
             @Path("order_id") String order_id,
             @Header("Authorization") String token
@@ -101,6 +101,10 @@ public interface ApiService {
     @GET("orders")
     Call<ApiResponse<List<Order>>> getOrders(
             @Query("group") String group,
+            @Header("Authorization") String token
+    );
+    @GET("orders/count")
+    Call<ApiResponse<Map<String,Integer>>> getNewOrderCount(
             @Header("Authorization") String token
     );
     @POST("calculate-shipping-fee")

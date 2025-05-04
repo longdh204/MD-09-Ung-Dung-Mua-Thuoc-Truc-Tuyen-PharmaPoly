@@ -73,7 +73,7 @@ public class ChatWithAdminFragment extends Fragment implements SocketManager.Upd
                 return;
             }
             socketManager.sendMessage("67b344c3744eaa2ff0f0ce7d", message);
-            edTextMessage.setText("");  // Sau khi gửi tin nhắn, làm sạch EditText
+            edTextMessage.setText("");
         });
 
         int defaultMarginBottom = getResources().getDimensionPixelSize(R.dimen.default_margin_bottom);
@@ -97,7 +97,6 @@ public class ChatWithAdminFragment extends Fragment implements SocketManager.Upd
                 }});
             }
         });
-
 
         return view;
     }
