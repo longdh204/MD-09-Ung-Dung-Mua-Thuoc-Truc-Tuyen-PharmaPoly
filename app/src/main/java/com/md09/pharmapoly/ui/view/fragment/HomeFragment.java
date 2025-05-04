@@ -227,7 +227,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        menuIcon.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
+        // Sửa sự kiện mở Drawer để luôn gọi DrawerLayout của MainActivity
+        menuIcon.setOnClickListener(v -> {
+            androidx.drawerlayout.widget.DrawerLayout drawerLayout = requireActivity().findViewById(R.id.drawer_layout);
+            drawerLayout.openDrawer(androidx.core.view.GravityCompat.START);
+        });
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_notification) {

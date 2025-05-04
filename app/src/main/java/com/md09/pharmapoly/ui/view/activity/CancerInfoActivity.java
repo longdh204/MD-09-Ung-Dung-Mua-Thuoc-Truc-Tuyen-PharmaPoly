@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,37 +23,17 @@ import java.util.List;
 
 public class CancerInfoActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private ArticleAdapter articleAdapter;
     private List<Article> articleList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_cancer_info);
-
-        // Initialize RecyclerView
-        recyclerView = findViewById(R.id.recycler_view_articles);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Prepare articles
-        articleList = new ArrayList<>();
-        loadArticles();
-
-        articleAdapter = new ArticleAdapter(articleList);
-        recyclerView.setAdapter(articleAdapter);
-
         // Set click listeners for categories
         setCategoryClickListeners();
     }
 
-    private void loadArticles() {
-        // Add sample articles
-        articleList.add(new Article("Tổng quan bệnh ung thư", "Nội dung bài viết tổng quan về bệnh ung thư..."));
-        articleList.add(new Article("Đau đầu có phải là dấu hiệu ung thư?", "Nội dung bài viết về đau đầu..."));
-        articleList.add(new Article("Dinh dưỡng trong điều trị ung thư", "Nội dung bài viết về dinh dưỡng..."));
-        // Add more articles as needed
-    }
 
     private void setCategoryClickListeners() {
         findViewById(R.id.txt_cancer_types).setOnClickListener(new View.OnClickListener() {

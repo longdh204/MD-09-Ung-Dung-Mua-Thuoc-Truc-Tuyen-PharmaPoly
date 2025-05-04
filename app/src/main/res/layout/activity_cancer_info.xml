@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/lightGrey"
     android:orientation="vertical">
 
@@ -40,110 +41,211 @@
                 android:textAlignment="center"
                 android:text="Hiểu về bệnh ung thư"
                 android:textColor="@color/white_FFF"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
+    <!-- Horizontal ScrollView for categories -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp">
+
+        <LinearLayout
+            android:id="@+id/category_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_cancer_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Hiểu về bệnh ung thư"
+                android:textSize="16sp"
+                android:textColor="@color/blue"
+                android:textStyle="bold"
+                android:background="@drawable/background_thick_bottom_corner"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/txt_cancer_types"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Các loại ung thư"
+                android:textSize="16sp"
+                android:textColor="@color/blue_CE4"
+                android:background="@drawable/background_thin_corner"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/txt_screening"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Sàng lọc ung thư"
+                android:textSize="16sp"
+                android:textColor="@color/blue_CE4"
+                android:background="@drawable/background_thin_corner"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/txt_treatment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Điều trị ung thư"
+                android:textSize="16sp"
+                android:textColor="@color/blue_CE4"
+                android:background="@drawable/background_thin_corner"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/txt_prevention"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Phòng ngừa"
+                android:textSize="16sp"
+                android:textColor="@color/blue_CE4"
+                android:background="@drawable/background_thin_corner"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        android:padding="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/hieuvebenh"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Thông tin về bệnh ung thư"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/black_333"
-                android:layout_marginBottom="16dp" />
+                android:orientation="vertical"
+                android:background="#E2E0FF"
+                android:padding="0dp"
+                app:layout_constraintTop_toTopOf="@+id/dotsIndicator">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Bệnh ung thư là một nhóm bệnh liên quan đến việc phân chia tế bào một cách vô tổ chức và những tế bào đó có khả năng xâm lấn những mô khác bằng cách phát triển trực tiếp vào mô lân cận hoặc di chuyển đến nơi xa (di căn)."
-                android:textSize="16sp"
-                android:textColor="@color/black_333"
-                android:layout_marginBottom="16dp" />
-
-            <!-- Horizontal ScrollView for categories -->
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp">
-
-                <LinearLayout
-                    android:id="@+id/category_container"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/overpass_regular"
+                    android:text="Hiểu về bệnh ung thư từ A-Z"
+                    android:textColor="#505050"
+                    android:textSize="17dp"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/txt_cancer_types"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:text="Các loại ung thư"
-                        android:textSize="16sp"
-                        android:textColor="@color/blue_CE4"
-                        android:background="@drawable/border"
-                        android:layout_marginEnd="8dp"
-                        android:clickable="true"
-                        android:focusable="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/overpass_regular"
+                    android:text="Thông tin đã được biên soạn và xác thực"
+                    android:textColor="@color/black_333"
+                    android:textSize="20dp"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/txt_screening"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:text="Sàng lọc ung thư"
-                        android:textSize="16sp"
-                        android:textColor="@color/blue_CE4"
-                        android:background="@drawable/border"
-                        android:layout_marginEnd="8dp"
-                        android:clickable="true"
-                        android:focusable="true" />
 
-                    <TextView
-                        android:id="@+id/txt_treatment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:text="Điều trị ung thư"
-                        android:textSize="16sp"
-                        android:textColor="@color/blue_CE4"
-                        android:background="@drawable/border"
-                        android:layout_marginEnd="8dp"
-                        android:clickable="true"
-                        android:focusable="true" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:src="@drawable/nuinui"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="-60dp" />
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/txt_prevention"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:text="Phòng ngừa"
-                        android:textSize="16sp"
-                        android:textColor="@color/blue_CE4"
-                        android:background="@drawable/border"
-                        android:layout_marginEnd="8dp"
-                        android:clickable="true"
-                        android:focusable="true" />
-                </LinearLayout>
-            </HorizontalScrollView>
-
-            <!-- RecyclerView for articles -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_articles"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hiểu về bệnh ung thư"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_333"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ung thư là một nhóm bệnh phức tạp, trong đó các tế bào trong cơ thể phát triển một cách không kiểm soát và có khả năng xâm lấn vào các mô và cơ quan khác. Những tế bào này có thể hình thành khối u, gây ra các vấn đề sức khỏe nghiêm trọng và thậm chí đe dọa tính mạng. Ung thư có thể xảy ra ở bất kỳ bộ phận nào của cơ thể, từ da, phổi, vú, đại tràng, đến các cơ quan nội tạng như gan và thận. Mỗi loại ung thư có thể có triệu chứng, nguyên nhân và phương pháp điều trị khác nhau. Theo Tổ chức Y tế Thế giới (WHO), ung thư là nguyên nhân gây tử vong hàng đầu trên toàn cầu, với hàng triệu ca mắc mới mỗi năm. Điều này nhấn mạnh tầm quan trọng của việc hiểu rõ về bệnh ung thư để có thể phát hiện sớm và điều trị hiệu quả."
+                    android:textSize="16sp"
+                    android:textColor="@color/black_333"
+                    android:layout_marginBottom="16dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/hieuvebenh"
+                    android:scaleType="centerCrop"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nguyên nhân gây ung thư rất đa dạng và phức tạp. Một số yếu tố có thể góp phần vào sự phát triển của bệnh bao gồm di truyền, môi trường sống, chế độ ăn uống và lối sống. Ví dụ, việc tiếp xúc với hóa chất độc hại, bức xạ, hoặc thói quen xấu như hút thuốc lá có thể làm tăng nguy cơ mắc bệnh. Hút thuốc lá, đặc biệt, được biết đến là nguyên nhân hàng đầu gây ra ung thư phổi và nhiều loại ung thư khác. Ngoài ra, một số loại ung thư có thể di truyền trong gia đình, làm cho các thành viên trong gia đình có nguy cơ cao hơn so với những người khác. Những người có tiền sử gia đình mắc ung thư nên thực hiện các biện pháp sàng lọc thường xuyên hơn để phát hiện sớm bệnh. Thực phẩm mà chúng ta tiêu thụ cũng có thể ảnh hưởng đến nguy cơ mắc ung thư; chế độ ăn uống thiếu hụt vitamin và khoáng chất, hoặc chế độ ăn nhiều thực phẩm chế biến sẵn có thể làm tăng nguy cơ mắc bệnh."
+                    android:textSize="16sp"
+                    android:textColor="@color/black_333"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Triệu chứng của ung thư có thể khác nhau tùy thuộc vào loại ung thư và vị trí của khối u. Một số triệu chứng phổ biến bao gồm giảm cân không rõ lý do, mệt mỏi kéo dài, đau đớn không rõ nguyên nhân và sự thay đổi trong thói quen đi tiêu hoặc tiểu tiện. Ví dụ, ung thư đại trực tràng có thể gây ra sự thay đổi trong thói quen đi tiêu, trong khi ung thư vú có thể biểu hiện qua sự xuất hiện của khối u trong vú. Nếu bạn gặp phải bất kỳ triệu chứng nào trong số này, điều quan trọng là phải tham khảo ý kiến bác sĩ để được kiểm tra kịp thời. Việc phát hiện sớm ung thư có thể giúp tăng cường hiệu quả điều trị và cải thiện chất lượng cuộc sống cho bệnh nhân. Đôi khi, ung thư có thể không có triệu chứng rõ ràng ở giai đoạn đầu, vì vậy việc thực hiện các xét nghiệm sàng lọc định kỳ là rất quan trọng."
+                    android:textSize="16sp"
+                    android:textColor="@color/black_333"
+                    android:layout_marginBottom="16dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/hieuvebenhungthuu"
+                    android:scaleType="centerCrop"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Điều trị ung thư thường bao gồm nhiều phương pháp khác nhau, tùy thuộc vào loại ung thư và giai đoạn của bệnh. Phẫu thuật có thể được sử dụng để loại bỏ khối u, trong khi hóa trị và xạ trị có thể được áp dụng để tiêu diệt tế bào ung thư còn lại. Hóa trị sử dụng thuốc để tiêu diệt tế bào ung thư, trong khi xạ trị sử dụng bức xạ để tiêu diệt tế bào ung thư tại chỗ. Ngoài ra, liệu pháp miễn dịch cũng đang trở thành một phương pháp điều trị hiệu quả cho một số loại ung thư nhất định, giúp tăng cường hệ thống miễn dịch của cơ thể để chống lại bệnh. Việc phát hiện sớm và điều trị kịp thời có thể cải thiện đáng kể tỷ lệ sống sót và chất lượng cuộc sống của bệnh nhân. Bên cạnh đó, các nghiên cứu mới về liệu pháp nhắm mục tiêu và liệu pháp gen cũng đang mở ra hy vọng cho những bệnh nhân mắc ung thư, cung cấp các phương pháp điều trị ít tác dụng phụ hơn và hiệu quả hơn."
+                    android:textSize="16sp"
+                    android:textColor="@color/black_333"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nguồn tham khảo: Tổ chức Y tế Thế giới (WHO), Trung tâm Kiểm soát và Phòng ngừa Dịch bệnh (CDC), Viện Ung thư Quốc gia (NCI). Những nguồn tài liệu này cung cấp thông tin đáng tin cậy và chính xác về bệnh ung thư, giúp người dân hiểu rõ hơn về căn bệnh này và các biện pháp phòng ngừa cũng như điều trị. Việc nâng cao nhận thức về ung thư không chỉ giúp cá nhân bảo vệ sức khỏe của mình mà còn góp phần vào việc xây dựng một cộng đồng khỏe mạnh hơn."
+                    android:textSize="16sp"
+                    android:textColor="@color/black_333"
+                    android:layout_marginBottom="50dp" />
+
+            </LinearLayout>
         </LinearLayout>
+
     </ScrollView>
 </LinearLayout>
