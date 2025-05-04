@@ -7,10 +7,52 @@
     android:layout_height="match_parent"
     tools:context=".ui.view.aboutpharmapoly.pharmacy_introduction">
 
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_bottom_corners"
+        android:backgroundTint="@color/blue_CE4"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <!-- Phần đầu tiêu đề -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="20dp">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/arrow_back"
+                android:backgroundTint="@color/white_FFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/be_vietnam_pro_bold"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="Chính sách nội dung"
+                android:textColor="@color/white_FFF"
+                android:layout_marginRight="20dp"
+                android:textSize="17sp" />
+        </LinearLayout>
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        android:layout_marginTop="120dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,142 +60,109 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <!-- Title Header -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/btn_back"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="20dp"
-                    android:src="@drawable/arrow_back"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/overpass_regular"
-                    android:text="Chính sách nội dung"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/btn_back"
-                    android:layout_marginLeft="20dp"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- Policy Content -->
             <TextView
-                android:id="@+id/textViewPolicy"
+                android:id="@+id/textViewPurpose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chính sách nội dung tại Nhà thuốc ABC"
+                android:layout_marginTop="0dp"
+                android:text="Mục đích của chính sách nội dung này là nhằm bảo vệ quyền lợi của khách hàng và đảm bảo rằng mọi thông tin được cung cấp trên nền tảng của chúng tôi đều chính xác, đáng tin cậy và có giá trị. Chúng tôi cam kết tạo ra một môi trường an toàn và thân thiện cho tất cả người dùng, đồng thời khuyến khích sự chia sẻ thông tin tích cực và có trách nhiệm."
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="22dp"
-                android:layout_marginTop="30dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_back" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/textViewContent1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="I. Chính sách bảo vệ quyền lợi khách hàng"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="18dp"
                 android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewPolicy" />
+                android:text="I. Nội dung được phép"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewContentDescription1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nhà thuốc ABC cam kết bảo vệ quyền lợi của khách hàng bằng cách cung cấp thông tin chính xác, rõ ràng và minh bạch về sản phẩm, dịch vụ. Chúng tôi luôn ưu tiên sự hài lòng của khách hàng và bảo đảm không có bất kỳ thông tin sai lệch nào về các sản phẩm chúng tôi cung cấp."
-                android:textColor="@color/black"
                 android:layout_marginTop="10dp"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                app:layout_constraintTop_toBottomOf="@id/textViewContent1" />
+                android:textSize="15sp"
+                android:text="Người dùng có thể đăng tải các bài viết, hình ảnh, video và đánh giá sản phẩm liên quan đến dược phẩm và chăm sóc sức khỏe. Nội dung phải rõ ràng, chính xác và không vi phạm bản quyền hoặc quyền lợi của người khác."
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/textViewContent2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="II. Chính sách đổi trả hàng"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="18dp"
                 android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewContentDescription1" />
+                android:text="II. Nội dung bị cấm"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewContentDescription2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chúng tôi hỗ trợ chính sách đổi trả hàng trong vòng 7 ngày kể từ ngày nhận hàng. Sản phẩm phải còn nguyên tem, nhãn mác và chưa qua sử dụng. Quá trình đổi trả sẽ được thực hiện nhanh chóng để bảo vệ quyền lợi của khách hàng."
-                android:textColor="@color/black"
                 android:layout_marginTop="10dp"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                app:layout_constraintTop_toBottomOf="@id/textViewContent2" />
+                android:textSize="15sp"
+                android:text="Các loại nội dung sau đây bị cấm: 1) Nội dung khiêu dâm hoặc có tính chất tình dục; 2) Nội dung bạo lực, kích động, hoặc có tính chất phân biệt; 3) Thông tin sai lệch hoặc gây hiểu lầm về sản phẩm; 4) Nội dung vi phạm bản quyền hoặc quyền sở hữu trí tuệ của người khác; 5) Nội dung quảng cáo cho các sản phẩm không được phép hoặc bất hợp pháp."
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView8"
+                app:srcCompat="@drawable/chinhsachnoidung" />
 
             <TextView
                 android:id="@+id/textViewContent3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:text="III. Chính sách bảo mật thông tin"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="18dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewContentDescription2" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewContentDescription3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chúng tôi cam kết bảo mật tuyệt đối các thông tin cá nhân của khách hàng, bao gồm tên, địa chỉ, số điện thoại, email và thông tin thanh toán. Các thông tin này chỉ được sử dụng để phục vụ cho việc giao hàng và không bao giờ được chia sẻ với bên thứ ba."
-                android:textColor="@color/black"
                 android:layout_marginTop="10dp"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                app:layout_constraintTop_toBottomOf="@id/textViewContent3" />
+                android:textSize="15sp"
+                android:text="Chúng tôi cam kết bảo mật tuyệt đối các thông tin cá nhân của khách hàng, bao gồm tên, địa chỉ, số điện thoại, email và thông tin thanh toán. Các thông tin này chỉ được sử dụng để phục vụ cho việc giao hàng và không bao giờ được chia sẻ với bên thứ ba."
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/textViewContent4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="IV. Quyền lợi khách hàng khi mua hàng tại Nhà thuốc ABC"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="18dp"
                 android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewContentDescription3" />
+                android:text="IV. Quyền lợi khách hàng khi mua hàng tại Nhà thuốc PharmaPoly"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewContentDescription4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Khách hàng có quyền yêu cầu tư vấn trước khi mua hàng, đổi trả sản phẩm trong vòng 7 ngày, và được hưởng các ưu đãi đặc biệt khi mua hàng tại Nhà thuốc ABC."
-                android:textColor="@color/black"
                 android:layout_marginTop="10dp"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                app:layout_constraintTop_toBottomOf="@id/textViewContent4" />
+                android:textSize="15sp"
+                android:text="Khách hàng có quyền truy cập vào thông tin sản phẩm chi tiết, bao gồm thành phần, công dụng và hướng dẫn sử dụng. Ngoài ra, khách hàng sẽ được tham gia các chương trình khuyến mãi định kỳ, nhận thông báo về sản phẩm mới và có cơ hội tham gia các sự kiện sức khỏe do Nhà thuốc PharmaPoly tổ chức. Chúng tôi luôn nỗ lực để mang đến trải nghiệm mua sắm tốt nhất cho khách hàng."
+                android:textColor="@color/black" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="abc"
+                android:textSize="35dp"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/textView3_4_1" />
             <!-- Add More Sections as Needed -->
 
         </LinearLayout>

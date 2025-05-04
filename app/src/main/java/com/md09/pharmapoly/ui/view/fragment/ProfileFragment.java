@@ -106,6 +106,29 @@ public class ProfileFragment extends Fragment {
 
         InitUI(view);
 
+        // Thêm sự kiện click cho introduction
+        LinearLayout introduction = view.findViewById(R.id.introduction);
+        introduction.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), com.md09.pharmapoly.ui.view.aboutpharmapoly.pharmacy_introduction.class);
+            startActivity(intent);
+        });
+        // Thêm sự kiện click cho introduction
+        LinearLayout content = view.findViewById(R.id.content_policy);
+        content.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), com.md09.pharmapoly.ui.view.aboutpharmapoly.Content_Policy.class);
+            startActivity(intent);
+        });
+        LinearLayout shipping = view.findViewById(R.id.Shipping_Policy);
+        shipping.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), com.md09.pharmapoly.ui.view.aboutpharmapoly.Shipping_Policy.class);
+            startActivity(intent);
+        });
+        LinearLayout privacy = view.findViewById(R.id.privacy_policy);
+        privacy.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), com.md09.pharmapoly.ui.view.aboutpharmapoly.Privacy_Policy.class);
+            startActivity(intent);
+        });
+
         LinearLayout[] buttons = {btn_processing, btn_shipping, btn_delivered, btn_cancelled};
 
         for (int i = 0; i < buttons.length; i++) {
@@ -148,11 +171,11 @@ public class ProfileFragment extends Fragment {
 
         btn_vietnamese.setOnClickListener(v -> {
             new SharedPrefHelper(getContext()).saveLanguage("vi");
-            setLocale(getContext(),"vi");
+            setLocale(getContext(), "vi");
         });
         btn_english.setOnClickListener(v -> {
             new SharedPrefHelper(getContext()).saveLanguage("en");
-            setLocale(getContext(),"en");
+            setLocale(getContext(), "en");
         });
 
 //        btn_manage_card.setOnClickListener(v -> {
@@ -173,6 +196,7 @@ public class ProfileFragment extends Fragment {
         });
         return view;
     }
+
     private void performLogout() {
         SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(getContext());
         sharedPrefHelper.clearData();
