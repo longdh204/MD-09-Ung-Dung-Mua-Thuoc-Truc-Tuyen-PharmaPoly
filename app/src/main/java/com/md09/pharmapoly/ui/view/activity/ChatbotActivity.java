@@ -34,13 +34,17 @@ public class ChatbotActivity extends AppCompatActivity {
     private List<ChatMessage> chatMessages;
     private LinearLayout suggestionLayout, suggestionLayout2;
     private DatabaseReference chatbotRef;
+    private ImageButton btn_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chatbot);
-
+        btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(v -> {
+            finish();
+        });
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
         inputMessage = findViewById(R.id.inputMessage);
         sendButton = findViewById(R.id.sendButton);

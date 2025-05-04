@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +22,7 @@ import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.network.ApiService;
 import com.md09.pharmapoly.network.RetrofitClient;
+import com.md09.pharmapoly.ui.view.activity.cancer.PreventionActivity;
 import com.md09.pharmapoly.ui.view.fragment.HomeFragment;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 
@@ -36,6 +39,8 @@ public class Nav_FunctionalFoodActivity extends AppCompatActivity {
     private ProductAdapter productAdapter;
     private final List<Product> allProducts = new ArrayList<>();
     private int loadedCategoryCount = 0;
+    private ImageView btn_back, search, cart;
+
     private final List<String> categoryIds = Arrays.asList(
             "67d3dd545a228bc7cc5bb8eb", // vitamin & khoáng chất
             "67d3ff31b0aaf7c883554c55", // sinh lý & nội tiết tố
@@ -44,10 +49,50 @@ public class Nav_FunctionalFoodActivity extends AppCompatActivity {
             "67d3ff4cb0aaf7c883554c5b", // Hỗ trợ tiêu hóa
             "67d3ff56b0aaf7c883554c5d"  // Thần kinh não
     );
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_functional_food);
+
+        btn_back = findViewById(R.id.btn_back);
+        cart = findViewById(R.id.cart);
+        search = findViewById(R.id.search);
+        search.setOnClickListener(v -> {
+            // Mở màn hình tìm kiếm
+            startActivity(new Intent(Nav_FunctionalFoodActivity.this, SearchActivity.class));
+        });
+        cart.setOnClickListener(v -> {
+            Intent intent = new Intent(Nav_FunctionalFoodActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.putExtra("open_cart", true);
+            startActivity(intent);
+            finish();
+        });
+        btn_back.setOnClickListener(v -> {
+            finish();
+        });
+
+        // Thêm code chuyển màn hình cho các button
+        findViewById(R.id.nav_duocmypham).setOnClickListener(v -> {
+            startActivity(new Intent(Nav_FunctionalFoodActivity.this, Nav_Pharmaceutical_Cosmetics.class));
+            finish();
+        });
+
+        findViewById(R.id.nav_thuoc).setOnClickListener(v -> {
+            startActivity(new Intent(Nav_FunctionalFoodActivity.this, Nav_Medicine.class));
+            finish();
+        });
+
+        findViewById(R.id.nav_chamsoccanhan).setOnClickListener(v -> {
+            startActivity(new Intent(Nav_FunctionalFoodActivity.this, Nav_Personalcare.class));
+            finish();
+        });
+
+        findViewById(R.id.nav_thietbiyte).setOnClickListener(v -> {
+            startActivity(new Intent(Nav_FunctionalFoodActivity.this, Nav_Medical_Equiment.class));
+            finish();
+        });
 
         recyclerView = findViewById(R.id.thucphamchucnang);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -134,6 +179,7 @@ public class Nav_FunctionalFoodActivity extends AppCompatActivity {
                     }
                 });
     }
+
     private void filterProductsByCategory(String categoryId) {
         String token = "Bearer " + new SharedPrefHelper(this).getToken();
         Log.d("FILTER_API", "Gọi API lấy sản phẩm của Category: " + categoryId);

@@ -1,7 +1,10 @@
 package com.md09.pharmapoly.ui.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,11 +28,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Nav_Pharmaceutical_Cosmetics extends AppCompatActivity{
+public class Nav_Pharmaceutical_Cosmetics extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProductAdapter productAdapter;
     private final List<Product> allProducts = new ArrayList<>();
     private int loadedCategoryCount = 0;
+    private ImageView btn_back, search, cart;
+
     private final List<String> categoryIds = Arrays.asList(
             "67d40078b0aaf7c883554d52", // Chăm sóc da mặt
             "67d40083b0aaf7c883554d54", // Chăm sóc cơ thể
@@ -38,10 +43,55 @@ public class Nav_Pharmaceutical_Cosmetics extends AppCompatActivity{
             "67d400efb0aaf7c883554d5a", // Mỹ phẩm trang điểm
             "67d400f6b0aaf7c883554d5c"  // Chăm sóc da vùng mặt
     );
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_pharmaceutical_cosmetics);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        btn_back = findViewById(R.id.btn_back);
+        cart = findViewById(R.id.cart);
+        search = findViewById(R.id.search);
+        search.setOnClickListener(v -> {
+            // Mở màn hình tìm kiếm
+            startActivity(new Intent(Nav_Pharmaceutical_Cosmetics.this, SearchActivity.class));
+        });
+        cart.setOnClickListener(v -> {
+            Intent intent = new Intent(Nav_Pharmaceutical_Cosmetics.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.putExtra("open_cart", true);
+            startActivity(intent);
+            finish();
+        });
+        btn_back.setOnClickListener(v -> {
+            finish();
+        });
+// Thêm code chuyển màn hình cho các button
+        findViewById(R.id.nav_thucphamchucnang).setOnClickListener(v -> {
+            startActivity(new Intent(Nav_Pharmaceutical_Cosmetics.this, Nav_FunctionalFoodActivity.class));
+            finish();
+        });
+        findViewById(R.id.nav_duocmypham).setOnClickListener(v -> {
+            startActivity(new Intent(Nav_Pharmaceutical_Cosmetics.this, Nav_Pharmaceutical_Cosmetics.class));
+            finish();
+        });
+
+        findViewById(R.id.nav_thuoc).setOnClickListener(v -> {
+            startActivity(new Intent(Nav_Pharmaceutical_Cosmetics.this, Nav_Medicine.class));
+            finish();
+        });
+
+        findViewById(R.id.nav_chamsoccanhan).setOnClickListener(v -> {
+            startActivity(new Intent(Nav_Pharmaceutical_Cosmetics.this, Nav_Personalcare.class));
+            finish();
+        });
+
+        findViewById(R.id.nav_thietbiyte).setOnClickListener(v -> {
+            startActivity(new Intent(Nav_Pharmaceutical_Cosmetics.this, Nav_Medical_Equiment.class));
+            finish();
+        });
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         recyclerView = findViewById(R.id.thucphamchucnang);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -58,6 +108,7 @@ public class Nav_Pharmaceutical_Cosmetics extends AppCompatActivity{
         findViewById(R.id.btnchamsocdavungmat).setOnClickListener(v -> filterProductsByCategory("67d400f6b0aaf7c883554d5c"));
 
     }
+
     private void loadAllProducts() {
         String token = "Bearer " + new SharedPrefHelper(this).getToken();
         Log.d("LOAD_ALL_PRODUCTS", "Gọi API lấy tất cả sản phẩm");
@@ -128,6 +179,7 @@ public class Nav_Pharmaceutical_Cosmetics extends AppCompatActivity{
                     }
                 });
     }
+
     private void filterProductsByCategory(String categoryId) {
         String token = "Bearer " + new SharedPrefHelper(this).getToken();
         Log.d("FILTER_API", "Gọi API lấy sản phẩm của Category: " + categoryId);

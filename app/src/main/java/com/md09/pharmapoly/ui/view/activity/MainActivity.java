@@ -56,7 +56,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.main_activity);
-
+        if (getIntent().getBooleanExtra("open_home", false)) {
+            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationMain);
+            bottomNavigationView.setSelectedItemId(R.id.home);
+        }
+        if (getIntent().getBooleanExtra("open_cart", false)) {
+            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationMain);
+            bottomNavigationView.setSelectedItemId(R.id.cart); // tab Cart
+        }
         InitUI();
         loadLocale();
 
@@ -93,6 +100,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent.getBooleanExtra("open_cart", false)) {
+            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationMain);
+            bottomNavigationView.setSelectedItemId(R.id.cart); // tab Cart
+        }
+    }
+
     private void checkAndRequestNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
@@ -103,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -117,16 +135,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadLocale() {
         String langCode = new SharedPrefHelper(this).getLanguage();
-        setLocale(this,langCode);
+        setLocale(this, langCode);
     }
+
     @Override
     public void onResume() {
         super.onResume();
-        if (new SharedPrefHelper(this).getBooleanState(PRODUCT_ADDED_TO_CART_KEY,false) ||
-                new SharedPrefHelper(this).getBooleanState(ORDER_KEY,false)) {
+        if (new SharedPrefHelper(this).getBooleanState(PRODUCT_ADDED_TO_CART_KEY, false) ||
+                new SharedPrefHelper(this).getBooleanState(ORDER_KEY, false)) {
             cartViewModel.FetchCartData(this);
         }
     }
+
     public void UpdateCartBadge(int cartCount) {
         BadgeDrawable badge = bottom_navigation_main.getOrCreateBadge(R.id.cart);
         if (cartCount > 0) {
@@ -138,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
             badge.setVisible(false);
         }
     }
+
     private void SetupBottomNavigation() {
         view_pager_main.setAdapter(bottom_navigation_main_adapter);
 

@@ -1,16 +1,21 @@
 package com.md09.pharmapoly.ui.view.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.md09.pharmapoly.Adapters.PharmacyAdapter;
 import com.md09.pharmapoly.Models.Pharmacy;
 import com.md09.pharmapoly.R;
+import com.md09.pharmapoly.ui.view.fragment.HomeFragment;
 
 
 import java.util.ArrayList;
@@ -38,11 +44,35 @@ public class PharmacyMapActivity extends FragmentActivity implements OnMapReadyC
     private RecyclerView recyclerView;
     private PharmacyAdapter pharmacyAdapter;
 
+    private ImageButton btn_back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pharmacy_map);
         EdgeToEdge.enable(this);
+
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        HomeFragment homeFragment = new HomeFragment();
+//        fragmentTransaction.replace(R.id.fragment_container, homeFragment); // Đảm bảo ID này tồn tại trong layout
+//        fragmentTransaction.addToBackStack(null); // Nếu bạn muốn quay lại fragment trước đó
+//        fragmentTransaction.commit();
+
+        btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(v -> {
+            finish();
+        });
+
+//        btn_back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(PharmacyMapActivity.this, HomeFragment.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(intent);
+//                finish(); // Kết thúc hoạt động hiện tại
+//            }
+//        });
 
         // Khởi tạo FusedLocationProviderClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);

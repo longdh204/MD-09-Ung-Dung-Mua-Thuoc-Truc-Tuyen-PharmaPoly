@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TimePicker;
 
 import androidx.activity.EdgeToEdge;
@@ -50,13 +51,17 @@ public class MedicineReminderActivity extends AppCompatActivity implements Medic
     private List<Reminder> reminderList;
     private CheckBox checkRepeatDaily, checkRepeatHourly;
     private List<Integer> selectedHours;
+    private ImageButton btn_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder);
         EdgeToEdge.enable(this);
-
+        btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(v -> {
+            finish();
+        });
         edtMedicineName = findViewById(R.id.edtMedicineName);
         timePicker = findViewById(R.id.timePicker);
         btnSetReminder = findViewById(R.id.btnSetReminder);

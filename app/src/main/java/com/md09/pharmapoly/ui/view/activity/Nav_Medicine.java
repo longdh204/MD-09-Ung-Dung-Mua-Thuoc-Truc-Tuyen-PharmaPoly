@@ -1,7 +1,10 @@
 package com.md09.pharmapoly.ui.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +33,8 @@ public class Nav_Medicine extends AppCompatActivity {
     private ProductAdapter productAdapter;
     private final List<Product> allProducts = new ArrayList<>();
     private int loadedCategoryCount = 0;
+    private ImageView btn_back, search, cart;
+
     private final List<String> categoryIds = Arrays.asList(
             "67d4015fb0aaf7c883554d5e", // Thuốc dị ứng
             "67d40169b0aaf7c883554d60", // Thuốc da liễu
@@ -44,10 +49,53 @@ public class Nav_Medicine extends AppCompatActivity {
             "67d401aeb0aaf7c883554d72", // Thuốc kháng sinh kháng nấm
             "67d401b3b0aaf7c883554d74"  // Thuốc hệ thần kinh
     );
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_medicine);
+
+        btn_back = findViewById(R.id.btn_back);
+        cart = findViewById(R.id.cart);
+        search = findViewById(R.id.search);
+        search.setOnClickListener(v -> {
+            // Mở màn hình tìm kiếm
+            startActivity(new Intent(Nav_Medicine.this, SearchActivity.class));
+        });
+        cart.setOnClickListener(v -> {
+            Intent intent = new Intent(Nav_Medicine.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.putExtra("open_cart", true);
+            startActivity(intent);
+            finish();
+        });
+        btn_back.setOnClickListener(v -> {
+            finish();
+        });
+// Thêm code chuyển màn hình cho các button
+        findViewById(R.id.nav_thucphamchucnang).setOnClickListener(v -> {
+            startActivity(new Intent(Nav_Medicine.this, Nav_FunctionalFoodActivity.class));
+            finish();
+        });
+        findViewById(R.id.nav_duocmypham).setOnClickListener(v -> {
+            startActivity(new Intent(Nav_Medicine.this, Nav_Pharmaceutical_Cosmetics.class));
+            finish();
+        });
+
+        findViewById(R.id.nav_thuoc).setOnClickListener(v -> {
+            startActivity(new Intent(Nav_Medicine.this, Nav_Medicine.class));
+            finish();
+        });
+
+        findViewById(R.id.nav_chamsoccanhan).setOnClickListener(v -> {
+            startActivity(new Intent(Nav_Medicine.this, Nav_Personalcare.class));
+            finish();
+        });
+
+        findViewById(R.id.nav_thietbiyte).setOnClickListener(v -> {
+            startActivity(new Intent(Nav_Medicine.this, Nav_Medical_Equiment.class));
+            finish();
+        });
 
         recyclerView = findViewById(R.id.thucphamchucnang);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -71,6 +119,7 @@ public class Nav_Medicine extends AppCompatActivity {
         findViewById(R.id.btnthuochethankinh).setOnClickListener(v -> filterProductsByCategory("67d401b3b0aaf7c883554d74"));
 
     }
+
     private void loadAllProducts() {
         String token = "Bearer " + new SharedPrefHelper(this).getToken();
         Log.d("LOAD_ALL_PRODUCTS", "Gọi API lấy tất cả sản phẩm");
@@ -141,6 +190,7 @@ public class Nav_Medicine extends AppCompatActivity {
                     }
                 });
     }
+
     private void filterProductsByCategory(String categoryId) {
         String token = "Bearer " + new SharedPrefHelper(this).getToken();
         Log.d("FILTER_API", "Gọi API lấy sản phẩm của Category: " + categoryId);
