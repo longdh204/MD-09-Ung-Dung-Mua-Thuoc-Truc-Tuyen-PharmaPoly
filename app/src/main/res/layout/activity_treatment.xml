@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightGrey"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_bottom_corners"
+        android:backgroundTint="@color/blue_CE4"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="20dp">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/arrow_back"
+                android:backgroundTint="@color/white_FFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/be_vietnam_pro_bold"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="Điều trị ung thư"
+                android:textColor="@color/white_FFF"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Horizontal ScrollView for categories -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:id="@+id/category_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_cancer_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Hiểu về bệnh ung thư"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_CE4"
+                        android:background="@drawable/background_thin_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:id="@+id/txt_cancer_types"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Các loại ung thư"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_CE4"
+                        android:background="@drawable/background_thin_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:id="@+id/txt_screening"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Sàng lọc ung thư"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_CE4"
+                        android:background="@drawable/background_thin_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:id="@+id/txt_treatment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Điều trị ung thư"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue"
+                        android:textStyle="bold"
+                        android:background="@drawable/background_thick_bottom_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:id="@+id/txt_prevention"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Phòng ngừa"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_CE4"
+                        android:background="@drawable/background_thin_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:layout_marginBottom="6dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Cách điều trị ung thư"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ung thư là một trong những căn bệnh nghiêm trọng nhất hiện nay, ảnh hưởng đến hàng triệu người trên toàn thế giới. Tuy nhiên, với sự phát triển của y học hiện đại, có nhiều phương pháp điều trị hiệu quả đang được áp dụng. Dưới đây là một số cách điều trị ung thư phổ biến, cùng với những thông tin chi tiết về từng phương pháp:"
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1. Phẫu thuật: Phẫu thuật là một trong những phương pháp điều trị ung thư lâu đời nhất và vẫn được sử dụng rộng rãi hiện nay. Mục tiêu của phẫu thuật là loại bỏ khối u và một phần mô xung quanh để ngăn chặn sự lây lan của bệnh. Tùy thuộc vào vị trí và kích thước của khối u, bác sĩ có thể thực hiện phẫu thuật cắt bỏ một phần hoặc toàn bộ cơ quan bị ảnh hưởng. Phẫu thuật có thể mang lại cơ hội sống sót cao hơn cho bệnh nhân nếu ung thư được phát hiện ở giai đoạn sớm. Tuy nhiên, không phải tất cả các loại ung thư đều có thể điều trị bằng phẫu thuật, đặc biệt là khi khối u đã di căn đến các bộ phận khác của cơ thể. Trong những trường hợp này, phẫu thuật có thể không phải là lựa chọn tốt nhất."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/dieutriungthuu"
+                        android:scaleType="centerCrop"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="2. Hóa trị: Hóa trị là một phương pháp điều trị sử dụng thuốc để tiêu diệt tế bào ung thư. Các loại thuốc này có thể được tiêm vào tĩnh mạch hoặc uống dưới dạng viên. Hóa trị có thể được sử dụng độc lập hoặc kết hợp với phẫu thuật và xạ trị. Mặc dù hóa trị có thể gây ra nhiều tác dụng phụ như buồn nôn, mệt mỏi, rụng tóc và giảm sức đề kháng, nhưng nó vẫn là một trong những phương pháp điều trị hiệu quả nhất cho nhiều loại ung thư. Hóa trị có thể giúp thu nhỏ khối u trước khi phẫu thuật hoặc tiêu diệt tế bào ung thư còn lại sau phẫu thuật. Ngoài ra, hóa trị cũng có thể được sử dụng để điều trị các loại ung thư đã di căn."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="3. Xạ trị: Xạ trị là một phương pháp điều trị sử dụng tia X hoặc các loại bức xạ khác để tiêu diệt tế bào ung thư. Phương pháp này có thể được sử dụng độc lập hoặc kết hợp với các phương pháp điều trị khác. Xạ trị có thể giúp giảm kích thước khối u trước khi phẫu thuật hoặc tiêu diệt tế bào ung thư còn lại sau phẫu thuật. Tác dụng phụ của xạ trị có thể bao gồm mệt mỏi, tổn thương mô lành, và các vấn đề về da tại khu vực điều trị. Mặc dù xạ trị có thể gây ra một số tác dụng phụ, nhưng nó vẫn là một phương pháp điều trị quan trọng, đặc biệt cho những bệnh nhân không thể phẫu thuật hoặc cần điều trị bổ trợ."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="4. Liệu pháp miễn dịch: Liệu pháp miễn dịch là một phương pháp điều trị mới nổi, giúp kích thích hệ thống miễn dịch của cơ thể để nhận diện và tiêu diệt tế bào ung thư. Phương pháp này đã cho thấy hiệu quả tích cực trong việc điều trị một số loại ung thư, chẳng hạn như ung thư da và ung thư phổi. Liệu pháp miễn dịch có thể giúp bệnh nhân sống lâu hơn và cải thiện chất lượng cuộc sống. Tuy nhiên, không phải tất cả bệnh nhân đều phản ứng tốt với liệu pháp miễn dịch, và một số người có thể gặp phải tác dụng phụ như viêm nhiễm hoặc phản ứng dị ứng."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="5. Liệu pháp nhắm mục tiêu: Phương pháp này sử dụng thuốc hoặc các chất khác để tấn công các tế bào ung thư mà không làm tổn thương các tế bào khỏe mạnh. Liệu pháp nhắm mục tiêu có thể giúp giảm tác dụng phụ so với hóa trị truyền thống và thường được sử dụng cho những bệnh nhân có đột biến gen cụ thể. Các loại thuốc nhắm mục tiêu có thể tác động vào các tín hiệu sinh học trong tế bào ung thư, ngăn chặn sự phát triển và phân chia của chúng. Liệu pháp này đã mở ra một hướng điều trị mới cho nhiều bệnh nhân và có thể mang lại hiệu quả cao trong việc điều trị ung thư."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nguồn: Các thông tin trên được tổng hợp từ nhiều nguồn y học uy tín và nghiên cứu hiện có về ung thư, bao gồm các tài liệu từ các tổ chức y tế hàng đầu như Tổ chức Y tế Thế giới (WHO) và Hiệp hội Ung thư Hoa Kỳ (ACS). Để biết thêm chi tiết và thông tin chính xác hơn, bệnh nhân nên tham khảo ý kiến bác sĩ chuyên khoa."
+                        android:textSize="14sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginTop="16dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

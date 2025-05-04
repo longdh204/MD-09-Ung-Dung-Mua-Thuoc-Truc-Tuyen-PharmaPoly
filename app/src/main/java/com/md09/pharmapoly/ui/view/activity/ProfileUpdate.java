@@ -70,6 +70,7 @@ public class ProfileUpdate extends AppCompatActivity {
     private ImageView img_user_avatar;
     private boolean isDateSelected = false;
     private ImageView btn_back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +78,6 @@ public class ProfileUpdate extends AppCompatActivity {
         setContentView(R.layout.activity_profile_update);
 
         InitUI();
-
         loadUserData();
 
 //        btnSaveProfile.setOnClickListener(v -> updateUserProfile());

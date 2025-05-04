@@ -39,6 +39,13 @@
         android:theme="@style/Theme.MD09_PharmaPoly"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity android:name=".ui.view.activity.cancer.CancerTypesActivity" />
+        <activity android:name=".ui.view.activity.cancer.ScreeningActivity" />
+        <activity android:name=".ui.view.activity.cancer.TreatmentActivity" />
+        <activity android:name=".ui.view.activity.cancer.PreventionActivity" />
+        <activity
+            android:name=".ui.view.activity.CancerInfoActivity"
+            android:exported="false" />
 
         <service
             android:name=".utils.MyFirebaseMessagingService"

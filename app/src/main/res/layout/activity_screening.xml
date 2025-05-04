@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightGrey"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_bottom_corners"
+        android:backgroundTint="@color/blue_CE4"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="20dp">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/arrow_back"
+                android:backgroundTint="@color/white_FFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/be_vietnam_pro_bold"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="Sàng lọc ung thư"
+                android:textColor="@color/white_FFF"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Horizontal ScrollView for categories -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:id="@+id/category_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_cancer_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Hiểu về bệnh ung thư"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_CE4"
+                        android:background="@drawable/background_thin_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:id="@+id/txt_cancer_types"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Các loại ung thư"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_CE4"
+                        android:background="@drawable/background_thin_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:id="@+id/txt_screening"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Sàng lọc ung thư"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue"
+                        android:textStyle="bold"
+                        android:background="@drawable/background_thick_bottom_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:id="@+id/txt_treatment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Điều trị ung thư"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_CE4"
+                        android:background="@drawable/background_thin_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:id="@+id/txt_prevention"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Phòng ngừa"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_CE4"
+                        android:background="@drawable/background_thin_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:layout_marginBottom="6dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sàng lọc ung thư"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sàng lọc ung thư là một quá trình quan trọng trong việc phát hiện sớm bệnh ung thư, giúp tăng khả năng điều trị thành công và cải thiện tỷ lệ sống sót cho bệnh nhân. Việc phát hiện ung thư ở giai đoạn đầu có thể giúp bác sĩ đưa ra các phương pháp điều trị hiệu quả hơn. Dưới đây là một số phương pháp sàng lọc ung thư phổ biến và những điều cần biết về chúng:"
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1. Mammogram (Sàng lọc ung thư vú): Mammogram là một phương pháp chụp X-quang vú để phát hiện sớm ung thư vú. Phụ nữ từ 40 tuổi trở lên nên thực hiện mammogram hàng năm hoặc theo chỉ định của bác sĩ. Mammogram có thể phát hiện các khối u nhỏ trước khi chúng trở nên lớn hơn và có khả năng di căn. Việc phát hiện sớm ung thư vú thông qua mammogram có thể giúp tăng cường hiệu quả điều trị và cải thiện tỷ lệ sống sót cho bệnh nhân. Tuy nhiên, một số phụ nữ có thể cảm thấy không thoải mái trong quá trình chụp X-quang, nhưng đây là một bước quan trọng trong việc bảo vệ sức khỏe vú."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/sanglocungthu"
+                        android:scaleType="centerCrop"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="2. Nội soi đại tràng (Sàng lọc ung thư đại trực tràng): Nội soi đại tràng là một phương pháp giúp phát hiện các polyp hoặc khối u trong đại tràng và trực tràng. Bệnh nhân thường được khuyến cáo thực hiện nội soi đại tràng từ tuổi 45 hoặc sớm hơn nếu có tiền sử gia đình mắc ung thư đại trực tràng. Nội soi có thể giúp phát hiện ung thư ở giai đoạn sớm và cho phép bác sĩ loại bỏ các polyp trước khi chúng phát triển thành ung thư. Việc thực hiện nội soi định kỳ có thể giảm nguy cơ mắc ung thư đại trực tràng đáng kể."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="3. Xét nghiệm PAP (Sàng lọc ung thư cổ tử cung): Xét nghiệm PAP là một phương pháp sàng lọc giúp phát hiện sớm các tế bào bất thường trong cổ tử cung, có thể dẫn đến ung thư cổ tử cung. Phụ nữ nên bắt đầu thực hiện xét nghiệm PAP từ tuổi 21 và tiếp tục hàng năm hoặc theo chỉ định của bác sĩ. Nếu kết quả xét nghiệm PAP cho thấy có tế bào bất thường, bác sĩ có thể yêu cầu thực hiện thêm các xét nghiệm khác để xác định tình trạng sức khỏe. Việc phát hiện sớm ung thư cổ tử cung thông qua xét nghiệm PAP có thể giúp giảm tỷ lệ tử vong do bệnh này."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="4. Xét nghiệm PSA (Sàng lọc ung thư tuyến tiền liệt): Xét nghiệm PSA là một xét nghiệm máu giúp phát hiện nồng độ kháng nguyên đặc hiệu của tuyến tiền liệt (PSA). Bác sĩ có thể khuyến nghị xét nghiệm PSA cho nam giới từ 50 tuổi trở lên hoặc sớm hơn nếu có yếu tố nguy cơ cao. Mặc dù xét nghiệm PSA không phải lúc nào cũng chỉ ra ung thư, nhưng nó có thể giúp bác sĩ xác định xem có cần thực hiện thêm các xét nghiệm khác hay không. Việc phát hiện sớm ung thư tuyến tiền liệt có thể giúp tăng cường hiệu quả điều trị."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="5. Xét nghiệm da (Sàng lọc ung thư da): Sàng lọc ung thư da thường bao gồm việc kiểm tra da để phát hiện các dấu hiệu bất thường như mụn cóc, nốt ruồi hoặc tổn thương da. Bác sĩ da liễu có thể thực hiện kiểm tra da định kỳ để phát hiện sớm các dấu hiệu của ung thư da, chẳng hạn như ung thư biểu mô tế bào đáy hoặc ung thư biểu mô tế bào vảy. Việc phát hiện sớm ung thư da có thể giúp tăng cường hiệu quả điều trị và giảm nguy cơ di căn."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nguồn: Các thông tin trên được tổng hợp từ nhiều nguồn y học uy tín và nghiên cứu hiện có về sàng lọc ung thư, bao gồm các tài liệu từ Tổ chức Y tế Thế giới (WHO) và Hiệp hội Ung thư Hoa Kỳ (ACS). Để biết thêm chi tiết và thông tin chính xác hơn, bệnh nhân nên tham khảo ý kiến bác sĩ chuyên khoa."
+                        android:textSize="14sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginTop="16dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

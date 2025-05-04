@@ -31,6 +31,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,6 +53,7 @@ import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.data.model.User;
 import com.md09.pharmapoly.network.RetrofitClient;
+import com.md09.pharmapoly.ui.view.activity.CancerInfoActivity;
 import com.md09.pharmapoly.ui.view.activity.ChatbotActivity;
 import com.md09.pharmapoly.ui.view.activity.CustomTypefaceSpan;
 import com.md09.pharmapoly.ui.view.activity.MainActivity;
@@ -65,6 +67,7 @@ import com.md09.pharmapoly.ui.view.activity.PharmacyMapActivity;
 import com.md09.pharmapoly.ui.view.activity.SearchActivity;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.md09.pharmapoly.viewmodel.CartViewModel;
+import com.md09.pharmapoly.ui.view.activity.OrderManagementActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -219,25 +222,29 @@ public class HomeFragment extends Fragment {
             if (category.getName().equals("Tìm nhà thuốc")) {
                 Intent intent = new Intent(getContext(), PharmacyMapActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        // Xử lý sự kiện click vào category
-        categoryListAdapter.setOnCategoryClickListener(category -> {
-            if (category.getName().equals("Nhắc uống thuốc")) {
+            } else if (category.getName().equals("Nhắc uống thuốc")) {
                 Intent intent = new Intent(getContext(), MedicineReminderActivity.class);
+                startActivity(intent);
+            } else if (category.getName().equals("Đơn của tôi")) {
+                Intent intent = new Intent(getActivity(), OrderManagementActivity.class);
+                intent.putExtra("order_status", 0); // 0 là trạng thái "Đơn của tôi" (đang xử lý)
                 startActivity(intent);
             }
         });
 
-        menuIcon.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
+        // Sửa sự kiện mở Drawer để luôn gọi DrawerLayout của MainActivity
+        menuIcon.setOnClickListener(v -> {
+            drawerLayout.openDrawer(androidx.core.view.GravityCompat.START);
+        });
         navigationView.setNavigationItemSelectedListener(item -> {
+            Log.d("HomeFragment", "btnthucphamchucnang clicked");
             int id = item.getItemId();
             if (id == R.id.nav_notification) {
                 Toast.makeText(getContext(), "Thông báo", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), NotificationsActivity.class));
                 return true;
             } else if (id == R.id.nav_healthcare) {
+                Log.d("HomeFragment", "btnthucphamchucnang clicked");
                 Toast.makeText(getContext(), "Thực phẩm chức năng", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), Nav_FunctionalFoodActivity.class));
                 return true;
@@ -286,6 +293,7 @@ public class HomeFragment extends Fragment {
         btnthucphamchucnang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("HomeFragment", "btnthucphamchucnang clicked");
                 Intent intent = new Intent(getContext(), Nav_FunctionalFoodActivity.class); // Chuyển tới Activity bạn muốn
                 startActivity(intent);
             }
@@ -293,6 +301,7 @@ public class HomeFragment extends Fragment {
         btnduocmypham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("HomeFragment", "btnduocmypham clicked");
                 Intent intent = new Intent(getContext(), Nav_Pharmaceutical_Cosmetics.class); // Chuyển tới Activity bạn muốn
                 startActivity(intent);
             }
@@ -300,6 +309,7 @@ public class HomeFragment extends Fragment {
         btnthuoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("HomeFragment", "btnthuoc clicked");
                 Intent intent = new Intent(getContext(), Nav_Medicine.class); // Chuyển tới Activity bạn muốn
                 startActivity(intent);
             }
@@ -320,7 +330,9 @@ public class HomeFragment extends Fragment {
         });
         GetNotificationUnreadCount();
         return view;
+
     }
+
 
     //    @Override
     //    public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -477,6 +489,12 @@ public class HomeFragment extends Fragment {
         btnthietbiyte = view.findViewById(R.id.btnthietbiyte);
         btnthuocbovitamin = view.findViewById(R.id.btnthuocbovitamin);
         layout_search = view.findViewById(R.id.layout_search);
+
+        // Add click handler for cancer info button
+        view.findViewById(R.id.btn_cancer_info).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), CancerInfoActivity.class);
+            startActivity(intent);
+        });
 
         txt_greeting = view.findViewById(R.id.txt_greeting);
         User user = new SharedPrefHelper(getContext()).getUser();

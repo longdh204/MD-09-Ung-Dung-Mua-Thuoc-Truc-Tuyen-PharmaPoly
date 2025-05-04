@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightGrey"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_bottom_corners"
+        android:backgroundTint="@color/blue_CE4"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="20dp">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/arrow_back"
+                android:backgroundTint="@color/white_FFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/be_vietnam_pro_bold"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="Phòng ngừa ung thư"
+                android:textColor="@color/white_FFF"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Horizontal ScrollView for categories -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:id="@+id/category_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_cancer_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Hiểu về bệnh ung thư"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_CE4"
+                        android:background="@drawable/background_thin_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:id="@+id/txt_cancer_types"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Các loại ung thư"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_CE4"
+                        android:background="@drawable/background_thin_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:id="@+id/txt_screening"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Sàng lọc ung thư"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_CE4"
+                        android:background="@drawable/background_thin_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:id="@+id/txt_treatment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Điều trị ung thư"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_CE4"
+                        android:background="@drawable/background_thin_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:id="@+id/txt_prevention"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Phòng ngừa"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue"
+                        android:textStyle="bold"
+                        android:background="@drawable/background_thick_bottom_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:layout_marginBottom="6dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Phòng ngừa ung thư"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Phòng ngừa ung thư là một trong những nhiệm vụ quan trọng hàng đầu trong việc bảo vệ sức khỏe. Ung thư không chỉ là một căn bệnh gây tử vong mà còn ảnh hưởng đến chất lượng cuộc sống của hàng triệu người trên toàn thế giới. Việc áp dụng các biện pháp phòng ngừa có thể giúp giảm thiểu nguy cơ mắc bệnh. Dưới đây là một số biện pháp phòng ngừa ung thư hiệu quả mà mọi người có thể thực hiện để bảo vệ sức khỏe của mình. Những biện pháp này không chỉ giúp giảm nguy cơ ung thư mà còn cải thiện sức khỏe tổng thể và nâng cao chất lượng cuộc sống."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1. Duy trì một chế độ ăn uống lành mạnh: Chế độ ăn uống là một yếu tố quan trọng trong việc phòng ngừa ung thư. Một chế độ ăn uống cân bằng, giàu rau xanh, trái cây, ngũ cốc nguyên hạt và các loại thực phẩm giàu chất xơ có thể giúp giảm nguy cơ mắc nhiều loại ung thư. Hạn chế tiêu thụ các loại thực phẩm chế biến sẵn, thực phẩm chứa nhiều chất béo bão hòa, đường và muối là điều cần thiết. Nghiên cứu cho thấy rằng một chế độ ăn uống giàu chất chống oxy hóa, vitamin và khoáng chất có thể giúp bảo vệ tế bào khỏi tổn thương và ngăn chặn sự phát triển của tế bào ung thư. Ngoài ra, việc uống đủ nước và hạn chế đồ uống có đường cũng rất quan trọng trong việc duy trì sức khỏe."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/phongnguaungthuu"
+                        android:scaleType="centerCrop"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="2. Tập thể dục thường xuyên: Hoạt động thể chất đóng vai trò quan trọng trong việc duy trì sức khỏe và phòng ngừa ung thư. Nghiên cứu cho thấy rằng những người thường xuyên tập thể dục có nguy cơ mắc ung thư thấp hơn so với những người ít vận động. Tập thể dục không chỉ giúp kiểm soát cân nặng mà còn cải thiện sức khỏe tim mạch, tăng cường hệ miễn dịch và giảm căng thẳng. Các hoạt động như đi bộ, chạy bộ, bơi lội, yoga và tham gia các lớp thể dục nhịp điệu đều có thể giúp cải thiện sức khỏe tổng thể. Hãy cố gắng dành ít nhất 150 phút mỗi tuần cho các hoạt động thể chất vừa phải hoặc 75 phút cho các hoạt động thể chất mạnh mẽ để đạt được lợi ích sức khỏe tối ưu."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="3. Tránh xa thuốc lá và các sản phẩm chứa nicotine: Hút thuốc lá là một trong những nguyên nhân chính gây ra ung thư, đặc biệt là ung thư phổi, ung thư miệng, và ung thư thực quản. Nếu bạn đang hút thuốc, hãy tìm cách từ bỏ. Có nhiều chương trình hỗ trợ và sản phẩm giúp bạn từ bỏ thuốc lá. Ngoài ra, cần tránh tiếp xúc với khói thuốc lá thụ động, vì nó cũng có thể gây hại cho sức khỏe. Nghiên cứu cho thấy rằng việc từ bỏ thuốc lá có thể giảm nguy cơ mắc ung thư đáng kể và cải thiện sức khỏe tổng thể. Hãy nhớ rằng mỗi ngày không hút thuốc đều có thể mang lại lợi ích cho sức khỏe của bạn."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="4. Kiểm soát cân nặng: Giữ cân nặng trong mức độ hợp lý không chỉ giúp cải thiện sức khỏe tổng thể mà còn giảm nguy cơ mắc một số loại ung thư, bao gồm ung thư vú, ung thư đại trực tràng và ung thư nội mạc tử cung. Việc duy trì cân nặng hợp lý có thể đạt được thông qua chế độ ăn uống cân bằng và tập thể dục thường xuyên. Nếu bạn đang gặp khó khăn trong việc kiểm soát cân nặng, hãy tham khảo ý kiến bác sĩ hoặc chuyên gia dinh dưỡng để được hỗ trợ. Họ có thể giúp bạn xây dựng một kế hoạch ăn uống và tập luyện phù hợp với nhu cầu và mục tiêu của bạn."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="5. Thực hiện các xét nghiệm sàng lọc định kỳ: Một số loại ung thư có thể được phát hiện sớm thông qua các xét nghiệm sàng lọc, giúp tăng khả năng điều trị thành công. Các xét nghiệm như mammogram (đối với ung thư vú), nội soi đại tràng (đối với ung thư đại trực tràng), và xét nghiệm PAP (đối với ung thư cổ tử cung) đều rất quan trọng. Hãy tham khảo ý kiến bác sĩ về các xét nghiệm sàng lọc phù hợp với độ tuổi và tình trạng sức khỏe của bạn. Việc phát hiện sớm ung thư có thể giúp tăng cường hiệu quả điều trị và cải thiện tỷ lệ sống sót cho bệnh nhân."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="6. Tiêm vaccine phòng ngừa: Một số loại ung thư có thể được phòng ngừa thông qua việc tiêm vaccine. Ví dụ, vaccine HPV có thể giúp ngăn ngừa ung thư cổ tử cung, trong khi vaccine viêm gan B có thể giúp ngăn ngừa ung thư gan. Hãy thảo luận với bác sĩ về các vaccine phòng ngừa có sẵn và phù hợp với bạn. Việc tiêm vaccine không chỉ giúp bảo vệ bạn khỏi ung thư mà còn bảo vệ những người xung quanh bạn khỏi các bệnh truyền nhiễm có thể gây ra ung thư."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nguồn: Các thông tin trên được tổng hợp từ nhiều nguồn y học uy tín và nghiên cứu hiện có về phòng ngừa ung thư, bao gồm các tài liệu từ Tổ chức Y tế Thế giới (WHO) và Hiệp hội Ung thư Hoa Kỳ (ACS). Để biết thêm chi tiết và thông tin chính xác hơn, bệnh nhân nên tham khảo ý kiến bác sĩ chuyên khoa."
+                        android:textSize="14sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginTop="16dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -65,4 +65,5 @@ dependencies {
     implementation("androidx.work:work-runtime:2.7.1")
     implementation("com.google.android.material:material:1.6.0")
     implementation("io.socket:socket.io-client:2.1.0")
+    implementation("com.google.android.gms:play-services-location:18.0.0")
 }

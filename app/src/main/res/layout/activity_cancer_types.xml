@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightGrey"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_bottom_corners"
+        android:backgroundTint="@color/blue_CE4"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="20dp">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/arrow_back"
+                android:backgroundTint="@color/white_FFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/be_vietnam_pro_bold"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="Các loại ung thư"
+                android:textColor="@color/white_FFF"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Horizontal ScrollView for categories -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:id="@+id/category_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_cancer_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Hiểu về bệnh ung thư"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_CE4"
+                        android:background="@drawable/background_thin_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:id="@+id/txt_cancer_types"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/background_thick_bottom_corner"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="16dp"
+                        android:text="Các loại ung thư"
+                        android:textColor="@color/blue"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_screening"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Sàng lọc ung thư"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_CE4"
+                        android:background="@drawable/background_thin_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:id="@+id/txt_treatment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Điều trị ung thư"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_CE4"
+                        android:background="@drawable/background_thin_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:id="@+id/txt_prevention"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Phòng ngừa"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue_CE4"
+                        android:background="@drawable/background_thin_corner"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <View
+                android:id="@+id/underline"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/blue_CE4"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Các loại ung thư phổ biến"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black_333"
+                android:layout_marginBottom="16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:layout_marginBottom="6dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1. Ung thư phổi"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="0dp"
+                        android:text="Ung thư phổi là loại ung thư bắt đầu trong phổi. Đây là một trong những loại ung thư phổ biến nhất và nguy hiểm nhất, thường xảy ra ở những người hút thuốc lá. Tuy nhiên, ung thư phổi cũng có thể xảy ra ở những người không hút thuốc. Triệu chứng thường gặp bao gồm ho kéo dài, khó thở, đau ngực, và giảm cân không rõ nguyên nhân. Ngoài ra, người bệnh có thể cảm thấy mệt mỏi và yếu ớt. Việc phát hiện sớm ung thư phổi có thể giúp cải thiện khả năng điều trị và tỷ lệ sống sót. Các phương pháp điều trị bao gồm phẫu thuật, hóa trị, xạ trị và liệu pháp miễn dịch. Để phòng ngừa ung thư phổi, người ta nên tránh xa khói thuốc, duy trì một lối sống lành mạnh và kiểm tra sức khỏe định kỳ."
+                        android:textColor="@color/black_333"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/ungthuphoi"
+                        android:scaleType="centerCrop"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="0dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:layout_marginBottom="6dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="2. Ung thư vú"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ung thư vú là loại ung thư bắt đầu trong mô vú. Nó có thể ảnh hưởng đến cả nam và nữ, nhưng phổ biến hơn ở nữ giới. Triệu chứng của ung thư vú bao gồm sự xuất hiện của khối u trong vú, thay đổi kích thước hoặc hình dạng của vú, và tiết dịch từ núm vú. Một số người có thể cảm thấy đau ở vú hoặc nách. Nguyên nhân gây ung thư vú có thể liên quan đến yếu tố di truyền, hormone, và lối sống. Các phương pháp điều trị bao gồm phẫu thuật, hóa trị, xạ trị và liệu pháp hormone. Việc phát hiện sớm ung thư vú thông qua các phương pháp sàng lọc như mammogram có thể giúp tăng khả năng điều trị thành công và cải thiện tỷ lệ sống sót."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="0dp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/ungthuvu"
+                        android:scaleType="centerCrop"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="0dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:layout_marginBottom="6dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="3. Ung thư đại trực tràng"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="3dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ung thư đại trực tràng là loại ung thư bắt đầu từ đại tràng hoặc trực tràng. Triệu chứng bao gồm thay đổi thói quen đi tiêu, đau bụng, giảm cân không rõ nguyên nhân, và máu trong phân. Nguyên nhân có thể bao gồm chế độ ăn uống không lành mạnh, ít hoạt động thể chất, và tiền sử gia đình. Việc phát hiện sớm thông qua nội soi đại tràng có thể giúp phát hiện ung thư ở giai đoạn đầu, khi mà việc điều trị có thể mang lại hiệu quả cao hơn. Các phương pháp điều trị bao gồm phẫu thuật, hóa trị và xạ trị."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="0dp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/ungthudaitrang"
+                        android:scaleType="centerCrop"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="0dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:layout_marginBottom="6dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="4. Ung thư dạ dày"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ung thư dạ dày là loại ung thư bắt đầu trong dạ dày. Triệu chứng bao gồm đau bụng, khó tiêu, buồn nôn, giảm cân không rõ nguyên nhân, và cảm giác no sau khi ăn một lượng nhỏ thức ăn. Nguyên nhân có thể bao gồm nhiễm vi khuẩn H. pylori, chế độ ăn uống không lành mạnh, và di truyền. Điều trị ung thư dạ dày có thể bao gồm phẫu thuật, hóa trị và xạ trị. Việc phát hiện sớm là rất quan trọng để cải thiện tỷ lệ sống sót."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="0dp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/ungthudaday"
+                        android:scaleType="centerCrop"
+                        android:layout_marginTop="10dp"
+
+                        android:layout_marginBottom="0dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:layout_marginBottom="6dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="5. Ung thư gan"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ung thư gan là loại ung thư bắt đầu trong gan. Triệu chứng bao gồm mất cảm giác thèm ăn, giảm cân, đau bụng, và vàng da. Nguyên nhân có thể bao gồm viêm gan B, viêm gan C, và tiêu thụ rượu quá mức. Điều trị ung thư gan có thể bao gồm phẫu thuật, hóa trị, và liệu pháp miễn dịch. Việc phát hiện sớm ung thư gan có thể giúp cải thiện tỷ lệ sống sót."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="0dp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/ungthugan"
+                        android:scaleType="centerCrop"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="0dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:layout_marginBottom="6dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="6. Ung thư tuyến tiền liệt"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ung thư tuyến tiền liệt là loại ung thư xảy ra trong tuyến tiền liệt của nam giới. Triệu chứng có thể bao gồm khó khăn khi đi tiểu, đau khi đi tiểu, và đau lưng. Nguyên nhân chính xác chưa được xác định, nhưng có thể liên quan đến yếu tố di truyền và hormone. Việc phát hiện sớm thông qua các xét nghiệm như PSA có thể giúp điều trị hiệu quả hơn."
+                        android:textSize="16sp"
+                        android:textColor="@color/black_333"
+                        android:layout_marginBottom="0dp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/ungthutuyentienliet"
+                        android:scaleType="centerCrop"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="50dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

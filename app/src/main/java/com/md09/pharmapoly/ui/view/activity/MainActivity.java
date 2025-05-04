@@ -33,6 +33,16 @@ import com.md09.pharmapoly.ui.components.ViewPagerBottomNavigationMainAdapter;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.md09.pharmapoly.viewmodel.CartViewModel;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottom_navigation_main;
@@ -63,6 +73,13 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(Cart cart) {
                 UpdateCartBadge(cart.getCartItems().size());
             }
+        });
+        FloatingActionButton fab1 = findViewById(R.id.fab1);
+        fab1.setOnClickListener(view -> {
+            // Tạo một Intent để mở liên kết Zalo
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://zalo.me/0967197293"));
+            startActivity(intent);
         });
         checkAndRequestNotificationPermission();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

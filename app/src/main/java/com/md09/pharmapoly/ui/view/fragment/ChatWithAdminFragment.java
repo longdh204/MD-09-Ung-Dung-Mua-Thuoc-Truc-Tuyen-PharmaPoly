@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ public class ChatWithAdminFragment extends Fragment implements SocketManager.Upd
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d("HomeFragment", "onCreateView called");
         View view = inflater.inflate(R.layout.fragment_chat_with_admin, container, false);
         rvChatAdmin = view.findViewById(R.id.rvChatAdmin);
         btnSendMessage = view.findViewById(R.id.btnSend);

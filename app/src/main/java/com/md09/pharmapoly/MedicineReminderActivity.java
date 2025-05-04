@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.md09.pharmapoly.Adapters.MedicineReminderAdapter;
@@ -54,6 +55,7 @@ public class MedicineReminderActivity extends AppCompatActivity implements Medic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder);
+        EdgeToEdge.enable(this);
 
         edtMedicineName = findViewById(R.id.edtMedicineName);
         timePicker = findViewById(R.id.timePicker);
