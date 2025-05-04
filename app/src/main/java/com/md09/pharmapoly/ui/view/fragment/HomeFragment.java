@@ -171,9 +171,9 @@ public class HomeFragment extends Fragment {
 
         circleIndicator.setViewPager(viewPager2);
 
-        drawerLayout = view.findViewById(R.id.drawer_layout);
+        drawerLayout = requireActivity().findViewById(R.id.drawer_layout);
         ImageView menuIcon = view.findViewById(R.id.menu_icon);
-        NavigationView navigationView = view.findViewById(R.id.navigation_view);
+        NavigationView navigationView = requireActivity().findViewById(R.id.navigation_view);
         Typeface customFont = ResourcesCompat.getFont(requireContext(), R.font.be_vietnam_pro_bold);
         navigationView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white));
 
@@ -229,16 +229,17 @@ public class HomeFragment extends Fragment {
 
         // Sửa sự kiện mở Drawer để luôn gọi DrawerLayout của MainActivity
         menuIcon.setOnClickListener(v -> {
-            androidx.drawerlayout.widget.DrawerLayout drawerLayout = requireActivity().findViewById(R.id.drawer_layout);
             drawerLayout.openDrawer(androidx.core.view.GravityCompat.START);
         });
         navigationView.setNavigationItemSelectedListener(item -> {
+            Log.d("HomeFragment", "btnthucphamchucnang clicked");
             int id = item.getItemId();
             if (id == R.id.nav_notification) {
                 Toast.makeText(getContext(), "Thông báo", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), NotificationsActivity.class));
                 return true;
             } else if (id == R.id.nav_healthcare) {
+                Log.d("HomeFragment", "btnthucphamchucnang clicked");
                 Toast.makeText(getContext(), "Thực phẩm chức năng", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), Nav_FunctionalFoodActivity.class));
                 return true;
@@ -287,6 +288,7 @@ public class HomeFragment extends Fragment {
         btnthucphamchucnang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("HomeFragment", "btnthucphamchucnang clicked");
                 Intent intent = new Intent(getContext(), Nav_FunctionalFoodActivity.class); // Chuyển tới Activity bạn muốn
                 startActivity(intent);
             }
@@ -294,6 +296,7 @@ public class HomeFragment extends Fragment {
         btnduocmypham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("HomeFragment", "btnduocmypham clicked");
                 Intent intent = new Intent(getContext(), Nav_Pharmaceutical_Cosmetics.class); // Chuyển tới Activity bạn muốn
                 startActivity(intent);
             }
@@ -301,6 +304,7 @@ public class HomeFragment extends Fragment {
         btnthuoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("HomeFragment", "btnthuoc clicked");
                 Intent intent = new Intent(getContext(), Nav_Medicine.class); // Chuyển tới Activity bạn muốn
                 startActivity(intent);
             }
