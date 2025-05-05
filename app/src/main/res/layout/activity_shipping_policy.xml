@@ -40,7 +40,7 @@
                 android:fontFamily="@font/be_vietnam_pro_bold"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:text="Chính sách vận chuyển"
+                android:text="Chính sách giao hàng"
                 android:textColor="@color/white_FFF"
                 android:layout_marginRight="20dp"
                 android:textSize="17sp" />
@@ -51,13 +51,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@+id/header">
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        android:layout_marginTop="120dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/textViewContent1"
@@ -67,8 +68,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:paddingTop="100dp"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="0dp" />
 
             <TextView
                 android:id="@+id/textViewContentDescription1"
@@ -154,6 +154,7 @@
                 android:textSize="35dp"
                 android:textColor="@color/white"
                 app:layout_constraintTop_toBottomOf="@+id/textView3_4_1" />
+
         </LinearLayout>
     </ScrollView>
 

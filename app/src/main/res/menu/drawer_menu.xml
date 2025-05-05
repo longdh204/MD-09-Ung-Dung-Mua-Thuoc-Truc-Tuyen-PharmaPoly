@@ -6,8 +6,7 @@
     <item
         android:id="@+id/nav_healthcare"
         android:title="Thực phẩm chức năng"
-        android:checkable="true"
-        />
+        android:checkable="true" />
 
     <item
         android:id="@+id/nav_pharmacy"
@@ -32,15 +31,4 @@
         android:id="@+id/nav_chatbot"
         android:title="ChatBot"
         android:checkable="true" />
-
-    <item
-        android:id="@+id/nav_health_package"
-        android:title="Gói sức khỏe"
-        android:checkable="true" />
-    <item
-        android:id="@+id/nav_system"
-        android:title="Hệ thống nhà thuốc"
-        android:checkable="true" />
-
-
 </menu>

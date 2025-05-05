@@ -29,6 +29,8 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private Context context;
     private List<Product> productList;
+    private int maxHeight = 0;
+
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
@@ -51,6 +53,23 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.tv_specification.setText(product.getSpecification());
         List<View> typeViews = new ArrayList<>();
 
+        // Measure the height of the item
+        holder.itemView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                holder.itemView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                int height = holder.itemView.getHeight();
+                if (height > maxHeight) {
+                    maxHeight = height;
+                    notifyDataSetChanged();
+                }
+            }
+        });
+
+        // Set the height of the item
+        ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
+        params.height = maxHeight > 0 ? maxHeight : ViewGroup.LayoutParams.WRAP_CONTENT;
+        holder.itemView.setLayoutParams(params);
 
         holder.itemView.post(() -> {
             if (product.getProduct_types().size() > 1) {
@@ -70,8 +89,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     TextView tv_type_name = view.findViewById(R.id.tv_type_name);
                     tv_type_name.setText(item.getName());
 
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(itemWidth, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    view.setLayoutParams(params);
+                    LinearLayout.LayoutParams itemParams = new LinearLayout.LayoutParams(itemWidth, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    view.setLayoutParams(itemParams);
 
                     typeViews.add(view);
 

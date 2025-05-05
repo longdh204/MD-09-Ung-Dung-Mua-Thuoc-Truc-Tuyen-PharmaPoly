@@ -4,6 +4,7 @@ import static com.md09.pharmapoly.utils.Constants.ORDER_KEY;
 import static com.md09.pharmapoly.utils.Constants.formatCurrency;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -32,6 +33,7 @@ import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.network.RetrofitClient;
 import com.md09.pharmapoly.ui.view.activity.CheckoutActivity;
+import com.md09.pharmapoly.ui.view.activity.MainActivity;
 import com.md09.pharmapoly.utils.CartItemListener;
 import com.md09.pharmapoly.utils.DialogHelper;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
@@ -107,17 +109,29 @@ public class CartFragment extends Fragment {
     private LinearLayout cart_main_layout,
             cart_sub_layout;
     private List<CartItem> selectedItems;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
-        requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         InitUI(view);
 
         SetUpRecyclerView();
 
+        // Add keyboard listener to handle bottom navigation visibility
+        view.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            Rect r = new Rect();
+            view.getWindowVisibleDisplayFrame(r);
+            int screenHeight = view.getRootView().getHeight();
+            int keypadHeight = screenHeight - r.bottom;
+
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).setBottomNavigationVisibility(keypadHeight < screenHeight * 0.15);
+            }
+        });
 
         cartViewModel.GetCart().observe(getViewLifecycleOwner(), new Observer<Cart>() {
             @Override
@@ -226,7 +240,7 @@ public class CartFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (new SharedPrefHelper(getContext()).getBooleanState(ORDER_KEY,false)) {
+        if (new SharedPrefHelper(getContext()).getBooleanState(ORDER_KEY, false)) {
             cart.getCartItems().removeAll(selectedItems);
             cartAdapter.UpdateCart(cart);
             new SharedPrefHelper(getContext()).resetBooleanState(ORDER_KEY);
