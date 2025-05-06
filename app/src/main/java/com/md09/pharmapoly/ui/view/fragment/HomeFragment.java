@@ -237,32 +237,32 @@ public class HomeFragment extends Fragment {
             Log.d("HomeFragment", "btnthucphamchucnang clicked");
             int id = item.getItemId();
             if (id == R.id.nav_notification) {
-                Toast.makeText(getContext(), "Thông báo", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Thông báo", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), NotificationsActivity.class));
                 return true;
             } else if (id == R.id.nav_healthcare) {
                 Log.d("HomeFragment", "btnthucphamchucnang clicked");
-                Toast.makeText(getContext(), "Thực phẩm chức năng", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Thực phẩm chức năng", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), Nav_FunctionalFoodActivity.class));
                 return true;
             } else if (id == R.id.nav_pharmacy) {
-                Toast.makeText(getContext(), "Dược mỹ phẩm", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Dược mỹ phẩm", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), Nav_Pharmaceutical_Cosmetics.class));
                 return true;
             } else if (id == R.id.nav_medicine) {
-                Toast.makeText(getContext(), "Thuốc", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Thuốc", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), Nav_Medicine.class));
                 return true;
             } else if (id == R.id.nav_medical_equipment) {
-                Toast.makeText(getContext(), "Thiết bị y tế", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Thiết bị y tế", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), Nav_Medical_Equiment.class));
                 return true;
             } else if (id == R.id.nav_personalcare) {
-                Toast.makeText(getContext(), "Chăm sóc cá nhân", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Chăm sóc cá nhân", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), Nav_Personalcare.class));
                 return true;
             } else if (id == R.id.nav_chatbot) {
-                Toast.makeText(getContext(), "ChatBot", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "ChatBot", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), ChatbotActivity.class));
                 return true;
             }

@@ -31,6 +31,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.md09.pharmapoly.ForgotPasswordActivity;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.utils.PopupHelper;
 import com.md09.pharmapoly.utils.ProgressDialogHelper;
@@ -50,6 +51,7 @@ public class VerifyPhone extends AppCompatActivity {
     private EditText[] otpInputs;
     private FirebaseAuth auth;
     private String verification_id;
+    private PhoneAuthProvider.ForceResendingToken mResendToken;
     private String uid;
     private String phone_number;
     private boolean isSendOtp = false;
@@ -65,10 +67,69 @@ public class VerifyPhone extends AppCompatActivity {
         SetupFirebase();
         ShowPhoneNumber();
 
-        SendOtp();
-        SetupOtpInputs();
-        SetupButton();
+        String purpose = getIntent().getStringExtra("purpose");
+        if ("forgot_password".equals(purpose)) {
+            Toast.makeText(this, "Check " + phone_number, Toast.LENGTH_SHORT).show();
+            PhoneAuthProvider.OnVerificationStateChangedCallbacks callbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                @Override
+                public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken token) {
+                    verification_id = verificationId;
+                    mResendToken = token;
+                    Toast.makeText(VerifyPhone.this, "Send OTP", Toast.LENGTH_SHORT).show();
+                }
 
+                @Override
+                public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                    auth.signInWithCredential(phoneAuthCredential)
+                            .addOnCompleteListener(VerifyPhone.this, task -> {
+
+                                FirebaseUser user = auth.getCurrentUser();
+                                if (task.isSuccessful()) {
+                                    uid = user.getUid();
+                                    Intent intent = new Intent(VerifyPhone.this, ForgotPasswordActivity.class);
+                                    intent.putExtra(PHONE_NUMBER_KEY,phone_number);
+                                    intent.putExtra(UID_KEY,uid);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(VerifyPhone.this, "Xác thực OTP thất bại!", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    ProgressDialogHelper.hideLoading();
+                }
+
+                @Override
+                public void onVerificationFailed(@NonNull FirebaseException e) {
+                    Log.e("OTP Error", "Gửi OTP thất bại: " + e.getMessage());
+                    ProgressDialogHelper.hideLoading();
+                    isSendOtp = false;
+                    String message = getString(R.string.otp_request_limit);
+                    PopupHelper.ShowPopup(VerifyPhone.this, "", message, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                        }
+                    }).setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialogInterface) {
+                            finish();
+                        }
+                    });
+                }
+            };
+            PhoneAuthOptions options = PhoneAuthOptions.newBuilder(FirebaseAuth.getInstance())
+                    .setPhoneNumber(phone_number)             // số điện thoại người dùng
+                    .setTimeout(60L, TimeUnit.SECONDS)       // timeout cho OTP
+                    .setActivity(this)                       // Activity hiện tại
+                    .setCallbacks(callbacks)                 // callbacks đã định nghĩa
+                    .build();
+
+            PhoneAuthProvider.verifyPhoneNumber(options);
+
+        } else {
+            SendOtp();
+            SetupOtpInputs();
+            SetupButton();
+        }
     }
 
     private void SetupFirebase() {

@@ -35,7 +35,7 @@ public class LoginPassword extends AppCompatActivity {
 
     private EditText edt_password;
     private CardView btn_login;
-    private TextView tv_phone_number;
+    private TextView tv_phone_number,btn_forgotPassword;
     private RetrofitClient retrofitClient;
     private ImageButton btn_back;
 
@@ -52,6 +52,12 @@ public class LoginPassword extends AppCompatActivity {
 
         btn_back.setOnClickListener(v -> {
             finish();
+        });
+        btn_forgotPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginPassword.this, VerifyPhone.class);
+            intent.putExtra(PHONE_NUMBER_KEY, phoneNumber);
+            intent.putExtra("purpose", "forgot_password");
+            startActivity(intent);
         });
         btn_login.setOnClickListener(v -> {
             ProgressDialogHelper.showLoading(LoginPassword.this);
@@ -172,6 +178,7 @@ public class LoginPassword extends AppCompatActivity {
 
     private void initUI() {
         retrofitClient = new RetrofitClient();
+        btn_forgotPassword = findViewById(R.id.btn_forgotPassword);
         edt_password = findViewById(R.id.edt_password);
         btn_login = findViewById(R.id.btn_login);
         tv_phone_number = findViewById(R.id.tv_phone_number);
