@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/overpass_regular"
                 android:padding="3dp"
-                android:text="chat here"
+                android:text="chat here chat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat herechat here"
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
         </LinearLayout>

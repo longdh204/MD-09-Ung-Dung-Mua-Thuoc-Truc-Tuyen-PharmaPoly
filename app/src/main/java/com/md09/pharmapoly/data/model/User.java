@@ -102,7 +102,6 @@ public class User implements Serializable {
         User user = (User) obj;
         return gender == user.gender &&
                 Objects.equals(full_name, user.full_name) &&
-                Objects.equals(phone_number, user.phone_number) &&
                 Objects.equals(shipping_phone_number, user.shipping_phone_number) &&
                 Objects.equals(date_of_birth, user.date_of_birth);
     }

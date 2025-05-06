@@ -133,10 +133,14 @@
 
                 <EditText
                     android:id="@+id/update_profile_phone_number"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:enabled="false"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="6dp"
                     android:background="@drawable/rounded_shadow_background"
+                    android:backgroundTint="@color/gray_DCD"
                     android:fontFamily="@font/be_vietnam_pro_medium"
                     android:textColor="@color/black_333"
                     android:textColorHint="@color/gray_DCD"
@@ -233,7 +237,7 @@
                     android:id="@+id/tvDateOfBirth"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:padding="12dp"
+                    android:paddingHorizontal="24dp"
                     android:background="@drawable/rounded_shadow_background"
                     android:fontFamily="@font/be_vietnam_pro_medium"
                     android:textColor="@color/black_333"
@@ -250,7 +254,7 @@
                 android:layout_marginBottom="24dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                app:cardBackgroundColor="@color/nav_background"
+                app:cardBackgroundColor="@color/gray_DCD"
                 app:cardCornerRadius="32dp">
 
                 <RelativeLayout
@@ -264,7 +268,7 @@
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/be_vietnam_pro_bold"
                         android:text="@string/update"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray_E9E"
                         android:textSize="18sp" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>

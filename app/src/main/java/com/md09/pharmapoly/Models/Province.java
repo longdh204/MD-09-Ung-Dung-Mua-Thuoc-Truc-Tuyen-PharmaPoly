@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Province implements Serializable {
     private int ProvinceID;
     private String ProvinceName;
-
+    private int IsEnable;
     public Province(int provinceID, String provinceName) {
         ProvinceID = provinceID;
         ProvinceName = provinceName;
@@ -25,6 +25,14 @@ public class Province implements Serializable {
 
     public void setProvinceName(String provinceName) {
         ProvinceName = provinceName;
+    }
+
+    public int getIsEnable() {
+        return IsEnable;
+    }
+
+    public void setIsEnable(int isEnable) {
+        IsEnable = isEnable;
     }
 
     @Override

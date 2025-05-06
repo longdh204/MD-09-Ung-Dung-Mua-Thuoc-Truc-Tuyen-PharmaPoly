@@ -7,6 +7,7 @@ import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -38,6 +39,7 @@ import com.md09.pharmapoly.utils.SharedPrefHelper;
 import com.md09.pharmapoly.utils.SuccessMessageBottomSheet;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -192,7 +194,22 @@ public class AddressActivity extends AppCompatActivity {
             if (response != null && response.isSuccessful()) {
                 if (response.body().getCode() == 200) {
                     provinces = new ArrayList<>(response.body().getData());
-                    provinces.remove(0);
+//                    provinces.remove(0);
+
+//                    List<Province> filtered = new ArrayList<>();
+//                    for (Province item : response.body().getData()) {
+//                        String provinceName = item.getProvinceName();
+//                        Integer isEnable = item.getIsEnable();
+//
+//                        boolean nameInvalid = provinceName != null && provinceName.toLowerCase().contains("test");
+//                        boolean notEnabled = isEnable == null || isEnable != 1;
+//
+//                        if (!nameInvalid && !notEnabled) {
+//                            filtered.add(item);
+//                        }
+//                    }
+//                    provinces = new ArrayList<>(filtered);
+//                    provinces.remove(0);
                     spinnerProvinceAdapter = new SpinnerProvinceAdapter(AddressActivity.this,R.layout.item_view_spinner,provinces);
                     spinner_province.setAdapter(spinnerProvinceAdapter);
                     if (userAddress != null) {

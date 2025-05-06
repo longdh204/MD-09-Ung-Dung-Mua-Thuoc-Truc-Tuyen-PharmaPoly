@@ -31,6 +31,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.data.model.ApiResponse;
 import com.md09.pharmapoly.data.model.User;
@@ -234,6 +235,9 @@ public class ProfileUpdate extends AppCompatActivity {
             public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
                 ProgressDialogHelper.hideLoading();
                 if (response.isSuccessful() && response.body().getStatus() == 200) {
+
+                    SharedPrefHelper sharedPrefHelper = new SharedPrefHelper(ProfileUpdate.this);
+
                     new SharedPrefHelper(ProfileUpdate.this).updateUser(response.body().getData());
                     //user = response.body().getData();
                     new SharedPrefHelper(ProfileUpdate.this).setBooleanState(USER_PROFILE_UPDATED_KEY, true);
@@ -291,7 +295,6 @@ public class ProfileUpdate extends AppCompatActivity {
         boolean isChanged = !newUser.equals(user) || selectedAvatarFile != null;
 
         boolean isValid = !fullName.isEmpty() && !shippingPhoneNumber.isEmpty() && isChanged;
-
 
         int colorFromCard = btnSaveProfile.getCardBackgroundColor().getDefaultColor();
         int colorToCard = ContextCompat.getColor(this, isValid ? R.color.blue_CE4 : R.color.gray_DCD);

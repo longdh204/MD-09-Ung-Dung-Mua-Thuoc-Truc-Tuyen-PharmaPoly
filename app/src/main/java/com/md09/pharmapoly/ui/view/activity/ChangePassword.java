@@ -118,10 +118,34 @@ public class ChangePassword extends AppCompatActivity {
                             finish();
                         } else {
                             try {
-                                String errorBody = response.errorBody() != null ? response.errorBody().string() : "null";
+                                String errorBody = response.errorBody() != null ? response.errorBody().string() : null;
+                                if (errorBody != null) {
+                                    JSONObject jsonObject = new JSONObject(errorBody);
+                                    String message = jsonObject.optString("message", getString(R.string.server_error));
+                                    int statusCode = jsonObject.optInt("status", response.code());
+
+                                    switch (statusCode) {
+                                        case 403:
+                                            currentPassword.setError(message);
+                                            break;
+                                        case 402:
+                                            newPassword.setError(message);
+                                            break;
+                                        case 401:
+                                            confirmPassword.setError(message);
+                                            break;
+                                        default:
+                                            Toast.makeText(ChangePassword.this, message, Toast.LENGTH_SHORT).show();
+                                            break;
+                                    }
+                                }
+                                else {
+                                    Toast.makeText(ChangePassword.this, getString(R.string.server_error), Toast.LENGTH_SHORT).show();
+                                }
                             } catch (Exception e) {
+                                e.printStackTrace();
+                                Toast.makeText(ChangePassword.this, getString(R.string.server_error), Toast.LENGTH_SHORT).show();
                             }
-                            handleErrorResponse(response.code());
                         }
                     }
 
