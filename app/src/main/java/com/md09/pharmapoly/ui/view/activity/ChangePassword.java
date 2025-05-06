@@ -115,7 +115,9 @@ public class ChangePassword extends AppCompatActivity {
                         ProgressDialogHelper.hideLoading();
                         if (response.isSuccessful() && response.body() != null) {
                             Toast.makeText(ChangePassword.this, getString(R.string.password_changed_successfully), Toast.LENGTH_SHORT).show();
-                            finish();
+                            new SharedPrefHelper(ChangePassword.this).clearData();
+                            startActivity(new Intent(ChangePassword.this, PhoneNumber.class));
+                            finishAffinity();
                         } else {
                             try {
                                 String errorBody = response.errorBody() != null ? response.errorBody().string() : null;
