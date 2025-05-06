@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
@@ -34,14 +36,20 @@ public class ChatbotActivity extends AppCompatActivity {
     private List<ChatMessage> chatMessages;
     private LinearLayout suggestionLayout, suggestionLayout2;
     private DatabaseReference chatbotRef;
+    private ImageButton btn_back;
+    private LinearLayout chatbotbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chatbot);
-
+        btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(v -> {
+            finish();
+        });
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
+        chatbotbox = findViewById(R.id.chatbotbox);
         inputMessage = findViewById(R.id.inputMessage);
         sendButton = findViewById(R.id.sendButton);
         suggestionLayout = findViewById(R.id.suggestionLayout);
@@ -57,6 +65,21 @@ public class ChatbotActivity extends AppCompatActivity {
 
         // Thêm các câu hỏi gợi ý
         addSuggestionButtons();
+
+        // Add keyboard listener
+        final View activityRootView = findViewById(R.id.main);
+        activityRootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                int heightDiff = activityRootView.getRootView().getHeight() - activityRootView.getHeight();
+                if (heightDiff > 100) { // If more than 100 pixels, probably keyboard is shown
+                    // Scroll RecyclerView to bottom
+                    if (chatMessages.size() > 0) {
+                        chatRecyclerView.smoothScrollToPosition(chatMessages.size() - 1);
+                    }
+                }
+            }
+        });
     }
 
     private void sendMessage() {

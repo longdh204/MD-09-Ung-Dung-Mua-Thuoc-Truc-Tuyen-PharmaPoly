@@ -3,6 +3,7 @@ package com.md09.pharmapoly.ui.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -24,6 +25,7 @@ import java.util.List;
 public class CancerInfoActivity extends AppCompatActivity {
 
     private List<Article> articleList;
+    private ImageButton btn_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +34,11 @@ public class CancerInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cancer_info);
         // Set click listeners for categories
         setCategoryClickListeners();
+        btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(v -> {
+            finish();
+        });
     }
-
 
     private void setCategoryClickListeners() {
         findViewById(R.id.txt_cancer_types).setOnClickListener(new View.OnClickListener() {

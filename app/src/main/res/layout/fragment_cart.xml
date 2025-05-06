@@ -24,12 +24,12 @@
             android:layout_marginTop="70dp"
             android:layout_marginBottom="20dp">
 
-<!--            <ImageButton-->
-<!--                android:id="@+id/btn_back"-->
-<!--                android:layout_width="25dp"-->
-<!--                android:layout_height="25dp"-->
-<!--                android:background="@drawable/arrow_back"-->
-<!--                android:backgroundTint="@color/white_FFF" />-->
+            <!--            <ImageButton-->
+            <!--                android:id="@+id/btn_back"-->
+            <!--                android:layout_width="25dp"-->
+            <!--                android:layout_height="25dp"-->
+            <!--                android:background="@drawable/arrow_back"-->
+            <!--                android:backgroundTint="@color/white_FFF" />-->
 
             <TextView
                 android:layout_width="0dp"
@@ -61,21 +61,21 @@
             android:orientation="vertical"
             android:layout_marginTop="80dp">
 
-<!--            <LinearLayout-->
-<!--                android:id="@+id/cart_header_layout"-->
-<!--                android:paddingBottom="12dp"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal">-->
+            <!--            <LinearLayout-->
+            <!--                android:id="@+id/cart_header_layout"-->
+            <!--                android:paddingBottom="12dp"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:orientation="horizontal">-->
 
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@string/your_cart"-->
-<!--                    android:fontFamily="@font/be_vietnam_pro_medium"-->
-<!--                    android:textSize="18sp"-->
-<!--                    android:textColor="@color/black" />-->
-<!--            </LinearLayout>-->
+            <!--                <TextView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:text="@string/your_cart"-->
+            <!--                    android:fontFamily="@font/be_vietnam_pro_medium"-->
+            <!--                    android:textSize="18sp"-->
+            <!--                    android:textColor="@color/black" />-->
+            <!--            </LinearLayout>-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -88,7 +88,8 @@
                 android:paddingHorizontal="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginBottom="64dp">
 
                 <LinearLayout
                     android:gravity="center_vertical"

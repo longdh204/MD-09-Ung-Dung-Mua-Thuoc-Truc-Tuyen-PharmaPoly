@@ -148,6 +148,7 @@ public class HomeFragment extends Fragment {
     private TextView txt_greeting;
     private RelativeLayout layout_badge_notification;
     private TextView tv_badge_notification;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -209,10 +210,6 @@ public class HomeFragment extends Fragment {
         categoryList.add(new ItemCategoryHome("Đơn của tôi", R.drawable.ic_doncuatoi));
         categoryList.add(new ItemCategoryHome("Tìm nhà thuốc", R.drawable.ic_timnhathuoc));
         categoryList.add(new ItemCategoryHome("Nhắc uống thuốc", R.drawable.ic_nhacuongthuoc));
-        categoryList.add(new ItemCategoryHome("Liên hệ dược sĩ", R.drawable.ic_lienheduocsi));
-        categoryList.add(new ItemCategoryHome("Ghi chú", R.drawable.ic_ghichuu));
-        categoryList.add(new ItemCategoryHome("Cần mua thuốc", R.drawable.ic_canmuathuoc));
-        categoryList.add(new ItemCategoryHome("Kiểm tra sức khỏe", R.drawable.ic_kiemtrasuckhoe));
 
         categoryListAdapter = new CategoryListAdapter(getContext(), categoryList); // Sử dụng ItemCategoryHome ở đây
         recyclerViewCategory.setAdapter(categoryListAdapter);
@@ -357,6 +354,7 @@ public class HomeFragment extends Fragment {
         super.onResume();
         GetNotificationUnreadCount();
     }
+
     private void GetNotificationUnreadCount() {
         new RetrofitClient()
                 .callAPI()
@@ -384,6 +382,7 @@ public class HomeFragment extends Fragment {
                     }
                 });
     }
+
     private void SetupRecyclerView(View view) {
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2); // Hiển thị 2 cột
         recyclerView.setLayoutManager(layoutManager);

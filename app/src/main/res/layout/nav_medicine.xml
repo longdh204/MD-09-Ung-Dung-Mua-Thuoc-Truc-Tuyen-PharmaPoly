@@ -14,7 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/linearLayout6"
@@ -37,7 +37,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:background="@drawable/rounded_button_menu1"
+                        android:background="@drawable/border_rounded_product"
                         android:orientation="horizontal"
                         android:padding="10dp">
 
@@ -46,7 +46,7 @@
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/vitamin" />
+                            android:src="@drawable/thuocdiung" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:background="@drawable/rounded_button_menu1"
+                        android:background="@drawable/border_rounded_product"
                         android:orientation="horizontal"
                         android:padding="10dp">
 
@@ -73,7 +73,7 @@
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/cobap" />
+                            android:src="@drawable/thuocdalieu" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -91,7 +91,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:background="@drawable/rounded_button_menu1"
+                        android:background="@drawable/border_rounded_product"
                         android:orientation="horizontal"
                         android:padding="10dp">
 
@@ -100,7 +100,7 @@
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/tieuhoa" />
+                            android:src="@drawable/cobap" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -118,7 +118,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:background="@drawable/rounded_button_menu1"
+                        android:background="@drawable/border_rounded_product"
                         android:orientation="horizontal"
                         android:padding="10dp">
 
@@ -127,7 +127,7 @@
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/vitamin" />
+                            android:src="@drawable/thuocungthu" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -145,7 +145,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:background="@drawable/rounded_button_menu1"
+                        android:background="@drawable/border_rounded_product"
                         android:orientation="horizontal"
                         android:padding="10dp">
 
@@ -154,7 +154,7 @@
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/cobap" />
+                            android:src="@drawable/thuochohap" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -172,7 +172,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:background="@drawable/rounded_button_menu1"
+                        android:background="@drawable/border_rounded_product"
                         android:orientation="horizontal"
                         android:padding="10dp">
 
@@ -181,7 +181,7 @@
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/tieuhoa" />
+                            android:src="@drawable/mattaimuihong" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -206,7 +206,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:background="@drawable/rounded_button_menu1"
+                        android:background="@drawable/border_rounded_product"
                         android:orientation="horizontal"
                         android:padding="10dp">
 
@@ -215,7 +215,7 @@
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/sinhly" />
+                            android:src="@drawable/thuocgiadoc" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -233,7 +233,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:background="@drawable/rounded_button_menu1"
+                        android:background="@drawable/border_rounded_product"
                         android:orientation="horizontal"
                         android:padding="10dp">
 
@@ -242,7 +242,7 @@
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/hotrodieutri" />
+                            android:src="@drawable/miengdancaoxoa" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -260,7 +260,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:background="@drawable/rounded_button_menu1"
+                        android:background="@drawable/border_rounded_product"
                         android:orientation="horizontal"
                         android:padding="10dp">
 
@@ -269,7 +269,7 @@
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/nao" />
+                            android:src="@drawable/thuocbovitamin" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -287,7 +287,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:background="@drawable/rounded_button_menu1"
+                        android:background="@drawable/border_rounded_product"
                         android:orientation="horizontal"
                         android:padding="10dp">
 
@@ -296,7 +296,7 @@
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/sinhly" />
+                            android:src="@drawable/thuocgiamdau" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -314,7 +314,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:background="@drawable/rounded_button_menu1"
+                        android:background="@drawable/border_rounded_product"
                         android:orientation="horizontal"
                         android:padding="10dp">
 
@@ -323,7 +323,7 @@
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/hotrodieutri" />
+                            android:src="@drawable/thuockhangsinh" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -335,12 +335,13 @@
                             android:textColor="@android:color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/btnthuochethankinh"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:background="@drawable/rounded_button_menu1"
+                        android:background="@drawable/border_rounded_product"
                         android:orientation="horizontal"
                         android:padding="10dp">
 
@@ -349,7 +350,7 @@
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/nao" />
+                            android:src="@drawable/thuochethankinh" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -373,7 +374,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/overpass_regular"
                 android:text="Danh sách sản phẩm"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
 
@@ -406,8 +407,8 @@
 
         <ImageView
             android:id="@+id/btn_back"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="23dp"
+            android:layout_height="20dp"
             android:layout_marginStart="30dp"
             android:src="@drawable/back"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -420,28 +421,28 @@
             android:layout_height="wrap_content"
             android:text="Thuốc"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView7"
+            app:layout_constraintEnd_toStartOf="@+id/search"
             app:layout_constraintStart_toEndOf="@+id/btn_back"
             app:layout_constraintTop_toTopOf="parent"
-            android:textSize="20dp"
-            android:fontFamily="@font/overpass_regular"/>
+            android:textSize="18dp"
+            android:fontFamily="@font/overpass_regular" />
 
         <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/search"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginEnd="10dp"
-            android:src="@android:drawable/ic_menu_search"
+            android:src="@drawable/newsearch"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView8"
+            app:layout_constraintEnd_toStartOf="@+id/cart"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView8"
+            android:id="@+id/cart"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/card"
+            android:src="@drawable/nav_cart2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -469,90 +470,69 @@
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/button20"
+                        android:id="@+id/nav_thucphamchucnang"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="Thực phẩm\nchức năng"
                         android:fontFamily="@font/overpass_regular"
                         android:textStyle="bold"
-                        android:background="@drawable/border"
+                        android:background="@drawable/background_thin_corner"
                         android:textAllCaps="false"
                         android:layout_marginRight="5dp"
-                        android:padding="5dp"/>
+                        android:padding="5dp" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/button21"
+                        android:id="@+id/nav_duocmypham"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="Dược mỹ\nphẩm"
                         android:fontFamily="@font/overpass_regular"
                         android:textStyle="bold"
-                        android:background="@drawable/border"
+                        android:background="@drawable/background_thin_corner"
                         android:textAllCaps="false"
                         android:layout_marginRight="5dp"
-                        android:padding="5dp"/>
+                        android:padding="5dp" />
 
                     <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/nav_thuoc"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="Thuốc"
                         android:fontFamily="@font/overpass_regular"
                         android:textStyle="bold"
-                        android:background="@drawable/border"
+                        android:background="@drawable/background_thick_bottom_corner"
                         android:textAllCaps="false"
                         android:layout_marginRight="5dp"
-                        android:padding="5dp"/>
+                        android:padding="5dp" />
 
                     <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/nav_chamsoccanhan"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="Chăm sóc\n cá nhân"
                         android:fontFamily="@font/overpass_regular"
                         android:textStyle="bold"
-                        android:background="@drawable/border"
+                        android:background="@drawable/background_thin_corner"
                         android:textAllCaps="false"
                         android:layout_marginRight="5dp"
-                        android:padding="5dp"/>
+                        android:padding="5dp" />
 
                     <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/nav_thietbiyte"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="Thiết bị\n y tế"
                         android:fontFamily="@font/overpass_regular"
                         android:textStyle="bold"
-                        android:background="@drawable/border"
+                        android:background="@drawable/background_thin_corner"
                         android:textAllCaps="false"
                         android:layout_marginRight="5dp"
-                        android:padding="5dp"/>
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="Tiêm chủng"
-                        android:fontFamily="@font/overpass_regular"
-                        android:textStyle="bold"
-                        android:background="@drawable/border"
-                        android:textAllCaps="false"
-                        android:layout_marginRight="5dp"
-                        android:padding="5dp"/>
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="Bệnh"
-                        android:fontFamily="@font/overpass_regular"
-                        android:textStyle="bold"
-                        android:background="@drawable/border"
-                        android:textAllCaps="false"
-                        android:layout_marginRight="5dp"
-                        android:padding="5dp"/>
+                        android:padding="5dp" />
                 </LinearLayout>
             </HorizontalScrollView>
         </LinearLayout>

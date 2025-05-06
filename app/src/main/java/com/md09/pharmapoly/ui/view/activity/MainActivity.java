@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -42,6 +43,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Locale;
+import android.graphics.Rect;
+import android.view.inputmethod.InputMethodManager;
+import android.content.Context;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPagerBottomNavigationMainAdapter bottom_navigation_main_adapter;
     private ViewPager2 view_pager_main;
     private CartViewModel cartViewModel;
+    private FloatingActionButton fab1;
     private static final int REQUEST_NOTIFICATION_PERMISSION = 1001;
 
     @Override
@@ -56,7 +61,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.main_activity);
-
+        if (getIntent().getBooleanExtra("open_home", false)) {
+            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationMain);
+            bottomNavigationView.setSelectedItemId(R.id.home);
+        }
+        if (getIntent().getBooleanExtra("open_cart", false)) {
+            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationMain);
+            bottomNavigationView.setSelectedItemId(R.id.cart); // tab Cart
+        }
         InitUI();
         loadLocale();
 
@@ -93,6 +105,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent.getBooleanExtra("open_cart", false)) {
+            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationMain);
+            bottomNavigationView.setSelectedItemId(R.id.cart); // tab Cart
+        }
+    }
+
     private void checkAndRequestNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
@@ -103,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -117,16 +140,42 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadLocale() {
         String langCode = new SharedPrefHelper(this).getLanguage();
-        setLocale(this,langCode);
+        setLocale(this, langCode);
     }
+
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
-        if (new SharedPrefHelper(this).getBooleanState(PRODUCT_ADDED_TO_CART_KEY,false) ||
-                new SharedPrefHelper(this).getBooleanState(ORDER_KEY,false)) {
+        // Đảm bảo bottom navigation ẩn khi có bàn phím
+        getWindow().getDecorView().getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            Rect r = new Rect();
+            getWindow().getDecorView().getWindowVisibleDisplayFrame(r);
+            int screenHeight = getWindow().getDecorView().getRootView().getHeight();
+            int keypadHeight = screenHeight - r.bottom;
+
+            if (keypadHeight > screenHeight * 0.15) { // Bàn phím đang hiển thị
+                setBottomNavigationVisibility(false);
+            } else {
+                setBottomNavigationVisibility(true);
+            }
+        });
+        if (new SharedPrefHelper(this).getBooleanState(PRODUCT_ADDED_TO_CART_KEY, false) ||
+                new SharedPrefHelper(this).getBooleanState(ORDER_KEY, false)) {
             cartViewModel.FetchCartData(this);
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Ẩn bàn phím khi activity bị tạm dừng
+        View view = getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
     public void UpdateCartBadge(int cartCount) {
         BadgeDrawable badge = bottom_navigation_main.getOrCreateBadge(R.id.cart);
         if (cartCount > 0) {
@@ -138,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
             badge.setVisible(false);
         }
     }
+
     private void SetupBottomNavigation() {
         view_pager_main.setAdapter(bottom_navigation_main_adapter);
 
@@ -195,5 +245,15 @@ public class MainActivity extends AppCompatActivity {
         bottom_navigation_main = findViewById(R.id.bottomNavigationMain);
         view_pager_main = findViewById(R.id.viewPagerMain);
         bottom_navigation_main_adapter = new ViewPagerBottomNavigationMainAdapter(this);
+        fab1 = findViewById(R.id.fab1);
+    }
+
+    public void setBottomNavigationVisibility(boolean visible) {
+        if (bottom_navigation_main != null) {
+            bottom_navigation_main.setVisibility(visible ? View.VISIBLE : View.GONE);
+        }
+        if (fab1 != null) {
+            fab1.setVisibility(visible ? View.VISIBLE : View.GONE);
+        }
     }
 }

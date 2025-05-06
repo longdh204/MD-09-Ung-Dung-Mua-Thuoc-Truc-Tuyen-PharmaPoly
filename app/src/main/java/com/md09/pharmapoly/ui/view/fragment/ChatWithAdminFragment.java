@@ -23,9 +23,12 @@ import com.md09.pharmapoly.Adapters.ChatAdminAdapter;
 import com.md09.pharmapoly.Models.Message;
 import com.md09.pharmapoly.R;
 import com.md09.pharmapoly.network.SocketManager;
+import com.md09.pharmapoly.ui.view.activity.MainActivity;
 import com.md09.pharmapoly.utils.SharedPrefHelper;
 
 import java.util.List;
+
+import androidx.activity.OnBackPressedCallback;
 
 public class ChatWithAdminFragment extends Fragment implements SocketManager.UpdateChatFragment {
     private SocketManager socketManager;
@@ -47,6 +50,25 @@ public class ChatWithAdminFragment extends Fragment implements SocketManager.Upd
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        // Reset trạng thái của bottom navigation
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Ẩn bàn phím khi fragment bị tạm dừng
+        if (getActivity() != null) {
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(edTextMessage.getWindowToken(), 0);
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d("HomeFragment", "onCreateView called");
@@ -54,16 +76,69 @@ public class ChatWithAdminFragment extends Fragment implements SocketManager.Upd
         rvChatAdmin = view.findViewById(R.id.rvChatAdmin);
         btnSendMessage = view.findViewById(R.id.btnSend);
         edTextMessage = view.findViewById(R.id.edtMessage);
-        chatLayout = view.findViewById(R.id.chatLayout);  // Khởi tạo
-        // Cài đặt listener để ẩn bàn phím khi ấn ra ngoài EditText
-        view.setOnTouchListener((v, event) -> {
-            // Kiểm tra nếu người dùng ấn vào bất kỳ vị trí nào ngoài EditText
-            if (getActivity() != null && edTextMessage.isFocused()) {
-                // Ẩn bàn phím
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(edTextMessage.getWindowToken(), 0);
-                // Bỏ focus khỏi EditText
+        chatLayout = view.findViewById(R.id.chatLayout);
+        int defaultMarginBottom = getResources().getDimensionPixelSize(R.dimen.default_margin_bottom);
+
+        // Thêm listener cho EditText
+        edTextMessage.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                chatLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+                ) {{
+                    bottomMargin = 0;
+                }});
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).setBottomNavigationVisibility(false);
+                }
+                // Hiển thị bàn phím
+                if (getActivity() != null) {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.showSoftInput(edTextMessage, InputMethodManager.SHOW_FORCED);
+                }
+            } else {
+                chatLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+                ) {{
+                    bottomMargin = defaultMarginBottom;
+                }});
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
+                }
+            }
+        });
+
+        // Thêm listener cho toàn bộ view để xử lý khi click ra ngoài
+        view.setOnClickListener(v -> {
+            if (edTextMessage.isFocused()) {
                 edTextMessage.clearFocus();
+                if (getActivity() != null) {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(edTextMessage.getWindowToken(), 0);
+                }
+            }
+        });
+
+        // Thêm listener cho RecyclerView
+        rvChatAdmin.setOnClickListener(v -> {
+            if (edTextMessage.isFocused()) {
+                edTextMessage.clearFocus();
+                if (getActivity() != null) {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(edTextMessage.getWindowToken(), 0);
+                }
+            }
+        });
+
+        // Thêm OnTouchListener cho RecyclerView
+        rvChatAdmin.setOnTouchListener((v, event) -> {
+            if (edTextMessage.isFocused()) {
+                edTextMessage.clearFocus();
+                if (getActivity() != null) {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(edTextMessage.getWindowToken(), 0);
+                }
             }
             return false;
         });
@@ -76,27 +151,43 @@ public class ChatWithAdminFragment extends Fragment implements SocketManager.Upd
             }
             socketManager.sendMessage("67b344c3744eaa2ff0f0ce7d", message);
             edTextMessage.setText("");
+            if (getActivity() != null) {
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(edTextMessage.getWindowToken(), 0);
+                edTextMessage.clearFocus();
+                chatLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+                ) {{
+                    bottomMargin = defaultMarginBottom;
+                }});
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
+                }
+            }
         });
 
-        int defaultMarginBottom = getResources().getDimensionPixelSize(R.dimen.default_margin_bottom);
-
-        edTextMessage.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                // Khi bắt đầu nhập, thay đổi marginBottom thành 0dp
-                chatLayout.setLayoutParams(new LinearLayout.LayoutParams(
+        // Xử lý nút back
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (edTextMessage.isFocused()) {
+                    edTextMessage.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(edTextMessage.getWindowToken(), 0);
+                    chatLayout.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.MATCH_PARENT
-                ) {{
-                    bottomMargin = 0; // Đặt bottomMargin về 0 khi bắt đầu nhập
-                }});
-            } else {
-                // Khi thoát khỏi phần nhập, quay lại marginBottom như cũ
-                chatLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT
-                ) {{
-                    bottomMargin = defaultMarginBottom; // Khôi phục giá trị cũ
-                }});
+                    ) {{
+                        bottomMargin = defaultMarginBottom;
+                    }});
+                    if (getActivity() instanceof MainActivity) {
+                        ((MainActivity) getActivity()).setBottomNavigationVisibility(true);
+                    }
+                } else {
+                    setEnabled(false);
+                    requireActivity().onBackPressed();
+                }
             }
         });
 
@@ -123,7 +214,7 @@ public class ChatWithAdminFragment extends Fragment implements SocketManager.Upd
     public void showOldMessage(List<Message> messageList) {
         requireActivity().runOnUiThread(() -> {
             String userId = new SharedPrefHelper(requireContext()).getUser().get_id();
-            ChatAdminAdapter chatAdminAdapter = new ChatAdminAdapter(getContext(),userId, messageList);
+            ChatAdminAdapter chatAdminAdapter = new ChatAdminAdapter(getContext(), userId, messageList);
             rvChatAdmin.setAdapter(chatAdminAdapter);
             rvChatAdmin.setLayoutManager(new LinearLayoutManager(getContext()));
             rvChatAdmin.scrollToPosition(rvChatAdmin.getAdapter().getItemCount() - 1);
