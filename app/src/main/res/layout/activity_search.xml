@@ -73,7 +73,7 @@
                     android:drawableStart="@drawable/ic_search"
                     android:drawablePadding="8dp"
                     android:fontFamily="@font/be_vietnam_pro_light"
-                    android:hint="Search recipes"
+                    android:hint="Tìm kiếm sản phẩm"
                     android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:paddingHorizontal="12dp"

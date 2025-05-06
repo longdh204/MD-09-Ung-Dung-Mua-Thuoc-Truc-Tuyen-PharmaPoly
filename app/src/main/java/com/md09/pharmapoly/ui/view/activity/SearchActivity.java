@@ -231,7 +231,7 @@ public class SearchActivity extends AppCompatActivity {
                                         pageInfoTextView.setText("" + searchData.getCurrentPage() + " / " + searchData.getTotalPages());
                                         updatePaginationButtons(searchData.isHasPrevPage(), searchData.isHasNextPage());
                                     } else {
-                                        Toast.makeText(SearchActivity.this, "Không có sản phẩm", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SearchActivity.this, "Không tìm thấy sản phẩm phù hợp", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             } else {
@@ -245,7 +245,8 @@ public class SearchActivity extends AppCompatActivity {
                         }
                     });
 
-        } else {
+        }
+        else {
             Toast.makeText(SearchActivity.this, "Token không hợp lệ", Toast.LENGTH_SHORT).show();
         }
     }
@@ -269,10 +270,22 @@ public class SearchActivity extends AppCompatActivity {
         categories.clear();  // Xóa các category cũ
         brands.clear();  // Xóa các brand cũ
 
+//        for (Product product : products) {
+//            categories.add(product.getCategory().getName());  // Thêm category vào set
+//            brands.add(product.getBrand().getName());  // Thêm brand vào set
+//        }
         for (Product product : products) {
-            categories.add(product.getCategory().getName());  // Thêm category vào set
-            brands.add(product.getBrand().getName());  // Thêm brand vào set
+            if (product != null) {
+                if (product.getCategory() != null && product.getCategory().getName() != null) {
+                    categories.add(product.getCategory().getName());
+                }
+
+                if (product.getBrand() != null && product.getBrand().getName() != null) {
+                    brands.add(product.getBrand().getName());
+                }
+            }
         }
+
 
         displayCategoriesAndBrands();
     }
