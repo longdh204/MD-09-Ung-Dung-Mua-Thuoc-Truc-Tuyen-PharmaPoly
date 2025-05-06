@@ -197,13 +197,14 @@ public class ProfileUpdate extends AppCompatActivity {
                     .error(R.drawable.default_avatar)
                     .into(img_user_avatar);
         }
+        updateButtonState();
     }
 
     private void updateUserProfile() {
         ProgressDialogHelper.showLoading(this);
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String formattedDate = (newUser.getDate_of_birth() != null) ? dateFormat.format(newUser.getDate_of_birth()) : null;
-
 
         RequestBody fullNameBody = RequestBody.create(MediaType.parse("text/plain"), newUser.getFull_name());
         RequestBody shippingPhoneNumberBody = RequestBody.create(MediaType.parse("text/plain"), newUser.getShipping_phone_number());

@@ -136,7 +136,7 @@
     <string name="status_delivery_fail">Giao hàng thất bại</string>
     <string name="status_waiting_to_return">Chờ hoàn hàng</string>
     <string name="status_return">Đang hoàn hàng</string>
-    <string name="status_returned">Đã hoàn hàng</string>
+    <string name="status_returned">Đơn hoàn do khách không nhận</string>
     <string name="status_return_fail">Hoàn hàng thất bại</string>
     <string name="status_canceled">Đơn hàng bị hủy</string>
     <string name="order_info">Thông tin đơn hàng</string>

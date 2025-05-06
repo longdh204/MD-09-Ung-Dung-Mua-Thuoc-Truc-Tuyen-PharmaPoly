@@ -54,7 +54,7 @@ public class ChatAdminAdapter extends RecyclerView.Adapter<ChatAdminAdapter.View
         Message message = chatMessages.get(position);
         holder.messageText.setText(message.getMessage());
 
-        if (getItemViewType(position) != TYPE_USER) {
+        if (getItemViewType(position) == TYPE_USER) {
             User user = new SharedPrefHelper(context).getUser();
             if (user.getAvatar_url() != null && !user.getAvatar_url().isEmpty()) {
                 Glide.with(context)
@@ -64,7 +64,7 @@ public class ChatAdminAdapter extends RecyclerView.Adapter<ChatAdminAdapter.View
                         .into(holder.img_avatar);
             }
         } else {
-            holder.img_avatar.setImageResource(R.drawable.default_avatar);
+            holder.img_avatar.setImageResource(R.drawable.logo);
         }
     }
 
